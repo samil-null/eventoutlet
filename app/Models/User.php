@@ -1,13 +1,16 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
+use Hash;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laratrust\Traits\LaratrustUserTrait;
 
 class User extends Authenticatable
 {
+    use LaratrustUserTrait;
     use Notifiable;
 
     /**
@@ -16,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'about_me', 'specialty', 'email', 'password',
     ];
 
     /**
@@ -36,4 +39,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function services()
+    {
+        return $this->hasMany(Service::class,'user_id', 'id');
+    }
+
+    public function offers()
+    {
+        return $this->hasMany(Offer::class,'user_id', 'id');
+    }
+
+    public function checkPassword($password)
+    {
+        return Hash::check($password, $this->password);
+    }
 }
