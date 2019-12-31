@@ -56,7 +56,7 @@
         methods: {
             createOffer() {
                 let payload = {
-                    service: this.service,
+                    service_id: this.service,
                     dates: this.dates,
                     discount: this.discount,
                     description: this.description,

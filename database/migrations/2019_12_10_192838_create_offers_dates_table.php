@@ -15,7 +15,7 @@ class CreateOffersDatesTable extends Migration
     {
         Schema::create('offers_dates', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id');
+            $table->bigInteger('offer_id');
             $table->date('date');
             $table->timestamps();
         });

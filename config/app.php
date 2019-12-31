@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Eventoutlet'),
 
     /*
     |--------------------------------------------------------------------------
@@ -106,7 +106,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'ru_RU',
 
     /*
     |--------------------------------------------------------------------------
@@ -166,6 +166,9 @@ return [
          * Package Service Providers...
          */
         Laratrust\LaratrustServiceProvider::class,
+        ShawnSandy\ImgFly\ImgflyServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        App\Providers\ImgCropProvider::class,
         /*
          * Application Service Providers...
          */
@@ -226,6 +229,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Laratrust'   => Laratrust\LaratrustFacade::class,
+        "Imgfly" => ShawnSandy\ImgFly\Classes\ImgflyFacade::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+        'ImgCrop' => App\Facades\ImgCrop::class
     ],
 
 ];

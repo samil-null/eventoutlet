@@ -15,6 +15,7 @@ class OfferController extends Controller
     public function index()
     {
         //
+
     }
 
     /**
@@ -47,6 +48,8 @@ class OfferController extends Controller
     public function show($id)
     {
         //
+
+
     }
 
     /**

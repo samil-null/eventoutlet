@@ -42,7 +42,7 @@ class ServiceController extends Controller
             'name'              => $request->input('name'),
             'user_id'           => Auth::user()->id,
             'price'             => $request->input('price'),
-            'price_option_id'   => $request->input('price_option_id'),
+            'price_option'      => $request->input('price_option'),
             'description'       => $request->input('description')
         ]);
 

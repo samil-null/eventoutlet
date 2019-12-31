@@ -2,6 +2,10 @@
 
 //use Str;
 use App\Models\User;
+use App\Models\Offer;
+use App\Models\UserInfo;
+use App\Models\OfferDate;
+use App\Models\Service;
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
@@ -13,10 +17,38 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
+
+        $denis = User::create([
             'email' => 'denis@gmail.com',
-            'password' => bcrypt('sosote20'),
-            'api_token' => hash('sha256', Str::random(60))
+            'name' => 'Denis Budancev',
+            'password' => bcrypt('qwerty')
         ]);
+
+        $denis->attachRole('executor');
+
+        factory(UserInfo::class)->create([
+            'user_id' => $denis->id
+        ]);
+
+        factory(User::class, 10)->create()->each(function ($user) {
+            factory(UserInfo::class)->create([
+                'user_id' => $user->id
+            ]);
+
+            $user->attachRole('executor');
+
+            factory(Service::class, random_int(1, 3))->create([
+                'user_id' => $user->id
+            ])->each(function ($service) {
+                factory(Offer::class, random_int(1,3))->create([
+                    'service_id' => $service->id
+                ])->each(function ($offer) {
+                    factory(OfferDate::class, random_int(1,2))->create([
+                        'offer_id' => $offer->id
+                    ]);
+                });
+            });
+        });
+
     }
 }

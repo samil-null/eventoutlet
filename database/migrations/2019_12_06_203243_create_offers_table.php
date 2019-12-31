@@ -15,15 +15,16 @@ class CreateOffersTable extends Migration
     {
         Schema::create('offers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id');
+            $table->bigInteger('service_id');
             $table->integer('discount');
-            $table->string('description', '500');
+            $table->integer('discount_price')->default(0);
+            $table->string('description', '500')->nullable();
             $table->timestamps();
         });
     }
 
     /**
-     * Reverse the migrations.
+     * Reverse the migrations. php artisan make:migration create_special_offers
      *
      * @return void
      */

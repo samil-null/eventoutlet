@@ -17,8 +17,12 @@
                 <div class="col-lg-8">
                     <a :href="createOfferLink" class="btn btn-outline-danger">Добавить спецпредложение</a>
 
-                    <ul>
-                        <li v-for="offer in offers"></li>
+                    <ul class="mt-5">
+                        <li v-for="offer in user.offers" :key="'offer-'+offer.id">
+                            {{ offer.service.name }} |
+                            {{ offer.service.price }} |
+                            {{ offer.discount }} %
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -34,7 +38,6 @@
         data() {
             return {
                 user: {},
-                offers:[]
             }
         },
         computed: {

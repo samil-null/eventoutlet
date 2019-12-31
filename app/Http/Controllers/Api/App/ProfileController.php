@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\App;
 
 
+use App\Services\ResizeService;
 use Auth;
 
 use App\Models\User;
@@ -13,6 +14,14 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
+
+    private $resize;
+
+    public function __construct(ResizeService $resize)
+    {
+        $this->resize = $resize;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +29,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -52,13 +61,12 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        $user = Auth::user();
+        $user = User::with(['offers.service'])->where('id', $id)->first();
 
         return response()->json([
             'success' => true,
             'data' => [
                 'user' => $user,
-                'offers' => []
             ]
         ]);
     }
@@ -75,13 +83,21 @@ class ProfileController extends Controller
         $specialties = Specialty::where('is_active', 1)->get(['id', 'name']);
         $priceOptions = PriceOption::all(['id', 'name']);
 
+        $resize = $this->resize;
+
+        $gallery = $user->gallery->map(function ($image) use ($resize)  {
+            return $resize->getFileUrl($image->name, 'gallery');
+        });
+
         return response()->json([
             'success' => true,
             'data' => [
                 'user' => $user,
                 'services' => $user->services,
                 'specialties' => $specialties,
-                'price_options' => $priceOptions
+                'price_options' => $priceOptions,
+                'avatar' => $this->resize->roc($user->avatar, 'avatar', 'avatar'),
+                'gallery' => $gallery
             ]
         ]);
     }

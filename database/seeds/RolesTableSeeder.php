@@ -17,10 +17,10 @@ class RolesTableSeeder extends Seeder
             'display_name' => 'Исполнитель',
         ]);
 
-        DB::table('role_user')->insert([
-            'user_id' => 1,
-            'role_id' => 1,
-            'user_type' => 'App\Models\User::class'
-        ]);
+//        DB::table('role_user')->insert([
+//            'user_id' => 1,
+//            'role_id' => 1,
+//            'user_type' => 'App\Models\User::class'
+//        ]);
     }
 }

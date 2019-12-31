@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\App;
 use App\Http\Controllers\Controller;
 use App\Models\Offer;
 use App\Models\User;
-use App\Services\offerService;
+use App\Services\OfferService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,7 +18,7 @@ class OfferController extends Controller
      */
     public function index()
     {
-        //
+        #code
     }
 
     /**
@@ -39,7 +39,7 @@ class OfferController extends Controller
 
     /**
      * @param Request $request
-     * @param CreateOfferService $createOfferService
+     * @param offerService $offerService
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request, OfferService $offerService)

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\OfferDate;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Offer;
@@ -14,18 +15,21 @@ class OfferService
     public function create(User $user, Request $request)
     {
         $offers = [];
-        $group = $this->makeGroupName($user->id);
 
         foreach ($request->input('dates') as $date) {
-            $offers[] = new Offer([
+            $offers[] = new OfferDate([
                 'date' => Carbon::parse($date)->format('Y-m-d'),
-                'group' => $group,
-                'description' => $request->input('description'),
-                'discount' => $request->input('discount'),
             ]);
         }
 
-        $user->offers()->saveMany($offers);
+        $offer = $user->offers()->save(new Offer(
+            $request->only(['service_id', 'description', 'discount']
+        )));
+
+        $offer->calculateDiscount();
+
+        $offer->offerDates()->saveMany($offers);
+
     }
 
     private function makeGroupName($id)
@@ -37,4 +41,5 @@ class OfferService
     {
 
     }
+
 }

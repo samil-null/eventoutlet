@@ -1,17 +1,16 @@
 <template>
     <div class="container">
-        <div class="row">
+        <div class="row mt-4">
             <div class="col-lg-12">
-                <h1>Profile</h1>
+                <h1>Редактирование анкеты</h1>
             </div>
         </div>
-        <form @submit.prevent="send">
+        <form @submit.prevent="send" class="mt-5">
             <div class="row form-group">
                 <div class="col-lg-6">
                     <label>Специальность</label>
-                    <select class="form-control" v-model="form.specialty">
-                        <option :value="0">Нет</option>
-                        <option v-for="item in specialties" :value="item.id" :key="'spcl-' + item.id">{{ item.name }}</option>
+                    <select class="form-control" v-model="form.speciality_id">
+                        <option :selected="form.speciality_id == item.id" v-for="item in specialities" :value="item.id" :key="'spcl-' + item.id">{{ item.name }}</option>
                     </select>
                 </div>
                 <div class="col-lg-6">
@@ -26,8 +25,48 @@
                 </div>
             </div>
             <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Телефон</label>
+                    <input type="text" class="form-control" v-model="form.phone">
+                </div>
+                <div class="col-lg-6">
+                    <label>Сайт</label>
+                    <input type="text" class="form-control" v-model="form.site">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Email</label>
+                    <input type="text" class="form-control" v-model="email">
+                </div>
+                <div class="col-lg-6">
+                    <label>Instagram</label>
+                    <input type="text" class="form-control" v-model="form.instagram">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Vk</label>
+                    <input type="text" class="form-control" v-model="form.vk">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-3">
+                    <label>Аватар</label><br>
+                    <image-loader
+                    :prev-image="avatar"
+                    ></image-loader>
+                </div>
+                <div class="col-lg-3">
+                    <gallery
+                        v-if="gallery"
+                        :images="gallery"
+                    ></gallery>
+                </div>
+            </div>
+            <div class="row form-group">
                 <div class="col-lg-12">
-                    <button type="submit" class="btn btn-primary mb-2">Send</button>
+                    <button type="submit" class="btn btn-primary mb-2">Save</button>
                 </div>
             </div>
         </form>
@@ -46,19 +85,28 @@
     import axios from '../modules/axios'
     import CreateServiceApp from "../components/CreateServiceApp";
     import ServicesListApp from "../components/ServicesListApp";
+    import Gallery from "../components/Gallery";
+    import ImageLoader from "../components/ImageLoader";
 
     export default {
         name: 'Profile',
         props:['userId'],
         data() {
             return {
-                specialties:[],
+                specialities:[],
                 priceOptions:[],
                 services:[],
+                avatar:null,
+                email:null,
+                gallery:null,
                 form: {
                     name:null,
                     about_me: null,
-                    specialty:0
+                    phone: null,
+                    site: null,
+                    instagram: null,
+                    vk: null,
+                    speciality_id:0
                 },
             }
         },
@@ -86,9 +134,11 @@
             axios.get(`/app/profiles/${this.userId}/edit`)
                 .then(res => res.data.data)
                 .then(data =>  {
-                    this.specialties  = data.specialties;
+                    this.specialities  = data.specialties;
                     this.priceOptions = data.price_options;
-                    this.services = data.services
+                    this.services = data.services;
+                    this.avatar = data.avatar;
+                    this.gallery = data.gallery;
                     return data.user
                 })
                 .then(user => {
@@ -96,12 +146,19 @@
                     form.name = user.name;
                     form.about_me = user.about_me;
                     form.specialty = user.specialty;
+                    form.phone = user.phone;
+                    form.site = user.site;
+                    form.instagram = user.instagram;
+                    form.vk = user.vk;
+
                 })
                 .catch(e => console.log(e))
         },
         components: {
+            ImageLoader,
             CreateServiceApp,
-            ServicesListApp
+            ServicesListApp,
+            Gallery
         }
     }
 </script>

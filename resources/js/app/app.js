@@ -4,9 +4,8 @@ import AuthForm from "./components/Auth/AuthForm";
 import Profile from './pages/Profile'
 import CreateOffer from "./pages/CreateOffer";
 import EditProfile from "./pages/EditProfile";
-
+import Search from './components/Search';
 import store from './store/index'
-
 
 new Vue({
     el:'#app',
@@ -15,6 +14,7 @@ new Vue({
         AuthForm,
         Profile,
         CreateOffer,
-        EditProfile
+        EditProfile,
+        Search,
     }
 })

@@ -23,8 +23,7 @@ class PriceOptionsTableSeeder extends Seeder
      */
     public function run()
     {
-        foreach ($this->priceOptions as $priceOption) {
-            PriceOption::create($priceOption);
-        }
+
+        PriceOption::insert($this->priceOptions);
     }
 }

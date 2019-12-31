@@ -15,11 +15,8 @@
                 <input type="text" class="form-control" v-model="price">
             </div>
             <div class="col-lg-2">
-                <label>Специальность</label>
-                <select class="form-control" v-model="priceOption">
-                    <option :value="0">Нет</option>
-                    <option v-for="item in priceOptions" :value="item.id" :key="'price-option-' + item.id">{{ item.name }}</option>
-                </select>
+                <label>Кол-во</label>
+                <input type="text" class="form-control" v-model="priceOption">
             </div>
         </div>
         <div class="row form-group">
@@ -54,7 +51,7 @@
                     name: this.name,
                     price: this.price,
                     description: this.description,
-                    price_option_id: this.priceOption
+                    price_option: this.priceOption
                 }
 
                 this.$emit('create-service', payload);
