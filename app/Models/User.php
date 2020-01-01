@@ -13,6 +13,17 @@ class User extends Authenticatable
     use LaratrustUserTrait;
     use Notifiable;
 
+    public const WAITING_STATUS = 0;
+
+    public const ACTIVE_STATUS = 1;
+
+    public const REJECTED_STATUS = 2;
+
+    public const BANNED_STATUS = 3;
+
+    private $statuses = [
+
+    ];
     /**
      * The attributes that are mass assignable.
      *
@@ -48,27 +59,40 @@ class User extends Authenticatable
 
     public function offers()
     {
-        return $this->hasMany(Offer::class,'user_id', 'id');
+        return $this->hasManyThrough(
+            Offer::class,
+            Service::class,
+            'user_id',
+            'service_id',
+            'id',
+            'id'
+        );
+
     }
 
     public function speciality()
     {
-        return $this->hasOne(Specialty::class, 'id', 'speciality_id');
+        return $this->hasOneThrough(
+            Specialty::class,
+            UserInfo::class,
+            'user_id',
+            'id',
+            'id',
+            'speciality_id'
+        );
+
     }
 
     public function city()
     {
-        return $this->hasOne(City::class, 'id', 'city_id');
-    }
-
-    public function offersDates()
-    {
-        return $this->hasManyThrough(
-            OfferDate::class,
-            Offer::class,
+        return $this->hasOneThrough(
+            City::class,
+            UserInfo::class,
             'user_id',
-            'offer_id',
-            'id');
+            'id',
+            'id',
+            'city_id'
+        );
     }
 
     public function checkPassword($password)
@@ -84,6 +108,11 @@ class User extends Authenticatable
 
     public function info()
     {
-        return $this->hasOne(UserInfo::class, 'id', 'user_id');
+        return $this->hasOne(UserInfo::class, 'user_id', 'id');
+    }
+
+    public function viewed()
+    {
+        $this->info()->increment('views');
     }
 }

@@ -79,21 +79,20 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
+        $user = User::with('info','services', 'city', 'speciality', 'offers', 'offers')->find($id);
+
+        abort_if(!$user, 404);
+
         $specialties = Specialty::where('is_active', 1)->get(['id', 'name']);
         $priceOptions = PriceOption::all(['id', 'name']);
-
-        $resize = $this->resize;
-
-        $gallery = $user->gallery->map(function ($image) use ($resize)  {
-            return $resize->getFileUrl($image->name, 'gallery');
+        $gallery = $user->gallery->map(function ($image)  {
+            return $this->resize->getFileUrl($image->name, 'gallery');
         });
 
         return response()->json([
             'success' => true,
             'data' => [
                 'user' => $user,
-                'services' => $user->services,
                 'specialties' => $specialties,
                 'price_options' => $priceOptions,
                 'avatar' => $this->resize->roc($user->avatar, 'avatar', 'avatar'),
@@ -111,10 +110,13 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        User::find($id)->update($request->all());
+        $user = User::find($id);
+        $user->update($request->only('name'));
+        $user->info()->update($request->except('name'));
 
         return response()->json([
-            'success' => true
+            'success' => true,
+            'user' => $user
         ]);
     }
 

@@ -14,6 +14,8 @@ class UserController extends Controller
             ->where('id', $id)
             ->first();
 
+        $user->viewed();
+
         return view('site.users.show', compact('user'));
     }
 }

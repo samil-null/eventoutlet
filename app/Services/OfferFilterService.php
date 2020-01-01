@@ -3,6 +3,7 @@
 
 namespace App\Services;
 
+use App\Models\Offer;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class OfferFilterService
 
     public function __construct()
     {
-        $this->builder = User::with('offers', 'offersDates');
+        $this->builder = User::with('offers.dates', 'info');
     }
 
     public function handle(Request $request)
@@ -31,6 +32,8 @@ class OfferFilterService
 
     private function apply($data)
     {
+        $this->defaultFilter();
+
         foreach ($data as $name => $value) {
             if (method_exists($this, $name)) {
                 $this->{$name}($value);
@@ -44,7 +47,7 @@ class OfferFilterService
     {
         $date = $this->approveDate($value, 'from')->format(self::DATE_FORMAT);
 
-        $this->builder->whereHas('offersDates', function (Builder $query) use ($date) {
+        $this->builder->whereHas('offers.dates', function (Builder $query) use ($date) {
             $query->where('date', '>=', $date);
         });
     }
@@ -53,15 +56,30 @@ class OfferFilterService
     {
         $date = $this->approveDate($value, 'to')->format(self::DATE_FORMAT);
 
-        $this->builder->whereHas('offersDates', function (Builder $query) use ($date) {
+        $this->builder->whereHas('offers.dates', function (Builder $query) use ($date) {
             $query->where('date', '<=', $date);
         });
     }
 
     public function speciality($value)
     {
-        $this->builder->where('speciality_id', $value);
-        $this->builder->where('approved', 1);
+        $this->builder->whereHas('info', function (Builder $query) use ($value) {
+            $query->where('speciality_id', $value);
+        });
+    }
+
+    public function special()
+    {
+
+    }
+
+    private function defaultFilter()
+    {
+        $this->builder->where('approved', User::ACTIVE_STATUS);
+
+        $this->builder->whereHas('offers', function (Builder $query) {
+            $query->where('approved', Offer::APPROVED_STATUS);
+        });
     }
 
     private function approveDate($value, $side)

@@ -36,6 +36,10 @@
                                         {{ $offer->service->name }} |
                                         {{ $offer->discount_price }} {{ $offer->service->price_option }} |
                                         {{ $offer->discount }} %
+                                        <br>
+                                        @foreach($offer->dates as $date)
+                                            <span>{{ $date->date }}</span><br>
+                                        @endforeach
                                     </li>
                                 @endforeach
                             </ul>

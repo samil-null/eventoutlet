@@ -24,6 +24,7 @@ class CreateUserInfoTable extends Migration
             $table->bigInteger('speciality_id');
             $table->bigInteger('city_id');
             $table->string('vk', 255);
+            $table->bigInteger('views')->default(0);
             $table->timestamps();
         });
     }

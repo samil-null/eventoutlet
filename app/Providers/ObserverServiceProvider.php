@@ -5,15 +5,17 @@ namespace App\Providers;
 use App\Models\Offer;
 use App\Models\OfferDate;
 use App\Models\Service;
+use App\Models\User;
 use App\Observers\OfferDateObserver;
 use App\Observers\OfferObserver;
 use App\Observers\ServiceObserver;
+use App\Observers\UserObserver;
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
+class ObserverServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * Register services.
      *
      * @return void
      */
@@ -23,12 +25,15 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Bootstrap any application services.
+     * Bootstrap services.
      *
      * @return void
      */
     public function boot()
     {
-
+        Offer::observe(OfferObserver::class);
+        Service::observe(ServiceObserver::class);
+        OfferDate::observe(OfferDateObserver::class);
+        User::observe(UserObserver::class);
     }
 }

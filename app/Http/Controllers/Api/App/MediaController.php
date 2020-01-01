@@ -3,12 +3,9 @@
 namespace App\Http\Controllers\Api\App;
 
 use App\Models\Media;
-use Illuminate\Support\Facades\Auth;
-use Imgfly;
 use App\Http\Controllers\Controller;
 use App\Services\ResizeService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 
 class MediaController extends Controller
@@ -38,7 +35,7 @@ class MediaController extends Controller
             $user = $request->user();
 
             list($fullPath, $filename) = $this->resize->store($request->file('avatar'), 'avatar');
-            
+
             if ($user->avatar) {
                $this->resize->remove($user->avatar, 'avatar');
             }

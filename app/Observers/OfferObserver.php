@@ -7,18 +7,22 @@ use App\Models\Offer;
 class OfferObserver
 {
     /**
+     * @param Offer $offer
+     */
+    public function creating(Offer $offer)
+    {
+        $offer->calculateDiscountPrice();
+    }
+
+    /**
      * Handle the offer "created" event.
      *
-     * @param  \App\Offer  $offer
+     * @param  \App\Models\Offer  $offer
      * @return void
      */
     public function created(Offer $offer)
     {
-        //echo "is work";
-//        $price = $offer->service->price;
-//        $sale = ($price / 100) * $offer->discount;
-//        $offer->discount_price = $price - $sale;
-//        echo $offer->discount_price . "\n";
+
     }
 
     /**

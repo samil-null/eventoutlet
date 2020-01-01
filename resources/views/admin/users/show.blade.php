@@ -54,7 +54,7 @@
                     <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
                         <div class="d-flex justify-content-between">
                             <a href="#" class="btn btn-sm btn-info mr-4">Connect</a>
-                            <a href="#" class="btn btn-sm btn-default float-right">Message</a>
+                            <a href="#" class="btn btn-sm btn-default float-right">Сообщение</a>
                         </div>
                     </div>
                     <div class="card-body pt-0 pt-md-4">
@@ -62,12 +62,12 @@
                             <div class="col">
                                 <div class="card-profile-stats d-flex justify-content-center mt-md-5">
                                     <div>
-                                        <span class="heading">22</span>
-                                        <span class="description">Friends</span>
+                                        <span class="heading">{{ $user->info->views }}</span>
+                                        <span class="description">Просмотров</span>
                                     </div>
                                     <div>
-                                        <span class="heading">10</span>
-                                        <span class="description">Photos</span>
+                                        <span class="heading">{{ $user->gallery()->count() }}</span>
+                                        <span class="description">Фото</span>
                                     </div>
                                     <div>
                                         <span class="heading">89</span>
@@ -78,20 +78,13 @@
                         </div>
                         <div class="text-center">
                             <h3>
-                                Jessica Jones<span class="font-weight-light">, 27</span>
+                                {{ $user->name }}
                             </h3>
                             <div class="h5 font-weight-300">
-                                <i class="ni location_pin mr-2"></i>Bucharest, Romania
-                            </div>
-                            <div class="h5 mt-4">
-                                <i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
-                            </div>
-                            <div>
-                                <i class="ni education_hat mr-2"></i>University of Computer Science
+                                <i class="ni location_pin mr-2"></i>{{ $user->city->name }}
                             </div>
                             <hr class="my-4">
-                            <p>Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music.</p>
-                            <a href="#">Show more</a>
+                            <a href="{{ route('site.users.show', $user->id) }}">Просмотреть страницу</a>
                         </div>
                     </div>
                 </div>
@@ -195,7 +188,7 @@
                                             <th scope="row">
                                                 <div class="media align-items-center">
                                                     <div class="media-body">
-                                                        <a class="mb-0 text-sm">{{ $offer->service->name }}</a>
+                                                        <a class="mb-0 text-sm" href="{{ route('admin.offers.show', $offer->id) }}">{{ $offer->service->name }}</a>
                                                     </div>
                                                 </div>
                                             </th>

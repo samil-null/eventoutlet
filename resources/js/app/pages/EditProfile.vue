@@ -37,7 +37,7 @@
             <div class="row form-group">
                 <div class="col-lg-6">
                     <label>Email</label>
-                    <input type="text" class="form-control" v-model="email">
+                    <input type="text" class="form-control" v-model="form.email">
                 </div>
                 <div class="col-lg-6">
                     <label>Instagram</label>
@@ -101,6 +101,7 @@
                 gallery:null,
                 form: {
                     name:null,
+                    email:null,
                     about_me: null,
                     phone: null,
                     site: null,
@@ -136,21 +137,23 @@
                 .then(data =>  {
                     this.specialities  = data.specialties;
                     this.priceOptions = data.price_options;
-                    this.services = data.services;
                     this.avatar = data.avatar;
                     this.gallery = data.gallery;
                     return data.user
                 })
                 .then(user => {
-                    console.log(user);
+                    this.services = user.services;
                     form.name = user.name;
-                    form.about_me = user.about_me;
-                    form.specialty = user.specialty;
-                    form.phone = user.phone;
-                    form.site = user.site;
-                    form.instagram = user.instagram;
-                    form.vk = user.vk;
-
+                    return user.info;
+                })
+                .then(info => {
+                    form.about_me = info.about_me;
+                    form.specialty = info.specialty;
+                    form.phone = info.phone;
+                    form.site = info.site;
+                    form.instagram = info.instagram;
+                    form.vk = info.vk;
+                    form.email = info.email;
                 })
                 .catch(e => console.log(e))
         },

@@ -14,32 +14,16 @@ class OfferService
 {
     public function create(User $user, Request $request)
     {
-        $offers = [];
+        $dates = array_map(function ($date) {
+            return new OfferDate(['date' => $date]);
+        }, $request->input('dates'));
 
-        foreach ($request->input('dates') as $date) {
-            $offers[] = new OfferDate([
-                'date' => Carbon::parse($date)->format('Y-m-d'),
-            ]);
-        }
+        $service = $user->services()->where('id', $request->input('service_id'))->first();
 
-        $offer = $user->offers()->save(new Offer(
-            $request->only(['service_id', 'description', 'discount']
-        )));
+        $offer = $service->offers()->save(
+            new Offer($request->only(['description', 'discount']))
+        );
 
-        $offer->calculateDiscount();
-
-        $offer->offerDates()->saveMany($offers);
-
+        $offer->dates()->saveMany($dates);
     }
-
-    private function makeGroupName($id)
-    {
-        return Str::random(20) . time() . "-" . $id;
-    }
-
-    public function getOffersList()
-    {
-
-    }
-
 }

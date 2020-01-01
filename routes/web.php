@@ -15,6 +15,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::post('/register', 'RegisterController@index')->name('register');
     Route::post('/login', 'LoginController@index')->name('login');
     Route::get('/logout', 'LogoutController@index')->name('logout');
+    Route::get('/verification/{token}', 'VerificationController@verify')->name('verification');
 });
 
 Route::group(['namespace' => 'Site'], function () {
@@ -73,6 +74,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::resource('/cities', 'CityController')->names([
         'index' => 'admin.cities.index',
         'show'  => 'admin.cities.show'
+    ]);
+
+    Route::resource('/offers', 'OfferController')->names([
+        'show'  => 'admin.offers.show'
     ]);
 
 });

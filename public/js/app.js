@@ -2489,6 +2489,7 @@ __webpack_require__.r(__webpack_exports__);
       gallery: null,
       form: {
         name: null,
+        email: null,
         about_me: null,
         phone: null,
         site: null,
@@ -2524,19 +2525,21 @@ __webpack_require__.r(__webpack_exports__);
     }).then(function (data) {
       _this2.specialities = data.specialties;
       _this2.priceOptions = data.price_options;
-      _this2.services = data.services;
       _this2.avatar = data.avatar;
       _this2.gallery = data.gallery;
       return data.user;
     }).then(function (user) {
-      console.log(user);
+      _this2.services = user.services;
       form.name = user.name;
-      form.about_me = user.about_me;
-      form.specialty = user.specialty;
-      form.phone = user.phone;
-      form.site = user.site;
-      form.instagram = user.instagram;
-      form.vk = user.vk;
+      return user.info;
+    }).then(function (info) {
+      form.about_me = info.about_me;
+      form.specialty = info.specialty;
+      form.phone = info.phone;
+      form.site = info.site;
+      form.instagram = info.instagram;
+      form.vk = info.vk;
+      form.email = info.email;
     })["catch"](function (e) {
       return console.log(e);
     });
@@ -45033,19 +45036,19 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.email,
-                    expression: "email"
+                    value: _vm.form.email,
+                    expression: "form.email"
                   }
                 ],
                 staticClass: "form-control",
                 attrs: { type: "text" },
-                domProps: { value: _vm.email },
+                domProps: { value: _vm.form.email },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.email = $event.target.value
+                    _vm.$set(_vm.form, "email", $event.target.value)
                   }
                 }
               })

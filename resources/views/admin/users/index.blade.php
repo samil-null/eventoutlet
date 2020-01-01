@@ -5,7 +5,7 @@
     <div class="container-fluid mt--7">
         <!-- Table -->
         <div class="row">
-            <div class="col">
+            <div class="col-lg-8">
                 <div class="card shadow">
                     <div class="card-header border-0">
                         <h3 class="mb-0">Пользователи</h3>
@@ -99,6 +99,41 @@
                         </nav>
                     </div>
                 </div>
+            </div>
+            <div class="col-lg-4">
+                <form class="card shadow">
+                    <div class="card-header border-0">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h3 class="mb-0">Фильтр</h3>
+                            </div>
+                            <div class="col text-right">
+                                <a href="{{ route('admin.users.index') }}" class="btn btn-sm btn-dark">Сбросить</a>
+                                <button type="submit" class="btn btn-sm btn-primary">Применить</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group focused">
+                            <label class="form-control-label" for="input-speciality">Специальность</label>
+                            <select class="form-control form-control-alternative" id="input-speciality" name="speciality_id">
+                                @foreach(\App\Models\Specialty::all() as $speciality)
+                                    <option value="{{ $speciality->id }}">{{ $speciality->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group focused">
+                            <label class="form-control-label" for="input-speciality">Город</label>
+                            <select class="form-control form-control-alternative" id="input-speciality" name="city_id">
+                                @foreach(\App\Models\City::all() as $city)
+                                    <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                    </div>
+                </form>
             </div>
         </div>
     </div>
