@@ -16,7 +16,9 @@
             </div>
             <div class="col-lg-2">
                 <label>Кол-во</label>
-                <input type="text" class="form-control" v-model="priceOption">
+                <select v-model="priceOptionId" class="form-control">
+                    <option  v-for="option in priceOptions" :value="option.id">{{ option.name}}</option>
+                </select>
             </div>
         </div>
         <div class="row form-group">
@@ -42,7 +44,7 @@
                 name:null,
                 price:null,
                 description:null,
-                priceOption:0
+                priceOptionId:1
             }
         },
         methods: {
@@ -51,7 +53,7 @@
                     name: this.name,
                     price: this.price,
                     description: this.description,
-                    price_option: this.priceOption
+                    price_option_id: this.priceOptionId
                 }
 
                 this.$emit('create-service', payload);

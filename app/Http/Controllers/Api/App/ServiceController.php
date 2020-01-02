@@ -40,9 +40,9 @@ class ServiceController extends Controller
 
         $service = Service::create([
             'name'              => $request->input('name'),
-            'user_id'           => Auth::user()->id,
+            'user_id'           => $request->user()->id,
             'price'             => $request->input('price'),
-            'price_option'      => $request->input('price_option'),
+            'price_option_id'      => $request->input('price_option_id'),
             'description'       => $request->input('description')
         ]);
 

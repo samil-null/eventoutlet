@@ -57,16 +57,6 @@ class ResizeService
            });
         }
 
-        if (false) {
-            $image = $image->resizeCanvas(
-                $options['height'],
-                $options['width'],
-                'center',
-                false,
-                '#fff'
-            );
-        }
-
         return $image;
     }
 

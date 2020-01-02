@@ -1,7 +1,7 @@
 <template>
     <ul>
         <li v-for="service in services">
-            {{ service.name }} | {{ service.price}} / {{ service.price_option }}
+            {{ service.name }} | {{ service.price}} / {{ service.price_option.name }}
         </li>
     </ul>
 </template>

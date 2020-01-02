@@ -10,14 +10,14 @@ class ServicesTableSeeder extends Seeder
             'user_id' => 1,
             'name' => 'Фото на память',
             'price' => '1200',
-            'price_option' => 'Фикс.',
+            'price_option_id' => 1,
             'description' => 'about text...'
         ],
         [
             'user_id' => 1,
             'name' => 'Свадебное фото',
             'price' => '1000',
-            'price_option' => 'руб./ч.',
+            'price_option' => 2,
             'description' => 'about photo text...'
         ]
     ];

@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
             RolesTableSeeder::class,
             UsersTableSeeder::class,
             SpecialtiesTableSeeder::class,
-            //PriceOptionsTableSeeder::class,
+            PriceOptionsTableSeeder::class,
             ServicesTableSeeder::class
         ]);
     }

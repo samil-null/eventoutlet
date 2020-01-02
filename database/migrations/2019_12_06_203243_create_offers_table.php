@@ -18,7 +18,7 @@ class CreateOffersTable extends Migration
             $table->bigInteger('service_id');
             $table->integer('discount');
             $table->integer('discount_price')->default(0);
-            $table->string('description', '500')->nullable();
+            $table->string('description', 1000)->nullable();
             $table->integer('approved')->default(0);
             $table->timestamps();
         });

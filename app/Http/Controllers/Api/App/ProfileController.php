@@ -79,7 +79,7 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        $user = User::with('info','services', 'city', 'speciality', 'offers', 'offers')->find($id);
+        $user = User::with('info','services.priceOption', 'city', 'speciality', 'offers', 'offers')->find($id);
 
         abort_if(!$user, 404);
 

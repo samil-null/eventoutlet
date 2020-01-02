@@ -30,8 +30,6 @@ class SpecialtiesTableSeeder extends Seeder
      */
     public function run()
     {
-        foreach ($this->specialties as $specialty) {
-            Specialty::create($specialty);
-        }
+        Specialty::insert($this->specialties);
     }
 }

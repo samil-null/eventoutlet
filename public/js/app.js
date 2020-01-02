@@ -2040,6 +2040,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['priceOptions'],
   name: "CreateServiceApp",
@@ -2048,7 +2050,7 @@ __webpack_require__.r(__webpack_exports__);
       name: null,
       price: null,
       description: null,
-      priceOption: 0
+      priceOptionId: 1
     };
   },
   methods: {
@@ -2057,7 +2059,7 @@ __webpack_require__.r(__webpack_exports__);
         name: this.name,
         price: this.price,
         description: this.description,
-        price_option: this.priceOption
+        price_option_id: this.priceOptionId
       };
       this.$emit('create-service', payload);
     }
@@ -44317,27 +44319,41 @@ var render = function() {
         _c("div", { staticClass: "col-lg-2" }, [
           _c("label", [_vm._v("Кол-во")]),
           _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.priceOption,
-                expression: "priceOption"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text" },
-            domProps: { value: _vm.priceOption },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.priceOptionId,
+                  expression: "priceOptionId"
                 }
-                _vm.priceOption = $event.target.value
+              ],
+              staticClass: "form-control",
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.priceOptionId = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
               }
-            }
-          })
+            },
+            _vm._l(_vm.priceOptions, function(option) {
+              return _c("option", { domProps: { value: option.id } }, [
+                _vm._v(_vm._s(option.name))
+              ])
+            }),
+            0
+          )
         ])
       ]),
       _vm._v(" "),
@@ -44642,7 +44658,7 @@ var render = function() {
             " | " +
             _vm._s(service.price) +
             " / " +
-            _vm._s(service.price_option) +
+            _vm._s(service.price_option.name) +
             "\n    "
         )
       ])

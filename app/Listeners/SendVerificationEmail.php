@@ -24,3 +24,4 @@ class SendVerificationEmail
         });
     }
 }
+// create_additional_fields_specialties_table

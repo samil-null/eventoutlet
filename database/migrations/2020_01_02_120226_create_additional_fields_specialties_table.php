@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateServicesTable extends Migration
+class CreateAdditionalFieldsSpecialtiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateServicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('additional_fields_specialties', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id');
-            $table->integer('price_option_id');
-            $table->string('name', 255);
-            $table->integer('price');
-            $table->string('description', 500);
+            $table->bigInteger('speciality_id');
+            $table->string('name')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateServicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('services');
+        Schema::dropIfExists('additional_fields_specialties');
     }
 }
