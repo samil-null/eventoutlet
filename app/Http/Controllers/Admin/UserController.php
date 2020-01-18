@@ -2,25 +2,41 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\User\UserChangeStatus;
+use App\Models\City;
+use App\Models\Role;
 use App\Models\Service;
 use App\Models\Specialty;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Services\UserFilterService;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @var UserFilterService
      */
-    public function index()
+    private $filter;
+
+    public function __construct(UserFilterService $filter)
     {
-        $user = User::paginate(20);
+        $this->filter = $filter;
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index(Request $request)
+    {
+
+        $users = $this->filter->apply($request, $request->user())->paginate(20);
 
         return view('admin.users.index', [
-            'users' => $user
+            'users' => $users,
+            'request' => $request
         ]);
     }
 
@@ -53,12 +69,16 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
+        $user = User::with('offers', 'services')->findOrFail($id);
         $specialties = Specialty::all();
+        $roles = Role::all();
+        $cities = City::all();
 
         return view('admin.users.show', [
-            'user' => $user,
-            'specialties' => $specialties
+            'user'          => $user,
+            'roles'         => $roles,
+            'specialties'   => $specialties,
+            'cities'        => $cities
         ]);
     }
 
@@ -82,7 +102,18 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+
+        if ($user->status != $request->status) {
+            event(new UserChangeStatus($request->status, $user));
+        }
+
+        $roles = Role::whereIn('name', $request->roles)->get();
+        $user->syncRoles($roles);
+
+        $user->update($request->only(['status']));
+
+        return redirect()->route('admin.users.show', $id);
     }
 
     /**

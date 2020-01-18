@@ -1,5 +1,5 @@
 const getToken = () => {
-    return localStorage.getItem('api_token');
+    return document.querySelector('meta[name="csrf-token"]').attributes.content.value
 }
 
 const setToken = (token) => {

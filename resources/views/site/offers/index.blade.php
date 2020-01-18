@@ -1,6 +1,11 @@
 @extends('site.layout.index')
 
 @section('content')
+    <div class="container">
+        <div class="row">
+            <filter-app></filter-app>
+        </div>
+    </div>
     @foreach($users as $user)
         <div class="container">
             <div class="card mt-5">

@@ -25,12 +25,13 @@ class UsersTableSeeder extends Seeder
         ]);
 
         $denis->attachRole('executor');
+        $denis->attachRole('admin');
 
         factory(UserInfo::class)->create([
             'user_id' => $denis->id
         ]);
 
-        factory(User::class, 10)->create()->each(function ($user) {
+        factory(User::class, 50)->create()->each(function ($user) {
             factory(UserInfo::class)->create([
                 'user_id' => $user->id
             ]);
@@ -43,7 +44,7 @@ class UsersTableSeeder extends Seeder
                 factory(Offer::class, random_int(1,3))->create([
                     'service_id' => $service->id
                 ])->each(function ($offer) {
-                    factory(OfferDate::class, random_int(1,2))->create([
+                    factory(OfferDate::class, random_int(5,10))->create([
                         'offer_id' => $offer->id
                     ]);
                 });

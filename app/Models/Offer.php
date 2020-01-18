@@ -2,15 +2,18 @@
 
 namespace App\Models;
 
+use App\Helpers\DateHelper;
 use Illuminate\Database\Eloquent\Model;
 
 class Offer extends Model
 {
+    protected $fillable = ['status', 'discount', 'discount_price', 'description'];
+
     protected $guarded = [];
 
     public const WAITING_STATUS = 0;
 
-    public const APPROVED_STATUS = 1;
+    public const ACTIVE_STATUS = 1;
 
     public const REJECTED_STATUS = 2;
 
@@ -19,12 +22,12 @@ class Offer extends Model
             'name' => 'Ожидает',
             'public_name' => 'Ваше предложение отправленно на модерацию'
         ],
-        self::APPROVED_STATUS => [
+        self::ACTIVE_STATUS => [
             'name' => 'Принят',
             'public_name' => 'Ваше предложение подтверждено'
         ],
         self::REJECTED_STATUS => [
-            'name' => 'Откланен',
+            'name' => 'Отклонен',
             'public_name' => 'Ваше предложение откланено'
         ]
     ];
@@ -39,10 +42,27 @@ class Offer extends Model
         return $this->hasOne(Service::class, 'id', 'service_id');
     }
 
+    public function user()
+    {
+        return $this->hasOneThrough(
+        User::class,
+        Service::class,
+        'id',
+        'id',
+        'service_id',
+        'user_id'
+        );
+    }
+
     public function calculateDiscountPrice()
     {
         $price = $this->service->price;
         $sale = ($price / 100) * $this->discount;
         $this->discount_price = $price - $sale;
+    }
+
+    public function getStatus($key)
+    {
+        return $this->statuses[$this->status][$key];
     }
 }

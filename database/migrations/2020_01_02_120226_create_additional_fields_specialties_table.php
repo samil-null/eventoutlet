@@ -16,6 +16,8 @@ class CreateAdditionalFieldsSpecialtiesTable extends Migration
         Schema::create('additional_fields_specialties', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('speciality_id');
+            $table->string('type');
+            $table->string('key')->unique();
             $table->string('name')->nullable();
             $table->timestamps();
         });

@@ -13,26 +13,46 @@ class User extends Authenticatable
     use LaratrustUserTrait;
     use Notifiable;
 
-    public const WAITING_STATUS = 0;
+    public const NEW_STATUS = 0;
 
     public const ACTIVE_STATUS = 1;
 
-    public const REJECTED_STATUS = 2;
+    public const WAITING_STATUS = 2;
 
-    public const BANNED_STATUS = 3;
+    public const REJECTED_STATUS = 3;
 
-    private $statuses = [
+    public const BANED_STATUS = 4;
 
-    ];
     /**
-     * The attributes that are mass assignable.
-     *
      * @var array
      */
-//    protected $fillable = [
-//        'name', 'about_me', 'specialty', 'email', 'password', 'speciality_id', 'avatar'
-//    ];
+    public $statuses = [
+        self::NEW_STATUS => [
+            'name' => 'Новый',
+            'public_name' => 'Новый'
+        ],
 
+        self::WAITING_STATUS => [
+            'name' => 'Ожидает модерации',
+            'public_name' => 'Ваш аккаунт на модерации'
+        ],
+        self::ACTIVE_STATUS => [
+            'name' => 'Активен',
+            'public_name' => 'Активен'
+        ],
+        self::REJECTED_STATUS => [
+            'name' => 'Отклонен',
+            'public_name' => 'Ваша заявка отклонена, проверте свою почту'
+        ],
+        self::BANED_STATUS => [
+            'name' => 'Заблокирован',
+            'public_name' => 'Ваш аккаунт заблокирован'
+        ]
+    ];
+
+    /**
+     * @var array
+     */
     protected $guarded = [];
     /**
      * The attributes that should be hidden for arrays.
@@ -40,7 +60,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'email_verified_token'
     ];
 
     /**
@@ -67,7 +87,19 @@ class User extends Authenticatable
             'id',
             'id'
         );
+    }
 
+    public function maxOfferPrice()
+    {
+        return $this->hasManyThrough(
+            Offer::class,
+            Service::class,
+            'user_id',
+            'service_id',
+            'id',
+            'id'
+        )->selectRaw('max(offers.discount_price) as max_price, user_id')
+            ->groupBy('laravel_through_key');
     }
 
     public function speciality()
@@ -106,6 +138,12 @@ class User extends Authenticatable
                     ->where(['type' => 'image', 'type_content' => 'gallery']);
     }
 
+    public function videos()
+    {
+        return $this->hasMany(Media::class,'user_id', 'id')
+            ->where(['type' => 'video', 'type_content' => 'video']);
+    }
+
     public function info()
     {
         return $this->hasOne(UserInfo::class, 'user_id', 'id');
@@ -114,5 +152,10 @@ class User extends Authenticatable
     public function viewed()
     {
         $this->info()->increment('views');
+    }
+
+    public function getStatus($name = 'name')
+    {
+        return $this->statuses[$this->status][$name];
     }
 }

@@ -18,10 +18,9 @@ class SendVerificationEmail
     {
         if ($event->user->email != 'denis.budancev@gmail.com') return false;
 
-        Mail::send('mail.verification', ['user' => $event->user], function ($message) use ($event) {
+        Mail::send('mails.verification', ['user' => $event->user], function ($message) use ($event) {
             $message->from('info@eventoutlet.ru');
             $message->to($event->user->email);
         });
     }
 }
-// create_additional_fields_specialties_table

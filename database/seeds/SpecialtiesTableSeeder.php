@@ -8,19 +8,19 @@ class SpecialtiesTableSeeder extends Seeder
     private $specialties = [
         [
             'name' => 'Фотограф',
-            'is_active' => 1
+            'status' => 1
         ],
         [
             'name' => 'Ведущий',
-            'is_active' => 1
+            'status' => 1
         ],
         [
             'name' => 'Звукорежиссер',
-            'is_active' => 1
+            'status' => 1
         ],
         [
             'name' => 'Декоратор',
-            'is_active' => 1
+            'status' => 1
         ]
     ];
     /**

@@ -3,38 +3,74 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Laravel</title>
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-
+        {!! SEO::generate(true) !!}
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <link rel="stylesheet" href="{{ asset('/static/eventoutlet/dist/assets/css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
     </head>
-    <body>
-        <div id="app">
-            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-                <a class="navbar-brand" href="/">Eventoutlet</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+    <body class="Site">
+    <!-- main wrapper -->
+    <div class="wrapper" id="app">
+        <nav id="menuBody" class="navbar-general">
+            <div class="container container-bg">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="navbar-general__row">
+                            <a href="{{ route('site.home') }}" class="navbar-logo">
+                                <img src="/static/eventoutlet/dist/assets/img/general/logo.png" alt="">
+                                <span class="eventoutlet">
+								EventOutlet
+							</span>
+                            </a>
+                            <div class="navbar-general__collapse">
+                                <ul class="navbar-general__main">
+                                    <li><a href="#">Каталог специалистов</a></li>
+                                    <li><a href="#">Стать исполнителем</a></li>
+                                </ul>
+                                <div class="navbar-general__profile">
+                                    @guest
+                                    <auth-form
+                                    ></auth-form>
+                                    @endguest
+                                    @auth
+                                        <div class="navbar-general__profile">
+                                            <div class="navbar-general__profile-body">
+                                                <div class="navbar-general__profile-preview">
+                                                    <span>{{ Auth::user()->name }}</span>
+                                                    <div class="navbar-general__profile-photo"
+                                                         style="background-image:url({{ Imager::avatar(Auth::user()->avatar) }})"></div>
+                                                    <div class="arrow-svg"></div>
+                                                </div>
+                                                <ul class="navbar-general__profile-menu">
+                                                    <li><a href="{{ route('site.lk.profiles.show', Auth::user()->id) }}">Личный кабинет</a></li>
+                                                    <li><a href="{{ route('site.lk.profiles.edit', Auth::user()->id) }}">Редактировать профиль</a></li>
+                                                    <li><a href="{{ route('logout') }}">Выход</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    @endauth
+                                </div>
+                            </div>
+                            <div id="menuBtn" class="navbar-burger">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
 
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav mr-auto">
-                        @auth
-                            <li class="nav-item active">
-                                <a class="nav-link" href="{{ route('site.lk.profiles.show',  Auth::user()->id) }}">Личный кабинет</a>
-                            </li>
-                        @endauth
-                    </ul>
-                    <div class="form-inline">
-                        <auth-form :user="{{ Auth::check()?Auth::user():'{}' }}"></auth-form>
                     </div>
                 </div>
-            </nav>
 
+            </div>
+        </nav>
+
+        <!-- main wrapper -->
+        <div class="wrapper">
             @yield('content')
         </div>
-
+    </div>
     </body>
+    <script src="{{ asset('static/eventoutlet/dist/assets/js/app.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
 </html>
 

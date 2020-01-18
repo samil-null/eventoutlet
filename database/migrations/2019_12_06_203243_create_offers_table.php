@@ -19,7 +19,7 @@ class CreateOffersTable extends Migration
             $table->integer('discount');
             $table->integer('discount_price')->default(0);
             $table->string('description', 1000)->nullable();
-            $table->integer('approved')->default(0);
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

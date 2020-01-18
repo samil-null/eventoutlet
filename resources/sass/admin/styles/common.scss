@@ -1,0 +1,55 @@
+.admin-email-verify-status {
+    margin-left: 10px;
+}
+.multiple-select__container {
+    position: relative;
+    z-index: 55;
+}
+
+.custom-badge {
+    text-transform: none;
+    font-size: 12px;
+}
+
+select.form-control[multiple]{
+    position: absolute;
+    width: 100%;
+    height: 46px;
+
+    &:focus {
+        height: 100px;
+    }
+}
+
+.custom-status-0 {
+    background-color: #fb6340!important;
+}
+.custom-status-1 {
+    background-color: #2dce89!important;
+}
+
+.custom-status-2 {
+    background-color:#091428 !important;
+}
+
+.custom-status-3 {
+    background-color:#091428 !important;
+}
+
+.custom-status-4 {
+    background-color: #f5365c!important;
+}
+
+.admin-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -5px;
+    &__item {
+        width: 8vw;
+        height: 8vw;
+        margin: 0 5px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+}

@@ -3,28 +3,40 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Services\FilterBuilderService;
 use App\Services\OfferFilterService;
+use App\Services\UserFilterService;
 use Illuminate\Http\Request;
 
 class OfferController extends Controller
 {
+
     /**
-     * @var OfferFilterService
+     * @var UserFilterService
      */
-    private $offerFilter;
+    private $filter;
 
     /**
      * OfferController constructor.
-     * @param OfferFilterService $offerFilter
+     * @param UserFilterService $filter
      */
-    public function __construct(OfferFilterService $offerFilter)
+    public function __construct(UserFilterService $filter, FilterBuilderService $builder)
     {
-        $this->offerFilter = $offerFilter;
+        $this->filter = $filter;
+        $this->builder = $builder;
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(Request $request)
     {
-        $users = $this->offerFilter->handle($request)->get();
+        $users = $this->filter->apply($request)->paginate(10);
+
+        $filter = $this->builder->create($request);
+
+        dd($filter);
 
         return view('site.offers.index', [
             'users' => $users,

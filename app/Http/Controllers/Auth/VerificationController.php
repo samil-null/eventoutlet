@@ -11,11 +11,16 @@ class VerificationController extends Controller
 {
     public function verify($token)
     {
-        $user = User::where(['email_verified_token' => $token, 'email_verified_at' => null])->first();
+        $user = User::where([
+            'email_verified_token' => $token,
+            'email_verified_at' => null,
+            'verified' => 0,
+        ])->first();
 
         if ($user) {
             $user->update([
-                'email_verified_at' => Carbon::now()
+                'email_verified_at' => Carbon::now(),
+                'verified' => 1
             ]);
         }
 

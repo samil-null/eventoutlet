@@ -1,0 +1,88 @@
++--------+-----------+------------------------------------+---------------------------+-----------------------------------------------------------+-------------------+
+| Domain | Method    | URI                                | Name                      | Action                                                    | Middleware        |
++--------+-----------+------------------------------------+---------------------------+-----------------------------------------------------------+-------------------+
+|        | GET|HEAD  | /                                  | site.home                 | App\Http\Controllers\Site\HomeController@index            | web               |
+|        | GET|HEAD  | admin                              | admin.dashboard           | App\Http\Controllers\Admin\DashboardController@index      | web,role:admin    |
+|        | GET|HEAD  | admin/cities                       | admin.cities.index        | App\Http\Controllers\Admin\CityController@index           | web,role:admin    |
+|        | POST      | admin/cities                       | admin.cities.store        | App\Http\Controllers\Admin\CityController@store           | web,role:admin    |
+|        | GET|HEAD  | admin/cities/create                | admin.cities.create       | App\Http\Controllers\Admin\CityController@create          | web,role:admin    |
+|        | DELETE    | admin/cities/{city}                | admin.cities.destroy      | App\Http\Controllers\Admin\CityController@destroy         | web,role:admin    |
+|        | GET|HEAD  | admin/cities/{city}                | admin.cities.show         | App\Http\Controllers\Admin\CityController@show            | web,role:admin    |
+|        | PUT|PATCH | admin/cities/{city}                | admin.cities.update       | App\Http\Controllers\Admin\CityController@update          | web,role:admin    |
+|        | GET|HEAD  | admin/cities/{city}/edit           | cities.edit               | App\Http\Controllers\Admin\CityController@edit            | web,role:admin    |
+|        | POST      | admin/offers                       | admin.offers.store        | App\Http\Controllers\Admin\OfferController@store          | web,role:admin    |
+|        | GET|HEAD  | admin/offers                       | admin.offers.index        | App\Http\Controllers\Admin\OfferController@index          | web,role:admin    |
+|        | GET|HEAD  | admin/offers/create                | admin.offers.create       | App\Http\Controllers\Admin\OfferController@create         | web,role:admin    |
+|        | DELETE    | admin/offers/{offer}               | admin.offers.destroy      | App\Http\Controllers\Admin\OfferController@destroy        | web,role:admin    |
+|        | GET|HEAD  | admin/offers/{offer}               | admin.offers.show         | App\Http\Controllers\Admin\OfferController@show           | web,role:admin    |
+|        | PUT|PATCH | admin/offers/{offer}               | admin.offers.update       | App\Http\Controllers\Admin\OfferController@update         | web,role:admin    |
+|        | GET|HEAD  | admin/offers/{offer}/edit          | offers.edit               | App\Http\Controllers\Admin\OfferController@edit           | web,role:admin    |
+|        | POST      | admin/specialties                  | admin.specialties.store   | App\Http\Controllers\Admin\SpecialityController@store     | web,role:admin    |
+|        | GET|HEAD  | admin/specialties                  | admin.specialties.index   | App\Http\Controllers\Admin\SpecialityController@index     | web,role:admin    |
+|        | GET|HEAD  | admin/specialties/create           | admin.specialties.create  | App\Http\Controllers\Admin\SpecialityController@create    | web,role:admin    |
+|        | DELETE    | admin/specialties/{specialty}      | admin.specialties.destroy | App\Http\Controllers\Admin\SpecialityController@destroy   | web,role:admin    |
+|        | GET|HEAD  | admin/specialties/{specialty}      | admin.specialties.show    | App\Http\Controllers\Admin\SpecialityController@show      | web,role:admin    |
+|        | PUT|PATCH | admin/specialties/{specialty}      | admin.specialties.update  | App\Http\Controllers\Admin\SpecialityController@update    | web,role:admin    |
+|        | GET|HEAD  | admin/specialties/{specialty}/edit | specialties.edit          | App\Http\Controllers\Admin\SpecialityController@edit      | web,role:admin    |
+|        | GET|HEAD  | admin/users                        | admin.users.index         | App\Http\Controllers\Admin\UserController@index           | web,role:admin    |
+|        | POST      | admin/users                        | admin.users.store         | App\Http\Controllers\Admin\UserController@store           | web,role:admin    |
+|        | GET|HEAD  | admin/users/create                 | admin.users.create        | App\Http\Controllers\Admin\UserController@create          | web,role:admin    |
+|        | DELETE    | admin/users/{user}                 | admin.users.destroy       | App\Http\Controllers\Admin\UserController@destroy         | web,role:admin    |
+|        | GET|HEAD  | admin/users/{user}                 | admin.users.show          | App\Http\Controllers\Admin\UserController@show            | web,role:admin    |
+|        | PUT|PATCH | admin/users/{user}                 | admin.users.update        | App\Http\Controllers\Admin\UserController@update          | web,role:admin    |
+|        | GET|HEAD  | admin/users/{user}/edit            | users.edit                | App\Http\Controllers\Admin\UserController@edit            | web,role:admin    |
+|        | POST      | app/filter                         |                           | App\Http\Controllers\Api\App\FilterController@build       | web               |
+|        | POST      | app/media/avatar                   |                           | App\Http\Controllers\Api\App\MediaController@avatar       | web               |
+|        | POST      | app/media/gallery                  |                           | App\Http\Controllers\Api\App\MediaController@gallery      | web               |
+|        | POST      | app/media/video                    |                           | App\Http\Controllers\Api\App\MediaController@video        | web               |
+|        | GET|HEAD  | app/offers                         | offers.index              | App\Http\Controllers\Api\App\OfferController@index        | web               |
+|        | POST      | app/offers                         | offers.store              | App\Http\Controllers\Api\App\OfferController@store        | web               |
+|        | GET|HEAD  | app/offers/create                  | offers.create             | App\Http\Controllers\Api\App\OfferController@create       | web               |
+|        | GET|HEAD  | app/offers/{offer}                 | offers.show               | App\Http\Controllers\Api\App\OfferController@show         | web               |
+|        | DELETE    | app/offers/{offer}                 | offers.destroy            | App\Http\Controllers\Api\App\OfferController@destroy      | web               |
+|        | PUT|PATCH | app/offers/{offer}                 | offers.update             | App\Http\Controllers\Api\App\OfferController@update       | web               |
+|        | GET|HEAD  | app/offers/{offer}/edit            | offers.edit               | App\Http\Controllers\Api\App\OfferController@edit         | web               |
+|        | GET|HEAD  | app/profiles                       | profiles.index            | App\Http\Controllers\Api\App\ProfileController@index      | web               |
+|        | POST      | app/profiles                       | profiles.store            | App\Http\Controllers\Api\App\ProfileController@store      | web               |
+|        | GET|HEAD  | app/profiles/create                | profiles.create           | App\Http\Controllers\Api\App\ProfileController@create     | web               |
+|        | DELETE    | app/profiles/{profile}             | profiles.destroy          | App\Http\Controllers\Api\App\ProfileController@destroy    | web               |
+|        | PUT|PATCH | app/profiles/{profile}             | profiles.update           | App\Http\Controllers\Api\App\ProfileController@update     | web               |
+|        | GET|HEAD  | app/profiles/{profile}             | profiles.show             | App\Http\Controllers\Api\App\ProfileController@show       | web               |
+|        | GET|HEAD  | app/profiles/{profile}/edit        | profiles.edit             | App\Http\Controllers\Api\App\ProfileController@edit       | web               |
+|        | POST      | app/services                       | services.store            | App\Http\Controllers\Api\App\ServiceController@store      | web               |
+|        | GET|HEAD  | app/services                       | services.index            | App\Http\Controllers\Api\App\ServiceController@index      | web               |
+|        | GET|HEAD  | app/services/create                | services.create           | App\Http\Controllers\Api\App\ServiceController@create     | web               |
+|        | PUT|PATCH | app/services/{service}             | services.update           | App\Http\Controllers\Api\App\ServiceController@update     | web               |
+|        | GET|HEAD  | app/services/{service}             | services.show             | App\Http\Controllers\Api\App\ServiceController@show       | web               |
+|        | DELETE    | app/services/{service}             | services.destroy          | App\Http\Controllers\Api\App\ServiceController@destroy    | web               |
+|        | GET|HEAD  | app/services/{service}/edit        | services.edit             | App\Http\Controllers\Api\App\ServiceController@edit       | web               |
+|        | GET|HEAD  | app/specialties                    | specialties.index         | App\Http\Controllers\Api\App\SpecialityController@index   | web               |
+|        | POST      | app/specialties                    | specialties.store         | App\Http\Controllers\Api\App\SpecialityController@store   | web               |
+|        | GET|HEAD  | app/specialties/create             | specialties.create        | App\Http\Controllers\Api\App\SpecialityController@create  | web               |
+|        | DELETE    | app/specialties/{specialty}        | specialties.destroy       | App\Http\Controllers\Api\App\SpecialityController@destroy | web               |
+|        | PUT|PATCH | app/specialties/{specialty}        | specialties.update        | App\Http\Controllers\Api\App\SpecialityController@update  | web               |
+|        | GET|HEAD  | app/specialties/{specialty}        | specialties.show          | App\Http\Controllers\Api\App\SpecialityController@show    | web               |
+|        | GET|HEAD  | app/specialties/{specialty}/edit   | specialties.edit          | App\Http\Controllers\Api\App\SpecialityController@edit    | web               |
+|        | POST      | auth/forgot                        | forgot                    | App\Http\Controllers\Auth\ForgotController@forgot         | web               |
+|        | GET|HEAD  | auth/forgot/{token}                | remember                  | App\Http\Controllers\Auth\ForgotController@remember       | web               |
+|        | POST      | auth/login                         | login                     | App\Http\Controllers\Auth\LoginController@index           | web               |
+|        | GET|HEAD  | auth/logout                        | logout                    | App\Http\Controllers\Auth\LogoutController@index          | web               |
+|        | POST      | auth/register                      | register                  | App\Http\Controllers\Auth\RegisterController@index        | web               |
+|        | GET|HEAD  | auth/verification/{token}          | verification              | App\Http\Controllers\Auth\VerificationController@verify   | web               |
+|        | POST      | lk/offers                          | site.lk.offers.store      | App\Http\Controllers\Site\Lk\OfferController@store        | web,role:executor |
+|        | GET|HEAD  | lk/offers                          | offers.index              | App\Http\Controllers\Site\Lk\OfferController@index        | web,role:executor |
+|        | GET|HEAD  | lk/offers/create                   | site.lk.offers.create     | App\Http\Controllers\Site\Lk\OfferController@create       | web,role:executor |
+|        | GET|HEAD  | lk/offers/{offer}                  | offers.show               | App\Http\Controllers\Site\Lk\OfferController@show         | web,role:executor |
+|        | PUT|PATCH | lk/offers/{offer}                  | offers.update             | App\Http\Controllers\Site\Lk\OfferController@update       | web,role:executor |
+|        | DELETE    | lk/offers/{offer}                  | offers.destroy            | App\Http\Controllers\Site\Lk\OfferController@destroy      | web,role:executor |
+|        | GET|HEAD  | lk/offers/{offer}/edit             | offers.edit               | App\Http\Controllers\Site\Lk\OfferController@edit         | web,role:executor |
+|        | POST      | lk/profiles                        | profiles.store            | App\Http\Controllers\Site\Lk\ProfileController@store      | web,role:executor |
+|        | GET|HEAD  | lk/profiles                        | profiles.index            | App\Http\Controllers\Site\Lk\ProfileController@index      | web,role:executor |
+|        | GET|HEAD  | lk/profiles/create                 | profiles.create           | App\Http\Controllers\Site\Lk\ProfileController@create     | web,role:executor |
+|        | PUT|PATCH | lk/profiles/{profile}              | profiles.update           | App\Http\Controllers\Site\Lk\ProfileController@update     | web,role:executor |
+|        | DELETE    | lk/profiles/{profile}              | profiles.destroy          | App\Http\Controllers\Site\Lk\ProfileController@destroy    | web,role:executor |
+|        | GET|HEAD  | lk/profiles/{profile}              | site.lk.profiles.show     | App\Http\Controllers\Site\Lk\ProfileController@show       | web,role:executor |
+|        | GET|HEAD  | lk/profiles/{profile}/edit         | site.lk.profiles.edit     | App\Http\Controllers\Site\Lk\ProfileController@edit       | web,role:executor |
+|        | GET|HEAD  | offers                             | site.offers               | App\Http\Controllers\Site\OfferController@index           | web               |
+|        | GET|HEAD  | users/{id}                         | site.users.show           | App\Http\Controllers\Site\UserController@show             | web               |
++--------+-----------+------------------------------------+---------------------------+-----------------------------------------------------------+-------------------+

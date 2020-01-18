@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers\Api\App;
 
+
+use App\Utils\Media\Video;
 use App\Models\Media;
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Services\ResizeService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\Api\Media\MediaGalleryRequest;
+use App\Http\Requests\Api\Media\MediaVideoRequest;
 
 
 class MediaController extends Controller
@@ -27,6 +33,7 @@ class MediaController extends Controller
     /**
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function avatar(Request $request)
     {
@@ -56,7 +63,7 @@ class MediaController extends Controller
         ]);
     }
 
-    public function gallery(Request $request)
+    public function gallery(MediaGalleryRequest $request)
     {
         $user = $request->user();
 
@@ -74,6 +81,27 @@ class MediaController extends Controller
                 'full_path' => asset($fullPath) ,
                 'filepath'  => $filename
             ]
+        ]);
+    }
+
+    public function video(MediaVideoRequest $request, Video $video)
+    {
+
+         list($video_path, $thumb_path) = $video->load($request);
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'video_path' => asset($video_path),
+                'thumb_path' => asset($thumb_path),
+            ]
+        ]);
+    }
+
+    public function render(Request $request)
+    {
+        return view('api.media.video', [
+            'url' => asset('/videos/'. $request->name)
         ]);
     }
 }

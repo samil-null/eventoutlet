@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\City\StoreCityRequest;
 use App\Models\City;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,7 @@ class CityController extends Controller
     public function index()
     {
         $cities = City::all();
-        
+
         return view('admin.cities.index', compact('cities'));
     }
 
@@ -27,7 +28,9 @@ class CityController extends Controller
      */
     public function create()
     {
-        //
+        $city = new City();
+
+        return view('admin.cities.create', compact('city'));
     }
 
     /**
@@ -36,9 +39,12 @@ class CityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCityRequest $request)
     {
-        //
+        $city = City::create($request->only('name', 'status'));
+
+        return redirect()->route('admin.cities.show', $city->id);
+
     }
 
     /**
@@ -72,10 +78,14 @@ class CityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreCityRequest $request, $id)
     {
+
         $city = City::find($id);
-        $city->update($request->only('name'));
+
+        $city->update($request->only('name', 'status'));
+
+        return redirect()->route('admin.cities.show', $id);
         //
     }
 
@@ -87,6 +97,8 @@ class CityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        City::find($id)->delete();
+
+        return redirect()->route('admin.cities.index');
     }
 }

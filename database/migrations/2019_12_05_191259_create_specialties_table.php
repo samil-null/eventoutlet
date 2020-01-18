@@ -16,7 +16,7 @@ class CreateSpecialtiesTable extends Migration
         Schema::create('specialties', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 255)->uniqid();
-            $table->integer('is_active')->default(0);
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

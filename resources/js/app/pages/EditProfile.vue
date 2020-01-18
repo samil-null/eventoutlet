@@ -1,83 +1,235 @@
 <template>
-    <div class="container">
-        <div class="row mt-4">
-            <div class="col-lg-12">
-                <h1>Редактирование анкеты</h1>
+    <div>
+        <section class="profile-edit">
+            <div class="container">
+                <div class="profile-edit__content">
+                    <div class="row no-gutters">
+                        <div class="col-xl-3">
+                            <div class="profile-edit__card-wrapper">
+                                <div class="profile-edit__card">
+                                    <div class="profile-edit__card-photo" :style="{'background-image': 'url('+ avatar +')'}">
+
+                                    </div>
+                                    <div class="profile-edit__name">
+                                        <span>{{ form.name }}</span>
+                                    </div>
+                                    <div class="profile-edit__prof">
+                                        <span>{{ speciality.name }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-8 offset-xl-1">
+                            <div class="profile-edit__wrapper">
+                                <a href="#" class="back-btn back-btn-white">
+                                    <span class="back-arrow-svg"></span>
+                                    <span>Назад</span>
+                                </a>
+                                <div class="profile-edit__title">
+                                    <span>Редактирование анкеты</span>
+                                </div>
+                                <form class="profile-edit__body" @submit.prevent="send">
+                                    <!-- Line -->
+                                    <div class="pe-block">
+                                        <div class="pe-block__title">
+                                            <span>Личные данные</span>
+                                        </div>
+                                        <div class="pe-block__form form">
+                                            <form action="">
+                                                <div class="row">
+                                                    <div class="col-xl-6">
+                                                        <label class="form__label">
+                                                            <span>Специальность</span>
+                                                            <select-app
+                                                                :options="specialities"
+                                                                select-value="id"
+                                                                select-name="name"
+                                                                v-model="form.speciality_id"
+                                                                description="Выберете вашу специальность"
+                                                                empty-selected="Выберете вашу специальность"
+                                                            ></select-app>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <label class="form__label">
+                                                            <span>Имя, фамилия или название</span>
+                                                            <input type="text" class="form__input" v-model="form.name" placeholder="Иван Иванов">
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xl-12">
+                                                        <label class="form__label">
+                                                            <span>Расскажите о себе</span>
+                                                            <textarea-app
+                                                                limit="1000"
+                                                                v-model="form.about_me"
+                                                                placeholder="Начните писать"
+                                                            ></textarea-app>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- Line -->
+                                    <div class="pe-block">
+                                        <div class="pe-block__title">
+                                            <span>Контакты</span>
+                                        </div>
+                                        <div class="pe-block__form form">
+                                            <form action="">
+                                                <div class="row">
+                                                    <div class="col-xl-6">
+                                                        <label class="form__label">
+                                                            <span>Телефон</span>
+                                                            <div class="form__icon-input-wrapper">
+                                                                <div class="phone-svg input-svg"></div>
+                                                                <div class="delimiter"></div>
+                                                                <input type="text" v-model="form.phone" class="form__icon-input" placeholder="+7 (965) 632-34-12">
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <label class="form__label">
+                                                            <span>Ваш сайт</span>
+                                                            <div class="form__icon-input-wrapper">
+                                                                <div class="exploier-svg input-svg"></div>
+                                                                <div class="delimiter"></div>
+                                                                <input type="text" v-model="form.site" class="form__icon-input" placeholder="portfolio_my.ru">
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xl-6">
+                                                        <label class="form__label">
+                                                            <span>Email</span>
+                                                            <div class="form__icon-input-wrapper">
+                                                                <div class="at-svg input-svg"></div>
+                                                                <div class="delimiter"></div>
+                                                                <input type="text" v-model="form.email" class="form__icon-input" placeholder="event-outlet@gmail.com">
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <label class="form__label">
+                                                            <span>Instagram</span>
+                                                            <div class="form__icon-input-wrapper">
+                                                                <div class="inst-svg input-svg"></div>
+                                                                <div class="delimiter"></div>
+                                                                <input type="text" v-model="form.instagram" class="form__icon-input" placeholder="@my_acaunt">
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xl-6">
+                                                        <label class="form__label">
+                                                            <span>Вконтакте</span>
+                                                            <div class="form__icon-input-wrapper">
+                                                                <div class="vk-svg input-svg"></div>
+                                                                <div class="delimiter"></div>
+                                                                <input type="text" v-model="form.vk" class="form__icon-input" placeholder="vk.com/my_account">
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <label class="form__label">
+                                                            <span>WhatsApp</span>
+                                                            <div class="form__icon-input-wrapper">
+                                                                <div class="wa-svg input-svg"></div>
+                                                                <div class="delimiter"></div>
+                                                                <input type="text" class="form__icon-input" v-model="form.whatsap" placeholder="+7 (965) 632-34-12">
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- Line -->
+                                    <!-- Line -->
+                                    <div class="pe-block">
+                                        <div class="pe-block__title">
+                                            <span>Портфолио</span>
+                                        </div>
+                                        <div class="pe-block__form">
+                                            <div class="pe-portfolio">
+                                                <div class="pe-portfolio__wrapper">
+                                                    <div class="row">
+                                                        <!-- Add/Edit Main avatar -->
+                                                        <div class="col-xl-4">
+                                                            <div class="pe-portfolio__item">
+                                                                <div class="pe-portfolio__item-title">
+                                                                    <span>Аватар</span>
+                                                                </div>
+                                                                <div class="pe-portfolio__block">
+                                                                    <avatar-loader :prev-image="avatar"></avatar-loader>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Add/Edit portfolio photos -->
+                                                        <div class="col-xl-4">
+                                                            <div class="pe-portfolio__item">
+                                                                <div class="pe-portfolio__item-title">
+                                                                    <span>Добавить фото </span>
+                                                                </div>
+                                                                <gallery
+                                                                    v-if="gallery"
+                                                                    :images="gallery"
+                                                                    id="profile-gallery"
+                                                                ></gallery>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Add/Edit portfolio video -->
+                                                        <div class="col-xl-4">
+                                                            <div class="pe-portfolio__item">
+                                                                <div class="pe-portfolio__item-title">
+                                                                    <span>Добавить видео</span>
+                                                                </div>
+                                                                <video-loader
+                                                                    :videos="videos"
+                                                                    v-if="videos"
+                                                                ></video-loader>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Line -->
+                                    <div class="pe-block pe-list">
+                                        <div class="pe-block__title">
+                                            <span>Стоимость и наименование ваших услуг</span>
+                                        </div>
+                                        <services-list-app
+                                            :services="services"
+                                            v-if="renderServiceApp"
+                                            :price-options="priceOptions"
+                                            @update-service="updateService"
+                                        ></services-list-app>
+                                    </div>
+                                    <create-service-app
+                                        v-if="renderServiceApp"
+                                        :price-options="priceOptions"
+                                        :additional-fields="additionalFields"
+                                        @create-service="createService"
+                                    ></create-service-app>
+                                    <div class="pe-block__save-button">
+                                        <button type="submit" class="rectangle-btn rectangle-btn-green">
+                                            <span>Сохранить анкету</span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <form @submit.prevent="send" class="mt-5">
-            <div class="row form-group">
-                <div class="col-lg-6">
-                    <label>Специальность</label>
-                    <select class="form-control" v-model="form.speciality_id">
-                        <option :selected="form.speciality_id == item.id" v-for="item in specialities" :value="item.id" :key="'spcl-' + item.id">{{ item.name }}</option>
-                    </select>
-                </div>
-                <div class="col-lg-6">
-                    <label>Имя</label>
-                    <input type="text" class="form-control" v-model="form.name">
-                </div>
-            </div>
-            <div class="row form-group">
-                <div class="col-lg-12">
-                    <label>О себе</label>
-                    <textarea class="form-control"  rows="5" v-model="form.about_me"></textarea>
-                </div>
-            </div>
-            <div class="row form-group">
-                <div class="col-lg-6">
-                    <label>Телефон</label>
-                    <input type="text" class="form-control" v-model="form.phone">
-                </div>
-                <div class="col-lg-6">
-                    <label>Сайт</label>
-                    <input type="text" class="form-control" v-model="form.site">
-                </div>
-            </div>
-            <div class="row form-group">
-                <div class="col-lg-6">
-                    <label>Email</label>
-                    <input type="text" class="form-control" v-model="form.email">
-                </div>
-                <div class="col-lg-6">
-                    <label>Instagram</label>
-                    <input type="text" class="form-control" v-model="form.instagram">
-                </div>
-            </div>
-            <div class="row form-group">
-                <div class="col-lg-6">
-                    <label>Vk</label>
-                    <input type="text" class="form-control" v-model="form.vk">
-                </div>
-            </div>
-            <div class="row form-group">
-                <div class="col-lg-3">
-                    <label>Аватар</label><br>
-                    <image-loader
-                    :prev-image="avatar"
-                    ></image-loader>
-                </div>
-                <div class="col-lg-3">
-                    <gallery
-                        v-if="gallery"
-                        :images="gallery"
-                    ></gallery>
-                </div>
-            </div>
-            <div class="row form-group">
-                <div class="col-lg-12">
-                    <button type="submit" class="btn btn-primary mb-2">Save</button>
-                </div>
-            </div>
-        </form>
-        <services-list-app
-            :services="services"
-        ></services-list-app>
-        <create-service-app
-            v-if="priceOptions"
-            :price-options="priceOptions"
-            @create-service="createService"
-        ></create-service-app>
+        </section>
     </div>
 </template>
 
@@ -87,18 +239,26 @@
     import ServicesListApp from "../components/ServicesListApp";
     import Gallery from "../components/Gallery";
     import ImageLoader from "../components/ImageLoader";
+    import VideoLoader from "../components/VideoLoader";
+    import TextareaApp from "../components/TextareaApp";
+    import SelectApp from "../components/SelectApp";
+    import AvatarLoader from "../components/AvatarLoader";
 
     export default {
         name: 'Profile',
         props:['userId'],
         data() {
             return {
+                renderServiceApp:false,
                 specialities:[],
                 priceOptions:[],
                 services:[],
+                speciality:{},
                 avatar:null,
                 email:null,
                 gallery:null,
+                videos:null,
+                additionalFields:[],
                 form: {
                     name:null,
                     email:null,
@@ -124,6 +284,15 @@
                             this.services = data.data;
                         }
                     })
+            },
+            updateService(data) {
+                axios.put('/app/services/' + data.id, data)
+                    .then(res => res.data)
+                    .then(data => {
+                        if (data.success) {
+                            this.services = data.data;
+                        }
+                    })
             }
         },
         computed: {
@@ -139,11 +308,14 @@
                     this.priceOptions = data.price_options;
                     this.avatar = data.avatar;
                     this.gallery = data.gallery;
+                    this.videos = data.videos;
                     return data.user
                 })
                 .then(user => {
                     this.services = user.services;
                     form.name = user.name;
+                    this.additionalFields = user.speciality.fields;
+                    this.speciality = user.speciality|| {};
                     return user.info;
                 })
                 .then(info => {
@@ -154,14 +326,20 @@
                     form.instagram = info.instagram;
                     form.vk = info.vk;
                     form.email = info.email;
+                    form.speciality_id = info.speciality_id;
+                    this.renderServiceApp = true;
                 })
                 .catch(e => console.log(e))
         },
         components: {
+            AvatarLoader,
+            SelectApp,
+            TextareaApp,
+            VideoLoader,
             ImageLoader,
             CreateServiceApp,
             ServicesListApp,
-            Gallery
+            Gallery,
         }
     }
 </script>

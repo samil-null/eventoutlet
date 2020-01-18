@@ -16,6 +16,7 @@ class CreateServicesTable extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id');
+            $table->integer('status')->default(1);
             $table->integer('price_option_id');
             $table->string('name', 255);
             $table->integer('price');

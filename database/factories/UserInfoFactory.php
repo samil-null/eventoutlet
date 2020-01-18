@@ -14,6 +14,7 @@ $factory->define(UserInfo::class, function (Faker $faker) {
         'phone' => $faker->phoneNumber,
         'site' => $faker->word . '.ru',
         'vk' => 'vk.com/' . $faker->unique()->word,
+        'whatsapp' => $faker->phoneNumber,
         'instagram' => '@'. $faker->unique()->word,
     ];
 });

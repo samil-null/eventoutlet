@@ -1,14 +1,20 @@
 @extends('admin.layout.index')
 
 @section('content')
-    @include('admin.components.statistics')
+    @include('admin.components.board.pass')
     <div class="container-fluid mt--7">
-        <!-- Table -->
         <div class="row">
             <div class="col">
                 <div class="card shadow">
                     <div class="card-header border-0">
-                        <h3 class="mb-0">Специальности</h3>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <h3 class="mb-0">Города</h3>
+                            </div>
+                            <div class="col-lg-4 text-right">
+                                <a href="{{ route('admin.cities.create') }}" class="btn btn-sm btn-default">Добавить</a>
+                            </div>
+                        </div>
                     </div>
                     <div class="table-responsive">
                         <table class="table align-items-center table-flush">
@@ -16,9 +22,9 @@
                             <tr>
                                 <th scope="col">Название</th>
                                 <th scope="col">Кол-во пользователей</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Users</th>
-                                <th scope="col">Completion</th>
+                                <th scope="col">Статус</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
                                 <th scope="col"></th>
                             </tr>
                             </thead>
@@ -39,33 +45,15 @@
                                     </td>
                                     <td>
                                       <span class="badge badge-dot mr-4">
-                                        <i class="bg-warning"></i> pending
+                                        <i class="{{ (int) $city->status?'bg-success':'bg-danger' }}"></i> {{ $city->getStatus() }}
                                       </span>
                                     </td>
                                     <td>
 
                                     </td>
                                     <td>
-                                        <div class="d-flex align-items-center">
-                                            <span class="mr-2">60%</span>
-                                            <div>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </td>
                                     <td class="text-right">
-                                        <div class="dropdown">
-                                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fas fa-ellipsis-v"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <a class="dropdown-item" href="#">Something else here</a>
-                                            </div>
-                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

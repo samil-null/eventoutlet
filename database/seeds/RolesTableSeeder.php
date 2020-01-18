@@ -13,14 +13,14 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         Role::create([
+            'name' => 'admin',
+            'display_name' => 'Администратор'
+        ]);
+
+        Role::create([
             'name' => 'executor',
             'display_name' => 'Исполнитель',
         ]);
 
-//        DB::table('role_user')->insert([
-//            'user_id' => 1,
-//            'role_id' => 1,
-//            'user_type' => 'App\Models\User::class'
-//        ]);
     }
 }

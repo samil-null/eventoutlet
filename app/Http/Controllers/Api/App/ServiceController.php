@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api\App;
 
+use App\Models\User;
+use App\Services\ServiceManagerService;
 use Auth;
 use App\Models\Service;
 use App\Http\Controllers\Controller;
@@ -9,6 +11,13 @@ use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
+    private $service;
+
+    public function __construct(ServiceManagerService $service)
+    {
+        $this->service = $service;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -38,13 +47,7 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
 
-        $service = Service::create([
-            'name'              => $request->input('name'),
-            'user_id'           => $request->user()->id,
-            'price'             => $request->input('price'),
-            'price_option_id'      => $request->input('price_option_id'),
-            'description'       => $request->input('description')
-        ]);
+        $this->service->create($request);
 
         return response()->json([
             'success'   => true,
@@ -84,7 +87,8 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $service = $request->user()->services()->find($id);
+        $this->service->update($request, $service);
     }
 
     /**

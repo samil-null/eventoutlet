@@ -78,7 +78,7 @@ class OfferFilterService
         $this->builder->where('approved', User::ACTIVE_STATUS);
 
         $this->builder->whereHas('offers', function (Builder $query) {
-            $query->where('approved', Offer::APPROVED_STATUS);
+            $query->where('approved', Offer::ACTIVE_STATUS);
         });
     }
 

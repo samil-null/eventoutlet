@@ -16,6 +16,8 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::post('/login', 'LoginController@index')->name('login');
     Route::get('/logout', 'LogoutController@index')->name('logout');
     Route::get('/verification/{token}', 'VerificationController@verify')->name('verification');
+    Route::post('/forgot', 'ForgotController@forgot')->name('forgot');
+    Route::get('/forgot/{token}', 'ForgotController@remember')->name('remember');
 });
 
 Route::group(['namespace' => 'Site'], function () {
@@ -44,40 +46,70 @@ Route::group(['namespace' => 'Site'], function () {
 
 //**
 
-Route::group(['prefix' => 'app', 'namespace' => 'Api\App'], function() {
+Route::group(['prefix' => 'app', 'namespace' => 'Api\App', 'middleware' => ['role:executor']], function() {
     Route::resource('/profiles', 'ProfileController');
     Route::resource('/offers', 'OfferController');
     Route::resource('/services', 'ServiceController');
     Route::resource('/specialties', 'SpecialityController');
 
-    //Route::get('/media', 'MediaController@avatar');
-
     Route::group(['prefix' => 'media'], function () {
-        Route::post('/avatar', 'MediaController@avatar');
-        Route::post('/gallery','MediaController@gallery');
+        Route::post('/avatar', 'MediaController@avatar')->middleware('optimizeImages');
+        Route::post('/gallery','MediaController@gallery')->middleware('optimizeImages');
+        Route::post('/video', 'MediaController@video');
+        Route::get('/video/render','MediaController@render');
+    });
+
+    Route::group(['prefix' => 'filter'], function () {
+        Route::post('/', 'FilterController@build');
     });
 });
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['role:admin']], function () {
     Route::get('/', 'DashboardController@index')->name('admin.dashboard');
     Route::resource('/users', 'UserController')->names([
-        'index' => 'admin.users.index',
-        'show' => 'admin.users.show',
-        'edit' => 'admin.users.edit'
+        'index'     => 'admin.users.index',
+        'show'      =>   'admin.users.show',
+        'create'    => 'admin.users.create',
+        'store'     => 'admin.users.store',
+        'update'    => 'admin.users.update',
+        'destroy'   => 'admin.users.destroy'
     ]);
 
     Route::resource('/specialties', 'SpecialityController')->names([
-        'index' => 'admin.specialties.index',
-        'show' =>   'admin.specialties.show'
+        'index'     => 'admin.specialties.index',
+        'show'      =>   'admin.specialties.show',
+        'create'    => 'admin.specialties.create',
+        'store'     => 'admin.specialties.store',
+        'update'    => 'admin.specialties.update',
+        'destroy'   => 'admin.specialties.destroy'
     ]);
 
     Route::resource('/cities', 'CityController')->names([
-        'index' => 'admin.cities.index',
-        'show'  => 'admin.cities.show'
+        'index'     => 'admin.cities.index',
+        'show'      => 'admin.cities.show',
+        'create'    => 'admin.cities.create',
+        'store'     => 'admin.cities.store',
+        'update'    => 'admin.cities.update',
+        'destroy'   => 'admin.cities.destroy'
+    ]);
+
+    Route::resource('/services', 'ServiceController')->names([
+        'index'     => 'admin.services.index',
+        'show'      => 'admin.services.show',
+        'edit'      =>  'admin.services.edit',
+        'create'    => 'admin.services.create',
+        'store'     => 'admin.services.store',
+        'update'    => 'admin.services.update',
+        'destroy'   => 'admin.services.destroy'
     ]);
 
     Route::resource('/offers', 'OfferController')->names([
-        'show'  => 'admin.offers.show'
+        'index'     => 'admin.offers.index',
+        'show'      => 'admin.offers.show',
+        'create'    => 'admin.offers.create',
+        'store'     => 'admin.offers.store',
+        'update'    => 'admin.offers.update',
+        'destroy'   => 'admin.offers.destroy'
     ]);
 
 });

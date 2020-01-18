@@ -168,7 +168,11 @@ return [
         Laratrust\LaratrustServiceProvider::class,
         ShawnSandy\ImgFly\ImgflyServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
+        HTMLMin\HTMLMin\HTMLMinServiceProvider::class,
         App\Providers\ImgCropProvider::class,
+        App\Providers\ImagerProvider::class,
+        Pawlox\VideoThumbnail\VideoThumbnailServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -232,7 +236,11 @@ return [
         'Laratrust'   => Laratrust\LaratrustFacade::class,
         "Imgfly" => ShawnSandy\ImgFly\Classes\ImgflyFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        'ImgCrop' => App\Facades\ImgCrop::class
+        'ImgCrop' => App\Facades\ImgCrop::class,
+        'Imager' => App\Facades\Imager::class,
+        'SEO' => Artesaos\SEOTools\Facades\SEOTools::class,
+        'HTMLMin' => HTMLMin\HTMLMin\Facades\HTMLMin::class,
+        'VideoThumbnail' => Pawlox\VideoThumbnail\Facade\VideoThumbnail::class
     ],
 
 ];

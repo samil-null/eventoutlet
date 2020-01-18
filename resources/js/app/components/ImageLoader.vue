@@ -1,10 +1,31 @@
 <template>
     <div>
-        <div class="image-loader__container" @click="selectImage" :style="{'background-image':'url(' + (image || prevImage)  +')'}">
-
+        <div class="pe-portfolio__avatar">
+            <div class="pe-portfolio__avatar-hasnt" style="
+                display: none;
+            "><span>Добавить аватар</span>
+                <div class="bold-plus-svg"></div>
+            </div>
+            <div class="pe-portfolio__avatar-has" style="/* display: none; */">
+                <div class="pe-portfolio__added-photo" style="background-image: url(&quot;assets/img/person.png&quot;);">
+                    <div class="pe-portfolio__bg"></div>
+                    <div class="pe-portfolio__increase-photo">
+                        <div class="increase-svg"></div>
+                    </div>
+                    <div class="pe-portfolio__delete-photo">
+                        <div class="times-svg"></div>
+                    </div>
+                </div> <span>Изменить</span></div>
         </div>
-        <input type="file" style="display: none;" ref="imageInput" @change="renderImage">
+        <div v-if="false">
+            <div class="image-loader__container" @click="selectImage" :style="{'background-image':'url(' + (image || prevImage)  +')'}">
+
+            </div>
+            <input type="file" style="display: none;" ref="imageInput" @change="renderImage">
+        </div>
     </div>
+
+
 </template>
 
 <script>

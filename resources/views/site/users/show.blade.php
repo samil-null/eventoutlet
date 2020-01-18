@@ -51,7 +51,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h6 class="card-title">Телефон</h6>
-                                <span>{{ $user->phone }}</span>
+                                <span>{{ $user->info->phone }}</span>
                             </div>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h6 class="card-title">Сайт</h6>
-                                <span>{{ $user->site }}</span>
+                                <span>{{ $user->info->site }}</span>
                             </div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h6 class="card-title">Instagram</h6>
-                                <span>{{ $user->instagram }}</span>
+                                <span>{{ $user->info->instagram }}</span>
                             </div>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h6 class="card-title">Vk</h6>
-                                <span>{{ $user->vk }}</span>
+                                <span>{{ $user->info->vk }}</span>
                             </div>
                         </div>
                     </div>

@@ -13,3 +13,9 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
+
+
+mix.js('resources/js/admin/index.js', 'public/js/admin')
+    .sass('resources/sass/admin/index.scss', 'public/css/admin');
+
+mix.js('resources/js/api/video/index.js', 'public/js/api/video');

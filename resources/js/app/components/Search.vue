@@ -2,7 +2,7 @@
     <form action="/offers">
         <div class="row">
             <div class="col-lg-2">
-                <select class="form-control" name="speciality" v-model="specialitySelect">
+                <select class="form-control" name="speciality_id" v-model="specialitySelect">
                     <option value="" v-for="speciality in specialties" :value="speciality.id">{{ speciality.name }}</option>
                 </select>
             </div>
@@ -13,10 +13,10 @@
                     v-model="range"
                     mode="range"
                     :masks="{model: 'YYYY-MM-DD'}"
-
                     :popover="{ placement: 'bottom', visibility: 'click' }">
                     <button type="button" class="btn btn-outline-secondary">select date</button>
                 </date-picker>
+                <input type="hidden" name="specials_offers" value="1">
             </div>
             <div class="col-lg-2">
                 <button class="btn btn-danger">find</button>

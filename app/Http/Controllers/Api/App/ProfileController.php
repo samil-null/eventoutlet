@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\App;
 
 
 use App\Services\ResizeService;
+use App\Utils\Media\Video;
 use Auth;
 
 use App\Models\User;
@@ -77,17 +78,20 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Video $video, $id)
     {
-        $user = User::with('info','services.priceOption', 'city', 'speciality', 'offers', 'offers')->find($id);
+        $user = User::with('info','services.priceOption', 'city','speciality','speciality.fields', 'offers', 'offers')->find($id);
 
         abort_if(!$user, 404);
 
-        $specialties = Specialty::where('is_active', 1)->get(['id', 'name']);
+        $specialties = Specialty::where('status', Specialty::ACTIVE_STATUS)->get(['id', 'name']);
         $priceOptions = PriceOption::all(['id', 'name']);
+
         $gallery = $user->gallery->map(function ($image)  {
             return $this->resize->getFileUrl($image->name, 'gallery');
         });
+
+        $videos = $video->take($user->videos);
 
         return response()->json([
             'success' => true,
@@ -96,7 +100,8 @@ class ProfileController extends Controller
                 'specialties' => $specialties,
                 'price_options' => $priceOptions,
                 'avatar' => $this->resize->roc($user->avatar, 'avatar', 'avatar'),
-                'gallery' => $gallery
+                'gallery' => $gallery,
+                'videos' => $videos
             ]
         ]);
     }
@@ -111,7 +116,10 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-        $user->update($request->only('name'));
+        $user->update([
+            'name' => $request->input('name'),
+            'status' => User::WAITING_STATUS
+        ]);
         $user->info()->update($request->except('name'));
 
         return response()->json([

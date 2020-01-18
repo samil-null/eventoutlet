@@ -16,4 +16,9 @@ class ExampleTest extends TestCase
     {
         $this->assertTrue(true);
     }
+
+    public function test_change_status()
+    {
+        //$this->assertEquals();
+    }
 }
