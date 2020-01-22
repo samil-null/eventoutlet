@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Events\User\UserChangeStatus;
+use App\Filters\UserFilter;
 use App\Models\City;
 use App\Models\Role;
 use App\Models\Service;
@@ -29,10 +30,10 @@ class UserController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request, UserFilter $filter)
     {
 
-        $users = $this->filter->apply($request, $request->user())->paginate(20);
+        $users = User::filter($filter)->paginate(20);
 
         return view('admin.users.index', [
             'users' => $users,

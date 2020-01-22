@@ -20,6 +20,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "@glidejs/glide": "^3.4.1",
         "baguettebox.js": "^1.11.0",
         "bigpicture": "^2.3.1",
         "jquery": "^3.4.1",

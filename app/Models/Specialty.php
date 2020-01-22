@@ -6,18 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Specialty extends Model
 {
-    public const TEXT_FIELD = 'text';
-
-    public const TEXT_AREA_FIELD = 'textarea';
-
-    public $options = [
-        self::TEXT_FIELD => 'Текст',
-        self::TEXT_AREA_FIELD => 'Текстовая область'
-    ];
-
     protected $fillable = [
         'name', 'status'
     ];
+
     public const DISABLED_STATUS = 0;
 
     public const ACTIVE_STATUS = 1;
@@ -46,6 +38,9 @@ class Specialty extends Model
 
     public function fields()
     {
-        return $this->hasMany(AdditionFieldSpeciality::class,'speciality_id', 'id');
+        return $this->hasMany(
+            AdditionFieldSpeciality::class,
+            'speciality_id',
+            'id');
     }
 }

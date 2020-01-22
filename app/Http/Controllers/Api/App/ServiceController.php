@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\App;
 
+use App\Http\Requests\Api\Service\StoreRequest;
 use App\Models\User;
 use App\Services\ServiceManagerService;
 use Auth;
@@ -39,12 +40,10 @@ class ServiceController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
 
         $this->service->create($request);

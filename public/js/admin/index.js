@@ -119,16 +119,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "additionalFields",
   props: ['options', 'additionFields'],
@@ -35399,6 +35389,30 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
+                      value: field.key,
+                      expression: "field.key"
+                    }
+                  ],
+                  attrs: {
+                    type: "hidden",
+                    name: "addition_fields[" + fieldId + "][key]"
+                  },
+                  domProps: { value: field.key },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(field, "key", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
                       value: field.name,
                       expression: "field.name"
                     }
@@ -35416,73 +35430,6 @@ var render = function() {
                         return
                       }
                       _vm.$set(field, "name", $event.target.value)
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-lg-4" }, [
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: field.type,
-                        expression: "field.type"
-                      }
-                    ],
-                    staticClass: "form-control form-control-alternative",
-                    attrs: { name: "addition_fields[" + fieldId + "][type]" },
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          field,
-                          "type",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      }
-                    }
-                  },
-                  _vm._l(_vm.optionsList, function(option, index) {
-                    return _c("option", { domProps: { value: index } }, [
-                      _vm._v(_vm._s(option))
-                    ])
-                  }),
-                  0
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: field.key,
-                      expression: "field.key"
-                    }
-                  ],
-                  attrs: {
-                    type: "hidden",
-                    name: "addition_fields[" + fieldId + "][key]"
-                  },
-                  domProps: { value: field.key },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(field, "key", $event.target.value)
                     }
                   }
                 })

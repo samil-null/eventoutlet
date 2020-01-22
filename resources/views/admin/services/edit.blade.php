@@ -42,8 +42,8 @@
                                         <thead class="thead-light">
                                         <tr>
                                             <th scope="col">Название</th>
-                                            <th scope="col">Цена</th>
-{{--                                            <th scope="col">Статус</th>--}}
+                                            <th scope="col">Добавлено</th>
+                                            <th scope="col">Обновлено</th>
                                             <th></th>
                                         </tr>
                                         </thead>
@@ -52,12 +52,15 @@
                                             <th scope="row">
                                                 <div class="media align-items-center">
                                                     <div class="media-body">
-                                                        <a class="mb-0 text-sm" href="{{ route('admin.offers.show', $service->id) }}">{{ $service->name }}</a>
+                                                        <span class="mb-0 text-sm">{{ $service->name }}</span>
                                                     </div>
                                                 </div>
                                             </th>
                                             <td>
-                                                {{ $service->price }}
+                                                {{ \Carbon\Carbon::parse($service->created_at)->format('d.m.Y H:i:s') }}
+                                            </td>
+                                            <td>
+                                                {{ \Carbon\Carbon::parse($service->updated_at)->format('d.m.Y H:i:s') }}
                                             </td>
 {{--                                            <td>--}}
 {{--                                              <span class="badge badge-dot mr-4">--}}
@@ -92,8 +95,8 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group focused">
-                                            <label class="form-control-label" for="input-offer-sale">Скидка</label>
-                                            <input type="text" id="input-offer-sale"  disabled class="form-control form-control-alternative" placeholder="website.com" value="{{ $service->discount }}">
+                                            <label class="form-control-label" for="input-offer-sale">Цена</label>
+                                            <input type="text" id="input-offer-sale"  disabled class="form-control form-control-alternative" placeholder="website.com" value="{{ $service->price }}">
                                         </div>
                                     </div>
                                 </div>
@@ -109,20 +112,6 @@
                         </form>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3">
-                <form class="card shadow">
-                    <div class="card-header border-0">
-                        <div class="row align-items-center">
-                            <div class="col-lg-4">
-                                <h3 class="mb-0">Даты</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-
-                    </div>
-                </form>
             </div>
         </div>
     </div>

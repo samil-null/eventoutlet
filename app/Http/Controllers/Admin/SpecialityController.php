@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\Speciality\StoreSpecialityRequest;
 use App\Models\AdditionFieldSpeciality;
 use App\Models\Service;
 use App\Models\Specialty;
+use App\Services\AdditionsFieldsService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -74,34 +75,15 @@ class SpecialityController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param StoreSpecialityRequest $request
+     * @param AdditionsFieldsService $service
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(StoreSpecialityRequest $request, $id)
+    public function update(StoreSpecialityRequest $request, AdditionsFieldsService $service, $id)
     {
         $speciality = Specialty::find($id);
-
-        if ($request->has('addition_fields')) {
-
-            foreach ($request->input('addition_fields') as $field) {
-                if (!$field['key']) {
-
-                    $field['key'] = Str::random(50);
-                    $speciality->fields()
-                        ->save(new AdditionFieldSpeciality($field));
-                } else {
-                    $additionField = $speciality->fields()
-                        ->where('key', $field['key'])
-                        ->first()
-                        ->update($field);
-                }
-            }
-
-        }
-
+        $service->make($request->input('addition_fields'), $speciality);
         $speciality->update($request->only('name', 'status'));
 
         return redirect()->route('admin.specialties.show', $id);

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Filters\UserFilter;
 use Hash;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -157,5 +158,10 @@ class User extends Authenticatable
     public function getStatus($name = 'name')
     {
         return $this->statuses[$this->status][$name];
+    }
+
+    public function scopeFilter($query, UserFilter $filter)
+    {
+        return $filter->apply($query);
     }
 }

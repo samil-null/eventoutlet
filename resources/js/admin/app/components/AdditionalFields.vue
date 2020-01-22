@@ -2,18 +2,8 @@
     <div class="div">
         <div class="row mt-3" v-for="(field, fieldId) in additionalFieldsList" v-if="additionalFieldsList.length">
             <div class="col-lg-4">
-                <input type="text" placeholder="Название" :name="`addition_fields[${fieldId}][name]`" class="form-control form-control-alternative" v-model="field.name">
-            </div>
-            <div class="col-lg-4">
-                <select class="form-control form-control-alternative"
-                        :name="`addition_fields[${fieldId}][type]`"
-                        v-model="field.type">
-                    <option
-                        :value="index"
-                        v-for="(option, index) in optionsList"
-                    >{{ option }}</option>
-                </select>
                 <input type="hidden" :name="`addition_fields[${fieldId}][key]`" v-model="field.key">
+                <input type="text" placeholder="Название" :name="`addition_fields[${fieldId}][name]`" class="form-control form-control-alternative" v-model="field.name">
             </div>
             <div class="col-lg-4">
                 <button class="btn btn-icon btn-2 btn-danger" type="button" @click="deleteField(fieldId)">

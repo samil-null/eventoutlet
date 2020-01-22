@@ -38,7 +38,7 @@
                                             <form action="">
                                                 <div class="row">
                                                     <div class="col-xl-6">
-                                                        <label class="form__label">
+                                                        <label class="form__label" :class="{invalid:!!errors.speciality_id.length}">
                                                             <span>Специальность</span>
                                                             <select-app
                                                                 :options="specialities"
@@ -48,12 +48,44 @@
                                                                 description="Выберете вашу специальность"
                                                                 empty-selected="Выберете вашу специальность"
                                                             ></select-app>
+                                                            <span class="validation" v-for="error in errors.speciality_id">{{ error }}</span>
                                                         </label>
                                                     </div>
                                                     <div class="col-xl-6">
-                                                        <label class="form__label">
+                                                        <label class="form__label" :class="{invalid:!!errors.name.length}">
                                                             <span>Имя, фамилия или название</span>
                                                             <input type="text" class="form__input" v-model="form.name" placeholder="Иван Иванов">
+                                                            <span class="validation" v-for="error in errors.name">{{ error }}</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xl-6">
+                                                        <label class="form__label" :class="{invalid:!!errors.city_id.length}">
+                                                            <span>Город</span>
+                                                            <select-app
+                                                                :options="cities"
+                                                                select-value="id"
+                                                                select-name="name"
+                                                                v-model="form.city_id"
+                                                                description="Выберете город"
+                                                                empty-selected="Выберете город"
+                                                            ></select-app>
+                                                            <span class="validation" v-for="error in errors.city_id">{{ error }}</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <label class="form__label"  :class="{invalid:!!errors.gender.length}">
+                                                            <span>Пол</span>
+                                                            <select-app
+                                                                :options="genders"
+                                                                select-value="id"
+                                                                select-name="name"
+                                                                v-model="form.gender"
+                                                                description="Выберете ваш пол"
+                                                                empty-selected="Выберете ваш пол"
+                                                            ></select-app>
+                                                            <span class="validation" v-for="error in errors.gender">{{ error }}</span>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -140,7 +172,7 @@
                                                             <div class="form__icon-input-wrapper">
                                                                 <div class="wa-svg input-svg"></div>
                                                                 <div class="delimiter"></div>
-                                                                <input type="text" class="form__icon-input" v-model="form.whatsap" placeholder="+7 (965) 632-34-12">
+                                                                <input type="text" class="form__icon-input" v-model="form.whatsapp" placeholder="+7 (965) 632-34-12">
                                                             </div>
                                                         </label>
                                                     </div>
@@ -259,6 +291,8 @@
                 gallery:null,
                 videos:null,
                 additionalFields:[],
+                cities:[],
+                genders:[],
                 form: {
                     name:null,
                     email:null,
@@ -267,13 +301,36 @@
                     site: null,
                     instagram: null,
                     vk: null,
-                    speciality_id:0
+                    speciality_id:0,
+                    whatsapp:null,
+                    gender:0,
+                    city_id:0
                 },
+                errors:{
+                    name:[],
+                    speciality_id:[],
+                    city_id:[],
+                    gender:[]
+                }
             }
         },
         methods: {
             send() {
                 axios.put(`/app/profiles/${this.userId}`, this.form)
+                    .then(({data}) => {
+                        if (data.success) {
+                            //location.reload()
+                        }
+                    }).catch(({ response }) => {
+                        if (response.status == 422) {
+                            let errors = response.data.errors;
+
+                            this.errors.name = errors.name || [];
+                            this.errors.speciality_id = errors.speciality_id || [];
+                            this.errors.city_id = errors.city_id || [];
+                            this.errors.gender = errors.gender || [];
+                        }
+                    })
             },
 
             createService(data) {
@@ -281,7 +338,7 @@
                     .then(res => res.data)
                     .then(data => {
                         if (data.success) {
-                            this.services = data.data;
+                            this.$set(this, 'services', data.data);
                         }
                     })
             },
@@ -309,6 +366,8 @@
                     this.avatar = data.avatar;
                     this.gallery = data.gallery;
                     this.videos = data.videos;
+                    this.cities = data.cities;
+                    this.genders = data.genders;
                     return data.user
                 })
                 .then(user => {
@@ -327,9 +386,11 @@
                     form.vk = info.vk;
                     form.email = info.email;
                     form.speciality_id = info.speciality_id;
+                    form.whatsapp = info.whatsapp;
+                    form.city_id = info.city_id;
+                    form.gender = info.gender;
                     this.renderServiceApp = true;
                 })
-                .catch(e => console.log(e))
         },
         components: {
             AvatarLoader,

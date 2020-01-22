@@ -1,6 +1,6 @@
 <template>
     <div class="form__textarea-wrapp">
-    <textarea name="" @input="writing" v-model="value" id="" :placeholder="placeholder" class="form__textarea">
+    <textarea :maxlength="limit" @input="writing" v-model="value" id="" :placeholder="placeholder" class="form__textarea">
   	</textarea>
         <span>Еще {{ left }} символов</span>
     </div>

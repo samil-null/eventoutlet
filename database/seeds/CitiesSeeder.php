@@ -7,16 +7,20 @@ class CitiesSeeder extends Seeder
 {
     private $cities = [
         [
-            'name'  => 'Москва'
+            'name'  => 'Москва',
+            'status' => 1
         ],
         [
-            'name'  => 'Санкт-Петербург'
+            'name'  => 'Санкт-Петербург',
+            'status' => 1
         ],
         [
-            'name'  => 'Новосибирск'
+            'name'  => 'Новосибирск',
+            'status' => 1
         ],
         [
-            'name'  => 'Екатеринбург'
+            'name'  => 'Екатеринбург',
+            'status' => 1
         ]
     ];
     /**
@@ -26,8 +30,6 @@ class CitiesSeeder extends Seeder
      */
     public function run()
     {
-        foreach ($this->cities as $city) {
-            City::create($city);
-        }
+        City::insert($this->cities);
     }
 }

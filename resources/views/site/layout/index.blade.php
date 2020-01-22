@@ -36,7 +36,7 @@
                                         <div class="navbar-general__profile">
                                             <div class="navbar-general__profile-body">
                                                 <div class="navbar-general__profile-preview">
-                                                    <span>{{ Auth::user()->name }}</span>
+                                                    <span>{{ Auth::user()->name??Auth::user()->email }}</span>
                                                     <div class="navbar-general__profile-photo"
                                                          style="background-image:url({{ Imager::avatar(Auth::user()->avatar) }})"></div>
                                                     <div class="arrow-svg"></div>

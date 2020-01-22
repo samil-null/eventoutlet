@@ -31,10 +31,17 @@ class UsersTableSeeder extends Seeder
             'user_id' => $denis->id
         ]);
 
-        factory(User::class, 50)->create()->each(function ($user) {
+        factory(User::class, 80)->create()->each(function ($user) {
+
+            factory(\App\Models\Media::class, random_int(4, 8))->create([
+                'user_id' => $user->id
+            ]);
+
             factory(UserInfo::class)->create([
                 'user_id' => $user->id
             ]);
+
+
 
             $user->attachRole('executor');
 

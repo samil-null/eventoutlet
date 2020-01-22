@@ -6,7 +6,7 @@ use App\Models\UserInfo;
 use Faker\Generator as Faker;
 
 $factory->define(UserInfo::class, function (Faker $faker) {
-    return [
+    $gen = [
         'email' => $faker->unique()->safeEmail,
         'city_id' => random_int(1,4),
         'speciality_id' => random_int(1,4),
@@ -16,5 +16,8 @@ $factory->define(UserInfo::class, function (Faker $faker) {
         'vk' => 'vk.com/' . $faker->unique()->word,
         'whatsapp' => $faker->phoneNumber,
         'instagram' => '@'. $faker->unique()->word,
+        'gender' => random_int(1,2)
     ];
+
+    return $gen;
 });

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Site;
 
+use App\Filters\UserFilter;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Services\FilterBuilderService;
 use App\Services\OfferFilterService;
 use App\Services\UserFilterService;
@@ -20,23 +22,18 @@ class OfferController extends Controller
      * OfferController constructor.
      * @param UserFilterService $filter
      */
-    public function __construct(UserFilterService $filter, FilterBuilderService $builder)
+    public function __construct(UserFilterService $filter)
     {
         $this->filter = $filter;
-        $this->builder = $builder;
     }
 
     /**
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request, UserFilter $filter)
     {
-        $users = $this->filter->apply($request)->paginate(10);
-
-        $filter = $this->builder->create($request);
-
-        dd($filter);
+        $users = (new User())->filter($filter)->with('gallery')->get();
 
         return view('site.offers.index', [
             'users' => $users,

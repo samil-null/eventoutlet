@@ -14,6 +14,7 @@
  */
 import './scripts/header'
 import './scripts/zoomer'
+import './scripts/slider'
 import './app/app'
 // import Echo from 'laravel-echo';
 

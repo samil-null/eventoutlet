@@ -20,8 +20,8 @@ class UserObserver
      */
     public function created(User $user)
     {
-        $user->info()->create();
-        event(new RegisterNewUser($user));
+        //$user->info()->create();
+        //event(new RegisterNewUser($user));
     }
 
     /**

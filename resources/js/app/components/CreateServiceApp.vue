@@ -10,31 +10,43 @@
                 <form action="">
                     <div class="row">
                         <div class="col-xl-6">
-                            <label class="form__label">
+                            <label class="form__label" :class="{invalid:!!errors.name.length}">
                                 <span>Услуга</span>
                                 <input type="text" class="form__input" v-model="name" placeholder="Введите название услуги">
+                                <span class="validation" v-for="error in errors.name">{{ error }}</span>
                             </label>
                         </div>
                         <div class="col-xl-6">
-                            <label class="form__label">
+                            <label class="form__label" :class="{invalid:!!errors.price.length}">
                                 <span>Стоимость</span>
                                 <div class="form__icon-input-wrapper">
                                     <div class="rub-svg input-svg"></div>
                                     <div class="delimiter"></div>
                                     <input type="text" class="form__icon-input" v-model="price" placeholder="3 000">
                                 </div>
+                                <span class="validation" v-for="error in errors.price">{{ error }}</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6" v-for="field in additional">
+                            <label class="form__label" :class="getErrorAdditionField(field.key).length">
+                                <span>{{ field.name }}</span>
+                                <input type="text" class="form__input" v-model="field.value" placeholder="Введите значение">
+                                <span class="validation" v-for="error in getErrorAdditionField(field.key)">{{ error }}</span>
                             </label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xl-9">
-                            <label class="form__label">
+                            <label class="form__label" :class="{invalid:!!errors.price.length}">
                                 <span>Расскажите о себе</span>
                                 <textarea-app
                                     limit="500"
                                     placeholder="Начните писать"
                                     v-model="description"
                                 ></textarea-app>
+                                <span class="validation" v-for="error in errors.description">{{ error }}</span>
                             </label>
                         </div>
                         <div class="col-xl-3">
@@ -62,47 +74,6 @@
                 <span>Добавить услугу</span>
             </button>
         </div>
-        <form @submit.prevent="send" v-if="false">
-            <div class="row form-group">
-                <div class="col-lg-12">
-                    <h4>Добавить услугу</h4>
-                </div>
-            </div>
-            <div class="row form-group">
-                <div class="col-lg-6">
-                    <label>Услуга</label>
-                    <input type="text" class="form-control" v-model="name">
-                </div>
-                <div class="col-lg-4">
-                    <label>Цена</label>
-                    <input type="text" class="form-control" v-model="price">
-                </div>
-                <div class="col-lg-2">
-                    <label>Кол-во</label>
-                    <select v-model="priceOptionId" class="form-control">
-                        <option  v-for="option in priceOptions" :value="option.id">{{ option.name}}</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row form-group">
-                <div class="col-lg-10">
-                    <label>Условия</label>
-                    <textarea class="form-control"  rows="5" v-model="description"></textarea>
-                </div>
-            </div>
-            <div class="row form-group" v-for="field in additional">
-                <div class="col-lg-10">
-                    <label>{{ field.name }}</label>
-                    <input type="text" v-model="field.value" :name="`additional_fields[${field.key}]`" class="form-control" v-if="field.type == 'text'">
-                    <textarea class="form-control" :name="`additional_fields[${field.key}]`" rows="5" v-if="field.type == 'textarea'" ></textarea>
-                </div>
-            </div>
-            <div class="row form-group">
-                <div class="col-lg-12">
-                    <button type="submit" class="btn btn-primary mb-2">Добавить</button>
-                </div>
-            </div>
-        </form>
     </form>
 
 </template>
@@ -110,6 +81,7 @@
 <script>
     import TextareaApp from "./TextareaApp";
     import SelectApp from "./SelectApp";
+    import axios from "../modules/axios";
 
     export default {
         components: {SelectApp, TextareaApp},
@@ -121,7 +93,13 @@
                 price:null,
                 description:null,
                 priceOptionId:1,
-                additional:[]
+                additional:[],
+                errors:{
+                    name:[],
+                    price:[],
+                    description:[],
+                    additional_fields:[]
+                }
             }
         },
         methods: {
@@ -131,15 +109,49 @@
                     price: this.price,
                     description: this.description,
                     price_option_id: this.priceOptionId,
-                    additional_fields: this.additional
+                    additional_fields: this.prepareFields(this.additional)
                 }
 
-                this.$emit('create-service', payload);
+
+                axios.post('/app/services', payload)
+                    .then(({data}) => {
+
+                    })
+                    .catch(({response}) => {
+                        if (response.status === 422) {
+                            let errors = response.data.errors;
+                            this.errors.name = errors.name || [];
+                            this.errors.price = errors.price || [];
+                            this.errors.description = errors.description || [];
+                        }
+                    })
+
+                //this.$emit('create-service', payload);
+            },
+            prepareFields(fields) {
+                let result = {};
+
+                if (fields) {
+                    fields.forEach((item) => {
+                        result[item.key] = item;
+                    })
+
+                    return result;
+                }
+            },
+            getErrorAdditionField(key) {
+                let errors = this.errors.additional_fields['additional_fields.' + key + '.value'];
+
+                return errors || [];
             }
         },
         async mounted() {
             this.additional = this.additionalFields.map(item => {
-                return {...item, value:null}
+                return {
+                    name: item.name,
+                    key: item.key,
+                    value: null
+                }
             });
         }
     }

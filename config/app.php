@@ -172,6 +172,7 @@ return [
         HTMLMin\HTMLMin\HTMLMinServiceProvider::class,
         App\Providers\ImgCropProvider::class,
         App\Providers\ImagerProvider::class,
+        App\Providers\MacroProvider::class,
         Pawlox\VideoThumbnail\VideoThumbnailServiceProvider::class,
         /*
          * Application Service Providers...

@@ -3,15 +3,18 @@
 namespace App\Http\Controllers\Api\App;
 
 
-use App\Services\ResizeService;
-use App\Utils\Media\Video;
 use Auth;
-
+use App\Models\City;
 use App\Models\User;
+use App\Models\UserInfo;
 use App\Models\Specialty;
+
+use App\Utils\Media\Video;
 use App\Models\PriceOption;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Services\ResizeService;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Profile\UpdateRequest;
 
 class ProfileController extends Controller
 {
@@ -80,18 +83,22 @@ class ProfileController extends Controller
      */
     public function edit(Video $video, $id)
     {
-        $user = User::with('info','services.priceOption', 'city','speciality','speciality.fields', 'offers', 'offers')->find($id);
+        $user = User::with(
+            'info','services.priceOption', 'city',
+            'speciality','speciality.fields', 'offers', 'offers'
+        )->find($id);
 
         abort_if(!$user, 404);
 
         $specialties = Specialty::where('status', Specialty::ACTIVE_STATUS)->get(['id', 'name']);
         $priceOptions = PriceOption::all(['id', 'name']);
+        $cities = City::where('status', City::ACTIVE_STATUS)->get();
+        $genders = (new UserInfo())->genders;
+        $videos = $video->take($user->videos);
 
         $gallery = $user->gallery->map(function ($image)  {
             return $this->resize->getFileUrl($image->name, 'gallery');
         });
-
-        $videos = $video->take($user->videos);
 
         return response()->json([
             'success' => true,
@@ -101,7 +108,9 @@ class ProfileController extends Controller
                 'price_options' => $priceOptions,
                 'avatar' => $this->resize->roc($user->avatar, 'avatar', 'avatar'),
                 'gallery' => $gallery,
-                'videos' => $videos
+                'videos' => $videos,
+                'cities' => $cities,
+                'genders' => $genders
             ]
         ]);
     }
@@ -109,11 +118,11 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Api\Profile\UpdateRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
         $user = User::find($id);
         $user->update([

@@ -5,3 +5,17 @@
     pointer-events: auto !important;
 }
 
+.form__label {
+    &.invalid {
+        .form__input, .form__icon-input-wrapper, .form__select-intro {
+            border: 1px solid red;
+            color: red;
+        }
+
+        & .validation {
+            color: red;
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}

@@ -25,36 +25,32 @@ class ResizeService
             'height' => 200,
             'width' => 200,
             'mode' => 'center'
+        ],
+        'gallery' => [
+            'height' => null,
+            'width' => 1000
         ]
     ];
-    /**
-     * @param UploadedFile $file
-     * @param array $options
-     * @return null
-     */
-    public function make(UploadedFile $file, $options = [])
-    {
-
-
-        //$this->resize($file, $options);
-
-        return null;
-    }
 
     /**
      * @param $filename
      * @param $store
      * @param $options
+     * @param string $mode
      * @return mixed
      */
-    public function resize($filename, $store, $options)
+    public function resize($filename, $store, $options, $mode = 'fit')
     {
         $image = $this->getImage($filename, $store);
 
-        if ($options['height'] || $options['width']) {
+        if ($options['height'] && $options['width'] && $mode == 'fit') {
            $image = $image->fit($options['height'], $options['width'], function ($constraint) {
                $constraint->upsize();
            });
+        } elseif ($mode == 'resize') {
+            $image = $image->resize($options['height'], $options['width'], function ($constraint) {
+                $constraint->upsize();
+            });
         }
 
         return $image;
@@ -168,7 +164,9 @@ class ResizeService
      */
     public function getImage($file, $store)
     {
+
         $path = $this->createFullPathFile($this->getFileFolder($store));
+
         return Image::make($this->creatPathFile($path, $file));
     }
 
@@ -191,7 +189,7 @@ class ResizeService
         return "$filename{$height}x{$width}.$ext";
     }
 
-    public function roc($filename, $store, $preset = null, $options = [])
+    public function roc($filename, $store, $preset = null, $options = [], $mode = 'fit')
     {
         if (!$filename) return null;
 
@@ -207,7 +205,7 @@ class ResizeService
         $cacheFilename = $this->createCacheName($filename, $options['height'], $options['width']);
 
         if (!file_exists($this->creatPathFile($path, $cacheFilename))) {
-            $image = $this->resize($filename, $store, $options);
+            $image = $this->resize($filename, $store, $options, $mode);
             $image->save($this->creatPathFile($path, $cacheFilename));
         }
 
