@@ -35,4 +35,9 @@ class City extends Model
     {
         return $this->statuses[$this->status];
     }
+
+    public function active()
+    {
+        return $this->where('status', City::ACTIVE_STATUS);
+    }
 }

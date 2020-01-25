@@ -15,7 +15,7 @@
                     <div class="pe-portfolio__delete-photo">
                         <div class="times-svg"></div>
                     </div>
-                </div> <span>Изменить</span></div>
+                </div><span>Изменить</span></div>
         </div>
         <div v-if="false">
             <div class="image-loader__container" @click="selectImage" :style="{'background-image':'url(' + (image || prevImage)  +')'}">

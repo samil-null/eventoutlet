@@ -23,7 +23,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
 Route::group(['namespace' => 'Site'], function () {
 
     Route::get('/', 'HomeController@index')->name('site.home');
-    Route::group(['middleware' => ['role:executor'], 'prefix' => 'lk', 'namespace' => 'Lk' ], function() {
+    Route::group(['middleware' => ['role:executor', 'lkGuard'], 'prefix' => 'lk', 'namespace' => 'Lk' ], function() {
 
         Route::resource('/profiles', 'ProfileController')->names([
             'show' => 'site.lk.profiles.show',
@@ -55,6 +55,7 @@ Route::group(['prefix' => 'app', 'namespace' => 'Api\App', 'middleware' => ['rol
     Route::group(['prefix' => 'media'], function () {
         Route::post('/avatar', 'MediaController@avatar')->middleware('optimizeImages');
         Route::post('/gallery','MediaController@gallery')->middleware('optimizeImages');
+        Route::delete('/gallery','MediaController@remove')->middleware('optimizeImages');
         Route::post('/video', 'MediaController@video');
         Route::get('/video/render','MediaController@render');
     });

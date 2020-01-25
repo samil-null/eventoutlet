@@ -1,7 +1,7 @@
 <template>
         <div class="pe-portfolio__avatar">
-            <div class="pe-portfolio__avatar-hasnt" v-if="!prevImage">
-                <span @click="selectImage">Добавить аватар</span>
+            <div class="pe-portfolio__avatar-hasnt"  @click="selectImage" v-if="!prevImage">
+                <span>Добавить аватар</span>
                 <div class="bold-plus-svg"></div>
             </div>
             <div class="pe-portfolio__avatar-has" v-else>
@@ -43,7 +43,9 @@
                 axios.post('/app/media/avatar', form)
                     .then(res => res.data.data)
                     .then(data => {
-                        this.image = data.path;
+                        //alert(data.path);
+                        this.$set(this, 'image', data.path);
+                        //this.image = data.path;
                     })
 
             }

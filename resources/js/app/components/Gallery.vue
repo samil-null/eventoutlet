@@ -2,21 +2,21 @@
     <div>
         <div class="pe-portfolio__block">
             <div class="pe-portfolio__field">
-                <div class="pe-portfolio__added-photo pe-portfolio__field-item"  v-for="image in galleryImage" :style="{'background-image': 'url('+ image +')'}">
+                <div class="pe-portfolio__added-photo pe-portfolio__field-item"  v-for="(image, index) in galleryImage" :style="{'background-image': 'url('+ image.full_path +')'}">
                     <div class="pe-portfolio__bg"></div>
-                    <div :data-bp="image" class="pe-portfolio__increase-photo zoomer">
+                    <div :data-bp="image.full_path" class="pe-portfolio__increase-photo zoomer">
                         <div class="increase-svg"></div>
                     </div>
-                    <div class="pe-portfolio__delete-photo">
+                    <div class="pe-portfolio__delete-photo" @click="removeImage(image.image, index)">
                         <div class="times-svg"></div>
                     </div>
                 </div>
-                <div class="pe-portfolio__add-photo pe-portfolio__field-item" @click="addImage">
+                <div class="pe-portfolio__add-photo pe-portfolio__field-item" @click="addImage" v-if="balance > 0">
                     <div class="bold-plus-svg"></div>
                 </div>
                 <input type="file" ref="image" style="display: none;" @change="loadImage">
             </div>
-            <span class="pe-portfolio__counter">Еще 15 фото</span>
+            <span class="pe-portfolio__counter" v-if="balance > 0">Еще {{ balance }} фото</span>
         </div>
     </div>
 </template>
@@ -29,7 +29,13 @@
         props:['images'],
         data() {
             return {
-                galleryImage:[]
+                galleryImage:[],
+                limit:5
+            }
+        },
+        computed: {
+            balance() {
+                return this.limit - this.galleryImage.length;
             }
         },
         methods: {
@@ -43,7 +49,7 @@
                     let response = await axios.post('/app/media/gallery', form);
 
                     if (response.data.success) {
-                        this.galleryImage.push(response.data.data.full_path);
+                        this.galleryImage.push(response.data.data);
                     }
                 }
 
@@ -51,6 +57,12 @@
             addImage() {
                 let input = this.$refs.image;
                 input.click();
+            },
+            removeImage(image, index) {
+                axios.delete('/app/media/gallery',{params: {image:image}})
+                .then((data) => {
+                    this.galleryImage.splice(index,1);
+                });
             }
         },
         mounted() {

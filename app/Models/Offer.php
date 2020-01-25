@@ -65,4 +65,17 @@ class Offer extends Model
     {
         return $this->statuses[$this->status][$key];
     }
+
+    public function scopeBetweenDates($query, $dateFrom, $dateTo)
+    {
+        return $query->whereHas('dates', function ($q) use ($dateFrom, $dateTo) {
+            $q->where('date', '>=', $dateFrom)
+                ->where('date', '<=', $dateTo);
+        });
+    }
+
+    public function scopeBetweenDiscount($query, $condition, $value)
+    {
+        return $query->where('discount', $condition, $value);
+    }
 }

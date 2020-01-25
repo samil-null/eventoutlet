@@ -43,4 +43,9 @@ class Specialty extends Model
             'speciality_id',
             'id');
     }
+
+    public function active()
+    {
+        return $this->where('status', self::ACTIVE_STATUS);
+    }
 }

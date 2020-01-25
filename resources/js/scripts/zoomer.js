@@ -6,12 +6,12 @@ window.addEventListener('load', function () {
             e.preventDefault();
             console.log(e.target.dataset.image)
             BigPicture({
-                el: e.target,
+                el: this,
                 gallery: document.querySelectorAll('#profile-gallery .zoomer')
             })
         })
     });
-    alert('fic');
+
     document.querySelector('.pe-portfolio__field').addEventListener('click', function (e) {
         BigPicture({
             el: e.target.closest('div[data-bp]'),
@@ -23,11 +23,10 @@ window.addEventListener('load', function () {
     document.querySelectorAll('.zoomer-video').forEach(item => {
         item.addEventListener('click', e => {
             e.preventDefault();
-            alert(e.target.dataset.video);
-            console.log(e.target.dataset.video)
+            let video  = e.target.closest('div[data-video]');
             BigPicture({
-                el: e.target,
-                iframeSrc:e.target.dataset.video
+                el: video,
+                iframeSrc: video.dataset.video
             })
         })
     })

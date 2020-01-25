@@ -79,7 +79,21 @@ class MediaController extends Controller
             'success' => true,
             'data' => [
                 'full_path' => asset($fullPath) ,
-                'filepath'  => $filename
+                'image'  => $filename
+            ]
+        ]);
+    }
+
+    public function remove(Request $request)
+    {
+        $f= $request->user()->gallery()->where([
+            'type_content' => 'gallery',
+            'name' => $request->input('image')
+        ])->delete();
+
+        return response()->json([
+            'success' => true,
+            'data' => [
             ]
         ]);
     }

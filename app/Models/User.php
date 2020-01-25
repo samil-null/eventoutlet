@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use EloquentFilter\Filterable;
 use App\Filters\UserFilter;
 use Hash;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -12,6 +13,7 @@ use Laratrust\Traits\LaratrustUserTrait;
 class User extends Authenticatable
 {
     use LaratrustUserTrait;
+    use Filterable;
     use Notifiable;
 
     public const NEW_STATUS = 0;
@@ -76,6 +78,12 @@ class User extends Authenticatable
     public function services()
     {
         return $this->hasMany(Service::class,'user_id', 'id');
+    }
+
+    public function activeServices()
+    {
+        return $this->hasMany(Service::class,'user_id', 'id')
+            ->where('status', Service::ACTIVE_STATUS);
     }
 
     public function offers()
@@ -160,8 +168,14 @@ class User extends Authenticatable
         return $this->statuses[$this->status][$name];
     }
 
-    public function scopeFilter($query, UserFilter $filter)
+//    public function scopeFilter($query, UserFilter $filter)
+//    {
+//        return $filter->apply($query);
+//    }
+
+    public function modelFilter()
     {
-        return $filter->apply($query);
+        return $this->provideFilter(\App\Filters\UserFilter::class);
     }
+
 }

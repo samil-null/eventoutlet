@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Barryvdh\Debugbar\ServiceProvider::class,
         Laratrust\LaratrustServiceProvider::class,
         ShawnSandy\ImgFly\ImgflyServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
@@ -174,9 +175,11 @@ return [
         App\Providers\ImagerProvider::class,
         App\Providers\MacroProvider::class,
         Pawlox\VideoThumbnail\VideoThumbnailServiceProvider::class,
+        EloquentFilter\ServiceProvider::class,
         /*
          * Application Service Providers...
          */
+        App\Providers\OfferFilterProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         App\Providers\ObserverServiceProvider::class,
@@ -241,7 +244,8 @@ return [
         'Imager' => App\Facades\Imager::class,
         'SEO' => Artesaos\SEOTools\Facades\SEOTools::class,
         'HTMLMin' => HTMLMin\HTMLMin\Facades\HTMLMin::class,
-        'VideoThumbnail' => Pawlox\VideoThumbnail\Facade\VideoThumbnail::class
+        'VideoThumbnail' => Pawlox\VideoThumbnail\Facade\VideoThumbnail::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];

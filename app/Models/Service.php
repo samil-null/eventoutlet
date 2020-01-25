@@ -34,6 +34,12 @@ class Service extends Model
         return $this->hasMany(Offer::class,'service_id', 'id');
     }
 
+    public function activeOffers()
+    {
+      return $this->hasMany(Offer::class,'service_id', 'id')
+            ->where('status', Offer::ACTIVE_STATUS);
+    }
+
     public  function priceOption()
     {
         return $this->hasOne(PriceOption::class, 'id', 'price_option_id');

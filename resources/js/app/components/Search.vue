@@ -7,8 +7,8 @@
                 </select>
             </div>
             <div class="col-lg-2">
-                <input type="hidden" :value="dateFrom" name="date_from">
-                <input type="hidden" :value="dateTo" name="date_to">
+                <input type="hidden" :value="dateFrom" name="specials_offers[date_from]">
+                <input type="hidden" :value="dateTo" name="specials_offers[date_to]">
                 <date-picker
                     v-model="range"
                     mode="range"
@@ -16,7 +16,6 @@
                     :popover="{ placement: 'bottom', visibility: 'click' }">
                     <button type="button" class="btn btn-outline-secondary">select date</button>
                 </date-picker>
-                <input type="hidden" name="specials_offers" value="1">
             </div>
             <div class="col-lg-2">
                 <button class="btn btn-danger">find</button>

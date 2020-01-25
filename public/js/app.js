@@ -6069,7 +6069,9 @@ __webpack_require__.r(__webpack_exports__);
       _modules_axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/app/media/avatar', form).then(function (res) {
         return res.data.data;
       }).then(function (data) {
-        _this.image = data.path;
+        //alert(data.path);
+        _this.$set(_this, 'image', data.path); //this.image = data.path;
+
       });
     }
   },
@@ -6346,8 +6348,14 @@ __webpack_require__.r(__webpack_exports__);
   props: ['images'],
   data: function data() {
     return {
-      galleryImage: []
+      galleryImage: [],
+      limit: 5
     };
+  },
+  computed: {
+    balance: function balance() {
+      return this.limit - this.galleryImage.length;
+    }
   },
   methods: {
     loadImage: function loadImage() {
@@ -6373,7 +6381,7 @@ __webpack_require__.r(__webpack_exports__);
               response = _context.sent;
 
               if (response.data.success) {
-                this.galleryImage.push(response.data.data.full_path);
+                this.galleryImage.push(response.data.data);
               }
 
             case 9:
@@ -6386,6 +6394,17 @@ __webpack_require__.r(__webpack_exports__);
     addImage: function addImage() {
       var input = this.$refs.image;
       input.click();
+    },
+    removeImage: function removeImage(image, index) {
+      var _this = this;
+
+      _modules_axios__WEBPACK_IMPORTED_MODULE_1__["default"]["delete"]('/app/media/gallery', {
+        params: {
+          image: image
+        }
+      }).then(function (data) {
+        _this.galleryImage.splice(index, 1);
+      });
     }
   },
   mounted: function mounted() {
@@ -6479,7 +6498,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../modules/axios */ "./resources/js/app/modules/axios.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
-//
 //
 //
 //
@@ -68422,13 +68440,18 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "pe-portfolio__avatar" }, [
     !_vm.prevImage
-      ? _c("div", { staticClass: "pe-portfolio__avatar-hasnt" }, [
-          _c("span", { on: { click: _vm.selectImage } }, [
-            _vm._v("Добавить аватар")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "bold-plus-svg" })
-        ])
+      ? _c(
+          "div",
+          {
+            staticClass: "pe-portfolio__avatar-hasnt",
+            on: { click: _vm.selectImage }
+          },
+          [
+            _c("span", [_vm._v("Добавить аватар")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "bold-plus-svg" })
+          ]
+        )
       : _c("div", { staticClass: "pe-portfolio__avatar-has" }, [
           _c(
             "a",
@@ -68846,13 +68869,13 @@ var render = function() {
         "div",
         { staticClass: "pe-portfolio__field" },
         [
-          _vm._l(_vm.galleryImage, function(image) {
+          _vm._l(_vm.galleryImage, function(image, index) {
             return _c(
               "div",
               {
                 staticClass:
                   "pe-portfolio__added-photo pe-portfolio__field-item",
-                style: { "background-image": "url(" + image + ")" }
+                style: { "background-image": "url(" + image.full_path + ")" }
               },
               [
                 _c("div", { staticClass: "pe-portfolio__bg" }),
@@ -68861,24 +68884,38 @@ var render = function() {
                   "div",
                   {
                     staticClass: "pe-portfolio__increase-photo zoomer",
-                    attrs: { "data-bp": image }
+                    attrs: { "data-bp": image.full_path }
                   },
                   [_c("div", { staticClass: "increase-svg" })]
                 ),
                 _vm._v(" "),
-                _vm._m(0, true)
+                _c(
+                  "div",
+                  {
+                    staticClass: "pe-portfolio__delete-photo",
+                    on: {
+                      click: function($event) {
+                        return _vm.removeImage(image.image, index)
+                      }
+                    }
+                  },
+                  [_c("div", { staticClass: "times-svg" })]
+                )
               ]
             )
           }),
           _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "pe-portfolio__add-photo pe-portfolio__field-item",
-              on: { click: _vm.addImage }
-            },
-            [_c("div", { staticClass: "bold-plus-svg" })]
-          ),
+          _vm.balance > 0
+            ? _c(
+                "div",
+                {
+                  staticClass:
+                    "pe-portfolio__add-photo pe-portfolio__field-item",
+                  on: { click: _vm.addImage }
+                },
+                [_c("div", { staticClass: "bold-plus-svg" })]
+              )
+            : _vm._e(),
           _vm._v(" "),
           _c("input", {
             ref: "image",
@@ -68890,22 +68927,15 @@ var render = function() {
         2
       ),
       _vm._v(" "),
-      _c("span", { staticClass: "pe-portfolio__counter" }, [
-        _vm._v("Еще 15 фото")
-      ])
+      _vm.balance > 0
+        ? _c("span", { staticClass: "pe-portfolio__counter" }, [
+            _vm._v("Еще " + _vm._s(_vm.balance) + " фото")
+          ])
+        : _vm._e()
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "pe-portfolio__delete-photo" }, [
-      _c("div", { staticClass: "times-svg" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -68981,7 +69011,6 @@ var staticRenderFns = [
               ])
             ]
           ),
-          _vm._v(" "),
           _c("span", [_vm._v("Изменить")])
         ]
       )
@@ -69057,12 +69086,12 @@ var render = function() {
         { staticClass: "col-lg-2" },
         [
           _c("input", {
-            attrs: { type: "hidden", name: "date_from" },
+            attrs: { type: "hidden", name: "specials_offers[date_from]" },
             domProps: { value: _vm.dateFrom }
           }),
           _vm._v(" "),
           _c("input", {
-            attrs: { type: "hidden", name: "date_to" },
+            attrs: { type: "hidden", name: "specials_offers[date_to]" },
             domProps: { value: _vm.dateTo }
           }),
           _vm._v(" "),
@@ -69092,11 +69121,7 @@ var render = function() {
                 [_vm._v("select date")]
               )
             ]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            attrs: { type: "hidden", name: "specials_offers", value: "1" }
-          })
+          )
         ],
         1
       ),
@@ -85462,17 +85487,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bigpicture__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(bigpicture__WEBPACK_IMPORTED_MODULE_0__);
 
 window.addEventListener('load', function () {
+  var _this = this;
+
   document.querySelectorAll('.zoomer').forEach(function (item) {
     item.addEventListener('click', function (e) {
       e.preventDefault();
       console.log(e.target.dataset.image);
       bigpicture__WEBPACK_IMPORTED_MODULE_0___default()({
-        el: e.target,
+        el: _this,
         gallery: document.querySelectorAll('#profile-gallery .zoomer')
       });
     });
   });
-  alert('fic');
   document.querySelector('.pe-portfolio__field').addEventListener('click', function (e) {
     bigpicture__WEBPACK_IMPORTED_MODULE_0___default()({
       el: e.target.closest('div[data-bp]'),
@@ -85482,11 +85508,10 @@ window.addEventListener('load', function () {
   document.querySelectorAll('.zoomer-video').forEach(function (item) {
     item.addEventListener('click', function (e) {
       e.preventDefault();
-      alert(e.target.dataset.video);
-      console.log(e.target.dataset.video);
+      var video = e.target.closest('div[data-video]');
       bigpicture__WEBPACK_IMPORTED_MODULE_0___default()({
-        el: e.target,
-        iframeSrc: e.target.dataset.video
+        el: video,
+        iframeSrc: video.dataset.video
       });
     });
   });

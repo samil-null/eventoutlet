@@ -97,7 +97,10 @@ class ProfileController extends Controller
         $videos = $video->take($user->videos);
 
         $gallery = $user->gallery->map(function ($image)  {
-            return $this->resize->getFileUrl($image->name, 'gallery');
+            return [
+                'full_path' => $this->resize->getFileUrl($image->name, 'gallery'),
+                'image' => $image->name
+            ];
         });
 
         return response()->json([

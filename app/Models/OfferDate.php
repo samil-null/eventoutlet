@@ -15,4 +15,10 @@ class OfferDate extends Model
     {
         return Carbon::parse($this->date)->format('Y-m-d');
     }
+
+    public function scopeBetween($query, $from, $to)
+    {
+        $query->where('date', '>=', $from)
+            ->where('date', '<=', $to);
+    }
 }
