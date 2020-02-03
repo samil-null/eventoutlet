@@ -93,10 +93,10 @@
 
                         <div class="form-group focused">
                             <label class="form-control-label" for="input-speciality">Статус</label>
-                            <select class="form-control form-control-alternative" id="input-speciality" name="user_status">
+                            <select class="form-control form-control-alternative" id="input-speciality" name="status">
                                 <option value="">Нет</option>
                                 @foreach((new \App\Models\User())->statuses as $status => $name)
-                                    <option value="{{ $status }}" @if($request->get('user_status') == $status) selected @endif>{{ $name['name'] }}</option>
+                                    <option value="{{ $status }}" @if($request->get('status') == $status) selected @endif>{{ $name['name'] }}</option>
                                 @endforeach
                             </select>
                         </div>

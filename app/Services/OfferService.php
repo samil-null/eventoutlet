@@ -21,7 +21,11 @@ class OfferService
         $service = $user->services()->where('id', $request->input('service_id'))->first();
 
         $offer = $service->offers()->save(
-            new Offer($request->only(['description', 'discount']))
+            new Offer([
+                'description' => $request->input('description'),
+                'discount' => $request->input('discount'),
+                'status' => Offer::ACTIVE_STATUS
+            ])
         );
 
         $offer->dates()->saveMany($dates);

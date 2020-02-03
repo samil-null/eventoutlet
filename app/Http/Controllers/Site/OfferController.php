@@ -6,7 +6,9 @@ use App\Factories\Algo\AlgoFactoryInterface;
 use App\Factories\AlgoFactory;
 use App\Filters\Offers\OfferFilterInterface;
 use App\Filters\UserFilter;
+use App\Helpers\DateHelper;
 use App\Http\Controllers\Controller;
+use App\Models\City;
 use App\Models\Media;
 use App\Models\Offer;
 use App\Models\PriceOption;
@@ -23,28 +25,39 @@ use Illuminate\Support\Facades\DB;
 class OfferController extends Controller
 {
 
-    /**
-     * @var UserFilterService
-     */
-    private $filter;
-
-    /**
-     * OfferController constructor.
-     * @param OfferFilterService $filter
-     */
-    public function __construct(OfferFilterService $filter)
-    {
-        $this->filter = $filter;
-    }
-
-
     public function index(Request $request, OfferFilterInterface $filter, AlgoFactoryInterface $factory)
     {
+        $result = $filter->apply();
+        $aggregate = $result->aggregate();
+        $additionFields = $result->additionsFields();
+        $users = $factory->load($result->get()->paginate(20), $request->has('specials_offers'))->create();
 
-        $users = $factory->load($filter->apply()->paginate(20))->create();
+        $filters = [
+            'availableFilters' => $result->getAvailableFilters(),
+            'cities' => [
+                'options' => (new City())->active()->get()->toJson(),
+                'active' => $request->input('city_id')??0
+            ],
+            'specialities' => [
+                'options' => (new Specialty())->active()->get()->toJson(),
+                'active' => $request->input('speciality_id')??0
+            ],
+            'dates' => [
+                'from' => $result->getFilterParam('date_from'),
+                'to' => $result->getFilterParam('date_to'),
+                'to_date_filter' => DateHelper::toDateFilter($result->getFilterParam('date_to')),
+                'max_date' => DateHelper::maxFilterDate(),
+                'min_date' => DateHelper::minFilterDate()
+            ],
+            'discount' => [
+                'from' => $result->getFilterParam('discount_from'),
+                'to' => $result->getFilterParam('discount_to'),
+            ]
+        ];
 
         return view('site.offers.index', [
             'users' => $users,
+            'filters' => $filters
         ]);
     }
 }

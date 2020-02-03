@@ -23,7 +23,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
 Route::group(['namespace' => 'Site'], function () {
 
     Route::get('/', 'HomeController@index')->name('site.home');
-    Route::group(['middleware' => ['role:executor', 'lkGuard'], 'prefix' => 'lk', 'namespace' => 'Lk' ], function() {
+    Route::group(['middleware' => ['role:executor'], 'prefix' => 'lk', 'namespace' => 'Lk' ], function() {
 
         Route::resource('/profiles', 'ProfileController')->names([
             'show' => 'site.lk.profiles.show',
@@ -37,7 +37,7 @@ Route::group(['namespace' => 'Site'], function () {
 
     });
 
-    Route::get('/offers', 'OfferController@index')->name('site.offers');
+    Route::get('/offers', 'OfferController@index')->name('site.offers.index');
     Route::get('/users/{id}', 'UserController@show')->name('site.users.show');
 
 });

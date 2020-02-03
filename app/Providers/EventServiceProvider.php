@@ -4,11 +4,13 @@ namespace App\Providers;
 
 use App\Events\Offer\OfferChangeStatus;
 use App\Events\RegisterNewUser;
+use App\Events\Service\ServiceChangeStatus;
 use App\Events\User\UserChangeStatus;
 use App\Events\User\UserForgotPassword;
 use App\Listeners\Offer\SendChangeStatusEmail;
 use App\Listeners\SendVerifecatedEmail;
 use App\Listeners\SendVerificationEmail;
+use App\Listeners\Service\SendEmailChangeServiceStatus;
 use App\Listeners\User\SendEmailChangeUserStatus;
 use App\Listeners\User\SendForgotEmailUser;
 use Illuminate\Auth\Events\Registered;
@@ -35,6 +37,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         UserForgotPassword::class => [
             SendForgotEmailUser::class
+        ],
+        ServiceChangeStatus::class => [
+            SendEmailChangeServiceStatus::class
         ]
 
     ];

@@ -36,4 +36,13 @@ class Imager
 
         return asset('/assets/avatars/'.random_int(1,6).'.png');
     }
+
+    public function galleryPreview($path)
+    {
+        if ($path) {
+            return $this->resize->roc($path, 'gallery', 'gallery_preview', [], 'resize');
+        }
+
+        return asset('/assets/avatars/'.random_int(1,6).'.png');
+    }
 }

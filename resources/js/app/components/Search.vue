@@ -3,12 +3,12 @@
         <div class="row">
             <div class="col-lg-2">
                 <select class="form-control" name="speciality_id" v-model="specialitySelect">
-                    <option value="" v-for="speciality in specialties" :value="speciality.id">{{ speciality.name }}</option>
+                    <option value="" v-for="speciality in specialities" :value="speciality.id">{{ speciality.name }}</option>
                 </select>
             </div>
             <div class="col-lg-2">
-                <input type="hidden" :value="dateFrom" name="specials_offers[date_from]">
-                <input type="hidden" :value="dateTo" name="specials_offers[date_to]">
+                <input type="hidden" v-if="dateFrom != 'Invalid date'" :value="dateFrom" name="specials_offers[date_from]">
+                <input type="hidden" v-if="dateTo != 'Invalid date'" :value="dateTo" name="specials_offers[date_to]">
                 <date-picker
                     v-model="range"
                     mode="range"
@@ -29,6 +29,7 @@
     import moment from 'moment'
 
     export default {
+        props:['specialities'],
         name: 'Search',
         data() {
             return {
@@ -38,7 +39,6 @@
                     end: null
                 },
                 specialitySelect:0,
-                specialties: []
             }
         },
         computed: {
@@ -50,11 +50,11 @@
             }
         },
         mounted() {
-            axios.get('/app/specialties')
-                .then(res => res.data.data)
-                .then(data => {
-                    this.specialties = data;
-                })
+            // axios.get('/app/specialties')
+            //     .then(res => res.data.data)
+            //     .then(data => {
+            //         this.specialties = data;
+            //     })
         },
         components: {
             DatePicker: () => import('v-calendar/lib/components/date-picker.umd')

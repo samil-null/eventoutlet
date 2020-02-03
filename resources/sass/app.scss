@@ -1,5 +1,6 @@
 @import '~baguettebox.js/dist/baguetteBox.min.css';
-
+@import "~slick-carousel/slick/slick";
+@import "~slick-carousel/slick/slick-theme";
 .zoomer,.zoomer-video {
     cursor: pointer;
     pointer-events: auto !important;
@@ -18,4 +19,15 @@
             visibility: visible;
         }
     }
+}
+
+.glide__slides {
+    .glide__slide:nth-child(-n+4) {
+        width:25%;
+        padding: 0 5px;
+    }
+}
+
+.catalog-nav__first {
+    height: 148px;
 }

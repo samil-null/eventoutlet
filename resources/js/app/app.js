@@ -7,7 +7,9 @@ import EditProfile from "./pages/EditProfile";
 import Search from './components/Search';
 import store from './store/index'
 import FilterApp from "./components/FilterApp";
-
+import FilterSelect from "./components/FilterSelect";
+import FilterDatePicker from "./components/FilterDatePicker";
+import FilterRangeSlider from "./components/FilterRangeSlider";
 new Vue({
     el:'#app',
     store,
@@ -18,5 +20,8 @@ new Vue({
         EditProfile,
         Search,
         FilterApp,
+        FilterSelect,
+        FilterDatePicker,
+        FilterRangeSlider
     }
-})
+});

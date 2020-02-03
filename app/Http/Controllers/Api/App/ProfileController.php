@@ -76,19 +76,18 @@ class ProfileController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Video $video
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function edit(Video $video, $id)
     {
         $user = User::with(
-            'info','services.priceOption', 'city',
-            'speciality','speciality.fields', 'offers', 'offers'
-        )->find($id);
+            'info','services.priceOption', 'services.fields.metaField', 'city',
+            'speciality.fields', 'offers'
+        )->findOrFail($id);
 
-        abort_if(!$user, 404);
 
         $specialties = Specialty::where('status', Specialty::ACTIVE_STATUS)->get(['id', 'name']);
         $priceOptions = PriceOption::all(['id', 'name']);

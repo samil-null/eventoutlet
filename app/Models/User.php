@@ -168,11 +168,6 @@ class User extends Authenticatable
         return $this->statuses[$this->status][$name];
     }
 
-//    public function scopeFilter($query, UserFilter $filter)
-//    {
-//        return $filter->apply($query);
-//    }
-
     public function modelFilter()
     {
         return $this->provideFilter(\App\Filters\UserFilter::class);

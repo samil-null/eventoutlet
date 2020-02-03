@@ -43,9 +43,11 @@
                 axios.post('/app/media/avatar', form)
                     .then(res => res.data.data)
                     .then(data => {
-                        //alert(data.path);
+                        this.image = data.path;
                         this.$set(this, 'image', data.path);
-                        //this.image = data.path;
+                        document.querySelectorAll('.navbar-general__profile-photo, .profile-edit__card-photo').forEach( item => {
+                            item.style.backgroundImage = `url(${data.path})`;
+                        })
                     })
 
             }

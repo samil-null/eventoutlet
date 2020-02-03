@@ -16,8 +16,8 @@ class CreateAdditionalFieldsServicesTable extends Migration
         Schema::create('additional_fields_services', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('service_id');
-            $table->bigInteger('fields_specialties_id');
-            $table->string('value');
+            $table->bigInteger('speciality_field_id');
+            $table->integer('value')->nullable();
             $table->timestamps();
         });
     }

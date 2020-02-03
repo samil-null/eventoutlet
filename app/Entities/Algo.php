@@ -20,7 +20,11 @@ class Algo
 
     public $gallery;
 
-    public function __construct($id = '', $name = '', $avatar = '', $speciality = '', $offer = '', $info ='', $gallery = '')
+    public $isSpecials;
+
+    public $service_price;
+
+    public function __construct($id = '', $name = '', $avatar = '', $speciality = '', $offer = '', $info ='', $gallery = '', $isSpecials = false, $servicePrice = 0)
     {
         $this->id = $id;
         $this->name = $name;
@@ -29,6 +33,8 @@ class Algo
         $this->offer = $offer;
         $this->info = $info;
         $this->gallery = $gallery;
+        $this->isSpecials = $isSpecials;
+        $this->service_price = $servicePrice;
     }
 }
 

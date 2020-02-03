@@ -25,6 +25,8 @@ class AlgoFactory implements AlgoFactoryInterface
 
     protected $priceOptions;
 
+    protected $isSpecials;
+
     public function __construct()
     {
         $this->getSpecialities();
@@ -32,12 +34,12 @@ class AlgoFactory implements AlgoFactoryInterface
         $this->getCities();
     }
 
-    public function load($data)
+    public function load($data, $isSpecials)
     {
         $this->data = $data;
+        $this->isSpecials = $isSpecials;
         $this->ids = $data->pluck('id')->toArray();
         $this->getGallery();
-
         return $this;
     }
 
@@ -99,7 +101,9 @@ class AlgoFactory implements AlgoFactoryInterface
             $this->bindSpeciality($data->speciality_id),
             $this->bindOffer($data),
             $this->bindInfo($data),
-            $this->bindGallery($data->id)
+            $this->bindGallery($data->id),
+            $this->isSpecials,
+            $data->service_price
         );
     }
 
@@ -111,9 +115,9 @@ class AlgoFactory implements AlgoFactoryInterface
     public function bindOffer($data)
     {
         $offer = new stdClass();
-        $offer->discount = $data->discount;
-        $offer->discount_price = $data->discount_price;
-        $offer->price_option = $this->getPriceOption($data->price_option_id);
+        $offer->discount = $data->discount??'';
+        $offer->discount_price = $data->discount_price??'';
+        $offer->price_option = $this->getPriceOption($data->price_option_id??null);
 
         return  $offer;
     }
@@ -129,12 +133,13 @@ class AlgoFactory implements AlgoFactoryInterface
         $info->instagram = $data->instagram;
         $info->email = $data->email;
         $info->whatsapp = $data->whatsapp;
+        $info->phone = $data->phone;
 
         return $info;
     }
 //
     public function bindGallery($id)
     {
-        return isset($this->allery[$id])?$this->gallery[$id]:[];
+        return isset($this->gallery[$id])?$this->gallery[$id]:[];
     }
 }

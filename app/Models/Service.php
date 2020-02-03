@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\AdditionFieldService;
 use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
@@ -59,7 +60,14 @@ class Service extends Model
 
     public function fields()
     {
-        return $this->hasMany(AdditionFieldSpeciality::class,'service_id', 'id');
+        return $this->hasMany(
+            AdditionFieldService::class,'service_id',
+            'id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function getStatus($name = 'name')

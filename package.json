@@ -10,14 +10,14 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
-        "axios": "^0.19",
+        "axios": "^0.19.2",
         "cross-env": "^5.1",
         "laravel-mix": "^4.0.7",
         "lodash": "^4.17.15",
         "resolve-url-loader": "^2.3.1",
-        "sass": "^1.15.2",
+        "sass": "^1.25.0",
         "sass-loader": "^7.1.0",
-        "vue-template-compiler": "^2.6.10"
+        "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
         "@glidejs/glide": "^3.4.1",
@@ -26,10 +26,11 @@
         "jquery": "^3.4.1",
         "magnific-popup": "^1.1.0",
         "moment": "^2.24.0",
-        "query-string": "^6.9.0",
+        "query-string": "^6.10.1",
+        "slick-carousel": "^1.8.1",
         "url-parse": "^1.4.7",
-        "v-calendar": "^1.0.0-beta.23",
-        "vue": "^2.6.10",
+        "v-calendar": "^1.0.1",
+        "vue": "^2.6.11",
         "vue-core-video-player": "0.0.1",
         "vue-laravel-validator": "^1.0.4",
         "vue-video-player": "^5.0.2",

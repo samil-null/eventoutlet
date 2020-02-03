@@ -118,7 +118,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "additionalFields",
   props: ['options', 'additionFields'],
@@ -138,6 +137,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     deleteField: function deleteField(id) {
       this.additionalFieldsList.splice(id, 1);
+    },
+    createName: function createName(id) {
+      if (id) {
+        return "addition_fields[exist][".concat(id, "]");
+      }
+
+      return "addition_fields[new][]";
     }
   },
   created: function created() {
@@ -18454,6 +18460,21 @@ function applyToTag (styleElement, obj) {
 
 /***/ }),
 
+/***/ "49e7":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("2350")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".vc-svg-icon[data-v-63f7b5ec]{display:inline-block;stroke:currentColor;stroke-width:0}.vc-svg-icon path[data-v-63f7b5ec]{fill:currentColor}", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "49f4":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19638,17 +19659,6 @@ module.exports = baseMatches;
 
 /***/ }),
 
-/***/ "6551":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_7_oneOf_1_0_node_modules_css_loader_index_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SvgIcon_vue_vue_type_style_index_0_id_5572e632_lang_postcss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("7dcd");
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_7_oneOf_1_0_node_modules_css_loader_index_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SvgIcon_vue_vue_type_style_index_0_id_5572e632_lang_postcss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_7_oneOf_1_0_node_modules_css_loader_index_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SvgIcon_vue_vue_type_style_index_0_id_5572e632_lang_postcss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
- /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_ref_7_oneOf_1_0_node_modules_css_loader_index_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SvgIcon_vue_vue_type_style_index_0_id_5572e632_lang_postcss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
 /***/ "656b":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20031,21 +20041,6 @@ function asciiToArray(string) {
 }
 
 module.exports = asciiToArray;
-
-
-/***/ }),
-
-/***/ "6e4c":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("2350")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".vc-svg-icon[data-v-5572e632]{display:inline-block;stroke:currentColor;stroke-width:0}.vc-svg-icon path[data-v-5572e632]{fill:currentColor}", ""]);
-
-// exports
 
 
 /***/ }),
@@ -20829,21 +20824,6 @@ module.exports = __webpack_require__("584a").getIterator = function (it) {
 
 /***/ }),
 
-/***/ "7dcd":
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__("6e4c");
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__("499e").default
-var update = add("6070a49c", content, true, {"sourceMap":false,"shadowMode":false});
-
-/***/ }),
-
 /***/ "7e64":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21551,6 +21531,17 @@ module.exports = Array.isArray || function isArray(arg) {
 
 /***/ }),
 
+/***/ "9010":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_7_oneOf_1_0_node_modules_css_loader_index_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SvgIcon_vue_vue_type_style_index_0_id_63f7b5ec_lang_postcss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("9740");
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_7_oneOf_1_0_node_modules_css_loader_index_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SvgIcon_vue_vue_type_style_index_0_id_63f7b5ec_lang_postcss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_7_oneOf_1_0_node_modules_css_loader_index_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SvgIcon_vue_vue_type_style_index_0_id_63f7b5ec_lang_postcss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_ref_7_oneOf_1_0_node_modules_css_loader_index_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SvgIcon_vue_vue_type_style_index_0_id_63f7b5ec_lang_postcss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
 /***/ "9093":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21910,6 +21901,21 @@ function baseHas(object, key) {
 
 module.exports = baseHas;
 
+
+/***/ }),
+
+/***/ "9740":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("49e7");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__("499e").default
+var update = add("90070284", content, true, {"sourceMap":false,"shadowMode":false});
 
 /***/ }),
 
@@ -31686,48 +31692,10 @@ class dateInfo_DateInfo {
   toDate(date) {
     const mask = this.locale.masks.data;
     return this.locale.toDate(date, mask);
-  } // Returns a date range that intersects two DateInfo objects
-  // NOTE: This is a shallow calculation (does not take patterns into account),
-  //   so this method should only really be called for special conditions
-  //   where absolute accuracy is not necessarily needed
+  }
 
-
-  findShallowIntersectingRange(date1, date2) {
-    const thisRange = date1.toRange();
-    const otherRange = date2.toRange(); // Start with infinite start and end dates
-
-    let start = null;
-    let end = null; // This start date exists
-
-    if (thisRange.start) {
-      // Use this definite start date if other start date is infinite
-      if (!otherRange.start) {
-        start = thisRange.start;
-      } else {
-        // Otherwise, use the earliest start date
-        start = thisRange.start < otherRange.start ? thisRange.start : otherRange.start;
-      } // Other start date exists
-
-    } else if (otherRange.start) {
-      // Use other definite start date as this one is infinite
-      start = otherRange.start;
-    } // Assign end date to this one if it is valid
-
-
-    if (thisRange.end && (!start || thisRange.end >= start)) {
-      end = thisRange.end;
-    } // Assign end date to other one if it is valid and before this one
-
-
-    if (otherRange.end && (!start || otherRange.end >= start)) {
-      if (!end || otherRange.end < end) end = otherRange.end;
-    } // Return calculated range
-
-
-    return {
-      start,
-      end
-    };
+  toDateInfo(date) {
+    return date.isDateInfo ? date : new dateInfo_DateInfo(date, this.opts);
   }
 
   startOfWeek(date) {
@@ -31892,6 +31860,64 @@ class dateInfo_DateInfo {
     }
 
     return result;
+  }
+
+  shallowIntersectingRange(other) {
+    return this.rangeShallowIntersectingRange(this, other);
+  } // Returns a date range that intersects two DateInfo objects
+  // NOTE: This is a shallow calculation (does not take patterns into account),
+  //   so this method should only really be called for special conditions
+  //   where absolute accuracy is not necessarily needed
+
+
+  rangeShallowIntersectingRange(date1, date2) {
+    date1 = this.toDateInfo(date1);
+    date2 = this.toDateInfo(date2);
+
+    if (!this.dateShallowIntersectsDate(date1, date2)) {
+      return null;
+    }
+
+    const thisRange = date1.toRange();
+    const otherRange = date2.toRange(); // Start with infinite start and end dates
+
+    let start = null;
+    let end = null; // This start date exists
+
+    if (thisRange.start) {
+      // Use this definite start date if other start date is infinite
+      if (!otherRange.start) {
+        start = thisRange.start;
+      } else {
+        // Otherwise, use the latest start date
+        start = thisRange.start > otherRange.start ? thisRange.start : otherRange.start;
+      } // Other start date exists
+
+    } else if (otherRange.start) {
+      // Use other definite start date as this one is infinite
+      start = otherRange.start;
+    } // This end date exists
+
+
+    if (thisRange.end) {
+      // Use this definite end date if other end date is infinite
+      if (!otherRange.end) {
+        end = thisRange.end;
+      } else {
+        // Otherwise, use the earliest end date
+        end = thisRange.end < otherRange.end ? thisRange.end : otherRange.end;
+      } // Other end date exists
+
+    } else if (otherRange.end) {
+      // Use other definite end date as this one is infinite
+      end = otherRange.end;
+    } // Return calculated range
+
+
+    return {
+      start,
+      end
+    };
   } // ========================================================
   // Determines if this date partially intersects another date
   // NOTE: This is a deep test (patterns tested)
@@ -31900,10 +31926,10 @@ class dateInfo_DateInfo {
   intersectsDate(other) {
     var _this = this;
 
-    const date = other.isDateInfo ? other : new dateInfo_DateInfo(other, this.opts);
+    const date = this.toDateInfo(other);
     if (!this.shallowIntersectsDate(date)) return null;
     if (!this.on) return this;
-    const range = this.findShallowIntersectingRange(this, date);
+    const range = this.rangeShallowIntersectingRange(this, date);
     let result = false;
     this.iterateDatesInRange(range, function (state) {
       if (_this.matchesDay(state.day)) {
@@ -31918,7 +31944,7 @@ class dateInfo_DateInfo {
 
 
   shallowIntersectsDate(other) {
-    return this.dateShallowIntersectsDate(this, other.isDate ? other : new dateInfo_DateInfo(other, this.opts));
+    return this.dateShallowIntersectsDate(this, this.toDateInfo(other));
   } // ========================================================
   // Determines if first date partially intersects second date
   // NOTE: This is a shallow test (no patterns tested)
@@ -31951,7 +31977,7 @@ class dateInfo_DateInfo {
   includesDate(other) {
     var _this2 = this;
 
-    const date = other.isDateInfo ? other : new dateInfo_DateInfo(other, this.opts);
+    const date = this.toDateInfo(other);
 
     if (!this.shallowIncludesDate(date)) {
       return false;
@@ -31961,7 +31987,7 @@ class dateInfo_DateInfo {
       return true;
     }
 
-    const range = this.findShallowIntersectingRange(this, date);
+    const range = this.rangeShallowIntersectingRange(this, date);
     let result = true;
     this.iterateDatesInRange(range, function (state) {
       if (_this2.matchesDay(state.day)) {
@@ -33016,12 +33042,12 @@ var CalendarNavvue_type_template_id_02721262_staticRenderFns = []
 
 // CONCATENATED MODULE: ./src/components/CalendarNav.vue?vue&type=template&id=02721262&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"599b2a0c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SvgIcon.vue?vue&type=template&id=5572e632&scoped=true&
-var SvgIconvue_type_template_id_5572e632_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',_vm._g({staticClass:"vc-svg-icon",attrs:{"width":_vm.width,"height":_vm.height,"viewBox":_vm.viewBox}},_vm.$listeners),[_c('path',{attrs:{"d":_vm.path}})])}
-var SvgIconvue_type_template_id_5572e632_scoped_true_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"599b2a0c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SvgIcon.vue?vue&type=template&id=63f7b5ec&scoped=true&
+var SvgIconvue_type_template_id_63f7b5ec_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',_vm._g({staticClass:"vc-svg-icon",attrs:{"width":_vm.width,"height":_vm.height,"viewBox":_vm.viewBox}},_vm.$listeners),[_c('path',{attrs:{"d":_vm.path}})])}
+var SvgIconvue_type_template_id_63f7b5ec_scoped_true_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/SvgIcon.vue?vue&type=template&id=5572e632&scoped=true&
+// CONCATENATED MODULE: ./src/components/SvgIcon.vue?vue&type=template&id=63f7b5ec&scoped=true&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SvgIcon.vue?vue&type=script&lang=js&
 //
@@ -33087,8 +33113,8 @@ const icons = {
 });
 // CONCATENATED MODULE: ./src/components/SvgIcon.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_SvgIconvue_type_script_lang_js_ = (SvgIconvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./src/components/SvgIcon.vue?vue&type=style&index=0&id=5572e632&lang=postcss&scoped=true&
-var SvgIconvue_type_style_index_0_id_5572e632_lang_postcss_scoped_true_ = __webpack_require__("6551");
+// EXTERNAL MODULE: ./src/components/SvgIcon.vue?vue&type=style&index=0&id=63f7b5ec&lang=postcss&scoped=true&
+var SvgIconvue_type_style_index_0_id_63f7b5ec_lang_postcss_scoped_true_ = __webpack_require__("9010");
 
 // CONCATENATED MODULE: ./src/components/SvgIcon.vue
 
@@ -33101,11 +33127,11 @@ var SvgIconvue_type_style_index_0_id_5572e632_lang_postcss_scoped_true_ = __webp
 
 var SvgIcon_component = normalizeComponent(
   components_SvgIconvue_type_script_lang_js_,
-  SvgIconvue_type_template_id_5572e632_scoped_true_render,
-  SvgIconvue_type_template_id_5572e632_scoped_true_staticRenderFns,
+  SvgIconvue_type_template_id_63f7b5ec_scoped_true_render,
+  SvgIconvue_type_template_id_63f7b5ec_scoped_true_staticRenderFns,
   false,
   null,
-  "5572e632",
+  "63f7b5ec",
   null
   
 )
@@ -35389,30 +35415,6 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: field.key,
-                      expression: "field.key"
-                    }
-                  ],
-                  attrs: {
-                    type: "hidden",
-                    name: "addition_fields[" + fieldId + "][key]"
-                  },
-                  domProps: { value: field.key },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(field, "key", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
                       value: field.name,
                       expression: "field.name"
                     }
@@ -35421,7 +35423,7 @@ var render = function() {
                   attrs: {
                     type: "text",
                     placeholder: "Название",
-                    name: "addition_fields[" + fieldId + "][name]"
+                    name: _vm.createName(field.id)
                   },
                   domProps: { value: field.name },
                   on: {
@@ -35636,7 +35638,7 @@ function normalizeComponent (
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global, setImmediate) {/*!
- * Vue.js v2.6.10
+ * Vue.js v2.6.11
  * (c) 2014-2019 Evan You
  * Released under the MIT License.
  */
@@ -37602,7 +37604,7 @@ if (typeof Promise !== 'undefined' && isNative(Promise)) {
   isUsingMicroTask = true;
 } else if (typeof setImmediate !== 'undefined' && isNative(setImmediate)) {
   // Fallback to setImmediate.
-  // Techinically it leverages the (macro) task queue,
+  // Technically it leverages the (macro) task queue,
   // but it is still a better choice than setTimeout.
   timerFunc = function () {
     setImmediate(flushCallbacks);
@@ -37691,7 +37693,7 @@ var initProxy;
     warn(
       "Property \"" + key + "\" must be accessed with \"$data." + key + "\" because " +
       'properties starting with "$" or "_" are not proxied in the Vue instance to ' +
-      'prevent conflicts with Vue internals' +
+      'prevent conflicts with Vue internals. ' +
       'See: https://vuejs.org/v2/api/#data',
       target
     );
@@ -38551,7 +38553,7 @@ function bindDynamicKeys (baseObj, values) {
     if (typeof key === 'string' && key) {
       baseObj[values[i]] = values[i + 1];
     } else if (key !== '' && key !== null) {
-      // null is a speical value for explicitly removing a binding
+      // null is a special value for explicitly removing a binding
       warn(
         ("Invalid value for dynamic directive argument (expected string or null): " + key),
         this
@@ -39046,6 +39048,12 @@ function _createElement (
     ns = (context.$vnode && context.$vnode.ns) || config.getTagNamespace(tag);
     if (config.isReservedTag(tag)) {
       // platform built-in elements
+      if (isDef(data) && isDef(data.nativeOn)) {
+        warn(
+          ("The .native modifier for v-on is only valid on components but it was used on <" + tag + ">."),
+          context
+        );
+      }
       vnode = new VNode(
         config.parsePlatformTagName(tag), data, children,
         undefined, undefined, context
@@ -39171,7 +39179,7 @@ function renderMixin (Vue) {
     // render self
     var vnode;
     try {
-      // There's no need to maintain a stack becaues all render fns are called
+      // There's no need to maintain a stack because all render fns are called
       // separately from one another. Nested component's render fns are called
       // when parent component is patched.
       currentRenderingInstance = vm;
@@ -41070,7 +41078,7 @@ Object.defineProperty(Vue, 'FunctionalRenderContext', {
   value: FunctionalRenderContext
 });
 
-Vue.version = '2.6.10';
+Vue.version = '2.6.11';
 
 /*  */
 
@@ -41743,7 +41751,7 @@ function createPatchFunction (backend) {
     }
   }
 
-  function removeVnodes (parentElm, vnodes, startIdx, endIdx) {
+  function removeVnodes (vnodes, startIdx, endIdx) {
     for (; startIdx <= endIdx; ++startIdx) {
       var ch = vnodes[startIdx];
       if (isDef(ch)) {
@@ -41854,7 +41862,7 @@ function createPatchFunction (backend) {
       refElm = isUndef(newCh[newEndIdx + 1]) ? null : newCh[newEndIdx + 1].elm;
       addVnodes(parentElm, refElm, newCh, newStartIdx, newEndIdx, insertedVnodeQueue);
     } else if (newStartIdx > newEndIdx) {
-      removeVnodes(parentElm, oldCh, oldStartIdx, oldEndIdx);
+      removeVnodes(oldCh, oldStartIdx, oldEndIdx);
     }
   }
 
@@ -41946,7 +41954,7 @@ function createPatchFunction (backend) {
         if (isDef(oldVnode.text)) { nodeOps.setTextContent(elm, ''); }
         addVnodes(elm, null, ch, 0, ch.length - 1, insertedVnodeQueue);
       } else if (isDef(oldCh)) {
-        removeVnodes(elm, oldCh, 0, oldCh.length - 1);
+        removeVnodes(oldCh, 0, oldCh.length - 1);
       } else if (isDef(oldVnode.text)) {
         nodeOps.setTextContent(elm, '');
       }
@@ -42175,7 +42183,7 @@ function createPatchFunction (backend) {
 
         // destroy old node
         if (isDef(parentElm)) {
-          removeVnodes(parentElm, [oldVnode], 0, 0);
+          removeVnodes([oldVnode], 0, 0);
         } else if (isDef(oldVnode.tag)) {
           invokeDestroyHook(oldVnode);
         }
@@ -44881,7 +44889,7 @@ var startTagOpen = new RegExp(("^<" + qnameCapture));
 var startTagClose = /^\s*(\/?)>/;
 var endTag = new RegExp(("^<\\/" + qnameCapture + "[^>]*>"));
 var doctype = /^<!DOCTYPE [^>]+>/i;
-// #7298: escape - to avoid being pased as HTML comment when inlined in page
+// #7298: escape - to avoid being passed as HTML comment when inlined in page
 var comment = /^<!\--/;
 var conditionalComment = /^<!\[/;
 
@@ -45166,7 +45174,7 @@ function parseHTML (html, options) {
 /*  */
 
 var onRE = /^@|^v-on:/;
-var dirRE = /^v-|^@|^:/;
+var dirRE = /^v-|^@|^:|^#/;
 var forAliasRE = /([\s\S]*?)\s+(?:in|of)\s+([\s\S]*)/;
 var forIteratorRE = /,([^,\}\]]*)(?:,([^,\}\]]*))?$/;
 var stripParensRE = /^\(|\)$/g;
@@ -45790,7 +45798,7 @@ function processSlotContent (el) {
           if (el.parent && !maybeComponent(el.parent)) {
             warn$2(
               "<template v-slot> can only appear at the root level inside " +
-              "the receiving the component",
+              "the receiving component",
               el
             );
           }
@@ -46353,7 +46361,7 @@ function isDirectChildOfTemplateFor (node) {
 
 /*  */
 
-var fnExpRE = /^([\w$_]+|\([^)]*?\))\s*=>|^function\s*(?:[\w$]+)?\s*\(/;
+var fnExpRE = /^([\w$_]+|\([^)]*?\))\s*=>|^function(?:\s+[\w$]+)?\s*\(/;
 var fnInvokeRE = /\([^)]*?\);*$/;
 var simplePathRE = /^[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*|\['[^']*?']|\["[^"]*?"]|\[\d+]|\[[A-Za-z_$][\w$]*])*$/;
 
@@ -47122,6 +47130,8 @@ function checkNode (node, warn) {
           var range = node.rawAttrsMap[name];
           if (name === 'v-for') {
             checkFor(node, ("v-for=\"" + value + "\""), warn, range);
+          } else if (name === 'v-slot' || name[0] === '#') {
+            checkFunctionParameterExpression(value, (name + "=\"" + value + "\""), warn, range);
           } else if (onRE.test(name)) {
             checkEvent(value, (name + "=\"" + value + "\""), warn, range);
           } else {
@@ -47141,9 +47151,9 @@ function checkNode (node, warn) {
 }
 
 function checkEvent (exp, text, warn, range) {
-  var stipped = exp.replace(stripStringRE, '');
-  var keywordMatch = stipped.match(unaryOperatorsRE);
-  if (keywordMatch && stipped.charAt(keywordMatch.index - 1) !== '$') {
+  var stripped = exp.replace(stripStringRE, '');
+  var keywordMatch = stripped.match(unaryOperatorsRE);
+  if (keywordMatch && stripped.charAt(keywordMatch.index - 1) !== '$') {
     warn(
       "avoid using JavaScript unary operator as property name: " +
       "\"" + (keywordMatch[0]) + "\" in expression " + (text.trim()),
@@ -47195,6 +47205,19 @@ function checkExpression (exp, text, warn, range) {
         range
       );
     }
+  }
+}
+
+function checkFunctionParameterExpression (exp, text, warn, range) {
+  try {
+    new Function(exp, '');
+  } catch (e) {
+    warn(
+      "invalid function parameter expression: " + (e.message) + " in\n\n" +
+      "    " + exp + "\n\n" +
+      "  Raw expression: " + (text.trim()) + "\n",
+      range
+    );
   }
 }
 

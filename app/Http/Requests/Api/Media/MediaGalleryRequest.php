@@ -24,7 +24,7 @@ class MediaGalleryRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => 'image|required'
+            'image' => 'image|required|dimensions:min_width=1079,min_height=1079'
         ];
     }
 }

@@ -32,7 +32,7 @@
                             </div>
                             <ul class="list-group list-group-flush">
                                 @foreach($user->offers as $offer)
-                                    <li class="list-group-item">
+                                    <li class="list-group-item" @if($offer->status == 1) style="background: green" @else style="background: red" @endif>
                                         {{ $offer->service->name }} |
                                         {{ $offer->discount_price }} {{ $offer->service->price_option }} |
                                         {{ $offer->discount }} %
@@ -92,7 +92,7 @@
                             </div>
                             <ul class="list-group list-group-flush">
                                 @foreach($user->services as $service)
-                                    <li class="list-group-item">
+                                    <li class="list-group-item" @if($service->status == 1) style="background: green" @else style="background: red" @endif>
                                         {{ $service->name }} | {{ $service->price }} {{ $service->price_option }}
                                     </li>
                                 @endforeach

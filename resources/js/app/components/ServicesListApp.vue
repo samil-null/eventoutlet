@@ -11,21 +11,27 @@
                         <span class="services-list__ltitle">
                             Услуга
                         </span>
-                        <span>{{ service.name }}</span>
+                        <span v-if="false">{{ service.name }}</span>
                     </div>
                     <div class="services-list__moder-info">
-                        <span>На модерации</span>
+                        <span v-if="service.status == 0">На модерации</span>
+                        <span v-if="service.status == 1" style="color: #91b15f">Активен</span>
                     </div>
                     <div class="services-list__info">
                         <div class="services-list__info-left">
                             <span class="services-list__ltitle">
-                                    Цена
+                                Цена
                             </span>
                             <div class="services-list__price">
-                                <span>{{ service.price }}</span><span></span> <span> {{ service.price_option.name }} </span></div>
+                                <span>{{ service.price }}</span>
+                                <span></span>
+                                <span> {{ service.price_option.name }} </span>
+                            </div>
                         </div>
                         <div class="services-list__change-btn">
-                            <a href="#" @click.prevent="editing(index)"> {{ service.isEditing?'Закрвть':'Изменить' }}</a>
+                            <a href="#" @click.prevent="editing(index)">
+                                {{ service.isEditing?'Закрыть':'Изменить' }}
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -36,7 +42,7 @@
                     <p>{{ service.description }}</p>
                 </div>
                 <div class="pe-block__form form">
-                    <form action="" @submit.prevent="updateService(index)">
+                    <div>
                         <div class="row">
                             <div class="col-xl-6">
                                 <label class="form__label"><span>Услуга</span>
@@ -54,6 +60,17 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-xl-6" v-for="field in service.fields">
+                                <label class="form__label">
+                                    <span>{{ field.meta_field.name }}</span>
+                                    <input type="text"
+                                           class="form__input"
+                                           v-model="field.value"
+                                           placeholder="Введите значение">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-xl-9">
                                 <label class="form__label"><span>Расскажите о себе</span>
                                     <div class="form__textarea-wrapp">
@@ -67,7 +84,7 @@
                             </div>
                             <div class="col-xl-3">
                                 <div class="save-list">
-                                    <span></span>
+                                    <span>&nbsp;</span>
                                     <select-app
                                         :options="priceOptions"
                                         select-value="id"
@@ -77,13 +94,16 @@
                                         description="Кол-во"
                                         empty-selected="Кол-во"
                                     ></select-app>
-                                    <button class="rectangle-btn rectangle-btn-green" type="submit">
+                                    <button class="rectangle-btn rectangle-btn-green" @click="updateService(index)">
                                         <span>Сохранить</span>
+                                    </button>
+                                    <button class="rectangle-btn rectangle-btn-green" @click="deleteService(index, service.id)">
+                                        <span>Удалить</span>
                                     </button>
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -95,12 +115,13 @@
     import SelectApp from "./SelectApp";
     import { find } from 'lodash';
     export default {
-        props:['services','priceOptions'],
+        props:['services','priceOptions', 'additionalFields'],
         name: "ServicesListApp",
         components: {TextareaApp, SelectApp},
         data() {
             return {
-                servicesMap:[]
+                servicesMap:[],
+                test:''
             }
         },
         methods: {
@@ -115,20 +136,60 @@
             },
             updateService(index) {
                 this.$emit('update-service', this.servicesMap[index]);
+            },
+            deleteService(index, id) {
+                this.servicesMap[index].isEditing = false;
+                setTimeout(() => {
+                    this.servicesMap.splice(index, 1);
+                    this.$emit('delete-service', id);
+                }, 1000)
+
             }
         },
-        created() {
+        mounted() {
             this.servicesMap = this.services.map((item) => {
                 this.$set(item, 'isEditing', false);
+                //let additions = [];
+
+                // for (let index in this.additionalFields) {
+                //     let aField = this.additionalFields[index];
+                    // let res = find(item.fields, {speciality_field_id:aField.id});
+                    // console.log(item.fields);
+                    // if (res) {
+                    //     additions.push({
+                    //         aId: aField.id,
+                    //         fId:res.id,
+                    //         title: aField.name,
+                    //         value: res.value
+                    //     })
+                    // } else {
+                    //     additions.push({
+                    //         aId: aField.id,
+                    //         fId:null,
+                    //         title: aField.name,
+                    //         value: null
+                    //     })
+                    // }
+                //}
+
+                //this.$set(item, 'additions', additions);
                 return item;
             });
-
-            console.log(this.servicesMap);
         }
 
     }
 </script>
 
 <style scoped>
-
+    .list-item {
+        display: inline-block;
+        margin-right: 10px;
+    }
+    .list-leave-active {
+        transition: margin-top .7s;
+    }
+    .list-enter, .list-leave-to {
+        opacity: 0;
+        margin-top: -100%;
+    }
 </style>

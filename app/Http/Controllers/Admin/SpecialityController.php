@@ -59,7 +59,7 @@ class SpecialityController extends Controller
     public function show($id)
     {
         $speciality = Specialty::with('fields')->find($id);
-
+        
         return view('admin.specialties.show', compact('speciality'));
     }
 

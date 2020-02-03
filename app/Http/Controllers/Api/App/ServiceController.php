@@ -88,6 +88,14 @@ class ServiceController extends Controller
     {
         $service = $request->user()->services()->find($id);
         $this->service->update($request, $service);
+        $updateService = $request->user()->services()->with('priceOption')->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'services' => $updateService
+            ]
+        ]);
     }
 
     /**
@@ -96,8 +104,12 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $request->user()->services()->find($id)->delete();
+
+        return response()->json([
+            'success' => true
+        ]);
     }
 }

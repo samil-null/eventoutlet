@@ -1,15 +1,17 @@
-import Glide from '@glidejs/glide'
+import $ from 'jquery'
+import 'slick-carousel';
 
-window.addEventListener('load', function () {
-    let sliders = document.querySelectorAll('.glide');
-
-    for (let i = 0; i < sliders.length; i++) {
-        new Glide(sliders[i], {
-            type: 'carousel',
-            startAt: 0,
-            perView: 4,
-            arrows: true
-        }).mount();
-    }
+$(document).ready(function() {
+    $('.algo-media').each(function (index, item) {
+        $($(item).find('.algo-media__slider')).slick({
+            dots: true,
+            infinite: false,
+            speed: 300,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            prevArrow: $(item).find('.algo-media__prev-slide'),
+            nextArrow: $(item).find('.algo-media__next-slide')
+        });
+    });
 });
 

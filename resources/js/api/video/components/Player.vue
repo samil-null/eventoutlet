@@ -4,7 +4,7 @@
                    :options="playerOptions"
                    :playsinline="true"
                    customEventName="customstatechangedeventname"
-
+                   :controls="true"
                    @play="onPlayerPlay($event)"
                    @pause="onPlayerPause($event)"
                    @ended="onPlayerEnded($event)"
@@ -31,7 +31,8 @@
                     // videojs options
                     muted: true,
                     language: 'ru',
-                    playbackRates: [0.7, 1.0, 1.5, 2.0],
+                    controls:true,
+                   // playbackRates: [0.7, 1.0, 1.5, 2.0],
                     sources: [{
                         type: "video/mp4",
                         src: this.videoSrc
@@ -41,6 +42,7 @@
             }
         },
         mounted() {
+
             console.log('this is current player instance object', this.player)
         },
         computed: {
@@ -72,3 +74,24 @@
         }
     }
 </script>
+
+<style>
+    .vjs-big-play-button {
+        left: 50% !important;
+        top: 50% !important;
+        transform: translate(-50%, -50%);
+    }
+    .video-js .vjs-big-play-button {
+        height: 62px !important;
+        width: 62px !important;
+        border-radius: 50% !important;
+        background-color: #ffffff !important;
+        background-image: url(./play-video.svg);
+        background-repeat: no-repeat;
+        background-size: 26px 23px;
+        background-position: center;
+    }
+    .vjs-icon-placeholder:before {
+        display: none !important;
+    }
+</style>

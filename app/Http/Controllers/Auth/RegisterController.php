@@ -16,9 +16,11 @@ class RegisterController extends Controller
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password'))
         ]);
-        
+
         //attache role
         $user->attachRole('executor');
+
+        $user->info()->save();
 
         return response()->json([
             'success' => true

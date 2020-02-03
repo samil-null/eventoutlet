@@ -30,16 +30,16 @@
                     </div>
                     <div class="row">
                         <div class="col-xl-6" v-for="field in additional">
-                            <label class="form__label" :class="getErrorAdditionField(field.key).length">
+                            <label class="form__label" :class="{invalid:errors.additional_fields[field.id]}">
                                 <span>{{ field.name }}</span>
                                 <input type="text" class="form__input" v-model="field.value" placeholder="Введите значение">
-                                <span class="validation" v-for="error in getErrorAdditionField(field.key)">{{ error }}</span>
+                                <span class="validation" v-for="error in errors.additional_fields[field.id]">{{ error }}</span>
                             </label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xl-9">
-                            <label class="form__label" :class="{invalid:!!errors.price.length}">
+                            <label class="form__label" :class="{invalid:!!errors.description.length}">
                                 <span>Расскажите о себе</span>
                                 <textarea-app
                                     limit="500"
@@ -109,7 +109,7 @@
                     price: this.price,
                     description: this.description,
                     price_option_id: this.priceOptionId,
-                    additional_fields: this.prepareFields(this.additional)
+                    additional_fields: this.additional
                 }
 
 
@@ -124,20 +124,15 @@
                             this.errors.price = errors.price || [];
                             this.errors.description = errors.description || [];
                         }
+
+                        if (response.status === 423) {
+                            let errors = response.data.errors;
+                            console.log(response.data);
+                            this.errors.additional_fields = errors;
+                        }
                     })
 
                 //this.$emit('create-service', payload);
-            },
-            prepareFields(fields) {
-                let result = {};
-
-                if (fields) {
-                    fields.forEach((item) => {
-                        result[item.key] = item;
-                    })
-
-                    return result;
-                }
             },
             getErrorAdditionField(key) {
                 let errors = this.errors.additional_fields['additional_fields.' + key + '.value'];
@@ -148,8 +143,8 @@
         async mounted() {
             this.additional = this.additionalFields.map(item => {
                 return {
+                    id: item.id,
                     name: item.name,
-                    key: item.key,
                     value: null
                 }
             });

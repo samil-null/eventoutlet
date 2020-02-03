@@ -86,7 +86,7 @@ class MediaController extends Controller
 
     public function remove(Request $request)
     {
-        $f= $request->user()->gallery()->where([
+        $request->user()->gallery()->where([
             'type_content' => 'gallery',
             'name' => $request->input('image')
         ])->delete();

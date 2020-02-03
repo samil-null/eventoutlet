@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\Service\ServiceChangeStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Service;
 use Illuminate\Http\Request;
@@ -72,7 +73,18 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $service = Service::find($id);
+        $status = $request->input('status');
+        if ($service->status != $status) {
+            event(new ServiceChangeStatus($service->user, $request->input('status'), $request->input('message')));
+        }
+
+        $service->update([
+            'status' => $status
+        ]);
+
+        return redirect()->route('admin.services.edit', $id);
+
     }
 
     /**

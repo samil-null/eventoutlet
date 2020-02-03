@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Api\Service;
 
+use App\Rules\AdditionsFieldsRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest
@@ -23,20 +24,14 @@ class StoreRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
+
+        return [
             'name' => 'required|min:3|max:128',
             'price' => 'required|integer',
-            'description' => 'max:500',
-            'price_option_id' => 'required'
+            'description' => 'required|max:500',
+            'price_option_id' => 'required',
+            'additional_fields' => [new AdditionsFieldsRule()]
         ];
-
-        $fields = request()->user()->speciality->fields;
-
-        foreach ($fields as $field) {
-            $rules['additional_fields.' . $field->key . '.value'] = 'required|integer';
-        }
-
-        return $rules;
     }
 
     public function messages()

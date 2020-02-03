@@ -86,7 +86,6 @@ class CityController extends Controller
         $city->update($request->only('name', 'status'));
 
         return redirect()->route('admin.cities.show', $id);
-        //
     }
 
     /**

@@ -21,7 +21,7 @@
                         </div>
                         <div class="col-xl-8 offset-xl-1">
                             <div class="profile-edit__wrapper">
-                                <a href="#" class="back-btn back-btn-white">
+                                <a href="#" onclick="window.history.back()" class="back-btn back-btn-white">
                                     <span class="back-arrow-svg"></span>
                                     <span>Назад</span>
                                 </a>
@@ -241,11 +241,13 @@
                                             :services="services"
                                             v-if="renderServiceApp"
                                             :price-options="priceOptions"
+                                            :additional-fields="additionalFields"
                                             @update-service="updateService"
+                                            @delete-service="deleteService"
                                         ></services-list-app>
                                     </div>
                                     <create-service-app
-                                        v-if="renderServiceApp"
+                                        v-if="renderServiceApp && services.length <= 6"
                                         :price-options="priceOptions"
                                         :additional-fields="additionalFields"
                                         @create-service="createService"
@@ -342,14 +344,29 @@
                         }
                     })
             },
+            deleteService(id) {
+                axios.delete('/app/services/' + id)
+                    .then(res => res.data)
+            },
             updateService(data) {
                 axios.put('/app/services/' + data.id, data)
                     .then(res => res.data)
                     .then(data => {
                         if (data.success) {
-                            this.services = data.data;
+                            this.services = [];
+                            this.services = data.data.services.map((item) => {
+                                return item;
+                            });
+                            //this.$set(this, 'services', data.data.services);
                         }
                     })
+                .then(() => this.forceSenderServiceList())
+            },
+            forceSenderServiceList() {
+                this.renderServiceApp = false;
+                this.$nextTick().then(() => {
+                    this.renderServiceApp = true;
+                });
             }
         },
         computed: {

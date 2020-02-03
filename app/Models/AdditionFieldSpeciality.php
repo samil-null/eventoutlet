@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class AdditionFieldSpeciality extends Model
 {
     protected $fillable = [
-        'name', 'type', 'key'
+        'name', 'type'
     ];
 
     protected $table = 'additional_fields_specialties';

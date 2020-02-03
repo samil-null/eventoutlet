@@ -17,23 +17,13 @@ class UserController extends Controller
 {
 
     /**
-     * @var UserFilterService
-     */
-    private $filter;
-
-    public function __construct(UserFilterService $filter)
-    {
-        $this->filter = $filter;
-    }
-
-    /**
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Request $request, UserFilter $filter)
+    public function index(Request $request)
     {
 
-        $users = User::filter($filter)->paginate(20);
+        $users = User::filter($request->all())->paginate(20);
 
         return view('admin.users.index', [
             'users' => $users,

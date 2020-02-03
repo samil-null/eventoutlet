@@ -9,6 +9,20 @@ use Illuminate\Support\Collection;
 
 class DateHelper
 {
+    public static $ruMonth = [
+        1 => 'января',
+        2 => 'февраля',
+        3 => 'марта',
+        4 => 'апреля',
+        5 => 'мая',
+        6 => 'июня',
+        7 => 'тюля',
+        8 => 'августа',
+        9 => 'сентября',
+        10 => 'октября',
+        11 => 'ноября',
+        12 => 'декабря'
+    ];
 
     private const FULL_DATE_FORMAT = 'd.m.y';
 
@@ -59,5 +73,22 @@ class DateHelper
         }
 
         return $date->format(self::FILTER_DATE_FORMAT);
+    }
+
+    public static function toDateFilter($date)
+    {
+        $date = Carbon::parse($date);
+
+        return 'До ' . $date->day . ' ' . self::$ruMonth[$date->month];
+    }
+
+    public static function minFilterDate()
+    {
+        return Carbon::now()->format('d-m-Y');
+    }
+
+    public static function maxFilterDate()
+    {
+        return Carbon::now()->addDays(31)->format('d-m-Y');
     }
 }

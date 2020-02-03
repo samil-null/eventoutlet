@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Models\Offer;
 use App\Models\Service;
 
 class ServiceObserver
@@ -14,8 +15,16 @@ class ServiceObserver
     public function updating(Service $service)
     {
         $service->offers->map(function ($offer) {
-            dd($offer);
+            $offer->calculateDiscountPrice();
+            $offer->save();
         });
+
+        if ($service->status !== Service::ACTIVE_STATUS) {
+            $service->offers->map(function ($offer) {
+                $offer->status = Offer::WAITING_STATUS;
+                $offer->save();
+            });
+        }
     }
     /**
      * Handle the service "created" event.

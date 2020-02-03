@@ -29,7 +29,11 @@ class ResizeService
         'gallery' => [
             'height' => null,
             'width' => 1000
-        ]
+        ],
+        'gallery_preview' => [
+            'height' => 300,
+            'width' => 300
+        ],
     ];
 
     /**
@@ -43,12 +47,17 @@ class ResizeService
     {
         $image = $this->getImage($filename, $store);
 
+        if (!$image) return null;
+
         if ($options['height'] && $options['width'] && $mode == 'fit') {
            $image = $image->fit($options['height'], $options['width'], function ($constraint) {
+               $constraint->aspectRatio();
                $constraint->upsize();
            });
-        } elseif ($mode == 'resize') {
+        }
+        elseif ($mode == 'resize') {
             $image = $image->resize($options['height'], $options['width'], function ($constraint) {
+                $constraint->aspectRatio();
                 $constraint->upsize();
             });
         }
