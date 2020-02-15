@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div class="pe-block__title" v-if="!!servicesMap.lenght"> 
+            <span>Стоимость и наименование ваших услуг</span>
+        </div>
         <div class="pe-block__services-list-wrapper">
             <div class="services-list"
                     v-for="(service, index) in servicesMap"
@@ -9,9 +12,8 @@
                 <div class="services-list__head">
                     <div class="services-list__title">
                         <span class="services-list__ltitle">
-                            Услуга
+                            {{ service.name }}
                         </span>
-                        <span v-if="false">{{ service.name }}</span>
                     </div>
                     <div class="services-list__moder-info">
                         <span v-if="service.status == 0">На модерации</span>
@@ -45,28 +47,35 @@
                     <div>
                         <div class="row">
                             <div class="col-xl-6">
-                                <label class="form__label"><span>Услуга</span>
+                                <label class="form__label" :class="{invalid:!!(service.name_errors.length)}"
+                                ><span>Услуга</span>
                                     <input type="text" v-model="service.name" placeholder="Введите название услуги" class="form__input">
+                                    <span class="validation" v-for="error in service.name_errors">{{ error }}</span>
                                 </label>
+                               
                             </div>
                             <div class="col-xl-6">
-                                <label class="form__label"><span>Стоимость</span>
+                                <label class="form__label" :class="{invalid:!!(service.price_errors.length)}">
+                                    <span>Стоимость</span>
                                     <div class="form__icon-input-wrapper">
                                         <div class="rub-svg input-svg"></div>
                                         <div class="delimiter"></div>
                                         <input type="text" v-model="service.price" placeholder="3 000" class="form__icon-input">
                                     </div>
+                                    <span class="validation" v-for="error in service.price_errors">{{ error }}</span>
                                 </label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-xl-6" v-for="field in service.fields">
-                                <label class="form__label">
+                                <label class="form__label" :class="{invalid:!!(service.additional_errors[field.meta_field.id])}">
                                     <span>{{ field.meta_field.name }}</span>
                                     <input type="text"
                                            class="form__input"
+                                           :data-field-id="field.meta_field.id"
                                            v-model="field.value"
                                            placeholder="Введите значение">
+                                    <span class="validation" v-for="error in service.additional_errors[field.meta_field.id]">{{ error }}</span>
                                 </label>
                             </div>
                         </div>
@@ -94,7 +103,7 @@
                                         description="Кол-во"
                                         empty-selected="Кол-во"
                                     ></select-app>
-                                    <button class="rectangle-btn rectangle-btn-green" @click="updateService(index)">
+                                    <button class="rectangle-btn rectangle-btn-green" @click.prevent.stop="updateService(index)">
                                         <span>Сохранить</span>
                                     </button>
                                     <button class="rectangle-btn rectangle-btn-green" @click="deleteService(index, service.id)">
@@ -114,6 +123,7 @@
     import TextareaApp from "./TextareaApp";
     import SelectApp from "./SelectApp";
     import { find } from 'lodash';
+    import axios from "../modules/axios";
     export default {
         props:['services','priceOptions', 'additionalFields'],
         name: "ServicesListApp",
@@ -121,7 +131,10 @@
         data() {
             return {
                 servicesMap:[],
-                test:''
+                test:'',
+                errors: {
+                    additional_fields:{}
+                }
             }
         },
         methods: {
@@ -131,51 +144,94 @@
             changePriceOption(index) {
                 let id = this.servicesMap[index].price_option_id;
 
-                let active = find(this.priceOptions, {id});
-                this.servicesMap[index].price_option = active;
+                this.servicesMap[index].price_option = find(this.priceOptions, {id});
             },
             updateService(index) {
-                this.$emit('update-service', this.servicesMap[index]);
+                let service = this.servicesMap[index];
+
+                let payload = {
+                    name: service.name,
+                    description:service.description,
+                    price:service.price,
+                    price_option_id: service.price_option_id,
+                    additional_fields: this.prepareSendAdditionalFields(service.fields)
+                };
+                let serviceObj = this.servicesMap[index];
+                axios.put('/app/services/' + service.id, payload)
+                    .then(res => res.data)
+                    .then(data => {
+                        if (data.success) {
+                            this.servicesMap[index].additional_errors = [];
+                            this.servicesMap[index].status = data.data.service.status;
+
+                            serviceObj.price_errors = [];
+                            serviceObj.name_errors = [];
+
+                            this.$emit('update-service', [{
+                                body:'Предложение успешно обновлено',
+                                type:'success'
+                            }]);
+
+                        }
+                    })
+                    .catch(({ response }) => {
+                        if (response.status === 422) {
+                            let serviceObj = this.servicesMap[index];
+                            let errors = response.data.errors;
+
+                            if (errors.additional_fields) {
+                                serviceObj.additional_errors =  errors.additional_fields[0];
+                            }
+
+                            serviceObj.price_errors = errors.price || [];
+                            serviceObj.name_errors = errors.name || [];
+                            console.log(errors)
+                        }
+                    });
+                console.log(this.servicesMap[index]);
             },
             deleteService(index, id) {
                 this.servicesMap[index].isEditing = false;
-                setTimeout(() => {
-                    this.servicesMap.splice(index, 1);
-                    this.$emit('delete-service', id);
-                }, 1000)
+                this.$emit('delete-service', {index, id});
+            },
+            getAdditionFieldErrors(serviceId, fieldId) {
 
+                let serviceError = this.errors.additional_fields['_' + serviceId];
+                console.log(serviceError);
+                if (serviceError) {
+                    let fieldErrors = serviceError[fieldId];
+
+                    return (fieldErrors)?fieldErrors:[];
+                }
+                return [];
+            },
+            prepareSendAdditionalFields(fields) {
+                return fields.map(field => {
+                    return {
+                        id:field.meta_field.id,
+                        value: field.value,
+                        fId:field.id
+                    }
+                })
+            },
+            createServicesMap(services) {
+                return services.map((item) => {
+                    this.$set(item, 'isEditing', false);
+                    this.$set(item, 'additional_errors', {});
+                    this.$set(item, 'name_errors', [])
+                    this.$set(item, 'price_errors', [])
+                    return item;
+                });
+            }
+        },
+        watch: {
+            services(services) {
+                this.servicesMap = this.createServicesMap(services);
             }
         },
         mounted() {
-            this.servicesMap = this.services.map((item) => {
-                this.$set(item, 'isEditing', false);
-                //let additions = [];
-
-                // for (let index in this.additionalFields) {
-                //     let aField = this.additionalFields[index];
-                    // let res = find(item.fields, {speciality_field_id:aField.id});
-                    // console.log(item.fields);
-                    // if (res) {
-                    //     additions.push({
-                    //         aId: aField.id,
-                    //         fId:res.id,
-                    //         title: aField.name,
-                    //         value: res.value
-                    //     })
-                    // } else {
-                    //     additions.push({
-                    //         aId: aField.id,
-                    //         fId:null,
-                    //         title: aField.name,
-                    //         value: null
-                    //     })
-                    // }
-                //}
-
-                //this.$set(item, 'additions', additions);
-                return item;
-            });
-        }
+            this.servicesMap = this.createServicesMap(this.services);
+        },
 
     }
 </script>

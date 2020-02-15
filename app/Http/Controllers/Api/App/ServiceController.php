@@ -3,10 +3,7 @@
 namespace App\Http\Controllers\Api\App;
 
 use App\Http\Requests\Api\Service\StoreRequest;
-use App\Models\User;
 use App\Services\ServiceManagerService;
-use Auth;
-use App\Models\Service;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -46,11 +43,18 @@ class ServiceController extends Controller
     public function store(StoreRequest $request)
     {
 
-        $this->service->create($request);
+        $service = $this->service->create($request);
 
+        $storeService = $request->user()
+                                ->services()
+                                ->where('id',$service->id)
+                                ->with('fields.metaField', 'priceOption')
+                                ->first();
         return response()->json([
             'success'   => true,
-            'data'      => Auth::user()->services
+            'data'      => [
+                'service' => $storeService
+            ]
         ]);
 
     }
@@ -84,16 +88,22 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreRequest $request, $id)
     {
-        $service = $request->user()->services()->find($id);
+        $user = $request->user();
+
+        $service = $user->services()->find($id);
         $this->service->update($request, $service);
-        $updateService = $request->user()->services()->with('priceOption')->get();
+        $updateService = $user
+            ->services()
+            ->find($id)
+            ->with('priceOption')
+            ->first();
 
         return response()->json([
             'success' => true,
             'data' => [
-                'services' => $updateService
+                'service' => $updateService
             ]
         ]);
     }
@@ -106,7 +116,16 @@ class ServiceController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $request->user()->services()->find($id)->delete();
+        $service = $request->user()->services()->find($id);
+        if ($service->offers->count()) {
+            $service->offers()->delete();
+        }
+        
+        if ($service->fields->count()) {
+            $service->fields()->delete();    
+        }
+        
+        $service->delete();
 
         return response()->json([
             'success' => true

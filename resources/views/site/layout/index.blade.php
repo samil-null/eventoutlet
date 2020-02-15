@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         {!! SEO::generate(true) !!}
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <link rel="stylesheet" href="{{ asset('/static/eventoutlet/dist/assets/css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('/static/eventoutlet/dist/css/style.bundle.css') }}">
         <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
     </head>
     <body class="Site">
@@ -17,7 +17,7 @@
                     <div class="col-xl-12">
                         <div class="navbar-general__row">
                             <a href="{{ route('site.home') }}" class="navbar-logo">
-                                <img src="/static/eventoutlet/dist/assets/img/general/logo.png" alt="">
+                                <img src="/static/eventoutlet/dist/img/general/logo.png" alt="">
                                 <span class="eventoutlet">
 								EventOutlet
 							</span>
@@ -67,7 +67,52 @@
         <!-- main wrapper -->
         <div class="wrapper">
             @yield('content')
+
         </div>
+        <footer class="footer">
+
+            <div class="container">
+              <div class="row">
+                <div class="col-xl-12">
+                  <div class="footer__logo">
+                    <img src="./img/general/logo.png" alt="">
+                    <span class="eventoutlet">EventOutlet</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-md-6 col-xl-7">
+                  <div class="footer__discription">
+                    <p>
+                      Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, 
+                      leo eget bibendum sodales, augue velit cursus nunc.Donec sodales sagittis magna. Sed 
+                      consequat, leo eget bibendum sodales, augue velit cursus nunc Sed fringilla mauris sit
+                      amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xl-5">
+                  <div class="footer-nav">
+                    <div class="footer-nav__item">
+                      <ul>
+                        <li><a href="#">Главная</a></li>
+                        <li><a href="#">Каталог специалистов</a></li>
+                        <li><a href="#">Стать исполнителем</a></li>
+                      </ul>
+                    </div>
+                    <div class="footer-nav__item">
+                      <ul>
+                        <li><a href="#">Вход</a></li>
+                        <li><a href="#">Регистрация</a></li>
+                        <li><a href="#">Как пользоваться?</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </footer>
     </div>
     </body>
     <script src="{{ asset('static/eventoutlet/dist/assets/js/app.js') }}"></script>

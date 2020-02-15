@@ -19,12 +19,12 @@ class ServiceObserver
             $offer->save();
         });
 
-        if ($service->status !== Service::ACTIVE_STATUS) {
-            $service->offers->map(function ($offer) {
-                $offer->status = Offer::WAITING_STATUS;
-                $offer->save();
-            });
-        }
+//        if ($service->status !== Service::ACTIVE_STATUS) {
+//            $service->offers->map(function ($offer) {
+//                $offer->status = Offer::WAITING_STATUS;
+//                $offer->save();
+//            });
+//        }
     }
     /**
      * Handle the service "created" event.

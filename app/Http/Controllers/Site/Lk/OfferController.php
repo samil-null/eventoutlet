@@ -36,7 +36,7 @@ class OfferController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -58,9 +58,11 @@ class OfferController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+        $offer = $request->user()->offers()->findOrFail($id);
+
+        return view('site.lk.offers.edit', compact('offer'));
     }
 
     /**

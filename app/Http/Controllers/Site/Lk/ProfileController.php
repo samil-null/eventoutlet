@@ -49,6 +49,7 @@ class ProfileController extends Controller
     {
         $user = User::find($id);
         abort_if(!$user, 404);
+
         return view('site.lk.profiles.show');
     }
 

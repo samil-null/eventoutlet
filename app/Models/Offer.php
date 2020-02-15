@@ -17,6 +17,8 @@ class Offer extends Model
 
     public const REJECTED_STATUS = 2;
 
+    public const NO_ACTIVE = 3;
+
     public  $statuses = [
         self::WAITING_STATUS => [
             'name' => 'Ожидает',
@@ -29,6 +31,10 @@ class Offer extends Model
         self::REJECTED_STATUS => [
             'name' => 'Отклонен',
             'public_name' => 'Ваше предложение откланено'
+        ],
+        self::NO_ACTIVE => [
+            'name' => 'Не активен',
+            'public_name' => 'Не активен'
         ]
     ];
 

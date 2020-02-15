@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Api\App;
 
+use App\Factories\Offer\OfferFactory;
+use App\Helpers\DateHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Offer;
+use App\Models\PriceOption;
 use App\Models\User;
 use App\Services\OfferService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Facades\Imager;
 
 class OfferController extends Controller
 {
@@ -16,9 +20,19 @@ class OfferController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        #code
+        $user = $request->user();
+        $data = $user->offers()->with('service.priceOption','dates')->get();
+
+        $offers = (new OfferFactory($data))->create();
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'offers' => $offers
+            ]
+        ]);
     }
 
     /**
@@ -26,13 +40,21 @@ class OfferController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(User $user)
+    public function create(Request $request)
     {
-
+        $user = $request->user();
+        $user = $user->with('speciality')->first();
+        $minDate = DateHelper::minFilterDate();
+        $maxDate = DateHelper::maxFilterDate();
+ 
         return response()->json([
             'success' => true,
             'data' => [
-                'services' => Auth::user()->services
+                'user' => $user,
+                'avatar' => Imager::avatar($user->avatar),
+                'services' => Auth::user()->services,
+                'min_date' => $minDate,
+                'max_date' => $maxDate
             ]
         ]);
     }
@@ -44,9 +66,11 @@ class OfferController extends Controller
      */
     public function store(Request $request, OfferService $offerService)
     {
-
+        $offer = $offerService->create($request->user(), $request);
         return response()->json([
-            'data' => $offerService->create(Auth::user(), $request)
+            'data' => [
+                'url' => route('site.lk.offers.edit', $offer->id)
+            ]
         ]);
     }
 
@@ -56,9 +80,17 @@ class OfferController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request,  $id)
     {
-        //
+        $user = $request->user();
+        $offer = $user->offers()->with('dates')->findOrFail($id);
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'offer' => $offer,
+            ]
+        ]);
     }
 
     /**
@@ -69,7 +101,7 @@ class OfferController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
@@ -90,8 +122,13 @@ class OfferController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
-        //
+        $user = $request->user();
+        $offer = $user->offers()->find($id);
+
+        if ($offer) {
+            $offer->delete();
+        }
     }
 }

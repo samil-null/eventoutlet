@@ -25,12 +25,19 @@ class StoreRequest extends FormRequest
     public function rules()
     {
 
+        $fields = request()->user()->speciality->fields;
+
+        $fieldsValidation = [new AdditionsFieldsRule($fields)];
+
+        if ($fields->count()) {
+            $fieldsValidation[] = 'required';
+        }
         return [
             'name' => 'required|min:3|max:128',
             'price' => 'required|integer',
             'description' => 'required|max:500',
             'price_option_id' => 'required',
-            'additional_fields' => [new AdditionsFieldsRule()]
+            'additional_fields' =>  $fieldsValidation
         ];
     }
 

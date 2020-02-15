@@ -27,11 +27,17 @@ class OfferController extends Controller
 
     public function index(Request $request, OfferFilterInterface $filter, AlgoFactoryInterface $factory)
     {
+        $perPage = 20;
+
+        if ($request->has('per_page') && is_numeric($request->input('per_page'))) {
+            $perPage = $request->input('per_page');
+        }
+
         $result = $filter->apply();
         $aggregate = $result->aggregate();
         $additionFields = $result->additionsFields();
-        $users = $factory->load($result->get()->paginate(20), $request->has('specials_offers'))->create();
-
+        $data = $result->get()->paginate($perPage);
+        $users = $factory->load($data, $request->has('specials_offers'))->create();
         $filters = [
             'availableFilters' => $result->getAvailableFilters(),
             'cities' => [
@@ -52,12 +58,16 @@ class OfferController extends Controller
             'discount' => [
                 'from' => $result->getFilterParam('discount_from'),
                 'to' => $result->getFilterParam('discount_to'),
-            ]
+            ],
+            'additional_fields' => $additionFields,
+            'additional_fields_params' => $result->getFilterParam('additional_fields')
         ];
 
         return view('site.offers.index', [
             'users' => $users,
-            'filters' => $filters
+            'filters' => $filters,
+            'pagination' => $data->appends($request->input()),
+            'aggregate' => $aggregate
         ]);
     }
 }

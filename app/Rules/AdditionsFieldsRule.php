@@ -15,9 +15,9 @@ class AdditionsFieldsRule implements Rule
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($fields)
     {
-        $this->fields = request()->user()->speciality->fields;
+        $this->fields = $fields;
     }
 
     /**
@@ -72,8 +72,6 @@ class AdditionsFieldsRule implements Rule
 
     protected  function addError($fieldId, $message)
     {
-        $this->errors[$fieldId] = [
-            'message' => $message
-        ];
+        $this->errors[$fieldId][] = $message;
     }
 }

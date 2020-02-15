@@ -46,11 +46,26 @@
                 if (image) {
                     let form = new FormData();
                     form.append('image', image);
-                    let response = await axios.post('/app/media/gallery', form);
+                    try {
+                        let response = await axios.post('/app/media/gallery', form);
 
-                    if (response.data.success) {
-                        this.galleryImage.push(response.data.data);
+                        if (response.data.success) {
+                            this.galleryImage.push(response.data.data);
+                        }
+
+                    } catch ({response}) {
+                        if (response.status === 422) {
+                            console.log(response.data);
+                            let errors = response.data.errors.image.map(error => {
+                                return {
+                                    type:'error',
+                                    body:error
+                                }
+                            });
+                            this.$emit('error', errors)
+                        }
                     }
+
                 }
 
             },
@@ -62,7 +77,7 @@
                 axios.delete('/app/media/gallery',{params: {image:image}})
                 .then((data) => {
                     this.galleryImage.splice(index,1);
-                });
+                })
             }
         },
         mounted() {

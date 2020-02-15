@@ -29,5 +29,7 @@ class OfferService
         );
 
         $offer->dates()->saveMany($dates);
+
+        return $offer;
     }
 }

@@ -54,7 +54,7 @@
                         </table>
                     </div>
                     <div class="card-footer py-4">
-{{--                        {{ $users->links('admin.components.pagination') }}--}}
+                        {{ $users->links('admin.components.pagination') }}
                     </div>
                 </div>
             </div>

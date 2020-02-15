@@ -20,7 +20,7 @@ class RegisterController extends Controller
         //attache role
         $user->attachRole('executor');
 
-        $user->info()->save();
+        $user->info()->create();
 
         return response()->json([
             'success' => true

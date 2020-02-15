@@ -5,7 +5,9 @@
 
             </div>
             <div class="catalog-card__head-info">
-                <a href="{{ route('site.users.show', $user->id) }}">{{ $user->name }}</a>
+                <span>  
+                    <a href="{{ route('site.users.show', $user->id) }}">{{ $user->name }}</a>
+                </span>
                 <span>{{ $user->speciality }}</span>
             </div>
             <div class="catalog-card__head-info">

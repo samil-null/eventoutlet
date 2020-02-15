@@ -118,7 +118,7 @@
                                                             <div class="form__icon-input-wrapper">
                                                                 <div class="phone-svg input-svg"></div>
                                                                 <div class="delimiter"></div>
-                                                                <input type="text" v-model="form.phone" class="form__icon-input" placeholder="+7 (965) 632-34-12">
+                                                                <input type="text" v-model="form.phone" v-mask="['+7 (###) ###-##-##']" class="form__icon-input" placeholder="+7 (965) 632-34-12">
                                                             </div>
                                                         </label>
                                                     </div>
@@ -169,10 +169,11 @@
                                                     <div class="col-xl-6">
                                                         <label class="form__label">
                                                             <span>WhatsApp</span>
+
                                                             <div class="form__icon-input-wrapper">
                                                                 <div class="wa-svg input-svg"></div>
                                                                 <div class="delimiter"></div>
-                                                                <input type="text" class="form__icon-input" v-model="form.whatsapp" placeholder="+7 (965) 632-34-12">
+                                                                <input type="text" class="form__icon-input" v-model="form.whatsapp" v-mask="['+7 (###) ###-##-##']" placeholder="+7 (965) 632-34-12">
                                                             </div>
                                                         </label>
                                                     </div>
@@ -211,6 +212,7 @@
                                                                     v-if="gallery"
                                                                     :images="gallery"
                                                                     id="profile-gallery"
+                                                                    @error="triggerAlert"
                                                                 ></gallery>
                                                             </div>
                                                         </div>
@@ -234,16 +236,14 @@
                                     </div>
                                     <!-- Line -->
                                     <div class="pe-block pe-list">
-                                        <div class="pe-block__title">
-                                            <span>Стоимость и наименование ваших услуг</span>
-                                        </div>
                                         <services-list-app
                                             :services="services"
                                             v-if="renderServiceApp"
                                             :price-options="priceOptions"
                                             :additional-fields="additionalFields"
-                                            @update-service="updateService"
+                                            @update-service="triggerAlert"
                                             @delete-service="deleteService"
+                                            @create-service="createService"
                                         ></services-list-app>
                                     </div>
                                     <create-service-app
@@ -264,6 +264,7 @@
                 </div>
             </div>
         </section>
+        <alert :messages="alertMessages" v-if="isActiveAlert"></alert>
     </div>
 </template>
 
@@ -277,12 +278,16 @@
     import TextareaApp from "../components/TextareaApp";
     import SelectApp from "../components/SelectApp";
     import AvatarLoader from "../components/AvatarLoader";
+    import Alert from "../components/Alert";
+    import {mask} from 'vue-the-mask'
 
     export default {
         name: 'Profile',
         props:['userId'],
         data() {
             return {
+                isActiveAlert:false,
+                alertMessages:[],
                 renderServiceApp:false,
                 specialities:[],
                 priceOptions:[],
@@ -321,12 +326,24 @@
                 axios.put(`/app/profiles/${this.userId}`, this.form)
                     .then(({data}) => {
                         if (data.success) {
-                            //location.reload()
+                            this.errors.name = [];
+                            this.errors.speciality_id = [];
+                            this.errors.city_id = [];
+                            this.errors.gender = [];
+                            this.triggerAlert([{
+                                    type:'success',
+                                    body:'Аккаунт успешно обновлен и отправлен на модерацию'
+                                }]);
+
+                            
                         }
                     }).catch(({ response }) => {
-                        if (response.status == 422) {
+                        if (response.status === 422) {
                             let errors = response.data.errors;
-
+                            this.triggerAlert([{
+                                type:'error',
+                                body:'В форме содержится ошибка!'
+                            }]);
                             this.errors.name = errors.name || [];
                             this.errors.speciality_id = errors.speciality_id || [];
                             this.errors.city_id = errors.city_id || [];
@@ -334,40 +351,27 @@
                         }
                     })
             },
+            triggerAlert(messages) {
+                this.isActiveAlert = true;
+                this.alertMessages = messages;
+                setTimeout(() => this.isActiveAlert = false, 7000);
 
-            createService(data) {
-                axios.post('/app/services', data)
-                    .then(res => res.data)
-                    .then(data => {
-                        if (data.success) {
-                            this.$set(this, 'services', data.data);
-                        }
-                    })
             },
-            deleteService(id) {
+            createService(service) {
+                this.triggerAlert([{
+                    type:'success',
+                    body:'Услуга успешно добавлена'
+                }]);
+                 this.services.push(service);
+            },
+            deleteService({id, index}) {
+                this.services.splice(index, 1);
                 axios.delete('/app/services/' + id)
                     .then(res => res.data)
-            },
-            updateService(data) {
-                axios.put('/app/services/' + data.id, data)
-                    .then(res => res.data)
-                    .then(data => {
-                        if (data.success) {
-                            this.services = [];
-                            this.services = data.data.services.map((item) => {
-                                return item;
-                            });
-                            //this.$set(this, 'services', data.data.services);
-                        }
+                    .then(({data}) => {
+                        
                     })
-                .then(() => this.forceSenderServiceList())
             },
-            forceSenderServiceList() {
-                this.renderServiceApp = false;
-                this.$nextTick().then(() => {
-                    this.renderServiceApp = true;
-                });
-            }
         },
         computed: {
 
@@ -409,6 +413,7 @@
                     this.renderServiceApp = true;
                 })
         },
+        directives: {mask},
         components: {
             AvatarLoader,
             SelectApp,
@@ -418,6 +423,7 @@
             CreateServiceApp,
             ServicesListApp,
             Gallery,
+            Alert
         }
     }
 </script>

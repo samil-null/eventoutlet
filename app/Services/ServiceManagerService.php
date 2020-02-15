@@ -48,6 +48,8 @@ class ServiceManagerService
         if (count($additionFields)) {
             $service->fields()->saveMany($additionFields);
         }
+
+        return $service;
     }
 
     public function createAdditionFields(Collection $requestFields, $specialityFields)
@@ -84,10 +86,11 @@ class ServiceManagerService
 
     public function updateAdditionFields(Collection $requestFields, $specialityFields, $service)
     {
+        //dd($specialityFields);
         foreach ($specialityFields as $field) {
 
-            if ($requestFields->contains('aId', $field->id)) {
-                $requestAdditionField = $requestFields->where('aId', $field->id)->first();
+            if ($requestFields->contains('id', $field->id)) {
+                $requestAdditionField = $requestFields->where('id', $field->id)->first();
                 Validator::make($requestAdditionField, $this->requestFieldsRules,$this->requestFieldsValidationErrorsMessages)
                     ->validate();
 
@@ -114,7 +117,7 @@ class ServiceManagerService
     {
         $user = $request->user();
         $fields = $user->speciality->fields;
-        $this->updateAdditionFields(collect($request->input('additions')), $fields, $service);
+        $this->updateAdditionFields(collect($request->input('additional_fields')), $fields, $service);
         $service->update([
             'name' => $request->input('name'),
             'description' => $request->input('description'),

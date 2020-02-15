@@ -34,4 +34,9 @@ class OfferFilter extends BaseOfferFilter implements OfferFilterInterface
                 ->where('offers.status', Offer::ACTIVE_STATUS);
         });
     }
+
+    public function additionsFields()
+    {
+        return [];
+    }
 }

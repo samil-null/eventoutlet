@@ -16,7 +16,15 @@ abstract class BaseOfferFilter
 
     protected $availableFilters = [];
 
-    protected $params = [];
+    protected $saveFilterState;
+
+    protected $orderFilters = [
+        'city_id',
+        'speciality_id',
+        'specials_offers',
+    ];
+
+    public $params = [];
 
     protected $select = [
         'users.name','users.id', 'users.avatar', 'services.user_id',
@@ -36,17 +44,48 @@ abstract class BaseOfferFilter
 
     public function filters()
     {
-        return $this->request->all();
+        $noOrderingIndex = count($this->orderFilters);
+
+        $orderingFilter = [];
+
+        foreach ($this->request->all() as $name => $value) {
+
+            $index = array_search($name, $this->orderFilters);
+            if ($index !== false) {
+                $orderingFilter[$index] = [
+                    'name' => $name,
+                    'value' => $value
+                ];
+            } else {
+                $orderingFilter[$noOrderingIndex] = [
+                    'name' => $name,
+                    'value' => $value
+                ];
+
+                $noOrderingIndex++;
+            }
+
+        }
+        ksort($orderingFilter);
+        return $orderingFilter;
     }
 
     public function apply()
     {
         $this->setup();
 
-        foreach ($this->filters() as $filter => $value) {
-            if (method_exists($this, $filter)) {
-                $this->params[$filter] = $value;
-                $this->$filter($value);
+        foreach ($this->filters() as $filter) {
+            $filterName = $filter['name'];
+            $filterValue = $filter['value'];
+
+            if (method_exists($this, $filterName)) {
+
+                $this->params[$filterName] = $filterValue;
+                $this->$filterName($filterValue);
+
+                if (in_array($filterName, $this->orderFilters)) {
+                    $this->saveFilterState = clone $this->builder;
+                }
             }
         }
 
@@ -76,23 +115,13 @@ abstract class BaseOfferFilter
 
     public function aggregate()
     {
-        $this->builder->select('offers.id');
+        $builder = $this->saveFilterState??$this->builder;
+        $builder->select('offers.id');
 
-        $aggregate = DB::table('offers')->whereRaw("id in ({$this->builder->toSql()})")
+        $aggregate = DB::table('offers')->whereRaw("id in ({$builder->toSql()})")
             ->select(DB::raw('max(discount) as max_discount, min(discount) as min_discount,
                         max(discount_price) as max_price, min(discount_price) as min_price'));
-        $aggregate->mergeBindings( $this->builder );
-
-        return $aggregate->first();
-    }
-
-    public function additionsFields()
-    {
-        $this->builder->select('services.id');
-
-        $aggregate = DB::table('additional_fields_services')->whereRaw("service_id in ({$this->builder->toSql()})")
-            ->select(DB::raw('*'));
-        $aggregate->mergeBindings( $this->builder );
+        $aggregate->mergeBindings( $builder );
 
         return $aggregate->first();
     }
@@ -101,4 +130,11 @@ abstract class BaseOfferFilter
     {
         return $this->availableFilters;
     }
+
+    public static function getQueries($builder)
+    {
+        $addSlashes = str_replace('?', "'?'", $builder->toSql());
+        return vsprintf(str_replace('?', '%s', $addSlashes), $builder->getBindings());
+    }
+
 }

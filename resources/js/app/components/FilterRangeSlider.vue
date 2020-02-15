@@ -1,11 +1,11 @@
 <template>
     <div class="catalog-select" :class="{show}" @click="show = true" ref="select">
         <div class="catalog-select__intro">
-            <div class="catalog-select__title">
-                <span>Размер скидки</span>
+            <div class="catalog-select__title" @click="show = !show">
+                <span>{{ title }}</span>
                 <div class="arrow-svg"></div>
             </div>
-            <div class="catalog-select__result">
+            <div class="catalog-select__result" v-if="displayResult">
                 <span>{{ start }}-{{ end }}%</span>
             </div>
         </div>
@@ -21,8 +21,8 @@
                         {{ start }}-{{ end }}%
                     </span>
                     </div>
-                    <input type="hidden" name="discount[from]" :value="start">
-                    <input type="hidden" name="discount[to]" :value="end">
+                    <input type="hidden" :name="`${inputName}[from]`" :value="start">
+                    <input type="hidden" :name="`${inputName}[to]`" :value="end">
                     <input type="text"  ref="filterRange"/>
                 </div>
             </div>
@@ -40,12 +40,12 @@
 
     export default {
         name: "FilterRangeSlider",
-        props:['fromRange', 'toRange', 'form'],
+        props:['fromRange', 'toRange', 'form', 'inputName', 'title', 'displayResult', 'valueFrom', 'valueTo'],
         data() {
             return {
                 show:false,
                 start:0,
-                end:100
+                end:100,
             }
         },
         methods:{
@@ -60,8 +60,10 @@
                 }
             },
             createValues(start, end) {
+                start = parseInt(start);
+                end = parseInt(end);
                 let range = [];
-                for(let i = start; i < end; i++) {
+                for(let i = start; i <= end; i++) {
                     range.push(i);
                 }
 
@@ -70,21 +72,31 @@
 
         },
         mounted() {
-            let data = this;
+            let range = this.createValues(this.fromRange, this.toRange);
+            this.start = parseInt(this.fromRange);
+            this.end = parseInt(this.toRange);
+            console.log([parseInt(this.fromRange), parseInt(this.toRange)],);
             let slider = new rSlider({
                 target: this.$refs.filterRange,
-                values: Array.from(Array(100).keys()),
+                values: range,
                 range: true,
                 tooltip: false,
                 scale: true,
                 labels: true,
-                set: [parseInt(this.fromRange), parseInt(this.toRange)],
-                onChange: function (value) {
-                    let values = slider.values;
-                    data.start = values.start;
-                    data.end = values.end;
+                set: [parseInt(this.valueFrom), parseInt(this.valueTo)],
+                onChange: (value) => {
+                    let values = value.split(',');
+                    ///console.log(values);
+                    this.start = parseInt(values[0]);
+                    this.end = parseInt(values[1]);
                 }
             });
+
+            if (this.displayResult === undefined) {
+                this.displayResult = true;
+            }
+
+
 
             document.addEventListener('click', this.documentClick)
         },

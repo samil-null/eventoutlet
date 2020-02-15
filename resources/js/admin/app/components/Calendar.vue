@@ -1,6 +1,8 @@
 <template>
     <div>
-        <v-ccalendar :attributes="attrs" class="w-100 border-0" ></v-ccalendar>
+        <v-ccalendar
+            :attributes="attrs"
+            class="w-100 border-0" ></v-ccalendar>
     </div>
 </template>
 

@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Offer;
 use App\Models\OfferDate;
 use App\Models\Service;
+use Illuminate\Support\Facades\Blade;
 use App\Observers\OfferDateObserver;
 use App\Observers\OfferObserver;
 use App\Observers\ServiceObserver;
@@ -29,6 +30,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Blade::directive('money', function ($money) {
+            return "<?php echo number_format($money, 0, '', ' ') ?>";
+        });
 
     }
 }

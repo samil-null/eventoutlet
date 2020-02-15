@@ -31,7 +31,8 @@ Route::group(['namespace' => 'Site'], function () {
         ]);
         Route::resource('/offers', 'OfferController')->names([
             'create' => 'site.lk.offers.create',
-            'store' => 'site.lk.offers.store'
+            'store' => 'site.lk.offers.store',
+            'edit' => 'site.lk.offers.edit'
         ]);
 
 

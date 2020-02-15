@@ -115,7 +115,15 @@
 
                 axios.post('/app/services', payload)
                     .then(({data}) => {
-
+                        if (data.success) {
+                            this.name = '';
+                            this.price = '';
+                            this.description = '';
+                            this.additional.forEach(item => {
+                                item.value = '';
+                            });
+                            this.$emit('create-service', data.data.service);      
+                        }      
                     })
                     .catch(({response}) => {
                         if (response.status === 422) {
@@ -123,21 +131,18 @@
                             this.errors.name = errors.name || [];
                             this.errors.price = errors.price || [];
                             this.errors.description = errors.description || [];
+                            this.errors.additional_fields = this.setAdditionalFieldsErrors(errors.additional_fields);
                         }
 
-                        if (response.status === 423) {
-                            let errors = response.data.errors;
-                            console.log(response.data);
-                            this.errors.additional_fields = errors;
-                        }
                     })
-
-                //this.$emit('create-service', payload);
             },
-            getErrorAdditionField(key) {
-                let errors = this.errors.additional_fields['additional_fields.' + key + '.value'];
 
-                return errors || [];
+            setAdditionalFieldsErrors(errors) {
+                if (errors) {
+                    return errors[0];
+                }
+
+                return [];
             }
         },
         async mounted() {
