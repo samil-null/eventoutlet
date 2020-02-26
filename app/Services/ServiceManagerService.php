@@ -32,9 +32,9 @@ class ServiceManagerService
         $user = $request->user();
         $fields = $user->speciality->fields;
 
-//        if ($user->services()->count() >= self::MAX_SERVICES) {
-//            throw new \Exception('max limit services', 422);
-//        }
+        if ($user->services()->count() >= self::MAX_SERVICES) {
+            throw new \Exception('max limit services', 422);
+        }
 
         $additionFields = [];
 
@@ -86,7 +86,6 @@ class ServiceManagerService
 
     public function updateAdditionFields(Collection $requestFields, $specialityFields, $service)
     {
-        //dd($specialityFields);
         foreach ($specialityFields as $field) {
 
             if ($requestFields->contains('id', $field->id)) {
@@ -125,5 +124,10 @@ class ServiceManagerService
             'status' => Service::WAIT_STATUS,
             'price_option_id' => $request->input('price_option_id'),
         ]);
+
+        $service->offers->map(function ($offer) {
+            $offer->calculateDiscountPrice();
+            $offer->save();
+        });
     }
 }

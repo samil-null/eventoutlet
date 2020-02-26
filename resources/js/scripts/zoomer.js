@@ -6,7 +6,6 @@ window.addEventListener('load', function () {
     document.querySelectorAll('.zoomer').forEach(item => {
         item.addEventListener('click', e => {
             e.preventDefault();
-            console.log(e.target.dataset.image)
             BigPicture({
                 el: this,
                 gallery: document.querySelectorAll('#profile-gallery .zoomer')

@@ -20,7 +20,7 @@
                 </div>
             </div>
             <input type="file" ref="image" style="display: none;" @change="loadImage" accept="video/mp4,video/x-m4v,video/*">
-            <span class="pe-portfolio__counter">Еще 7 видео</span>
+            <span class="pe-portfolio__counter" v-if="balance > 0" >Еще {{ balance }} видео</span>
         </div>
     </div>
 </template>
@@ -30,10 +30,15 @@
 
     export default {
         name: "VideoLoader",
-        props:['videos'],
+        props:['videos', 'limit'],
         data() {
             return {
                 videosList:[]
+            }
+        },
+        computed: {
+            balance() {
+                return this.limit - this.videosList.length;
             }
         },
         methods: {

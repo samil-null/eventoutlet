@@ -14,6 +14,7 @@ class OfferService
 {
     public function create(User $user, Request $request)
     {
+        
         $dates = array_map(function ($date) {
             return new OfferDate(['date' => $date]);
         }, $request->input('dates'));
@@ -31,5 +32,35 @@ class OfferService
         $offer->dates()->saveMany($dates);
 
         return $offer;
+    }
+
+    public function update($offer, $request)
+    {
+        $dates = array_map(function ($date) {
+            return new OfferDate(['date' => $date]);
+        }, $request->input('dates'));
+
+        $offer->dates()->delete();
+        $offer->dates()->saveMany($dates);
+
+        $offer->update([
+            'service_id' => $request->input('service_id'),
+            'description' => $request->input('description'),
+            'discount' => $request->input('discount'),
+            'status' => Offer::WAITING_STATUS
+        ]);
+    }
+
+    public function published($offers, $user)
+    {
+        $user->offers()->update([
+            'offers.status' => Offer::NO_ACTIVE
+        ]);
+
+        $user->offers()->whereIn('offers.id', $offers)->update([
+            'offers.status' => Offer::ACTIVE_STATUS
+        ]);
+
+
     }
 }

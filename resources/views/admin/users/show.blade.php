@@ -221,7 +221,23 @@
                                     </div>
                                 </div>
                             </div>
+                            <hr class="my-4">
+                            <h6 class="heading-small text-muted mb-4">Видео</h6>
 
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="admin-gallery">
+                                            @foreach($user->videos as $video)
+                                                <a href="/videos/{{ $video->name }}" class="card admin-gallery__item video-gallery">
+
+                                                </a>
+                                            @endforeach
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
                             <hr class="my-4">
                             <!-- Description -->
                             <h6 class="heading-small text-muted mb-4">Обо мне</h6>

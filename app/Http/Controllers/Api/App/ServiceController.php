@@ -7,12 +7,13 @@ use App\Services\ServiceManagerService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ServiceController extends Controller
+class ServiceController extends ApiAppController
 {
     private $service;
 
     public function __construct(ServiceManagerService $service)
     {
+        parent::__construct();
         $this->service = $service;
     }
 
@@ -82,23 +83,20 @@ class ServiceController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param StoreRequest $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(StoreRequest $request, $id)
     {
-        $user = $request->user();
+        $user = $this->user->first();
 
         $service = $user->services()->find($id);
         $this->service->update($request, $service);
-        $updateService = $user
-            ->services()
-            ->find($id)
-            ->with('priceOption')
-            ->first();
+        $updateService = $user->services()
+                        ->find($id)
+                        ->with('priceOption')
+                        ->first();
 
         return response()->json([
             'success' => true,
@@ -109,22 +107,22 @@ class ServiceController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Request $request, $id)
     {
         $service = $request->user()->services()->find($id);
+
         if ($service->offers->count()) {
             $service->offers()->delete();
         }
-        
+
         if ($service->fields->count()) {
-            $service->fields()->delete();    
+            $service->fields()->delete();
         }
-        
+
         $service->delete();
 
         return response()->json([

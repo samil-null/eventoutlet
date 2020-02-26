@@ -9,9 +9,7 @@ use Illuminate\Http\Request;
 class SpecialityController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {

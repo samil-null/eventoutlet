@@ -24,7 +24,7 @@
                             </a>
                             <div class="navbar-general__collapse">
                                 <ul class="navbar-general__main">
-                                    <li><a href="#">Каталог специалистов</a></li>
+                                    <li><a href="{{ route('site.offers.index') }}">Каталог специалистов</a></li>
                                     <li><a href="#">Стать исполнителем</a></li>
                                 </ul>
                                 <div class="navbar-general__profile">
@@ -75,18 +75,18 @@
               <div class="row">
                 <div class="col-xl-12">
                   <div class="footer__logo">
-                    <img src="./img/general/logo.png" alt="">
+                    <img src="/static/eventoutlet/dist/img/general/logo.png" alt="">
                     <span class="eventoutlet">EventOutlet</span>
                   </div>
                 </div>
               </div>
-              
+
               <div class="row">
                 <div class="col-md-6 col-xl-7">
                   <div class="footer__discription">
                     <p>
-                      Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, 
-                      leo eget bibendum sodales, augue velit cursus nunc.Donec sodales sagittis magna. Sed 
+                      Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat,
+                      leo eget bibendum sodales, augue velit cursus nunc.Donec sodales sagittis magna. Sed
                       consequat, leo eget bibendum sodales, augue velit cursus nunc Sed fringilla mauris sit
                       amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue
                     </p>

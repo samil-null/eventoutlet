@@ -7,12 +7,12 @@
         <div class="catalog-nav__first">
             <div class="container">
                 <div class="row no-gutters">
-                    <div class="col-12 col-xl-2">
+                    <div class="col-12 d-md-none d-lg-block col-lg-1 col-xl-2">
                         <div class="catalog-nav__title">
                             <span>Каталог</span>
                         </div>
                     </div>
-                    <div class="col-12 col-xl-9">
+                    <div class="col-12 col-md-12 col-lg-11 col-xl-9">
                         <div class="catalog-filter__preview">
                             <div class="catalog-filter__preview-title">
                                 <span>Фильтры специалистов</span>
@@ -43,6 +43,7 @@
                                         <filter-select
                                             select-name="Специальность"
                                             select-title="Выберете специальность"
+                                            :remove-additional-fields="true"
                                             :options="{{ $filters['specialities']['options'] }}"
                                             input-name="speciality_id"
                                             form="#offers-filter"
@@ -85,51 +86,22 @@
     <div class="additional_filters">
         <div class="container">
             <div class="row no-gutters">
-                <div class="col-md-10 col-lg-10 col-xl-10">
+                <div class="col-md-9 col-lg-10 col-xl-10">
                     <div class="additional_filters__wrapper">
                         <div class="how-much-filters">
-                            <div class="how-much-filters__wrapper">
-                                <div class="how-much-filters__main">
-                                    <ul>
-                                        <li>
-                                            <label>
-                                                <input type="radio" name="per_page" value="10" />10 предложений
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input type="radio" name="per_page" value="20" />20 предложений
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input type="radio" name="per_page" value="30" />30 предложений
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <per-page-app
+                                :per-page="{{ $perPage }}"
+                            />
                         </div>
                         <div class="additional_filters__main">
                             @foreach($filters['additional_fields'] as $field)
-                            <div class="additional_filters__item addition-field">
+                            <div class="additional_filters__item addition-field addition-field-entity">
                                     <addition-field
                                         title="{{ $field->name }}"
                                         form="#offers-filter"
                                         field-name="additional_fields[{{ $field->id }}]"
-                                        value="30"
+                                        value="{{ $filters['additional_fields_params'][$field->id] }}"
                                     />
-                                    <filter-range-slider
-                                        v-if="false"
-                                        from-range="{{ $field->min_value }}"
-                                        to-range="{{ $field->max_value }}"
-                                        value-from="{{ $filters['additional_fields_params'][$field->id]['from'] }}"
-                                        value-to="{{ $filters['additional_fields_params'][$field->id]['to'] }}"
-                                        form="#offers-filter"
-                                        input-name="additional_fields[{{ $field->id }}]"
-                                        title="{{ $field->name }}"
-                                        :display-result="false"
-                                    ></filter-range-slider>
                             </div>
                             @endforeach
                         </div>
@@ -161,3 +133,4 @@
     </div>
 </section>
 @endsection
+

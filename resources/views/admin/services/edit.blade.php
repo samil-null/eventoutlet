@@ -76,7 +76,7 @@
                                 </div>
                             </div>
 
-                            <h6 class="heading-small text-muted mb-4">Спец. предложение</h6>
+                            <h6 class="heading-small text-muted mb-4">Информация</h6>
                             <div class="pl-lg-4">
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -96,9 +96,18 @@
                                     <div class="col-lg-6">
                                         <div class="form-group focused">
                                             <label class="form-control-label" for="input-offer-sale">Цена</label>
-                                            <input type="text" id="input-offer-sale"  disabled class="form-control form-control-alternative" placeholder="website.com" value="{{ $service->price }}">
+                                            <input type="text" id="input-offer-sale"  disabled class="form-control form-control-alternative" value="{{ $service->price }}">
                                         </div>
                                     </div>
+
+                                    @foreach($service->fields as $field)
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-offer-sale">{{ $field->metaField->name }}</label>
+                                                <input type="text" id="input-offer-sale"  disabled class="form-control form-control-alternative" value="{{ $field->value }}">
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">

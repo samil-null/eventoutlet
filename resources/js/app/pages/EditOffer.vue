@@ -22,7 +22,7 @@
                                     <span class="back-arrow-svg"></span> <span>Назад</span>
                                 </a>
                                 <div class="profile-edit__title"><span>Спецпредложения</span></div>
-                                <form @submit.prevent="createOffer" class="profile-edit__body profile-special__body">
+                                <form @submit.prevent="updateOffer" class="profile-edit__body profile-special__body">
                                     <!-- Line -->
                                     <div class="pe-block">
                                         <div class="pe-block__form form">
@@ -44,12 +44,15 @@
 
                                                             <edit-offer-date-picker
                                                                 :raw-dates="offer.dates"
+                                                                v-model="dates"
                                                                 v-if="offer.dates"
+                                                                :min-date="minDate"
+                                                                :max-date="maxDate"
                                                             ></edit-offer-date-picker>
                                                         </label>
                                                     </div>
                                                     <div class="col-12 col-sm-12 col-md-6 col-xl-6">
-                                                        <discount-select v-model="discount"></discount-select>
+                                                        <discount-select v-model="discount" v-if="offer.discount"></discount-select>
                                                         <label class="form__label">
                                                             <span>Дополнительные условия предложения</span>
                                                             <textarea-app
@@ -68,8 +71,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-
                                     <div class="pe-block__add-btn">
                                         <button type="submit" class="add-btn add-btn-green">
                                             <div class="plus"><span></span> <span></span></div>
@@ -77,27 +78,15 @@
                                         </button>
                                     </div>
                                 </form>
-                                <div class="profile-special__title"><span>Ваши спецпредложения</span></div>
-                                <edit-offer-items></edit-offer-items>
-                                <div class="profile-special__footer">
-                                    <div class="profile-special__political">
-                                        <div class="additional_filters__checkbox">
-                                            <label class="filter-checkbox">
-                                                Публикую данное предложение вы подвтерждаете свою готовность принять заказ по указанным вами
-                                                условиям. <a href="#">Более подробные условия работы портала Event Outlet.</a>
-                                                <input type="checkbox" checked="checked" /> <span class="checkmark"></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="pe-block__save-button">
-                                        <a href="#" class="rectangle-btn rectangle-btn-green"> <span>Опубликовать</span> </a>
-                                    </div>
-                                </div>
+                                <edit-offer-items
+                                    @success-update="successPublishedOffers"
+                                />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <alert :messages="alertMessages" v-if="isActiveAlert" />
         </section>
     </div>
 
@@ -110,6 +99,8 @@
     import DiscountSelect from "../components/DiscountSelect";
     import TextareaApp from "../components/TextareaApp";
     import EditOfferDatePicker from "../components/Datepickers/EditOfferDatePicker";
+    import Alert from "../components/Alert";
+    import dayjs from 'dayjs';
 
     export default {
         name: "CreateOffer",
@@ -121,28 +112,68 @@
                 discount:0,
                 service:0,
                 description:null,
-                dates:null,
+                dates:[],
                 user:{},
                 avatar:{},
                 selectService:{},
                 minDate:null,
                 maxDate:null,
-                offer:{}
+                offer:{},
+                alertMessages:[],
+                isActiveAlert:false,
             }
         },
         methods: {
-            createOffer() {
-                let payload = {
-                    service_id: this.selectService,
-                    dates: this.dates,
-                    discount: this.discount,
-                    description: this.description,
-                }
+            successPublishedOffers() {
+                this.triggerAlert([{
+                    type:'success',
+                    body:'Ваши предложения успешно опубликованы'
+                }]);
+            },
+            updateOffer() {
+                let dates = [];
 
-                axios.post('/app/offers', payload)
+                dates = this.dates.map(date => {
+                    return dayjs(date.toString()).format('YYYY-MM-DD')
+                });
+
+                let payload = {
+                    service_id: this.offer.service_id,
+                    dates: dates,
+                    discount: this.discount,
+                    description: this.offer.description,
+                };
+
+                axios.put('/app/offers/' + this.offer.id, payload)
                     .then(({data}) => {
-                        location.href = data.data.url;
+                        this.triggerAlert([{
+                            type:'success',
+                            body:'Ваши предложение успешно обновлено'
+                        }]);
                     })
+                    .catch(({response}) => {
+                        if (response.status === 422) {
+                            let errors = response.data.errors;
+                            let messages = [];
+                            for(let key in errors) {
+                                errors[key].map(er => {
+                                    messages.push({
+                                        type:'error',
+                                        body: er
+                                    });
+                                })
+                            }
+                            this.triggerAlert(messages);
+                        }
+                    })
+            },
+            triggerAlert(messages) {
+                this.isActiveAlert = true;
+                this.alertMessages = messages;
+                setTimeout(() => {
+                    this.isActiveAlert = false
+                    this.alertMessages = [];
+                }, 5000);
             }
         },
         mounted() {
@@ -153,13 +184,14 @@
                     this.user = data.user;
                     this.avatar = data.avatar;
                     this.services = data.services;
-                    this.minDate = data.min_date;
-                    this.maxDate = data.max_date;
+                    this.minDate = data.minDate;
+                    this.maxDate = data.maxDate;
                 })
             axios.get('/app/offers/' + this.offerId)
                 .then(res => res.data.data)
                 .then(data => {
                     this.offer = data.offer;
+                    this.discount = data.offer.discount;
                 })
         },
         components: {
@@ -167,7 +199,8 @@
             SelectApp,
             DiscountSelect,
             TextareaApp,
-            EditOfferItems
+            EditOfferItems,
+            Alert
         }
     }
 </script>

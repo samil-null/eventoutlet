@@ -48,11 +48,10 @@
                                                                 v-model="dates"
                                                                 :available-dates='{ start: minDate, end: maxDate }'
                                                                 is-inline
-                                                                :popover="{ placement: 'bottom', visibility: 'click' }"
                                                                 >
                                                                 </v-calendar>
                                                             </div>
-                                                            
+
                                                         </label>
                                                     </div>
                                                     <div class="col-12 col-sm-12 col-md-6 col-xl-6">
@@ -83,61 +82,15 @@
                                         </button>
                                     </div>
                                 </form>
-                                <div class="profile-special__title"><span>Ваши спецпредложения</span></div>
-                                <div class="profile-edit__body">
-                                    <!-- Line -->
-                                    <div class="pe-block pr-block">
-                                        <div class="special-offer">
-                                            <div class="special-offer__head">
-                                                <div class="special-offer__icon">
-                                                    <div class="catalog-card__discount-icon"><div class="percent-svg"></div></div>
-                                                </div>
-                                                <div class="special-offer__item "><span>Дата</span> <span>10-16.07.2019</span></div>
-                                                <div class="special-offer__item"><span>Услуга</span> <span>Фотосессия </span></div>
-                                                <div class="special-offer__item">
-                                                    <span>Цена со скидкой</span> <span>3 000 р / фикс</span>
-                                                </div>
-                                                <div class="special-offer__item"><span>Скидка</span> <span>30%</span></div>
-                                                <div class="special-offer__button"><a href="#">Удалить</a></div>
-                                            </div>
-                                            <div class="special-offer__desctipton">
-                                                <div class="special-offer__desctipton-title"><span>Описание</span></div>
-                                                <div class="special-offer__desctipton-body">
-                                                    <p>
-                                                        Минимальное время работы 3 часа. В черте города. Итог до 40 ретушированных фотографий.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="special-offer__footer">
-                                                <div class="additional_filters__checkbox">
-                                                    <label class="filter-checkbox"
-                                                    >Опубликовать спецпредложение <input type="checkbox" checked="checked" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="profile-special__footer">
-                                    <div class="profile-special__political">
-                                        <div class="additional_filters__checkbox">
-                                            <label class="filter-checkbox">
-                                                Публикую данное предложение вы подвтерждаете свою готовность принять заказ по указанным вами
-                                                условиям. <a href="#">Более подробные условия работы портала Event Outlet.</a>
-                                                <input type="checkbox" checked="checked" /> <span class="checkmark"></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="pe-block__save-button">
-                                        <a href="#" class="rectangle-btn rectangle-btn-green"> <span>Опубликовать</span> </a>
-                                    </div>
-                                </div>
+                                <edit-offer-items
+                                    @success-update="successPublishedOffers"
+                                />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <alert :messages="alertMessages" v-if="isActiveAlert" />
         </section>
     </div>
 
@@ -149,6 +102,9 @@
     import DatePicker from 'v-calendar/lib/components/date-picker.umd'
     import DiscountSelect from "../components/DiscountSelect";
     import TextareaApp from "../components/TextareaApp";
+    import Alert from "../components/Alert";
+    import dayjs from "dayjs";
+    import EditOfferItems from "../components/EditOfferItems";
 
     export default {
         name: "CreateOffer",
@@ -160,27 +116,65 @@
                 discount:0,
                 service:0,
                 description:null,
-                dates:null,
+                dates:[],
                 user:{},
                 avatar:{},
                 selectService:{},
                 minDate:null,
-                maxDate:null
+                maxDate:null,
+                alertMessages:[],
+                isActiveAlert:false
             }
         },
         methods: {
             createOffer() {
+                let dates = null;
+                if (this.dates.length) {
+                    dates = this.dates.map(date => {
+                        return dayjs(date.toString()).format('YYYY-MM-DD')
+                    });
+                }
+
                 let payload = {
                     service_id: this.selectService,
-                    dates: this.dates,
+                    dates: dates,
                     discount: this.discount,
                     description: this.description,
-                }
+                };
 
                 axios.post('/app/offers', payload)
                     .then(({data}) => {
-                        location.href = data.data.url;
+                        //location.href = data.data.url;
                     })
+                    .catch(({response}) => {
+                        if (response.status === 422) {
+                            let errors = response.data.errors;
+                            let messages = [];
+                            for(let key in errors) {
+                                errors[key].map(er => {
+                                    messages.push({
+                                        type:'error',
+                                        body: er
+                                    });
+                                })
+                            }
+                            this.triggerAlert(messages);
+                        }
+                    })
+            },
+            triggerAlert(messages) {
+                this.isActiveAlert = true;
+                this.alertMessages = messages;
+                setTimeout(() => {
+                    this.isActiveAlert = false
+                    this.alertMessages = [];
+                }, 5000);
+            },
+            successPublishedOffers() {
+                this.triggerAlert([{
+                    type:'success',
+                    body:'Ваши предложения успешно опубликованы'
+                }]);
             }
         },
         mounted() {
@@ -191,18 +185,17 @@
                     this.user = data.user;
                     this.avatar = data.avatar;
                     this.services = data.services;
-                    this.minDate = data.min_date;
-                    this.maxDate = data.max_date;
+                    this.minDate = data.minDate;
+                    this.maxDate = data.maxDate;
                 })
         },
         components: {
             'v-calendar':DatePicker,
             SelectApp,
-            DiscountSelect
+            DiscountSelect,
+            TextareaApp,
+            Alert,
+            EditOfferItems
         }
     }
 </script>
-
-<style scoped>
-
-</style>

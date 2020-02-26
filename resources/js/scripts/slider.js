@@ -37,20 +37,20 @@ $(document).ready(function() {
             focusOnSelect: true
           });
           setTimeout(() => {
-            let startBgImage = $('.slider-for').find('.slick-slide.slick-current img').attr('src');
+            let startBgImage = $('.slider-for').find('.slick-slide.slick-current img').attr('data-bg');
             $('#profile-slider-bg').css({
               'background-image': `url(${startBgImage})`
             });
           }, 0)
-          
+
           $('.slider-for').on('beforeChange', function(event, slick, currentSlide, nextSlide){
             setTimeout(() => {
-              let bgImage = $(this).find('.slick-slide.slick-current img').attr('src');
+              let bgImage = $(this).find('.slick-slide.slick-current img').attr('data-bg');
               $('#profile-slider-bg').css({
                 'background-image': `url(${bgImage})`
               });
             },0)
-           
+
           });
     });
 });

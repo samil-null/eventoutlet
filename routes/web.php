@@ -23,6 +23,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
 Route::group(['namespace' => 'Site'], function () {
 
     Route::get('/', 'HomeController@index')->name('site.home');
+
     Route::group(['middleware' => ['role:executor'], 'prefix' => 'lk', 'namespace' => 'Lk' ], function() {
 
         Route::resource('/profiles', 'ProfileController')->names([
@@ -34,7 +35,6 @@ Route::group(['namespace' => 'Site'], function () {
             'store' => 'site.lk.offers.store',
             'edit' => 'site.lk.offers.edit'
         ]);
-
 
     });
 
@@ -50,6 +50,7 @@ Route::group(['namespace' => 'Site'], function () {
 Route::group(['prefix' => 'app', 'namespace' => 'Api\App', 'middleware' => ['role:executor']], function() {
     Route::resource('/profiles', 'ProfileController');
     Route::resource('/offers', 'OfferController');
+    Route::post('/offers/published', 'OfferController@published');
     Route::resource('/services', 'ServiceController');
     Route::resource('/specialties', 'SpecialityController');
 
@@ -114,4 +115,21 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['rol
         'destroy'   => 'admin.offers.destroy'
     ]);
 
+    Route::resource('/price-options', 'PriceOptionController')->names([
+        'index'     => 'admin.priceOptions.index',
+        'show'      => 'admin.priceOptions.show',
+        'create'    => 'admin.priceOptions.create',
+        'store'     => 'admin.priceOptions.store',
+        'update'    => 'admin.priceOptions.update',
+        'destroy'   => 'admin.priceOptions.destroy'
+    ]);
+
+    Route::resource('/roles', 'RoleController')->names([
+        'index'     => 'admin.roles.index',
+        'show'      => 'admin.roles.show',
+        'create'    => 'admin.roles.create',
+        'store'     => 'admin.roles.store',
+        'update'    => 'admin.roles.update',
+        'destroy'   => 'admin.roles.destroy'
+    ]);
 });

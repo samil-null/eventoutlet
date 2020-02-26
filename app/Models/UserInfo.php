@@ -40,4 +40,13 @@ class UserInfo extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public function pureWhatsapp()
+    {
+        if ($this->whatsapp) {
+            return preg_replace("/[^0-9]/", '', $this->whatsapp);
+        }
+
+        return null;
+    }
 }

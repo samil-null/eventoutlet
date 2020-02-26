@@ -49,13 +49,6 @@ class AdditionsFieldsService
 
                 $this->createAdditionFields($this->serviceBuilder, $newSpeciality->id);
             }
-//            $newFields = collect($fields['new']);
-//            dd($newFields);
-//            $newFieldsRecords = $newFields->map(function ($field) {
-//                return new AdditionFieldSpeciality(['name' => $field]);
-//            });
-
-            //$speciality->fields()->saveMany($newFieldsRecords);
         }
     }
 

@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Site;
 
-use SEOMeta;
+use App\Factories\Offer\OfferFactory;
+use App\Utils\Seo\Seo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,14 +12,24 @@ class UserController extends Controller
 {
     public function show($id)
     {
-        $user = User::with('offers', 'services')
-            ->where('id', $id)
-            ->first();
+        $user = User::with('activeServices.activeOffers.dates', 'activeServices.priceOption')->findOrFail($id);
 
-        $user->viewed();
+        $dates = collect([]);
+        $dataOffers = collect([]);
 
-        SEOMeta::setTitle($user->name);
+        foreach ($user->activeServices as $service) {
 
-        return view('site.users.show', compact('user'));
+            foreach ($service->activeOffers as  $offer) {
+                $dates = $dates->merge($offer->dates->pluck('date'));
+                $dataOffers->push($offer);
+            }
+
+        }
+
+        $offers = (new OfferFactory($dataOffers))->create();
+
+        Seo::user($user);
+
+        return view('site.users.show', compact('user', 'dates', 'offers'));
     }
 }

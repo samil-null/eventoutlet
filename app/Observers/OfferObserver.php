@@ -14,6 +14,11 @@ class OfferObserver
         $offer->calculateDiscountPrice();
     }
 
+    public function updating(Offer $offer)
+    {
+        $offer->calculateDiscountPrice();
+    }
+
     /**
      * Handle the offer "created" event.
      *

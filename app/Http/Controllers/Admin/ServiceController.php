@@ -59,7 +59,7 @@ class ServiceController extends Controller
      */
     public function edit($id)
     {
-        $service = Service::find($id);
+        $service = Service::whereId($id)->with('fields.metaField')->first();
 
         return view('admin.services.edit', compact('service'));
     }

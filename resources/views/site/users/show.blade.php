@@ -1,7 +1,7 @@
 @extends('site.layout.index')
 
 @section('content')
-    <section id="profile" class="profile">
+    <section id="profile" class="profile" itemscope itemtype="http://schema.org/ProfilePage">
         <div class="profile-slider">
             <div class="profile-slider__wrapper">
                 <div class="profile-slider__background" id="profile-slider-bg" style="background-image: url(./img/slider/o.jpg);"></div>
@@ -10,7 +10,7 @@
                         <div class="slider-for">
                             @foreach ($user->gallery as $image)
                                 <div class="profile-slider__item">
-                                    <img src="{{ Imager::gallery($image->name) }}" class="" alt="">
+                                    <img src="{{ Imager::gallery($image->name) }}" class="" data-bg="{{ Imager::gallerySmall($image->name) }}" alt="">
                                 </div>
                             @endforeach
                         </div>
@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-    
+
         <div class="container">
             <div class="profile__wrapper">
                 <div class="row">
@@ -61,20 +61,26 @@
                                     </div>
                                     <div class="profile-preview__item profile-preview__catacts">
                                         <div class="contacts-block__item">
-                                            <a href="#">
-                                                <div class="at-svg contacts-block-svg"></div>
-                                            </a>
+                                            @if ($user->info->email)
+                                                <a href="mailto:{{ $user->info->email }}">
+                                                    <div class="at-svg contacts-block-svg"></div>
+                                                </a>
+                                            @endif
                                         </div>
+                                        @if ($user->info->whatsapp)
+                                            <div class="contacts-block__item">
+                                                <a target="_blank" href="https://wa.me/{{ $user->info->pureWhatsapp() }}">
+                                                    <div class="wa-svg contacts-block-svg"></div>
+                                                </a>
+                                            </div>
+                                        @endif
+                                        @if ($user->info->phone)
                                         <div class="contacts-block__item">
-                                            <a href="#">
-                                                <div class="wa-svg contacts-block-svg"></div>
-                                            </a>
-                                        </div>
-                                        <div class="contacts-block__item">
-                                            <a href="#">
+                                            <a href="tel: {{ $user->info->phone }}">
                                                 <div class="phone-svg contacts-block-svg"></div>
                                             </a>
                                         </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -175,93 +181,40 @@
                                                                 </label>
                                                             </div>
                                                             @endif
-                                                        </div>                                                    
+                                                        </div>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="profile-core__contacts">
                                             <div class="profile-core__contacts_title">
                                                 <span>Спецпредложения</span>
                                             </div>
                                             <div class="profile-edit__body profile-core__list">
-                                                <!-- Line -->
-                                                <div class="pe-block pr-block">
-                                                    <div class="special-offer">
-                                                        <div class="special-offer__head">
-                                                            <div class="special-offer__icon">
-                                                                <div class="catalog-card__discount-icon">
-                                                                    <div class="percent-svg"></div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="special-offer__item ">
-                                                                <span>Дата</span>
-                                                                <span>10-16.07.2019</span>
-                                                            </div>
-                                                            <div class="special-offer__item">
+                                                @foreach($user->activeServices as $service)
+                                                    <div class="sidebar__item">
+                                                    <div class="sidebar__core">
+                                                        <div class="sidebar__head">
+                                                            <div class="sidebar__head_item">
                                                                 <span>Услуга</span>
-                                                                <span>Фотосессия </span>
+                                                                <span class="service-name">{{ $service->name }}</span>
                                                             </div>
-                                                            <div class="special-offer__item">
-                                                                <span>Цена со скидкой</span>
-                                                                <span>3 000 р / фикс</span>
-                                                            </div>
-                                                            <div class="special-offer__item">
-                                                                <span>Скидка</span>
-                                                                <span>30%</span>
+                                                            <div class="sidebar__slash"></div>
+                                                            <div class="sidebar__head_item">
+                                                                <span>Стоимость</span>
+                                                                <span class="sidebar-price">{{ $service->price }} {{ $service->priceOption->name }}</span>
                                                             </div>
                                                         </div>
-                                                        <div class="special-offer__desctipton">
-                                                            <div class="special-offer__desctipton-title">
-                                                                <span>Описание</span>
-                                                            </div>
-                                                            <div class="special-offer__desctipton-body">
-                                                                <p>Минимальное время работы 3 часа. В черте города. Итог до 40
-                                                                    ретушированных фотографий.</p>
-                                                            </div>
+                                                        <div class="sidebar__description">
+                                                            <span>Описание</span>
+                                                            <p>
+                                                                {{ $service->description }}
+                                                            </p>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="profile-edit__body profile-core__list">
-                                                <!-- Line -->
-                                                <div class="pe-block pr-block">
-                                                    <div class="special-offer">
-                                                        <div class="special-offer__head">
-                                                            <div class="special-offer__icon">
-                                                                <div class="catalog-card__discount-icon">
-                                                                    <div class="percent-svg"></div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="special-offer__item ">
-                                                                <span>Дата</span>
-                                                                <span>10-16.07.2019</span>
-                                                            </div>
-                                                            <div class="special-offer__item">
-                                                                <span>Услуга</span>
-                                                                <span>Фотосессия </span>
-                                                            </div>
-                                                            <div class="special-offer__item">
-                                                                <span>Цена со скидкой</span>
-                                                                <span>3 000 р / фикс</span>
-                                                            </div>
-                                                            <div class="special-offer__item">
-                                                                <span>Скидка</span>
-                                                                <span>30%</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="special-offer__desctipton">
-                                                            <div class="special-offer__desctipton-title">
-                                                                <span>Описание</span>
-                                                            </div>
-                                                            <div class="special-offer__desctipton-body">
-                                                                <p>Минимальное время работы 3 часа. В черте города. Итог до 40
-                                                                    ретушированных фотографий.</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                @endforeach
                                             </div>
                                         </div>
                                     </div>
@@ -273,65 +226,48 @@
                                                 </div>
                                                 <div class="sidebar__core">
                                                     <div class="sidebar__calendar">
-                                                        <v-calendar
-                                                            class="sidebar-calendar"
-                                                            mode='range' 
-                                                            title-position="left"
-                                                            v-model='date'
-                                                            is-inline
-                                                            color="red"
-                                                            :popover="{ placement: 'bottom', visibility: 'click' }">
-                                                        </v-calendar>
+                                                        <user-calendar :dates="{{ $dates }}"/>
                                                     </div>
-                                                    
+
                                                 </div>
                                             </div>
                                             <div class="sidebar__title">
-                                                <span>Стоимость</span>
+                                                <span>Спецпредложения</span>
                                             </div>
-                                            <div class="sidebar__item">
+                                            @foreach($offers as $offer)
+                                                <div class="sidebar__item">
                                                 <div class="sidebar__core">
-                                                   <div class="sidebar__head">
-                                                    <div class="sidebar__head_item">
-                                                        <span>Услуга</span>
-                                                        <span class="service-name">Фотосессия</span>
+                                                    <div class="sidebar__head">
+                                                        <div class="sidebar__head_item">
+                                                            <span>Услуга</span>
+                                                            <span class="service-name">{{ $offer->serviceName }}</span>
+                                                        </div>
+                                                        <div class="sidebar__slash"></div>
+                                                        <div class="sidebar__head_item">
+                                                            <span>Дата</span>
+                                                            <span class="sidebar-price">{{ $offer->dates }}</span>
+                                                        </div>
                                                     </div>
-                                                    <div class="sidebar__slash"></div>
-                                                    <div class="sidebar__head_item">
-                                                        <span>Стоимость</span>
-                                                        <span class="sidebar-price">4 000 р / час</span>
+                                                    <div class="sidebar__head">
+                                                        <div class="sidebar__head_item">
+                                                            <span>Цена со скидкой</span>
+                                                            <span class="service-name">{{ $offer->price }} {{ $offer->priceOption }}</span>
+                                                        </div>
+                                                        <div class="sidebar__slash"></div>
+                                                        <div class="sidebar__head_item">
+                                                            <span>Скидка</span>
+                                                            <span class="sidebar-price">{{ $offer->discount }}%</span>
+                                                        </div>
                                                     </div>
-                                                   </div>
-                                                   <div class="sidebar__description">
-                                                       <span>Описание</span>
-                                                       <p>
-                                                            Минимальное время работы 5 часа. Если свадьба загородом трансфер оплачивает заказчик.
-                                                       </p>
-                                                   </div>
+                                                    <div class="sidebar__description">
+                                                        <span>Описание</span>
+                                                        <p>
+                                                            {{ $offer->description }}
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             </div>
-    
-                                            <div class="sidebar__item">
-                                                <div class="sidebar__core">
-                                                   <div class="sidebar__head">
-                                                    <div class="sidebar__head_item">
-                                                        <span>Услуга</span>
-                                                        <span class="service-name">Фотосессия</span>
-                                                    </div>
-                                                    <div class="sidebar__slash"></div>
-                                                    <div class="sidebar__head_item">
-                                                        <span>Стоимость</span>
-                                                        <span class="sidebar-price">4 000 р / час</span>
-                                                    </div>
-                                                   </div>
-                                                   <div class="sidebar__description">
-                                                       <span>Описание</span>
-                                                       <p>
-                                                            Минимальное время работы 5 часа. Если свадьба загородом трансфер оплачивает заказчик.
-                                                       </p>
-                                                   </div>
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -340,7 +276,6 @@
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </section>
 @endsection

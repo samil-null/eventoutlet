@@ -27,6 +27,7 @@ class OfferFactory
     {
         return $this->offers->map(function ($offer) {
             return new Offer(
+                $offer->id,
                 $offer->service->name,
                 $offer->description,
                 DateHelper::displayRangeDates($offer->dates),

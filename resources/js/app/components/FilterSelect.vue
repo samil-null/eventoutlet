@@ -29,7 +29,7 @@
     import {find} from 'lodash';
 
     export default {
-        props:['options', 'selectName', 'selectTitle', 'inputName', 'form', 'active'],
+        props:['options', 'selectName', 'selectTitle', 'inputName', 'form', 'active', 'removeAdditionalFields'],
         name: "FilterSelect",
         data() {
             return {
@@ -43,6 +43,11 @@
         methods: {
             select(index) {
                 this.selected = this.options[index];
+                if (this.removeAdditionalFields) {
+                    document.querySelectorAll('.addition-field-entity').forEach((item) => {
+                        item.remove()
+                    });
+                }
                 setTimeout(() => {
                     document.querySelector(this.form).submit();
                 },0)
@@ -61,7 +66,6 @@
             let selected = find(this.options, {id:parseInt(this.active)});
             if (selected) {
                 this.selected = selected;
-                //this.selected = this.options[0];
             }
 
             document.addEventListener('click', this.documentClick)

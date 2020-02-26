@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\App;
 use App\Factories\Offer\OfferFactory;
 use App\Helpers\DateHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Offer\StoreOffer;
 use App\Models\Offer;
 use App\Models\PriceOption;
 use App\Models\User;
@@ -13,8 +14,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Facades\Imager;
 
-class OfferController extends Controller
+class OfferController extends ApiAppController
 {
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -40,21 +47,21 @@ class OfferController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        $user = $request->user();
-        $user = $user->with('speciality')->first();
+        $user = $this->user->with('speciality')->first();
+
         $minDate = DateHelper::minFilterDate();
         $maxDate = DateHelper::maxFilterDate();
- 
+
         return response()->json([
             'success' => true,
             'data' => [
                 'user' => $user,
                 'avatar' => Imager::avatar($user->avatar),
                 'services' => Auth::user()->services,
-                'min_date' => $minDate,
-                'max_date' => $maxDate
+                'minDate' => $minDate,
+                'maxDate' => $maxDate
             ]
         ]);
     }
@@ -64,7 +71,7 @@ class OfferController extends Controller
      * @param offerService $offerService
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request, OfferService $offerService)
+    public function store(StoreOffer $request, OfferService $offerService)
     {
         $offer = $offerService->create($request->user(), $request);
         return response()->json([
@@ -88,7 +95,7 @@ class OfferController extends Controller
         return response()->json([
             'success' => true,
             'data' => [
-                'offer' => $offer,
+                'offer' => $offer
             ]
         ]);
     }
@@ -105,15 +112,24 @@ class OfferController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param StoreOffer $request
+     * @param $id
+     * @param OfferService $offerService
      */
-    public function update(Request $request, $id)
+    public function update(StoreOffer $request, $id, OfferService $offerService)
     {
-        //
+        $user = $request->user();
+
+        $offerService->update($user->offers()->find($id), $request);
+
+    }
+
+    public function published(Request $request, OfferService $offerService)
+    {
+        $offerService->published(
+            $request->input('published'),
+            $request->user()
+        );
     }
 
     /**

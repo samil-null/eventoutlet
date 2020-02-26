@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Api\App;
 
-
-use Auth;
 use App\Models\City;
 use App\Models\User;
 use App\Models\UserInfo;
@@ -15,14 +13,16 @@ use Illuminate\Http\Request;
 use App\Services\ResizeService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Profile\UpdateRequest;
+use Illuminate\Support\Facades\Auth;
 
-class ProfileController extends Controller
+class ProfileController extends ApiAppController
 {
 
     private $resize;
 
     public function __construct(ResizeService $resize)
     {
+        parent::__construct();
         $this->resize = $resize;
     }
 
@@ -65,7 +65,8 @@ class ProfileController extends Controller
      */
     public function show(Request $request)
     {
-        $user = $request->user()->with(['offers.service'])->first();
+
+        $user = $this->user->with(['offers.service'])->first();
 
         return response()->json([
             'success' => true,
@@ -84,11 +85,9 @@ class ProfileController extends Controller
      */
     public function edit(Video $video, $id)
     {
-        $user = User::with(
-            'info','services.priceOption', 'services.fields.metaField', 'city',
-            'speciality.fields', 'offers'
-        )->findOrFail($id);
 
+        $user = $this->user->with([ 'info','services.priceOption', 'services.fields.metaField', 'city', 'speciality.fields', 'offers'])
+                            ->first();
 
         $specialties = Specialty::where('status', Specialty::ACTIVE_STATUS)->get(['id', 'name']);
         $priceOptions = PriceOption::all(['id', 'name']);
@@ -127,11 +126,13 @@ class ProfileController extends Controller
      */
     public function update(UpdateRequest $request, $id)
     {
-        $user = User::find($id);
+        $user = $this->user->first();
+
         $user->update([
             'name' => $request->input('name'),
             'status' => User::WAITING_STATUS
         ]);
+
         $user->info()->update($request->except('name'));
 
         return response()->json([

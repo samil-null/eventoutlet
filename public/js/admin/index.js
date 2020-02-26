@@ -47889,9 +47889,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.image-gallery').magnificPopup({
-    type: 'image'
-  });
+  if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('.image-gallery').length) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.image-gallery').magnificPopup({
+      type: 'image'
+    });
+  }
+
+  if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('.video-gallery').length) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.video-gallery').magnificPopup({
+      type: 'iframe'
+    });
+  }
 });
 
 /***/ }),

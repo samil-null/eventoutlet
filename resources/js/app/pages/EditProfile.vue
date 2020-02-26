@@ -213,6 +213,7 @@
                                                                     :images="gallery"
                                                                     id="profile-gallery"
                                                                     @error="triggerAlert"
+                                                                    :limit="20"
                                                                 ></gallery>
                                                             </div>
                                                         </div>
@@ -225,6 +226,7 @@
                                                                 <video-loader
                                                                     :videos="videos"
                                                                     v-if="videos"
+                                                                    :limit="5"
                                                                 ></video-loader>
                                                             </div>
                                                         </div>
@@ -335,7 +337,7 @@
                                     body:'Аккаунт успешно обновлен и отправлен на модерацию'
                                 }]);
 
-                            
+
                         }
                     }).catch(({ response }) => {
                         if (response.status === 422) {
@@ -369,7 +371,7 @@
                 axios.delete('/app/services/' + id)
                     .then(res => res.data)
                     .then(({data}) => {
-                        
+
                     })
             },
         },

@@ -151,6 +151,16 @@
                             <i class="ni ni-pin-3 text-orange"></i> Города
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="{{ route('admin.priceOptions.index') }}">
+                            <i class="ni ni-bullet-list-67 text-primary"></i> Варианты цены
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="{{ route('admin.roles.index') }}">
+                            <i class="ni ni-archive-2 text-black"></i> Роли
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

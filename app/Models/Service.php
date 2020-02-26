@@ -28,6 +28,8 @@ class Service extends Model
         ]
     ];
 
+    public const LIMIT_RECORD = 6;
+
     protected $guarded = [];
 
     public function offers()

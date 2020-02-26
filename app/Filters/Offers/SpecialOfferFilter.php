@@ -5,6 +5,7 @@ namespace App\Filters\Offers;
 
 
 use App\Helpers\DateHelper;
+use App\Models\AdditionFieldSpeciality;
 use App\Models\Offer;
 use App\Models\Service;
 use Illuminate\Http\Request;
@@ -57,13 +58,16 @@ class SpecialOfferFilter extends BaseOfferFilter implements OfferFilterInterface
         $index = 0;
 
         foreach ($fields as $id => $value) {
+
+            if (!$value) continue;
+
             $this->params['additional_fields'][$id] = $value;
 
             $asName = "afs{$index}";
             $afsQuery->join("additional_fields_services as $asName", function ($join) use ($asName, $id, $value) {
-                $join->on("{$asName}.service_id", '=', 'afs.service_id');
-                $join->where($asName.'.speciality_field_id', $id);
-                $join->where($asName.'.value' , '>=', $value);
+                $join->on("{$asName}.service_id", '=', 'afs.service_id')
+                    ->where($asName.'.speciality_field_id', $id)
+                    ->where($asName.'.value' , '>=', $value);
             });
             $index++;
         }
@@ -77,22 +81,11 @@ class SpecialOfferFilter extends BaseOfferFilter implements OfferFilterInterface
 
     public function additionsFields()
     {
-        $this->saveFilterState->select('services.id');
+        if ($this->request->has('speciality_id')) {
+            return AdditionFieldSpeciality::where('speciality_id', $this->request->input('speciality_id'))->get();
+        }
 
-        $aggregate = DB::table('additional_fields_services')
-            ->whereRaw("service_id in ({$this->saveFilterState->toSql()})")
-            ->whereNotNull('value')
-            ->leftJoin('additional_fields_specialties', 'additional_fields_services.speciality_field_id', '=', 'additional_fields_specialties.id')
-            ->groupBy('speciality_field_id')
-            ->select(DB::raw('additional_fields_specialties.id,
-                                min(additional_fields_services.value) as min_value,
-                                max(additional_fields_services.value) as max_value,
-                                additional_fields_specialties.name
-                                '));
-
-        $aggregate->mergeBindings( $this->saveFilterState );
-
-        return $aggregate->get();
+        return [];
     }
 
 }

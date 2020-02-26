@@ -5,7 +5,7 @@
             <input type="checkbox" @change="changeSpecial" v-model="checked">
             <span class="checkmark"></span>
         </label>
-        <template v-if="!checked">
+        <template v-if="!fixedState">
             <input type="hidden" name="specials_offers[date_from]" :value="dateFrom">
             <input type="hidden" name="specials_offers[date_to]" :value="dateTo">
         </template>
@@ -18,7 +18,8 @@
         name: "SpecialOfferCheckBox",
         data() {
             return {
-                checked:false
+                checked:false,
+                fixedState:false
             }
         },
         watch: {
@@ -30,21 +31,17 @@
                     document.querySelectorAll('.addition-field').forEach(item => {
                         item.remove()
                     });
-
                 }
-
-                this.submitForm();
-            },
-            submitForm() {
-
                 setTimeout(() => {
                     document.querySelector('#offers-filter').submit()
-                }, 0)
+                },0);
+
             }
         },
          created() {
             if (this.hasSpecial) {
                 this.checked = true;
+                this.fixedState = true;
             }
          }
     }

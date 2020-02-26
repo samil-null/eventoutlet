@@ -25,9 +25,15 @@ class Imager
             return $this->resize->roc($path, 'avatar', 'avatar');
         }
 
-        return asset('/assets/avatars/'.random_int(1,6).'.png');
+        return asset('/assets/avatars/no-avatar.png');
     }
 
+    public function gallerySmall($path)
+    {
+        if ($path) {
+            return $this->resize->roc($path, 'gallery', 'avatar');
+        }
+    }
     public function gallery($path)
     {
         if ($path) {

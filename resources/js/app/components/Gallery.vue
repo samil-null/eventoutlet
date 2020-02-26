@@ -26,11 +26,10 @@
 
     export default {
         name: "Gallery",
-        props:['images'],
+        props:['images', 'limit'],
         data() {
             return {
                 galleryImage:[],
-                limit:5
             }
         },
         computed: {

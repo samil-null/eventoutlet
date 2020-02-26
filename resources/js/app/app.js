@@ -13,8 +13,9 @@ import FilterRangeSlider from "./components/FilterRangeSlider";
 import EditOffer from "./pages/EditOffer";
 import SpecialOfferCheckBox from "./components/SpecialOfferCheckBox";
 import AdditionField from "./components/AdditionField";
+import UserCalendar from "./components/Datepickers/UserCalendar";
+import PerPageApp from "./components/PerPageApp";
 
-import VCalendar from 'v-calendar/lib/components/date-picker.umd';
 new Vue({
     el:'#app',
     store,
@@ -30,7 +31,8 @@ new Vue({
         FilterRangeSlider,
         EditOffer,
         SpecialOfferCheckBox,
-        VCalendar,
-        AdditionField
+        AdditionField,
+        UserCalendar,
+        PerPageApp
     }
 });

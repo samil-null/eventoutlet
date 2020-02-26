@@ -2,9 +2,11 @@
 <div>
     <span>Выберите размер скидки</span>
     <div class="form__discount">
-
-        <div class="discount-item" v-for="(discount, index) in discountList">
-            <label :for="'discount-item-' + index">
+            <label 
+                :for="'discount-item-' + index" 
+                :key="'discount-value-' + index" 
+                class="discount-item__wrapper"
+                v-for="(discount, index) in discountList">
                 <input
                     :id="'discount-item-' + index"
                     type="radio"
@@ -12,14 +14,15 @@
                     :data-value="discount"
                     :value="discount"
                     v-model="discountValue"
+                    @change="changeDiscount"
                 />
-                <span>{{ discount }}%</span>
+                <div class="discount-item">
+                    <span>{{ discount }}%</span>
+                </div>
             </label>
-        </div>
-
-        <div class="discount-item discount-item-other">
-            <input type="number" placeholder="Другое" v-model="customValue"/>
-        </div>
+            <div class="discount-item-other">
+                <input type="number" @input="inputCustomValue" min="10" max="70" placeholder="Другое" v-model="customValue" />
+            </div>
     </div>
 </div>
 
@@ -29,36 +32,44 @@
 <script>
     export default {
         name: "DiscountSelect",
-        props:['input'],
+        props:['value'],
         data() {
             return {
                 discountList: [
                     10, 15, 20, 25, 30, 35, 40, 45, 50
                 ],
-                discountValue:0,
+                discountValue:null,
                 customValue:null,
-                resultValue:0,
 
             }
         },
-        watch: {
-            customValue(value) {
-                console.log(value);
-                this.resultValue = value;
-                return value;
+        methods: {
+            init(value) {
+                if (value) {
+                    let index = this.discountList.indexOf(value);
+                    if (index !== -1) {
+                        this.discountValue = this.discountList[index];
+                        this.customValue = null;
+
+                        return this.discountValue;
+                    } else {
+                        this.discountValue = null;
+                        this.customValue = value;
+
+                        return value;
+                    }
+                }
             },
-            discountValue(value) {
+            inputCustomValue() {
+                this.$emit('input', this.init(parseInt(this.customValue)));
+            },
+            changeDiscount() {
                 this.customValue = null;
-                this.resultValue = value;
-                return value;
-            },
-            resultValue(value) {
-                this.$emit('input', value);
-                return value;
+                this.$emit('input', this.discountValue)
             }
         },
         created() {
-            //this.resultValue = this.discountValue = this.input;
+            this.init(this.value);
         }
     }
 </script>

@@ -27,14 +27,14 @@ class OfferController extends Controller
 
     public function index(Request $request, OfferFilterInterface $filter, AlgoFactoryInterface $factory)
     {
-        $perPage = 20;
+        $perPage = 10;
 
         if ($request->has('per_page') && is_numeric($request->input('per_page'))) {
             $perPage = $request->input('per_page');
         }
 
+
         $result = $filter->apply();
-        $aggregate = $result->aggregate();
         $additionFields = $result->additionsFields();
         $data = $result->get()->paginate($perPage);
         $users = $factory->load($data, $request->has('specials_offers'))->create();
@@ -67,7 +67,7 @@ class OfferController extends Controller
             'users' => $users,
             'filters' => $filters,
             'pagination' => $data->appends($request->input()),
-            'aggregate' => $aggregate
+            'perPage' => $perPage
         ]);
     }
 }

@@ -172,5 +172,4 @@ class User extends Authenticatable
     {
         return $this->provideFilter(\App\Filters\UserFilter::class);
     }
-
 }
