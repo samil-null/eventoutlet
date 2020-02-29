@@ -5229,12 +5229,14 @@ __webpack_require__.r(__webpack_exports__);
   props: ['userId'],
   data: function data() {
     return {
+      user: {},
+      services: [],
+      //
       isActiveAlert: false,
       alertMessages: [],
       renderServiceApp: false,
       specialities: [],
       priceOptions: [],
-      services: [],
       speciality: {},
       avatar: null,
       email: null,
@@ -5332,19 +5334,35 @@ __webpack_require__.r(__webpack_exports__);
     var _this3 = this;
 
     var form = this.form;
+    _modules_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/app/user').then(function (_ref5) {
+      var data = _ref5.data;
+      _this3.user = data.user;
+    });
+    _modules_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/app/services').then(function (_ref6) {
+      var data = _ref6.data;
+      _this3.services = data.services;
+    });
+    _modules_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/app/media/videos').then(function (_ref7) {
+      var data = _ref7.data;
+      _this3.video = data.video;
+    });
+    _modules_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/app/media/gallery').then(function (_ref8) {
+      var data = _ref8.data;
+      _this3.gallery = data.gallery;
+    });
     _modules_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get("/app/profiles/".concat(this.userId, "/edit")).then(function (res) {
       return res.data.data;
     }).then(function (data) {
       _this3.specialities = data.specialties;
       _this3.priceOptions = data.price_options;
-      _this3.avatar = data.avatar;
-      _this3.gallery = data.gallery;
-      _this3.videos = data.videos;
+      _this3.avatar = data.avatar; //this.gallery = data.gallery;
+      //this.videos = data.videos;
+
       _this3.cities = data.cities;
       _this3.genders = data.genders;
       return data.user;
     }).then(function (user) {
-      _this3.services = user.services;
+      //this.services = user.services;
       form.name = user.name;
       _this3.additionalFields = user.speciality.fields;
       _this3.speciality = user.speciality || {};
@@ -105562,7 +105580,7 @@ var render = function() {
                         "div",
                         { staticClass: "pe-block pe-list" },
                         [
-                          _vm.renderServiceApp
+                          _vm.services.length
                             ? _c("services-list-app", {
                                 attrs: {
                                   services: _vm.services,

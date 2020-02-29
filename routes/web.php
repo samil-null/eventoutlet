@@ -44,28 +44,35 @@ Route::group(['namespace' => 'Site'], function () {
 });
 
 
+/**
+ * executor routes
+ */
 
-//**
+
 
 Route::group(['prefix' => 'app', 'namespace' => 'Api\App', 'middleware' => ['role:executor']], function() {
+
+    Route::get('/user', 'UserController@index');
+
     Route::resource('/profiles', 'ProfileController');
     Route::resource('/offers', 'OfferController');
     Route::post('/offers/published', 'OfferController@published');
     Route::resource('/services', 'ServiceController');
     Route::resource('/specialties', 'SpecialityController');
 
-    Route::group(['prefix' => 'media'], function () {
-        Route::post('/avatar', 'MediaController@avatar')->middleware('optimizeImages');
-        Route::post('/gallery','MediaController@gallery')->middleware('optimizeImages');
-        Route::delete('/gallery','MediaController@remove')->middleware('optimizeImages');
-        Route::post('/video', 'MediaController@video');
+    Route::group(['prefix' => 'media', 'namespace' => 'Media'], function () {
+        Route::resource('/gallery','GalleryController')
+            ->only(['index', 'store'])
+            ->middleware('optimizeImages');
+
+        Route::delete('/gallery', 'GalleryController@destroy');
+        Route::resource('/videos', 'VideoController');
         Route::get('/video/render','MediaController@render');
     });
-
-    Route::group(['prefix' => 'filter'], function () {
-        Route::post('/', 'FilterController@build');
-    });
 });
+
+
+
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['role:admin']], function () {
     Route::get('/', 'DashboardController@index')->name('admin.dashboard');

@@ -33,7 +33,6 @@ class OfferController extends Controller
             $perPage = $request->input('per_page');
         }
 
-
         $result = $filter->apply();
         $additionFields = $result->additionsFields();
         $data = $result->get()->paginate($perPage);

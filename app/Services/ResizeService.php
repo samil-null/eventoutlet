@@ -179,6 +179,10 @@ class ResizeService
         return Image::make($this->creatPathFile($path, $file));
     }
 
+    /**
+     * @param $name
+     * @return array|mixed
+     */
     public function getPreset($name)
     {
         if (isset($this->presets[$name])) {
@@ -189,6 +193,12 @@ class ResizeService
 
     }
 
+    /**
+     * @param $filename
+     * @param string $height
+     * @param string $width
+     * @return string
+     */
     public function createCacheName($filename, $height = 'nope', $width = 'nope') {
 
         $fileInfo = new \SplFileInfo($filename);
@@ -198,6 +208,15 @@ class ResizeService
         return "$filename{$height}x{$width}.$ext";
     }
 
+    /**
+     * @param $filename
+     * @param $store
+     * @param null $preset
+     * @param array $options
+     * @param string $mode
+     * @return string|null
+     * @throws \Exception
+     */
     public function roc($filename, $store, $preset = null, $options = [], $mode = 'fit')
     {
         if (!$filename) return null;
@@ -222,6 +241,12 @@ class ResizeService
 
     }
 
+    /**
+     * @param $filename
+     * @param $store
+     * @param bool $original
+     * @return string
+     */
     public function getFileUrl($filename, $store, $original = true)
     {
         return asset($this->creatPathFile($this->getFileFolder($store, $original), $filename));

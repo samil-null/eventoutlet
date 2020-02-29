@@ -33,9 +33,9 @@ class UsersTableSeeder extends Seeder
 
         factory(User::class, 80)->create()->each(function ($user) {
 
-            factory(\App\Models\Media::class, random_int(4, 8))->create([
-                'user_id' => $user->id
-            ]);
+//            factory(\App\Models\Media::class, random_int(4, 8))->create([
+//                'user_id' => $user->id
+//            ]);
 
             factory(UserInfo::class)->create([
                 'user_id' => $user->id

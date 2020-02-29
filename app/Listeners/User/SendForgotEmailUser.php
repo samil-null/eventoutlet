@@ -26,9 +26,6 @@ class SendForgotEmailUser
      */
     public function handle($event)
     {
-
-        $event->user->email = 'denis.budancev@gmail.com';
-
         Mail::send('mails.user.forgot', ['user' => $event->user, 'token' => $event->token], function ($message) use ($event) {
             $message->from('info@eventoutlet.ru');
             $message->to($event->user->email);

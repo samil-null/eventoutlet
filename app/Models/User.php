@@ -26,6 +26,8 @@ class User extends Authenticatable
 
     public const BANED_STATUS = 4;
 
+    protected $with = ['info'];
+
     /**
      * @var array
      */
@@ -144,13 +146,13 @@ class User extends Authenticatable
     public function gallery()
     {
         return $this->hasMany(Media::class,'user_id', 'id')
-                    ->where(['type' => 'image', 'type_content' => 'gallery']);
+            ->where('type', Media::GALLERY_TYPE);
     }
 
     public function videos()
     {
         return $this->hasMany(Media::class,'user_id', 'id')
-            ->where(['type' => 'video', 'type_content' => 'video']);
+            ->where(['type' => 'video', Media::VIDEO_TYPE]);
     }
 
     public function info()

@@ -35,8 +35,6 @@ class SendEmailChangeUserStatus
                 break;
         }
 
-        $event->user->email = 'denis.budancev@gmail.com';
-
         Mail::send($template, ['user' => $event->user], function ($message) use ($event) {
             $message->from('info@eventoutlet.ru');
             $message->to($event->user->email);

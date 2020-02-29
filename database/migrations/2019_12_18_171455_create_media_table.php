@@ -17,7 +17,6 @@ class CreateMediaTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id');
             $table->string('type',125);
-            $table->string('type_content', 125);
             $table->string('name',255);
             $table->timestamps();
         });

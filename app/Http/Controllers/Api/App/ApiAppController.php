@@ -11,11 +11,17 @@ class ApiAppController extends Controller
 {
     protected $user;
 
+    protected $userBuilder;
+
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
-            $this->user = User::where('id', Auth::id());
-            return $next($request);
+            if (Auth::check()) {
+                $this->userBuilder = User::where('id', Auth::id());
+                $this->user = Auth::user();
+                return $next($request);
+            }
+            abort(403);
         });
     }
 }

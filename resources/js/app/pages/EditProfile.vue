@@ -240,7 +240,7 @@
                                     <div class="pe-block pe-list">
                                         <services-list-app
                                             :services="services"
-                                            v-if="renderServiceApp"
+                                            v-if="services.length"
                                             :price-options="priceOptions"
                                             :additional-fields="additionalFields"
                                             @update-service="triggerAlert"
@@ -288,12 +288,15 @@
         props:['userId'],
         data() {
             return {
+                user:{},
+                services:[],
+                //
                 isActiveAlert:false,
                 alertMessages:[],
                 renderServiceApp:false,
                 specialities:[],
                 priceOptions:[],
-                services:[],
+
                 speciality:{},
                 avatar:null,
                 email:null,
@@ -381,20 +384,38 @@
         mounted() {
             let form = this.form;
 
+            axios.get('/app/user')
+                .then(({data}) => {
+                    this.user = data.user;
+                });
+            axios.get('/app/services')
+                .then(({data}) => {
+                    this.services = data.services;
+                });
+            axios.get('/app/media/videos')
+                .then(({data}) => {
+                    this.video = data.video;
+                });
+
+            axios.get('/app/media/gallery')
+                .then(({data}) => {
+                    this.gallery = data.gallery;
+                });
+
             axios.get(`/app/profiles/${this.userId}/edit`)
                 .then(res => res.data.data)
                 .then(data =>  {
                     this.specialities  = data.specialties;
                     this.priceOptions = data.price_options;
                     this.avatar = data.avatar;
-                    this.gallery = data.gallery;
-                    this.videos = data.videos;
+                    //this.gallery = data.gallery;
+                    //this.videos = data.videos;
                     this.cities = data.cities;
                     this.genders = data.genders;
                     return data.user
                 })
                 .then(user => {
-                    this.services = user.services;
+                    //this.services = user.services;
                     form.name = user.name;
                     this.additionalFields = user.speciality.fields;
                     this.speciality = user.speciality|| {};

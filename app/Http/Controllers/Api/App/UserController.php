@@ -7,12 +7,15 @@ use Illuminate\Http\Request;
 
 class UserController extends ApiAppController
 {
-    public function show()
+    public function index()
     {
-        $user = $this->user->with('info')->first();
-
         return response()->json([
-            'user' => $user
+            'user' => $this->user
         ]);
+    }
+
+    public function update(Request $request)
+    {
+
     }
 }

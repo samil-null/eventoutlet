@@ -86,7 +86,7 @@ class ProfileController extends ApiAppController
     public function edit(Video $video, $id)
     {
 
-        $user = $this->user->with([ 'info','services.priceOption', 'services.fields.metaField', 'city', 'speciality.fields', 'offers'])
+        $user = $this->userBuilder->with([ 'info','services.priceOption', 'services.fields.metaField', 'city', 'speciality.fields', 'offers'])
                             ->first();
 
         $specialties = Specialty::where('status', Specialty::ACTIVE_STATUS)->get(['id', 'name']);
@@ -126,7 +126,7 @@ class ProfileController extends ApiAppController
      */
     public function update(UpdateRequest $request, $id)
     {
-        $user = $this->user->first();
+        $user = $this->user;
 
         $user->update([
             'name' => $request->input('name'),

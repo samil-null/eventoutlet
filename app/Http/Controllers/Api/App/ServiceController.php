@@ -18,13 +18,13 @@ class ServiceController extends ApiAppController
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        //
+        return response()->json([
+            'services' => $this->user->services()->with(['priceOption', 'fields.metaField'])->get()
+        ]);
     }
 
     /**

@@ -41,8 +41,6 @@ class SendEmailChangeServiceStatus
                 throw new \Exception('Неизвестный статус');
         }
 
-        $event->user->email = 'denis.budancev@gmail.com';
-
         Mail::send($template, ['user' => $event->user, '_message' => $event->message], function ($message) use ($event) {
             $message->from('info@eventoutlet.ru');
             $message->to($event->user->email);
