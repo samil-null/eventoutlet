@@ -8,6 +8,7 @@ use App\Filters\Offers\SpecialOfferFilter;
 use App\Helpers\DateHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Specialty;
+use App\Utils\Seo\SEO;
 use SEOMeta;
 use Illuminate\Http\Request;
 
@@ -15,6 +16,8 @@ class HomeController extends Controller
 {
     public function index(Request $request, AlgoFactoryInterface $factory)
     {
+        SEO::page('home');
+
         $filter = (new SpecialOfferFilter($request))->apply();
 
         $users = $factory->load(
@@ -26,10 +29,8 @@ class HomeController extends Controller
             ->active()
             ->get()
             ->toJson();
-
-        SEOMeta::setTitle('Eventoutlet - поиск специалистов для вашего мероприятия на определенную дату со скидкой.');
         return view('site.home.index',[
-            'users' => [],
+            'users' => $users,
             'specialities' => $specialities,
             'startDate' => DateHelper::minFilterDate(),
             'endDate' => DateHelper::maxFilterDate()

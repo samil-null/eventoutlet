@@ -2614,20 +2614,19 @@ __webpack_require__.r(__webpack_exports__);
       var self = this;
       var form = new FormData();
       form.append('avatar', avatar);
-      _modules_axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/app/media/avatar', form).then(function (res) {
-        return res.data.data;
-      }).then(function (data) {
-        self.image = data.path;
+      _modules_axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/app/media/avatar', form).then(function (_ref) {
+        var data = _ref.data;
+        console.log(data.avatar);
+        self.image = data.video;
 
-        _this.$set(_this, 'image', data.path);
+        _this.$set(_this, 'image', data.avatar);
 
         document.querySelectorAll('.navbar-general__profile-photo, .profile-edit__card-photo').forEach(function (item) {
-          item.style.backgroundImage = "url(".concat(data.path, ")");
+          item.style.backgroundImage = "url(".concat(data.avatar, ")");
         });
       });
     }
-  },
-  mounted: function mounted() {}
+  }
 });
 
 /***/ }),
@@ -3756,6 +3755,37 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/Profile/UserCard.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/app/components/Profile/UserCard.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['name', 'speciality', 'avatar', 'editable', 'link'],
+  name: "UserCard"
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/Search.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/app/components/Search.vue?vue&type=script&lang=js& ***!
@@ -4466,6 +4496,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! dayjs */ "./node_modules/dayjs/dayjs.min.js");
 /* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _components_EditOfferItems__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/EditOfferItems */ "./resources/js/app/components/EditOfferItems.vue");
+/* harmony import */ var _components_Profile_UserCard__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/Profile/UserCard */ "./resources/js/app/components/Profile/UserCard.vue");
 //
 //
 //
@@ -4560,10 +4591,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
+
 
 
 
@@ -4655,18 +4683,20 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this3 = this;
 
+    _modules_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/app/users').then(function (_ref3) {
+      var data = _ref3.data;
+      _this3.user = data.user;
+    });
     _modules_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/app/offers/create').then(function (res) {
       return res.data.data;
     }).then(function (data) {
-      console.log(data);
-      _this3.user = data.user;
-      _this3.avatar = data.avatar;
       _this3.services = data.services;
       _this3.minDate = data.minDate;
       _this3.maxDate = data.maxDate;
     });
   },
   components: {
+    UserCard: _components_Profile_UserCard__WEBPACK_IMPORTED_MODULE_8__["default"],
     'v-calendar': v_calendar_lib_components_date_picker_umd__WEBPACK_IMPORTED_MODULE_2___default.a,
     SelectApp: _components_SelectApp__WEBPACK_IMPORTED_MODULE_1__["default"],
     DiscountSelect: _components_DiscountSelect__WEBPACK_IMPORTED_MODULE_3__["default"],
@@ -4696,6 +4726,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Alert__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Alert */ "./resources/js/app/components/Alert.vue");
 /* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! dayjs */ "./node_modules/dayjs/dayjs.min.js");
 /* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _components_Profile_UserCard__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/Profile/UserCard */ "./resources/js/app/components/Profile/UserCard.vue");
 //
 //
 //
@@ -4786,10 +4817,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
+
 
 
 
@@ -4882,12 +4910,13 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this3 = this;
 
+    _modules_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/app/users').then(function (_ref3) {
+      var data = _ref3.data;
+      _this3.user = data.user;
+    });
     _modules_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/app/offers/create').then(function (res) {
       return res.data.data;
     }).then(function (data) {
-      console.log(data);
-      _this3.user = data.user;
-      _this3.avatar = data.avatar;
       _this3.services = data.services;
       _this3.minDate = data.minDate;
       _this3.maxDate = data.maxDate;
@@ -4900,6 +4929,7 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   components: {
+    UserCard: _components_Profile_UserCard__WEBPACK_IMPORTED_MODULE_8__["default"],
     EditOfferDatePicker: _components_Datepickers_EditOfferDatePicker__WEBPACK_IMPORTED_MODULE_5__["default"],
     SelectApp: _components_SelectApp__WEBPACK_IMPORTED_MODULE_1__["default"],
     DiscountSelect: _components_DiscountSelect__WEBPACK_IMPORTED_MODULE_3__["default"],
@@ -4932,6 +4962,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Alert__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/Alert */ "./resources/js/app/components/Alert.vue");
 /* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
 /* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _components_Profile_UserCard__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/Profile/UserCard */ "./resources/js/app/components/Profile/UserCard.vue");
 //
 //
 //
@@ -5195,13 +5226,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
+
 
 
 
@@ -5222,6 +5247,7 @@ __webpack_require__.r(__webpack_exports__);
       services: [],
       //
       isActiveAlert: false,
+      userCardRender: false,
       alertMessages: [],
       renderServiceApp: false,
       specialities: [],
@@ -5323,9 +5349,10 @@ __webpack_require__.r(__webpack_exports__);
     var _this3 = this;
 
     var form = this.form;
-    _modules_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/app/user').then(function (_ref5) {
+    _modules_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/app/users').then(function (_ref5) {
       var data = _ref5.data;
       _this3.user = data.user;
+      _this3.userCardRender = true;
     });
     _modules_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/app/services').then(function (_ref6) {
       var data = _ref6.data;
@@ -5369,6 +5396,7 @@ __webpack_require__.r(__webpack_exports__);
     mask: vue_the_mask__WEBPACK_IMPORTED_MODULE_10__["mask"]
   },
   components: {
+    UserCard: _components_Profile_UserCard__WEBPACK_IMPORTED_MODULE_11__["default"],
     AvatarLoader: _components_AvatarLoader__WEBPACK_IMPORTED_MODULE_8__["default"],
     SelectApp: _components_SelectApp__WEBPACK_IMPORTED_MODULE_7__["default"],
     TextareaApp: _components_TextareaApp__WEBPACK_IMPORTED_MODULE_6__["default"],
@@ -5393,41 +5421,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../modules/axios */ "./resources/js/app/modules/axios.js");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var _components_Profile_UserCard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Profile/UserCard */ "./resources/js/app/components/Profile/UserCard.vue");
 //
 //
 //
@@ -5494,30 +5488,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    UserCard: _components_Profile_UserCard__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   props: ['createOfferLink', 'editProfileLink', 'userId'],
   name: 'Profile',
   data: function data() {
     return {
       user: {},
       avatar: {},
-      offers: [""]
+      offers: []
     };
   },
   computed: {},
   mounted: function mounted() {
     var _this = this;
 
-    _modules_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/app/profiles/' + this.userId).then(function (res) {
-      return res.data.data;
-    }).then(function (data) {
-      _this.user = data.user;
-      _this.avatar = data.avatar;
-    })["catch"](function (e) {
-      console.log(e);
-    });
-    _modules_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/app/offers').then(function (_ref) {
+    _modules_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/app/users').then(function (_ref) {
       var data = _ref.data;
+      _this.user = data.user;
+    });
+    _modules_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/app/offers').then(function (_ref2) {
+      var data = _ref2.data;
       _this.offers = data.data.offers;
     });
   }
@@ -103374,6 +103368,60 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/Profile/UserCard.vue?vue&type=template&id=65fcc43e&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/app/components/Profile/UserCard.vue?vue&type=template&id=65fcc43e& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "profile-edit__card-wrapper" }, [
+    _c("div", { staticClass: "profile-edit__card profile-special" }, [
+      _c("div", {
+        staticClass: "profile-edit__card-photo",
+        style: { "background-image": "url(" + _vm.avatar + ")" }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "profile-edit__name" }, [
+        _c("span", [_vm._v(_vm._s(_vm.name))])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "profile-edit__prof" }, [
+        _c("span", [_vm._v(_vm._s(_vm.speciality))])
+      ]),
+      _vm._v(" "),
+      _vm.editable
+        ? _c("div", { staticClass: "pe-block__add-btn" }, [_vm._m(0)])
+        : _vm._e()
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      { staticClass: "add-btn", attrs: { href: "/lk/profile/edit" } },
+      [_c("span", [_vm._v("Редактировать профиль")])]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/Search.vue?vue&type=template&id=2cd3fd36&":
 /*!*************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/app/components/Search.vue?vue&type=template&id=2cd3fd36& ***!
@@ -104303,39 +104351,22 @@ var render = function() {
         _c("div", { staticClass: "container" }, [
           _c("div", { staticClass: "profile-edit__content" }, [
             _c("div", { staticClass: "row no-gutters" }, [
-              _c("div", { staticClass: "col-md-12 col-lg-3 col-xl-3" }, [
-                _c("div", { staticClass: "profile-edit__card-wrapper" }, [
-                  _c(
-                    "div",
-                    { staticClass: "profile-edit__card profile-special" },
-                    [
-                      _c("div", {
-                        staticClass: "profile-edit__card-photo",
-                        style: { "background-image": "url(" + _vm.avatar + ")" }
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "profile-edit__name" }, [
-                        _c("span", [_vm._v(_vm._s(_vm.user.name))])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "profile-edit__prof" }, [
-                        _c("span", [_vm._v(_vm._s(_vm.user.speciality.name))])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "pe-block__add-btn" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "add-btn",
-                            attrs: { href: _vm.editProfileLink }
-                          },
-                          [_c("span", [_vm._v("Редактировать профиль")])]
-                        )
-                      ])
-                    ]
-                  )
-                ])
-              ]),
+              _c(
+                "div",
+                { staticClass: "col-md-12 col-lg-3 col-xl-3" },
+                [
+                  _vm.user.id
+                    ? _c("user-card", {
+                        attrs: {
+                          avatar: _vm.user.avatar.original,
+                          name: _vm.user.name,
+                          speciality: _vm.user.info.speciality
+                        }
+                      })
+                    : _vm._e()
+                ],
+                1
+              ),
               _vm._v(" "),
               _c(
                 "div",
@@ -104606,39 +104637,22 @@ var render = function() {
         _c("div", { staticClass: "container" }, [
           _c("div", { staticClass: "profile-edit__content" }, [
             _c("div", { staticClass: "row no-gutters" }, [
-              _c("div", { staticClass: "col-md-12 col-lg-3 col-xl-3" }, [
-                _c("div", { staticClass: "profile-edit__card-wrapper" }, [
-                  _c(
-                    "div",
-                    { staticClass: "profile-edit__card profile-special" },
-                    [
-                      _c("div", {
-                        staticClass: "profile-edit__card-photo",
-                        style: { "background-image": "url(" + _vm.avatar + ")" }
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "profile-edit__name" }, [
-                        _c("span", [_vm._v(_vm._s(_vm.user.name))])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "profile-edit__prof" }, [
-                        _c("span", [_vm._v(_vm._s(_vm.user.speciality.name))])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "pe-block__add-btn" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "add-btn",
-                            attrs: { href: _vm.editProfileLink }
-                          },
-                          [_c("span", [_vm._v("Редактировать профиль")])]
-                        )
-                      ])
-                    ]
-                  )
-                ])
-              ]),
+              _c(
+                "div",
+                { staticClass: "col-md-12 col-lg-3 col-xl-3" },
+                [
+                  _vm.user.id
+                    ? _c("user-card", {
+                        attrs: {
+                          avatar: _vm.user.avatar.original,
+                          name: _vm.user.name,
+                          speciality: _vm.user.info.speciality
+                        }
+                      })
+                    : _vm._e()
+                ],
+                1
+              ),
               _vm._v(" "),
               _c(
                 "div",
@@ -104907,24 +104921,22 @@ var render = function() {
         _c("div", { staticClass: "container" }, [
           _c("div", { staticClass: "profile-edit__content" }, [
             _c("div", { staticClass: "row no-gutters" }, [
-              _c("div", { staticClass: "col-xl-3" }, [
-                _c("div", { staticClass: "profile-edit__card-wrapper" }, [
-                  _c("div", { staticClass: "profile-edit__card" }, [
-                    _c("div", {
-                      staticClass: "profile-edit__card-photo",
-                      style: { "background-image": "url(" + _vm.avatar + ")" }
-                    }),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "profile-edit__name" }, [
-                      _c("span", [_vm._v(_vm._s(_vm.form.name))])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "profile-edit__prof" }, [
-                      _c("span", [_vm._v(_vm._s(_vm.speciality.name))])
-                    ])
-                  ])
-                ])
-              ]),
+              _c(
+                "div",
+                { staticClass: "col-xl-3" },
+                [
+                  _vm.userCardRender
+                    ? _c("user-card", {
+                        attrs: {
+                          avatar: _vm.user.avatar.original,
+                          name: _vm.user.name,
+                          speciality: _vm.user.info.speciality
+                        }
+                      })
+                    : _vm._e()
+                ],
+                1
+              ),
               _vm._v(" "),
               _c("div", { staticClass: "col-xl-8 offset-xl-1" }, [
                 _c("div", { staticClass: "profile-edit__wrapper" }, [
@@ -105714,209 +105726,170 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    false
-      ? undefined
-      : _vm._e(),
-    _vm._v(" "),
-    _c("section", { staticClass: "profile-edit" }, [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "profile-edit__content" }, [
-          _c("div", { staticClass: "row no-gutters" }, [
-            _c("div", { staticClass: "col-md-12 col-lg-3 col-xl-3" }, [
-              _c("div", { staticClass: "profile-edit__card-wrapper" }, [
-                _c(
-                  "div",
-                  { staticClass: "profile-edit__card profile-special" },
-                  [
-                    _c("div", {
-                      staticClass: "profile-edit__card-photo",
-                      style: { "background-image": "url(" + _vm.avatar + ")" }
-                    }),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "profile-edit__name" }, [
-                      _c("span", [_vm._v(_vm._s(_vm.user.name))])
-                    ]),
-                    _vm._v(" "),
-                    _vm._m(0),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "pe-block__add-btn" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "add-btn",
-                          attrs: { href: _vm.editProfileLink }
-                        },
-                        [_c("span", [_vm._v("Редактировать профиль")])]
-                      )
+  return _c("section", { staticClass: "profile-edit" }, [
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "profile-edit__content" }, [
+        _c("div", { staticClass: "row no-gutters" }, [
+          _c(
+            "div",
+            { staticClass: "col-md-12 col-lg-3 col-xl-3" },
+            [
+              _vm.user.id
+                ? _c("user-card", {
+                    attrs: {
+                      avatar: _vm.user.avatar.original,
+                      name: _vm.user.name,
+                      speciality: _vm.user.info.speciality,
+                      editable: true
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "col-md-12 col-lg-8 col-xl-8 offset-lg-1 offset-xl-1"
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "profile-edit__wrapper" },
+                [
+                  _c("div", { staticClass: "profile-edit__title lk__title" }, [
+                    _c("span", [
+                      _vm._v("Здравствуйте, " + _vm._s(_vm.user.name))
                     ])
-                  ]
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "col-md-12 col-lg-8 col-xl-8 offset-lg-1 offset-xl-1"
-              },
-              [
-                _c(
-                  "div",
-                  { staticClass: "profile-edit__wrapper" },
-                  [
-                    _c(
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.offers, function(offer) {
+                    return _c(
                       "div",
-                      { staticClass: "profile-edit__title lk__title" },
+                      { staticClass: "profile-edit__body lk__body" },
                       [
-                        _c("span", [
-                          _vm._v("Здравствуйте, " + _vm._s(_vm.user.name))
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _vm._l(_vm.offers, function(offer) {
-                      return _c(
-                        "div",
-                        { staticClass: "profile-edit__body lk__body" },
-                        [
-                          _c("div", { staticClass: "pe-block pr-block" }, [
-                            _c("div", { staticClass: "special-offer" }, [
+                        _c("div", { staticClass: "pe-block pr-block" }, [
+                          _c("div", { staticClass: "special-offer" }, [
+                            _c("div", { staticClass: "special-offer__head" }, [
+                              _vm._m(0, true),
+                              _vm._v(" "),
                               _c(
                                 "div",
-                                { staticClass: "special-offer__head" },
+                                { staticClass: "special-offer__item " },
                                 [
-                                  _vm._m(1, true),
+                                  _c("span", [_vm._v("Дата")]),
                                   _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    { staticClass: "special-offer__item " },
-                                    [
-                                      _c("span", [_vm._v("Дата")]),
-                                      _vm._v(" "),
-                                      _c("span", [_vm._v(_vm._s(offer.dates))])
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    { staticClass: "special-offer__item" },
-                                    [
-                                      _c("span", [_vm._v("Услуга")]),
-                                      _vm._v(" "),
-                                      _c("span", [
-                                        _vm._v(_vm._s(offer.serviceName) + " ")
-                                      ])
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    { staticClass: "special-offer__item" },
-                                    [
-                                      _c("span", [_vm._v("Цена со скидкой")]),
-                                      _vm._v(" "),
-                                      _c("span", [
-                                        _vm._v(
-                                          _vm._s(offer.price) +
-                                            " " +
-                                            _vm._s(offer.priceOption)
-                                        )
-                                      ])
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    { staticClass: "special-offer__item" },
-                                    [
-                                      _c("span", [_vm._v("Скидка")]),
-                                      _vm._v(" "),
-                                      _c("span", [
-                                        _vm._v(_vm._s(offer.discount) + "%")
-                                      ])
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    { staticClass: "special-offer__button" },
-                                    [
-                                      _c(
-                                        "a",
-                                        { attrs: { href: offer.editUrl } },
-                                        [_vm._v("Изменить")]
-                                      )
-                                    ]
-                                  )
+                                  _c("span", [_vm._v(_vm._s(offer.dates))])
                                 ]
                               ),
                               _vm._v(" "),
                               _c(
                                 "div",
-                                { staticClass: "special-offer__desctipton" },
+                                { staticClass: "special-offer__item" },
                                 [
-                                  _vm._m(2, true),
+                                  _c("span", [_vm._v("Услуга")]),
                                   _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "special-offer__desctipton-body"
-                                    },
-                                    [
-                                      _c("p", [
-                                        _vm._v(
-                                          "\n                                                    " +
-                                            _vm._s(offer.description) +
-                                            "\n                                                "
-                                        )
-                                      ])
-                                    ]
-                                  )
+                                  _c("span", [
+                                    _vm._v(_vm._s(offer.serviceName) + " ")
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "special-offer__item" },
+                                [
+                                  _c("span", [_vm._v("Цена со скидкой")]),
+                                  _vm._v(" "),
+                                  _c("span", [
+                                    _vm._v(
+                                      _vm._s(offer.price) +
+                                        " " +
+                                        _vm._s(offer.priceOption)
+                                    )
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "special-offer__item" },
+                                [
+                                  _c("span", [_vm._v("Скидка")]),
+                                  _vm._v(" "),
+                                  _c("span", [
+                                    _vm._v(_vm._s(offer.discount) + "%")
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "special-offer__button" },
+                                [
+                                  _c("a", { attrs: { href: offer.editUrl } }, [
+                                    _vm._v("Изменить")
+                                  ])
                                 ]
                               )
-                            ])
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "special-offer__desctipton" },
+                              [
+                                _vm._m(1, true),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "special-offer__desctipton-body"
+                                  },
+                                  [
+                                    _c("p", [
+                                      _vm._v(
+                                        "\n                                                " +
+                                          _vm._s(offer.description) +
+                                          "\n                                            "
+                                      )
+                                    ])
+                                  ]
+                                )
+                              ]
+                            )
                           ])
-                        ]
-                      )
-                    })
-                  ],
-                  2
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "lk__havent-offers" }, [
-                  _vm._m(3),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "pe-block__add-btn" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "add-btn add-btn-corall",
-                        attrs: { href: _vm.createOfferLink }
-                      },
-                      [_c("span", [_vm._v("Добавить спецпредложение")])]
+                        ])
+                      ]
                     )
-                  ])
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "lk__havent-offers" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _c("div", { staticClass: "pe-block__add-btn" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "add-btn add-btn-corall",
+                      attrs: { href: _vm.createOfferLink }
+                    },
+                    [_c("span", [_vm._v("Добавить спецпредложение")])]
+                  )
                 ])
-              ]
-            )
-          ])
+              ])
+            ]
+          )
         ])
       ])
     ])
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "profile-edit__prof" }, [
-      _c("span", [_vm._v("Фотограф")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -105942,7 +105915,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "lk__havent-offers-title" }, [
       _c("span", [
         _vm._v(
-          "\n                              У вас еще нет опубликованных спецпредложений, вам нужно срочно их опубликовать\n                            "
+          "\n                          У вас еще нет опубликованных спецпредложений, вам нужно срочно их опубликовать\n                        "
         )
       ])
     ])
@@ -120787,6 +120760,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PerPageApp_vue_vue_type_template_id_32182ff2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PerPageApp_vue_vue_type_template_id_32182ff2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/app/components/Profile/UserCard.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/app/components/Profile/UserCard.vue ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _UserCard_vue_vue_type_template_id_65fcc43e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserCard.vue?vue&type=template&id=65fcc43e& */ "./resources/js/app/components/Profile/UserCard.vue?vue&type=template&id=65fcc43e&");
+/* harmony import */ var _UserCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserCard.vue?vue&type=script&lang=js& */ "./resources/js/app/components/Profile/UserCard.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _UserCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _UserCard_vue_vue_type_template_id_65fcc43e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _UserCard_vue_vue_type_template_id_65fcc43e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/app/components/Profile/UserCard.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/app/components/Profile/UserCard.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/app/components/Profile/UserCard.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./UserCard.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/Profile/UserCard.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/app/components/Profile/UserCard.vue?vue&type=template&id=65fcc43e&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/app/components/Profile/UserCard.vue?vue&type=template&id=65fcc43e& ***!
+  \*****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserCard_vue_vue_type_template_id_65fcc43e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./UserCard.vue?vue&type=template&id=65fcc43e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/Profile/UserCard.vue?vue&type=template&id=65fcc43e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserCard_vue_vue_type_template_id_65fcc43e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserCard_vue_vue_type_template_id_65fcc43e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

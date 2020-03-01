@@ -5,19 +5,12 @@
                 <div class="profile-edit__content">
                     <div class="row no-gutters">
                         <div class="col-xl-3">
-                            <div class="profile-edit__card-wrapper">
-                                <div class="profile-edit__card">
-                                    <div class="profile-edit__card-photo" :style="{'background-image': 'url('+ avatar +')'}">
-
-                                    </div>
-                                    <div class="profile-edit__name">
-                                        <span>{{ form.name }}</span>
-                                    </div>
-                                    <div class="profile-edit__prof">
-                                        <span>{{ speciality.name }}</span>
-                                    </div>
-                                </div>
-                            </div>
+                            <user-card
+                                v-if="userCardRender"
+                                :avatar="user.avatar.original"
+                                :name="user.name"
+                                :speciality="user.info.speciality"
+                            />
                         </div>
                         <div class="col-xl-8 offset-xl-1">
                             <div class="profile-edit__wrapper">
@@ -280,6 +273,7 @@
     import AvatarLoader from "../components/AvatarLoader";
     import Alert from "../components/Alert";
     import {mask} from 'vue-the-mask'
+    import UserCard from "../components/Profile/UserCard";
 
     export default {
         name: 'Profile',
@@ -290,6 +284,7 @@
                 services:[],
                 //
                 isActiveAlert:false,
+                userCardRender:false,
                 alertMessages:[],
                 renderServiceApp:false,
                 specialities:[],
@@ -382,9 +377,10 @@
         mounted() {
             let form = this.form;
 
-            axios.get('/app/user')
+            axios.get('/app/users')
                 .then(({data}) => {
                     this.user = data.user;
+                    this.userCardRender = true;
                 });
             axios.get('/app/services')
                 .then(({data}) => {
@@ -430,6 +426,7 @@
         },
         directives: {mask},
         components: {
+            UserCard,
             AvatarLoader,
             SelectApp,
             TextareaApp,

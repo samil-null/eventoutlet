@@ -5,16 +5,12 @@
                 <div class="profile-edit__content">
                     <div class="row no-gutters">
                         <div class="col-md-12 col-lg-3 col-xl-3">
-                            <div class="profile-edit__card-wrapper">
-                                <div class="profile-edit__card profile-special">
-                                    <div class="profile-edit__card-photo" :style="{'background-image': `url(${avatar})`}"></div>
-                                    <div class="profile-edit__name"><span>{{ user.name }}</span></div>
-                                    <div class="profile-edit__prof"><span>{{ user.speciality.name }}</span></div>
-                                    <div class="pe-block__add-btn">
-                                        <a :href="editProfileLink" class="add-btn"> <span>Редактировать профиль</span> </a>
-                                    </div>
-                                </div>
-                            </div>
+                            <user-card
+                                v-if="user.id"
+                                :avatar="user.avatar.original"
+                                :name="user.name"
+                                :speciality="user.info.speciality"
+                            />
                         </div>
                         <div class="col-md-12 col-lg-8 col-xl-8 offset-lg-1 offset-xl-1">
                             <div class="profile-edit__wrapper">
@@ -101,6 +97,7 @@
     import EditOfferDatePicker from "../components/Datepickers/EditOfferDatePicker";
     import Alert from "../components/Alert";
     import dayjs from 'dayjs';
+    import UserCard from "../components/Profile/UserCard";
 
     export default {
         name: "CreateOffer",
@@ -177,16 +174,20 @@
             }
         },
         mounted() {
+
+            axios.get('/app/users')
+                .then(({data}) => {
+                    this.user = data.user;
+                })
+
             axios.get('/app/offers/create')
                 .then(res => res.data.data)
                 .then(data => {
-                    console.log(data);
-                    this.user = data.user;
-                    this.avatar = data.avatar;
                     this.services = data.services;
                     this.minDate = data.minDate;
                     this.maxDate = data.maxDate;
                 })
+
             axios.get('/app/offers/' + this.offerId)
                 .then(res => res.data.data)
                 .then(data => {
@@ -195,6 +196,7 @@
                 })
         },
         components: {
+            UserCard,
             EditOfferDatePicker,
             SelectApp,
             DiscountSelect,

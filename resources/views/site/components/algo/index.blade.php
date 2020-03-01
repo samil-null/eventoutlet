@@ -1,7 +1,7 @@
 <div class="col-xl-12">
     <div class="catalog-card">
         <div class="catalog-card__head">
-            <div class="catalog-card__head-photo" style="background-image: url({{ Imager::avatar($user->avatar) }});"></div>
+            <div class="catalog-card__head-photo" style="background-image: url({{ Imager::avatar($user->avatar, 'middle') }});"></div>
             <div class="catalog-card__head-info catalog-card-name">
                 <span class="catalog-card__first-title">
                     <a href="{{ route('site.users.show', $user->id) }}">{{ $user->name }}</a>

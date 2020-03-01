@@ -53,19 +53,16 @@
                 let form = new FormData();
                 form.append('avatar', avatar);
                 axios.post('/app/media/avatar', form)
-                    .then(res => res.data.data)
-                    .then(data => {
-                        self.image = data.path;
-                        this.$set(this, 'image', data.path);
+                    .then(({data}) => {
+                        console.log(data.avatar);
+                        self.image = data.video;
+                        this.$set(this, 'image', data.avatar);
                         document.querySelectorAll('.navbar-general__profile-photo, .profile-edit__card-photo').forEach( item => {
-                            item.style.backgroundImage = `url(${data.path})`;
+                            item.style.backgroundImage = `url(${data.avatar})`;
                         })
                     })
 
             }
-        },
-        mounted() {
-
         }
     }
 </script>

@@ -4,6 +4,7 @@
 namespace App\Utils\Media;
 
 
+use App\Helpers\AvatarHelper;
 use App\Helpers\ImagePathHelper;
 use App\Services\ResizeService;
 
@@ -23,13 +24,18 @@ class Imager
         $this->cropper = $cropper;
     }
 
-    public function avatar($path)
+    public function avatar($path, $size = 'small')
     {
-        if ($path) {
-            return $this->resize->roc($path, 'avatar', 'avatar');
-        }
+        AvatarHelper::init();
 
-        return asset('/assets/avatars/no-avatar.png');
+        switch ($size) {
+            case 'small':
+                return AvatarHelper::small($path);
+            case 'middle':
+                return AvatarHelper::middle($path);
+            case 'original':
+                return AvatarHelper::original($path);
+        }
     }
 
     public function gallerySmall($filename)

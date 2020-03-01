@@ -12,7 +12,8 @@ class Cropper
     protected const NO_FOUND_IMAGE = 'assets/image-not-found-big.png';
 
     protected $storage = [
-        'gallery' => ['gallery']
+        'gallery' => ['gallery'],
+        'avatar' => ['avatar']
     ];
 
     protected $options = [
@@ -38,7 +39,6 @@ class Cropper
         $cropPath = ImagePathHelper::getFullStorePath($cropName, $storage, false);
         $url = asset($cropPath);
 
-
         if (Storage::exists($cropPath)) return $url;
 
         $image = $this->getImage($filename, $storage);
@@ -63,6 +63,8 @@ class Cropper
 
         if (is_string($data)) return $data;
         $image = $data['image'];
+
+        if (!$image) return null;
 
         $image->fit($data['options']['width'], $data['options']['height'], function ($constraint) {
             $constraint->upsize();

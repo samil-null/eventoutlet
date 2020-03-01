@@ -1,49 +1,16 @@
 <template>
-    <div>
-        <div v-if="false" class="container">
-            <div class="col-lg-3"></div>
-            <div class="col-lg-9">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1>Зравствуйте, {{ user.name }}</h1>
-                    </div>
-                </div>
-                <div class="row">
-
-                </div>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <a :href="editProfileLink" class="btn btn-outline-success">Редактировать</a>
-                    </div>
-                    <div class="col-lg-8">
-                        <a :href="createOfferLink" class="btn btn-outline-danger">Добавить спецпредложение</a>
-
-                        <ul class="mt-5">
-                            <li v-for="offer in user.offers" :key="'offer-'+offer.id">
-                                {{ offer.service.name }} |
-                                {{ offer.service.price }} |
-                                {{ offer.discount }} %
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
         <section class="profile-edit">
             <div class="container">
                 <div class="profile-edit__content">
                     <div class="row no-gutters">
                         <div class="col-md-12 col-lg-3 col-xl-3">
-                            <div class="profile-edit__card-wrapper">
-                                <div class="profile-edit__card profile-special">
-                                    <div class="profile-edit__card-photo" :style="{'background-image': `url(${avatar})`}"></div>
-                                    <div class="profile-edit__name"><span>{{ user.name }}</span></div>
-                                    <div class="profile-edit__prof"><span>Фотограф</span></div>
-                                    <div class="pe-block__add-btn">
-                                        <a :href="editProfileLink" class="add-btn"> <span>Редактировать профиль</span> </a>
-                                    </div>
-                                </div>
-                            </div>
+                            <user-card
+                                v-if="user.id"
+                                :avatar="user.avatar.original"
+                                :name="user.name"
+                                :speciality="user.info.speciality"
+                                :editable="true"
+                            />
                         </div>
                         <div class="col-md-12 col-lg-8 col-xl-8 offset-lg-1 offset-xl-1">
                             <div class="profile-edit__wrapper">
@@ -95,36 +62,30 @@
                 </div>
             </div>
         </section>
-    </div>
-
 </template>
 <script>
     import axios from "../modules/axios";
+    import UserCard from "../components/Profile/UserCard";
 
     export default {
+        components: {UserCard},
         props:['createOfferLink', 'editProfileLink', 'userId'],
         name:'Profile',
         data() {
             return {
                 user: {},
                 avatar:{},
-                offers:[``]
+                offers:[]
             }
         },
         computed: {
 
         },
         mounted() {
-            axios.get('/app/profiles/' + this.userId)
-               .then(res => res.data.data)
-               .then(data => {
-                   this.user = data.user;
-                   this.avatar = data.avatar;
-               })
-                .catch( e => {
-                    console.log(e);
+            axios.get('/app/users')
+                .then(({data}) => {
+                    this.user = data.user;
                 });
-
             axios.get('/app/offers')
                 .then(({data}) => {
                     this.offers = data.data.offers;

@@ -49,4 +49,10 @@ class UserInfo extends Model
 
         return null;
     }
+
+    public function speciality()
+    {
+        return $this->hasOne(Specialty::class,  'id', 'speciality_id')
+                    ->withDefault();
+    }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Factories\Offer\OfferFactory;
-use App\Utils\Seo\Seo;
+use App\Utils\Seo\SEO;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function show($id)
     {
-        $user = User::with('activeServices.activeOffers.dates', 'activeServices.priceOption')->findOrFail($id);
+        $user = User::with('activeServices.activeOffers.dates', 'activeServices.priceOption', 'speciality')->findOrFail($id);
 
         $dates = collect([]);
         $dataOffers = collect([]);
@@ -27,8 +27,7 @@ class UserController extends Controller
         }
 
         $offers = (new OfferFactory($dataOffers))->create();
-
-        Seo::user($user);
+        SEO::user($user);
 
         return view('site.users.show', compact('user', 'dates', 'offers'));
     }

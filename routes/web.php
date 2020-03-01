@@ -26,10 +26,9 @@ Route::group(['namespace' => 'Site'], function () {
 
     Route::group(['middleware' => ['role:executor'], 'prefix' => 'lk', 'namespace' => 'Lk' ], function() {
 
-        Route::resource('/profiles', 'ProfileController')->names([
-            'show' => 'site.lk.profiles.show',
-            'edit' => 'site.lk.profiles.edit'
-        ]);
+        Route::get('/profile', 'ProfileController@show')->name('site.lk.profile.show');
+        Route::get('/profile/edit', 'ProfileController@edit')->name('site.lk.profile.edit');
+
         Route::resource('/offers', 'OfferController')->names([
             'create' => 'site.lk.offers.create',
             'store' => 'site.lk.offers.store',
@@ -40,6 +39,8 @@ Route::group(['namespace' => 'Site'], function () {
 
     Route::get('/offers', 'OfferController@index')->name('site.offers.index');
     Route::get('/users/{id}', 'UserController@show')->name('site.users.show');
+
+    Route::get('/about', 'PageController@about')->name('site.about');
 
 });
 
@@ -52,7 +53,7 @@ Route::group(['namespace' => 'Site'], function () {
 
 Route::group(['prefix' => 'app', 'namespace' => 'Api\App', 'middleware' => ['role:executor']], function() {
 
-    Route::get('/user', 'UserController@index');
+    Route::resource('/users', 'UserController');
 
     Route::resource('/profiles', 'ProfileController');
     Route::resource('/offers', 'OfferController');
@@ -64,18 +65,16 @@ Route::group(['prefix' => 'app', 'namespace' => 'Api\App', 'middleware' => ['rol
         Route::resource('/gallery','GalleryController')
             ->only(['index', 'store'])
             ->middleware('optimizeImages');
-
         Route::delete('/gallery', 'GalleryController@destroy');
+
         Route::resource('/videos', 'VideoController')
             ->only(['index', 'store']);
         Route::delete('/videos', 'VideoController@destroy');
-
         Route::get('/video/render','VideoController@render');
+
+        Route::post('/avatar', 'AvatarController@store');
     });
 });
-
-
-
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['role:admin']], function () {
     Route::get('/', 'DashboardController@index')->name('admin.dashboard');

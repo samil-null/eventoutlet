@@ -42,8 +42,8 @@
                                                     <div class="arrow-svg"></div>
                                                 </div>
                                                 <ul class="navbar-general__profile-menu">
-                                                    <li><a href="{{ route('site.lk.profiles.show', Auth::user()->id) }}">Личный кабинет</a></li>
-                                                    <li><a href="{{ route('site.lk.profiles.edit', Auth::user()->id) }}">Редактировать профиль</a></li>
+                                                    <li><a href="{{ route('site.lk.profile.show') }}">Личный кабинет</a></li>
+                                                    <li><a href="{{ route('site.lk.profile.edit') }}">Редактировать профиль</a></li>
                                                     <li><a href="{{ route('logout') }}">Выход</a></li>
                                                 </ul>
                                             </div>
@@ -96,8 +96,8 @@
                   <div class="footer-nav">
                     <div class="footer-nav__item">
                       <ul>
-                        <li><a href="#">Главная</a></li>
-                        <li><a href="#">Каталог специалистов</a></li>
+                        <li><a href="{{ route('site.home') }}">Главная</a></li>
+                        <li><a href="{{ route('site.offers.index') }}">Каталог специалистов</a></li>
                         <li><a href="#">Стать исполнителем</a></li>
                       </ul>
                     </div>
@@ -105,7 +105,7 @@
                       <ul>
                         <li><a href="#">Вход</a></li>
                         <li><a href="#">Регистрация</a></li>
-                        <li><a href="#">Как пользоваться?</a></li>
+                        <li><a href="{{ route('site.about') }}">Как пользоваться?</a></li>
                       </ul>
                     </div>
                   </div>

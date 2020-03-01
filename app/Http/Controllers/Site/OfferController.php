@@ -18,6 +18,7 @@ use App\Models\User;
 use App\Services\FilterBuilderService;
 use App\Services\OfferFilterService;
 use App\Services\UserFilterService;
+use App\Utils\Seo\SEO;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
@@ -37,6 +38,9 @@ class OfferController extends Controller
         $additionFields = $result->additionsFields();
         $data = $result->get()->paginate($perPage);
         $users = $factory->load($data, $request->has('specials_offers'))->create();
+
+        SEO::filter('Фотографа', 'Москве');
+
         $filters = [
             'availableFilters' => $result->getAvailableFilters(),
             'cities' => [

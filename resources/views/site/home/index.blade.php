@@ -34,7 +34,7 @@
                         <div class="whats-it__subtitle">
                             <p>
                                 Если ваше мероприятие в ближайшие 31 день, а кого-то из специалистов или площадку вы еще не нашли,
-                                наш портал поможет вам! Вы сможете найти любого подрядчика на вашу дату со скидкой от 20% до 50%.
+                                наш портал поможет вам! Вы сможете найти любого подрядчика на вашу дату со скидкой от 10% до 70%.
                             </p>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                                     <p>Если вам просто нужен специалист event-индустрии на конкретный день</p>
                                 </div>
                                 <div class="whats-it__block_button">
-                                    <a href="#" class="thin-rectangle-btn rectangle-btn-border rectangle-btn-border-green">
+                                    <a href="{{ route('site.about') }}" class="thin-rectangle-btn rectangle-btn-border rectangle-btn-border-green">
                                         <span>Подробнее</span>
                                     </a>
                                 </div>
@@ -77,7 +77,7 @@
                                     <p>Если вам просто нужен специалист event-индустрии на конкретный день</p>
                                 </div>
                                 <div class="whats-it__block_button">
-                                    <a href="#" class="thin-rectangle-btn rectangle-btn-border rectangle-btn-border-green">
+                                    <a href="{{ route('site.about') }}" class="thin-rectangle-btn rectangle-btn-border rectangle-btn-border-green">
                                         <span>Подробнее</span>
                                     </a>
                                 </div>
@@ -96,7 +96,7 @@
                                     <p>Если вам просто нужен специалист event-индустрии на конкретный день</p>
                                 </div>
                                 <div class="whats-it__block_button">
-                                    <a href="#" class="thin-rectangle-btn rectangle-btn-border rectangle-btn-border-green">
+                                    <a href="{{ route('site.about') }}" class="thin-rectangle-btn rectangle-btn-border rectangle-btn-border-green">
                                         <span>Подробнее</span>
                                     </a>
                                 </div>
@@ -117,7 +117,7 @@
                                     <p>Если вам просто нужен специалист event-индустрии на конкретный день</p>
                                 </div>
                                 <div class="whats-it__block_button">
-                                    <a href="#" class="thin-rectangle-btn rectangle-btn-border rectangle-btn-border-green">
+                                    <a href="{{ route('site.about') }}" class="thin-rectangle-btn rectangle-btn-border rectangle-btn-border-green">
                                         <span>Подробнее</span>
                                     </a>
                                 </div>
@@ -143,7 +143,7 @@
                                     </p>
                                 </div>
                                 <div class="whats-it__benefit_button">
-                                    <a href="#" class="benefit-btn">
+                                    <a href="{{ route('site.offers.index') }}" class="benefit-btn">
                                         <span>Смотреть предложения</span>
                                         <div class="long-arrow-svg"></div>
                                     </a>
@@ -163,7 +163,7 @@
                                     <p>Напрямую связываетесь со специалистом через популярные мессенджеры. Без посредников</p>
                                 </div>
                                 <div class="whats-it__benefit_button">
-                                    <a href="#" class="benefit-btn">
+                                    <a href="{{ route('site.about') }}" class="benefit-btn">
                                         <span>Как работает сервис?</span>
                                         <div class="long-arrow-svg"></div>
                                     </a>
@@ -191,7 +191,7 @@
                 </div>
 
                 <div class="whats-it__benefits_button">
-                    <a href="#" class="benefits-btn yellow">
+                    <a href="{{ route('site.offers.index') }}" class="benefits-btn yellow">
                         <span>Подобрать исполнителя</span>
                         <div class="full-arrow-svg"></div>
                     </a>
