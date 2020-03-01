@@ -10,7 +10,7 @@
                         <div class="slider-for">
                             @foreach ($user->gallery as $image)
                                 <div class="profile-slider__item">
-                                    <img src="{{ Imager::gallery($image->name) }}" class="" data-bg="{{ Imager::gallerySmall($image->name) }}" alt="">
+                                    <img src="{{ Imager::galleryOriginal($image->name) }}" class="" data-bg="{{ Imager::gallerySmall($image->name) }}" alt="">
                                 </div>
                             @endforeach
                         </div>
@@ -27,7 +27,7 @@
                         <div class="slider-nav">
                             @foreach ($user->gallery as $image)
                                 <div class="slider-nav__canvas-item">
-                                    <div class="profile-slider__nav_item" style="background-image: url({{ Imager::gallery($image->name) }});"></div>
+                                    <div class="profile-slider__nav_item" style="background-image: url({{ Imager::gallerySmall($image->name) }});"></div>
                                 </div>
                             @endforeach
                         </div>

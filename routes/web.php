@@ -66,8 +66,11 @@ Route::group(['prefix' => 'app', 'namespace' => 'Api\App', 'middleware' => ['rol
             ->middleware('optimizeImages');
 
         Route::delete('/gallery', 'GalleryController@destroy');
-        Route::resource('/videos', 'VideoController');
-        Route::get('/video/render','MediaController@render');
+        Route::resource('/videos', 'VideoController')
+            ->only(['index', 'store']);
+        Route::delete('/videos', 'VideoController@destroy');
+
+        Route::get('/video/render','VideoController@render');
     });
 });
 

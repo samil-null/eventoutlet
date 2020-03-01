@@ -53,7 +53,7 @@ class AlgoFactory implements AlgoFactoryInterface
     protected function getGallery()
     {
         $this->gallery = Media::whereIn('user_id', $this->ids)
-            ->where('type_content','gallery')
+            ->where('type','gallery')
             ->get(['name', 'user_id'])
             ->groupBy('user_id')
             ->toArray();

@@ -26,10 +26,10 @@ class HomeController extends Controller
             ->active()
             ->get()
             ->toJson();
-        
+
         SEOMeta::setTitle('Eventoutlet - поиск специалистов для вашего мероприятия на определенную дату со скидкой.');
         return view('site.home.index',[
-            'users' => $users,
+            'users' => [],
             'specialities' => $specialities,
             'startDate' => DateHelper::minFilterDate(),
             'endDate' => DateHelper::maxFilterDate()

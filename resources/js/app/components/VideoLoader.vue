@@ -3,14 +3,14 @@
         <div class="pe-portfolio__block">
             <div class="pe-portfolio__field">
                 <div class="pe-portfolio__added-photo pe-portfolio__field-item"
-                     v-for="video in videosList"
-                     :style="{'background-image':'url(' + video.thumb_path  +')'}"
+                     v-for="(video,index) in videosList"
+                     :style="{'background-image':'url(' + video.thumb  +')'}"
                 >
                     <div class="pe-portfolio__bg"></div>
-                    <div class="pe-portfolio__increase-photo zoomer-video" :data-video="'/app/media/video/render?name='+video.video_path">
+                    <div class="pe-portfolio__increase-photo zoomer-video" :data-video="video.render">
                         <div class="increase-svg"></div>
                     </div>
-                    <div class="pe-portfolio__delete-photo">
+                    <div class="pe-portfolio__delete-photo" @click="removeImage(video.name, index)">
                         <div class="times-svg"></div>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
 
     export default {
         name: "VideoLoader",
-        props:['videos', 'limit'],
+        props:['limit'],
         data() {
             return {
                 videosList:[]
@@ -42,31 +42,36 @@
             }
         },
         methods: {
-            async loadImage() {
+            loadImage() {
                 let input = this.$refs.image;
                 let video = input.files[0];
 
                 if (video) {
                     let form = new FormData();
                     form.append('video', video);
-                    let response = await axios.post('/app/media/video', form);
-
-                    if (response.data.success) {
-                        this.videosList.push(response.data.data);
-                    }
+                    axios.post('/app/media/videos', form)
+                        .then(({data}) => {
+                            this.videosList.push(data.video);
+                        });
                 }
 
-            },
-            renderPreview(video) {
-                console.log(video);
             },
             addImage() {
                 let input = this.$refs.image;
                 input.click();
+            },
+            removeImage(video, index) {
+                axios.delete('/app/media/videos?video=' + video)
+                    .then(({data}) => {
+                        this.videosList.splice(index, 1)
+                    })
             }
         },
         created() {
-            this.videosList = this.videos;
+            axios.get('/app/media/videos')
+                .then(({data}) => {
+                    this.videosList = data.videos;
+                })
         }
     }
 </script>

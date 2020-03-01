@@ -17,11 +17,6 @@ use App\Facades\Imager;
 class OfferController extends ApiAppController
 {
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -89,8 +84,7 @@ class OfferController extends ApiAppController
      */
     public function show(Request $request,  $id)
     {
-        $user = $request->user();
-        $offer = $user->offers()->with('dates')->findOrFail($id);
+        $offer = $this->user->offers()->with('dates')->findOrFail($id);
 
         return response()->json([
             'success' => true,

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\App\Media;
 
 use App\Helpers\ImagePathHelper;
 use App\Http\Controllers\Api\App\ApiAppController;
+use App\Http\Requests\Api\Media\GalleryRequest;
 use App\Models\Media;
 use App\Services\Image\ImageRemoveService;
 use App\Services\Image\ImageStoreService;
@@ -25,7 +26,7 @@ class GalleryController extends ApiAppController
 
     }
 
-    public function store(Request $request, ImageStoreService $storeService)
+    public function store(GalleryRequest $request, ImageStoreService $storeService)
     {
         list($fullPath, $filename) = $storeService->execute($request->file('image'), 'gallery');
 

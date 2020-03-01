@@ -230,6 +230,7 @@ class ResizeService
         }
 
         $path = $this->createFullPathFile($this->createResizePath($store));
+
         $cacheFilename = $this->createCacheName($filename, $options['height'], $options['width']);
 
         if (!file_exists($this->creatPathFile($path, $cacheFilename))) {

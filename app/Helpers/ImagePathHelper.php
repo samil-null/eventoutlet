@@ -16,11 +16,6 @@ class ImagePathHelper
 
     protected const LEN_FILE_NAME = 27;
 
-    public static function create()
-    {
-
-    }
-
     public static function publicPath($filename, $folder, $original = true)
     {
         return self::createFullImagePath(self::getFinalPath([$folder], $original), $filename);
@@ -56,5 +51,15 @@ class ImagePathHelper
         $folders[] = $original? self::ORIGINAL_FOLDER : self::RESIZE_FOLDER;;
 
         return self::pathBuilder($folders);
+    }
+
+    public static function getFullStorePath(string $filename, array  $folder, bool $original = true)
+    {
+        return self::createFullImagePath(self::getFinalPath($folder, $original), $filename);
+    }
+
+    public static function getRealStoragePathFile($filename, $folders, $original = true)
+    {
+        return storage_path('app' . self::getFinalPath($folders, $original) . $filename);
     }
 }

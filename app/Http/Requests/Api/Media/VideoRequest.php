@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api\Media;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class MediaGalleryRequest extends FormRequest
+class VideoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class MediaGalleryRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => 'image|required|dimensions:min_width=1079,min_height=1079'
+            'video' => 'required|mimes:mp4,ogx,oga,ogv,ogg,webm'
         ];
     }
 }

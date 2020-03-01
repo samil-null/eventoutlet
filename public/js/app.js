@@ -4362,10 +4362,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _modules_axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modules/axios */ "./resources/js/app/modules/axios.js");
-
+/* harmony import */ var _modules_axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../modules/axios */ "./resources/js/app/modules/axios.js");
 //
 //
 //
@@ -4396,7 +4393,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "VideoLoader",
-  props: ['videos', 'limit'],
+  props: ['limit'],
   data: function data() {
     return {
       videosList: []
@@ -4409,48 +4406,42 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     loadImage: function loadImage() {
-      var input, video, form, response;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function loadImage$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              input = this.$refs.image;
-              video = input.files[0];
+      var _this = this;
 
-              if (!video) {
-                _context.next = 9;
-                break;
-              }
+      var input = this.$refs.image;
+      var video = input.files[0];
 
-              form = new FormData();
-              form.append('video', video);
-              _context.next = 7;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_modules_axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/app/media/video', form));
+      if (video) {
+        var form = new FormData();
+        form.append('video', video);
+        _modules_axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/app/media/videos', form).then(function (_ref) {
+          var data = _ref.data;
 
-            case 7:
-              response = _context.sent;
-
-              if (response.data.success) {
-                this.videosList.push(response.data.data);
-              }
-
-            case 9:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, null, this);
-    },
-    renderPreview: function renderPreview(video) {
-      console.log(video);
+          _this.videosList.push(data.video);
+        });
+      }
     },
     addImage: function addImage() {
       var input = this.$refs.image;
       input.click();
+    },
+    removeImage: function removeImage(video, index) {
+      var _this2 = this;
+
+      _modules_axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]('/app/media/videos?video=' + video).then(function (_ref2) {
+        var data = _ref2.data;
+
+        _this2.videosList.splice(index, 1);
+      });
     }
   },
   created: function created() {
-    this.videosList = this.videos;
+    var _this3 = this;
+
+    _modules_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/app/media/videos').then(function (_ref3) {
+      var data = _ref3.data;
+      _this3.videosList = data.videos;
+    });
   }
 });
 
@@ -5211,8 +5202,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 
@@ -5342,12 +5331,8 @@ __webpack_require__.r(__webpack_exports__);
       var data = _ref6.data;
       _this3.services = data.services;
     });
-    _modules_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/app/media/videos').then(function (_ref7) {
+    _modules_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/app/media/gallery').then(function (_ref7) {
       var data = _ref7.data;
-      _this3.video = data.video;
-    });
-    _modules_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/app/media/gallery').then(function (_ref8) {
-      var data = _ref8.data;
       _this3.gallery = data.gallery;
     });
     _modules_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get("/app/profiles/".concat(this.userId, "/edit")).then(function (res) {
@@ -5355,9 +5340,7 @@ __webpack_require__.r(__webpack_exports__);
     }).then(function (data) {
       _this3.specialities = data.specialties;
       _this3.priceOptions = data.price_options;
-      _this3.avatar = data.avatar; //this.gallery = data.gallery;
-      //this.videos = data.videos;
-
+      _this3.avatar = data.avatar;
       _this3.cities = data.cities;
       _this3.genders = data.genders;
       return data.user;
@@ -104227,13 +104210,13 @@ var render = function() {
         "div",
         { staticClass: "pe-portfolio__field" },
         [
-          _vm._l(_vm.videosList, function(video) {
+          _vm._l(_vm.videosList, function(video, index) {
             return _c(
               "div",
               {
                 staticClass:
                   "pe-portfolio__added-photo pe-portfolio__field-item",
-                style: { "background-image": "url(" + video.thumb_path + ")" }
+                style: { "background-image": "url(" + video.thumb + ")" }
               },
               [
                 _c("div", { staticClass: "pe-portfolio__bg" }),
@@ -104242,15 +104225,23 @@ var render = function() {
                   "div",
                   {
                     staticClass: "pe-portfolio__increase-photo zoomer-video",
-                    attrs: {
-                      "data-video":
-                        "/app/media/video/render?name=" + video.video_path
-                    }
+                    attrs: { "data-video": video.render }
                   },
                   [_c("div", { staticClass: "increase-svg" })]
                 ),
                 _vm._v(" "),
-                _vm._m(0, true)
+                _c(
+                  "div",
+                  {
+                    staticClass: "pe-portfolio__delete-photo",
+                    on: {
+                      click: function($event) {
+                        return _vm.removeImage(video.name, index)
+                      }
+                    }
+                  },
+                  [_c("div", { staticClass: "times-svg" })]
+                )
               ]
             )
           }),
@@ -104282,16 +104273,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "pe-portfolio__delete-photo" }, [
-      _c("div", { staticClass: "times-svg" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -105557,14 +105539,9 @@ var render = function() {
                                       [
                                         _vm._m(7),
                                         _vm._v(" "),
-                                        _vm.videos
-                                          ? _c("video-loader", {
-                                              attrs: {
-                                                videos: _vm.videos,
-                                                limit: 5
-                                              }
-                                            })
-                                          : _vm._e()
+                                        _c("video-loader", {
+                                          attrs: { limit: 5 }
+                                        })
                                       ],
                                       1
                                     )

@@ -224,8 +224,6 @@
                                                                     <span>Добавить видео</span>
                                                                 </div>
                                                                 <video-loader
-                                                                    :videos="videos"
-                                                                    v-if="videos"
                                                                     :limit="5"
                                                                 ></video-loader>
                                                             </div>
@@ -392,10 +390,6 @@
                 .then(({data}) => {
                     this.services = data.services;
                 });
-            axios.get('/app/media/videos')
-                .then(({data}) => {
-                    this.video = data.video;
-                });
 
             axios.get('/app/media/gallery')
                 .then(({data}) => {
@@ -408,8 +402,6 @@
                     this.specialities  = data.specialties;
                     this.priceOptions = data.price_options;
                     this.avatar = data.avatar;
-                    //this.gallery = data.gallery;
-                    //this.videos = data.videos;
                     this.cities = data.cities;
                     this.genders = data.genders;
                     return data.user

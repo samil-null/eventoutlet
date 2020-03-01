@@ -152,7 +152,7 @@ class User extends Authenticatable
     public function videos()
     {
         return $this->hasMany(Media::class,'user_id', 'id')
-            ->where(['type' => 'video', Media::VIDEO_TYPE]);
+            ->where('type', Media::VIDEO_TYPE);
     }
 
     public function info()

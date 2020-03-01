@@ -50,10 +50,10 @@
                         @foreach($user->gallery as $image)
                             <li class="glide__slide">
                                 <div class="glide__slide-bg"></div>
-                                <div class="glide__slide-search" data-bp="{{ Imager::gallery($image['name']) }}">
+                                <div class="glide__slide-search" data-bp="{{ Imager::galleryOriginal($image['name']) }}">
                                     <div class="search-svg"></div>
                                 </div>
-                                <div class="glide__slide__item" style="background-image: url({{ Imager::gallery($image['name']) }});"></div>
+                                <div class="glide__slide__item" style="background-image: url({{ Imager::galleryPreview($image['name']) }});"></div>
                             </li>
                         @endforeach
                     </ul>

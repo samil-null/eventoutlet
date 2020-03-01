@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\App;
 
 
+use App\Helpers\VideoPathHelper;
 use App\Utils\Media\Video;
 use App\Models\Media;
 use Illuminate\Support\Str;
@@ -115,7 +116,7 @@ class MediaController extends Controller
     public function render(Request $request)
     {
         return view('api.media.video', [
-            'url' => asset('/videos/'. $request->name)
+            'url' => VideoPathHelper::url($request->name)
         ]);
     }
 }

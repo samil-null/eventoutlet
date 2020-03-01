@@ -4,19 +4,23 @@
 namespace App\Utils\Media;
 
 
+use App\Helpers\ImagePathHelper;
 use App\Services\ResizeService;
 
 class Imager
 {
+    /**
+     * @var Cropper
+     */
+    protected $cropper;
 
     /**
-     * @var ResizeService
+     * Imager constructor.
+     * @param Cropper $cropper
      */
-    private $resize;
-
-    public function __construct(ResizeService $resize)
+    public function __construct(Cropper $cropper)
     {
-        $this->resize = $resize;
+        $this->cropper = $cropper;
     }
 
     public function avatar($path)
@@ -28,27 +32,18 @@ class Imager
         return asset('/assets/avatars/no-avatar.png');
     }
 
-    public function gallerySmall($path)
+    public function gallerySmall($filename)
     {
-        if ($path) {
-            return $this->resize->roc($path, 'gallery', 'avatar');
-        }
-    }
-    public function gallery($path)
-    {
-        if ($path) {
-            return $this->resize->roc($path, 'gallery', 'gallery', [], 'resize');
-        }
-
-        return asset('/assets/avatars/'.random_int(1,6).'.png');
+        return $this->cropper->fit($filename, 'gallery' , 'gallery_small');
     }
 
-    public function galleryPreview($path)
+    public function galleryOriginal($filename)
     {
-        if ($path) {
-            return $this->resize->roc($path, 'gallery', 'gallery_preview', [], 'resize');
-        }
+        return $this->cropper->original($filename, 'gallery');
+    }
 
-        return asset('/assets/avatars/'.random_int(1,6).'.png');
+    public function galleryPreview($filename)
+    {
+        return $this->cropper->fit($filename, 'gallery' , 'gallery_preview');
     }
 }
