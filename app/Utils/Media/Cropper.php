@@ -78,7 +78,7 @@ class Cropper
     public function original($filename, $store)
     {
         $storage = $this->getStorage($store);
-
+        
         if (is_array($storage)) {
             return asset(ImagePathHelper::getFullStorePath($filename, $storage, true));
         }
