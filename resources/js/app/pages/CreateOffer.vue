@@ -142,6 +142,7 @@
                 axios.post('/app/offers', payload)
                     .then(({data}) => {
                         location.href = data.data.url;
+                        //
                     })
                     .catch(({response}) => {
                         if (response.status === 422) {
