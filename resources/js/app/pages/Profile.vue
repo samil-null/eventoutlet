@@ -17,44 +17,46 @@
                                 <div class="profile-edit__title lk__title">
                                     <span>Здравствуйте, {{ user.name }}</span>
                                 </div>
-                                <div class="profile-edit__body lk__body" v-for="offer in offers">
-                                    <!-- Line -->
-                                    <div class="pe-block pr-block">
-                                        <div class="special-offer">
-                                            <div class="special-offer__head">
-                                                <div class="special-offer__icon">
-                                                    <div class="catalog-card__discount-icon"><div class="percent-svg"></div></div>
+                                <template v-if="offers.length">
+                                    <div class="profile-edit__body lk__body" v-for="offer in offers">
+                                        <!-- Line -->
+                                        <div class="pe-block pr-block">
+                                            <div class="special-offer">
+                                                <div class="special-offer__head">
+                                                    <div class="special-offer__icon">
+                                                        <div class="catalog-card__discount-icon"><div class="percent-svg"></div></div>
+                                                    </div>
+                                                    <div class="special-offer__item "><span>Дата</span> <span>{{ offer.dates }}</span></div>
+                                                    <div class="special-offer__item"><span>Услуга</span> <span>{{ offer.service_name }} </span></div>
+                                                    <div class="special-offer__item">
+                                                        <span>Цена со скидкой</span> <span>{{ offer.price }} {{ offer.price_option }}</span>
+                                                    </div>
+                                                    <div class="special-offer__item"><span>Скидка</span> <span>{{ offer.discount }}%</span></div>
+                                                    <div class="special-offer__button"><a :href="offer.url">Изменить</a></div>
                                                 </div>
-                                                <div class="special-offer__item "><span>Дата</span> <span>{{ offer.dates }}</span></div>
-                                                <div class="special-offer__item"><span>Услуга</span> <span>{{ offer.serviceName }} </span></div>
-                                                <div class="special-offer__item">
-                                                    <span>Цена со скидкой</span> <span>{{ offer.price }} {{ offer.priceOption }}</span>
-                                                </div>
-                                                <div class="special-offer__item"><span>Скидка</span> <span>{{ offer.discount }}%</span></div>
-                                                <div class="special-offer__button"><a :href="offer.editUrl">Изменить</a></div>
-                                            </div>
-                                            <div class="special-offer__desctipton">
-                                                <div class="special-offer__desctipton-title"><span>Описание</span></div>
-                                                <div class="special-offer__desctipton-body">
-                                                    <p>
-                                                        {{ offer.description }}
-                                                    </p>
+                                                <div class="special-offer__desctipton">
+                                                    <div class="special-offer__desctipton-title"><span>Описание</span></div>
+                                                    <div class="special-offer__desctipton-body">
+                                                        <p>
+                                                            {{ offer.description }}
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <!-- have no offers -->
-                            <div class="lk__havent-offers">
-                                <div class="lk__havent-offers-title">
-                                <span>
-                                  У вас еще нет опубликованных спецпредложений, вам нужно срочно их опубликовать
-                                </span>
-                                </div>
+                                </template>
+                                <!-- have no offers -->
+                                <div  class="lk__havent-offers">
+                                    <div class="lk__havent-offers-title" v-if="!offers.length" >
+                                        <span>
+                                          У вас еще нет опубликованных спецпредложений, вам нужно срочно их опубликовать
+                                        </span>
+                                    </div>
 
-                                <div class="pe-block__add-btn">
-                                    <a :href="createOfferLink" class="add-btn add-btn-corall"> <span>Добавить спецпредложение</span> </a>
+                                    <div class="pe-block__add-btn">
+                                        <a :href="createOfferLink" class="add-btn add-btn-corall"> <span>Добавить спецпредложение</span> </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +76,6 @@
         data() {
             return {
                 user: {},
-                avatar:{},
                 offers:[]
             }
         },
@@ -86,9 +87,10 @@
                 .then(({data}) => {
                     this.user = data.user;
                 });
-            axios.get('/app/offers')
+
+            axios.get('/app/offers?active=1')
                 .then(({data}) => {
-                    this.offers = data.data.offers;
+                    this.offers = data.offers;
                 })
         }
     }

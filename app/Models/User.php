@@ -100,6 +100,18 @@ class User extends Authenticatable
         );
     }
 
+    public function activeOffers()
+    {
+        return $this->hasManyThrough(
+            Offer::class,
+            Service::class,
+            'user_id',
+            'service_id',
+            'id',
+            'id'
+        )->where('offers.status', Offer::ACTIVE_STATUS);
+    }
+
     public function maxOfferPrice()
     {
         return $this->hasManyThrough(

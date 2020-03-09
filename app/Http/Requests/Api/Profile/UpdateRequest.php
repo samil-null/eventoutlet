@@ -28,7 +28,6 @@ class UpdateRequest extends FormRequest
             'name' => 'required|max:255',
             'speciality_id' => 'required|integer|not_in:0',
             'city_id' => 'required|integer|not_in:0',
-            'gender' => 'required|integer|not_in:0',
         ];
     }
 

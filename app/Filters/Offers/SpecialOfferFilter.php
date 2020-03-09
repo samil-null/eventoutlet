@@ -8,8 +8,7 @@ use App\Helpers\DateHelper;
 use App\Models\AdditionFieldSpeciality;
 use App\Models\Offer;
 use App\Models\Service;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+
 
 class SpecialOfferFilter extends BaseOfferFilter implements OfferFilterInterface
 {
@@ -54,28 +53,21 @@ class SpecialOfferFilter extends BaseOfferFilter implements OfferFilterInterface
 
     public function additional_fields($fields)
     {
-        $afsQuery = DB::table('additional_fields_services as afs');
-        $index = 0;
+        $this->builder->whereIn('services.id', function ($query) use ($fields) {
+            $query->from('additional_fields_services')
+                ->whereNotNull('value')
+                ->select('service_id');
 
-        foreach ($fields as $id => $value) {
+            foreach ($fields as $id => $value) {
+                if (!$value) continue;
 
-            if (!$value) continue;
+                $query->orWhere(function ($sub) use ($id, $value) {
+                    $sub->where('speciality_field_id', $id)
+                        ->where('value', '>=', $value);
+                });
+            }
 
-            $this->params['additional_fields'][$id] = $value;
-
-            $asName = "afs{$index}";
-            $afsQuery->join("additional_fields_services as $asName", function ($join) use ($asName, $id, $value) {
-                $join->on("{$asName}.service_id", '=', 'afs.service_id')
-                    ->where($asName.'.speciality_field_id', $id)
-                    ->where($asName.'.value' , '>=', $value);
-            });
-            $index++;
-        }
-
-        $afsQuery->selectRaw('afs.service_id')->groupBy('service_id');
-        $ids = $afsQuery->get()->pluck('service_id')->toArray();
-
-        $this->builder->whereIn('services.id', $ids);
+        });
 
     }
 

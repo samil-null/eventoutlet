@@ -48,17 +48,15 @@
                                         </div>
                                     </div>
                                     <div class="profile-preview__item profile-preview__name">
-                                        <span>{{ $user->name }}</span>
-                                        <span>{{ $user->speciality->name }}</span>
+                                        <h1>{{ $user->name }}</h1>
+                                        <h2>{{ $user->speciality->name }}</h2>
                                     </div>
-                                    <div class="profile-preview__item profile-preview__insta">
-                                        <span>@info_mirosch</span>
+                                    @if ($user->info->instagram)
+                                        <div class="profile-preview__item profile-preview__insta">
+                                        <a href="{{ Social::instagramUrl($user->info->instagram) }}" target="_blank" >{{ Social::instagramTag($user->info->instagram) }}</a>
                                         <span>Instagram</span>
                                     </div>
-                                    <div class="profile-preview__item profile-preview__price" style="opacity:0">
-                                        <span>Цена со скидкой</span>
-                                        <span>от 3 000 р / час</span>
-                                    </div>
+                                    @endif
                                     <div class="profile-preview__item profile-preview__catacts">
                                         <div class="contacts-block__item">
                                             @if ($user->info->email)
@@ -69,14 +67,14 @@
                                         </div>
                                         @if ($user->info->whatsapp)
                                             <div class="contacts-block__item">
-                                                <a target="_blank" href="https://wa.me/{{ $user->info->pureWhatsapp() }}">
+                                                <a target="_blank" href="{{ Social::whatsappUrl($user->info->whatsapp) }}">
                                                     <div class="wa-svg contacts-block-svg"></div>
                                                 </a>
                                             </div>
                                         @endif
                                         @if ($user->info->phone)
                                         <div class="contacts-block__item">
-                                            <a href="tel: {{ $user->info->phone }}">
+                                            <a href="tel:{{ $user->info->phone }}">
                                                 <div class="phone-svg contacts-block-svg"></div>
                                             </a>
                                         </div>
@@ -111,74 +109,74 @@
                                                         <div class="row">
                                                             @if ($user->info->phone)
                                                                 <div class="col-xl-6">
-                                                                    <label class="form__label">
+                                                                    <div  class="form__label">
                                                                         <span>Телефон</span>
-                                                                        <div class="form__icon-input-wrapper">
+                                                                        <a href="tel:{{ $user->info->phone }}" class="form__icon-input-wrapper">
                                                                             <div class="phone-svg input-svg"></div>
                                                                             <div class="delimiter"></div>
                                                                             <div class="profile-core__text">{{ $user->info->phone }}</div>
-                                                                        </div>
-                                                                    </label>
+                                                                        </a>
+                                                                    </div>
                                                                 </div>
                                                             @endif
-                                                            @if($user->info->sitea)
+                                                            @if($user->info->site)
                                                                 <div class="col-xl-6">
-                                                                    <label class="form__label">
+                                                                    <div class="form__label">
                                                                         <span>Ваш сайт</span>
-                                                                        <div class="form__icon-input-wrapper">
+                                                                        <a href="{{ $user->info->site }}" class="form__icon-input-wrapper">
                                                                             <div class="exploier-svg input-svg"></div>
                                                                             <div class="delimiter"></div>
                                                                             <div class="profile-core__text">{{ $user->info->site }}</div>
-                                                                        </div>
-                                                                    </label>
+                                                                        </a>
+                                                                    </div>
                                                                 </div>
                                                             @endif
                                                             @if($user->info->email)
                                                                 <div class="col-xl-6">
-                                                                    <label class="form__label">
+                                                                    <div  class="form__label">
                                                                         <span>Email</span>
-                                                                        <div class="form__icon-input-wrapper">
+                                                                        <a href="mailto:{{ $user->info->vk }}" class="form__icon-input-wrapper">
                                                                             <div class="at-svg input-svg"></div>
                                                                             <div class="delimiter"></div>
                                                                             <div class="profile-core__text">{{ $user->info->email }}</div>
-                                                                        </div>
-                                                                    </label>
+                                                                        </a>
+                                                                    </div>
                                                                 </div>
                                                             @endif
                                                             @if ($user->info->instagram)
                                                                 <div class="col-xl-6">
-                                                                    <label class="form__label">
+                                                                    <div class="form__label">
                                                                         <span>Instagram</span>
-                                                                        <div class="form__icon-input-wrapper">
+                                                                        <a href="{{ Social::instagramUrl($user->info->instagram) }}" class="form__icon-input-wrapper">
                                                                             <div class="inst-svg input-svg"></div>
                                                                             <div class="delimiter"></div>
-                                                                            <div class="profile-core__text">{{ $user->info->email }}</div>
-                                                                        </div>
-                                                                    </label>
+                                                                            <div class="profile-core__text">{{ Social::instagramTag($user->info->instagram) }}</div>
+                                                                        </a>
+                                                                    </div>
                                                                 </div>
                                                             @endif
                                                             @if($user->info->vk)
                                                             <div class="col-xl-6">
-                                                                <label class="form__label">
+                                                                <div class="form__label">
                                                                     <span>Вконтакте</span>
-                                                                    <div class="form__icon-input-wrapper">
+                                                                    <a href="{{ $user->info->vk }}" class="form__icon-input-wrapper">
                                                                         <div class="vk-svg input-svg"></div>
                                                                         <div class="delimiter"></div>
-                                                                        <div class="profile-core__text">vk.c{{ $user->info->vk }}</div>
-                                                                    </div>
-                                                                </label>
+                                                                        <div class="profile-core__text">{{ $user->info->vk }}</div>
+                                                                    </a>
+                                                                </div>
                                                             </div>
                                                             @endif
                                                             @if($user->info->whatsapp)
                                                             <div class="col-xl-6">
-                                                                <label class="form__label">
+                                                                <div class="form__label">
                                                                     <span>WhatsApp</span>
-                                                                    <div class="form__icon-input-wrapper">
+                                                                    <a href="{{ Social::whatsappUrl($user->info->whatsapp) }}" class="form__icon-input-wrapper">
                                                                         <div class="wa-svg input-svg"></div>
                                                                         <div class="delimiter"></div>
-                                                                    <div class="profile-core__text">{{$user->info->whatsapp }}</div>
-                                                                    </div>
-                                                                </label>
+                                                                    <div class="profile-core__text">{{ $user->info->whatsapp }}</div>
+                                                                    </a>
+                                                                </div>
                                                             </div>
                                                             @endif
                                                         </div>
@@ -189,7 +187,7 @@
 
                                         <div class="profile-core__contacts">
                                             <div class="profile-core__contacts_title">
-                                                <span>Спецпредложения</span>
+                                                <span>Услуги</span>
                                             </div>
                                             <div class="profile-edit__body profile-core__list">
                                                 @foreach($user->activeServices as $service)
@@ -232,7 +230,7 @@
                                                 </div>
                                             </div>
                                             <div class="sidebar__title">
-                                                <span>Спецпредложения</span>
+                                                <span>Спецпредложения %</span>
                                             </div>
                                             @foreach($offers as $offer)
                                                 <div class="sidebar__item">

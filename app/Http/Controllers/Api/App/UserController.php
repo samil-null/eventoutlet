@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\App;
 
+use App\Helpers\SocialHelper;
 use App\Http\Controllers\Controller;
 use App\Transformers\Api\App\UserTransformer;
 use Illuminate\Http\Request;

@@ -28,6 +28,7 @@ class OfferController extends Controller
 
     public function index(Request $request, OfferFilterInterface $filter, AlgoFactoryInterface $factory)
     {
+
         $perPage = 10;
 
         if ($request->has('per_page') && is_numeric($request->input('per_page'))) {

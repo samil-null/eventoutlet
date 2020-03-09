@@ -15,8 +15,7 @@ $factory->define(UserInfo::class, function (Faker $faker) {
         'site' => $faker->word . '.ru',
         'vk' => 'vk.com/' . $faker->unique()->word,
         'whatsapp' => $faker->phoneNumber,
-        'instagram' => '@'. $faker->unique()->word,
-        'gender' => random_int(1,2)
+        'instagram' => $faker->unique()->word
     ];
 
     return $gen;

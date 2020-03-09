@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
-use App\Services\ResizeService;
+
 use App\Utils\Media\Imager;
+use App\Utils\Social;
 use Illuminate\Support\ServiceProvider;
 
 class ImagerProvider extends ServiceProvider
@@ -16,6 +17,7 @@ class ImagerProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('imager', Imager::class);
+        $this->app->singleton('social', Social::class);
     }
 
     /**

@@ -10,7 +10,7 @@
             </div>
             @if($user->info->instagram)
             <div class="catalog-card__head-info catalog-card-insta">
-                <span class="catalog-card__first-title">{{ $user->info->instagram }}</span>
+                <a href="{{ Social::instagramUrl($user->info->instagram) }}" class="catalog-card__first-title">{{ Social::instagramTag($user->info->instagram) }}</a>
                 <span class="catalog-card__second-title">Instagram</span>
             </div>
             @endif
@@ -45,12 +45,12 @@
         </div>
         <div class="catalog-card__media algo-media">
             <div class="glide">
-                <div class="glide__track" data-glide-el="track">
+                <div class="glide__track">
                     <ul class="glide__slides algo-media__slider">
                         @foreach($user->gallery as $image)
-                            <li class="glide__slide">
+                            <li class="glide__slide glide__view" data-bp="{{ Imager::galleryOriginal($image['name']) }}">
                                 <div class="glide__slide-bg"></div>
-                                <div class="glide__slide-search" data-bp="{{ Imager::galleryOriginal($image['name']) }}">
+                                <div class="glide__slide-search">
                                     <div class="search-svg"></div>
                                 </div>
                                 <div class="glide__slide__item" style="background-image: url({{ Imager::galleryPreview($image['name']) }});"></div>
@@ -59,12 +59,12 @@
                     </ul>
                 </div>
                 <div class="glide__arrows">
-                    <div class="glide__left" data-glide-el="controls">
+                    <div class="glide__left">
                         <button class="glide__arrow glide__arrow--prev algo-media__prev-slide">
                             <span class="strelka-svg"></span>
                         </button>
                     </div>
-                    <div class="glide__right" data-glide-el="controls">
+                    <div class="glide__right">
                         <button class="glide__arrow glide__arrow--next algo-media__next-slide">
                             <span class="strelka-svg"></span>
                         </button>
@@ -79,16 +79,21 @@
                     <span class="catalog-card__second-title">Instagram</span>
                 </div>
             @endif
-
-            <div class="contacts-block__item">
-                <a href="#"><div class="at-svg contacts-block-svg"></div> </a>
-            </div>
-            <div class="contacts-block__item">
-                <a href="#"> <div class="wa-svg contacts-block-svg"></div> </a>
-            </div>
-            <div class="contacts-block__item">
-                <a href="#"> <div class="phone-svg contacts-block-svg"></div> </a>
-            </div>
+            @if ($user->info->email)
+                <div class="contacts-block__item">
+                    <a href="mailto:{{ $user->info->email }}"><div class="at-svg contacts-block-svg"></div> </a>
+                </div>
+            @endif
+            @if($user->info->whatsapp)
+                <div class="contacts-block__item">
+                    <a href="{{ Social::whatsappUrl($user->info->whatsapp) }}"> <div class="wa-svg contacts-block-svg"></div> </a>
+                </div>
+            @endif
+            @if($user->info->phone)
+                <div class="contacts-block__item">
+                    <a href="tel:{{ $user->info->phone }}"> <div class="phone-svg contacts-block-svg"></div> </a>
+                </div>
+            @endif
         </div>
     </div>
 </div>

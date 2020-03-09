@@ -84,4 +84,9 @@ class Offer extends Model
     {
         return $query->where('discount', $condition, $value);
     }
+
+    public function modelFilter()
+    {
+        return $this->provideFilter(\App\Filters\OfferFilter::class);
+    }
 }

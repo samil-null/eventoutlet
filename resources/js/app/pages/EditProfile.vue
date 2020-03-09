@@ -67,20 +67,6 @@
                                                             <span class="validation" v-for="error in errors.city_id">{{ error }}</span>
                                                         </label>
                                                     </div>
-                                                    <div class="col-xl-6">
-                                                        <label class="form__label"  :class="{invalid:!!errors.gender.length}">
-                                                            <span>Пол</span>
-                                                            <select-app
-                                                                :options="genders"
-                                                                select-value="id"
-                                                                select-name="name"
-                                                                v-model="form.gender"
-                                                                description="Выберете ваш пол"
-                                                                empty-selected="Выберете ваш пол"
-                                                            ></select-app>
-                                                            <span class="validation" v-for="error in errors.gender">{{ error }}</span>
-                                                        </label>
-                                                    </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-xl-12">
@@ -297,7 +283,6 @@
                 videos:null,
                 additionalFields:[],
                 cities:[],
-                genders:[],
                 form: {
                     name:null,
                     email:null,
@@ -308,14 +293,12 @@
                     vk: null,
                     speciality_id:0,
                     whatsapp:null,
-                    gender:0,
                     city_id:0
                 },
                 errors:{
                     name:[],
                     speciality_id:[],
                     city_id:[],
-                    gender:[]
                 }
             }
         },
@@ -327,12 +310,8 @@
                             this.errors.name = [];
                             this.errors.speciality_id = [];
                             this.errors.city_id = [];
-                            this.errors.gender = [];
-                            this.triggerAlert([{
-                                    type:'success',
-                                    body:'Аккаунт успешно обновлен и отправлен на модерацию'
-                                }]);
 
+                            location.href = '/lk/profile'
 
                         }
                     }).catch(({ response }) => {
@@ -345,7 +324,6 @@
                             this.errors.name = errors.name || [];
                             this.errors.speciality_id = errors.speciality_id || [];
                             this.errors.city_id = errors.city_id || [];
-                            this.errors.gender = errors.gender || [];
                         }
                     })
             },
@@ -399,11 +377,9 @@
                     this.priceOptions = data.price_options;
                     this.avatar = data.avatar;
                     this.cities = data.cities;
-                    this.genders = data.genders;
                     return data.user
                 })
                 .then(user => {
-                    //this.services = user.services;
                     form.name = user.name;
                     this.additionalFields = user.speciality.fields;
                     this.speciality = user.speciality|| {};
@@ -420,7 +396,6 @@
                     form.speciality_id = info.speciality_id;
                     form.whatsapp = info.whatsapp;
                     form.city_id = info.city_id;
-                    form.gender = info.gender;
                     this.renderServiceApp = true;
                 })
         },

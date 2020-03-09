@@ -14,12 +14,14 @@ class OfferService
 {
     public function create(User $user, Request $request)
     {
-        
+
         $dates = array_map(function ($date) {
             return new OfferDate(['date' => $date]);
         }, $request->input('dates'));
 
-        $service = $user->services()->where('id', $request->input('service_id'))->first();
+        $service = $user->services()
+                ->where('id', $request->input('service_id'))
+                ->first();
 
         $offer = $service->offers()->save(
             new Offer([
@@ -49,18 +51,5 @@ class OfferService
             'discount' => $request->input('discount'),
             'status' => Offer::WAITING_STATUS
         ]);
-    }
-
-    public function published($offers, $user)
-    {
-        $user->offers()->update([
-            'offers.status' => Offer::NO_ACTIVE
-        ]);
-
-        $user->offers()->whereIn('offers.id', $offers)->update([
-            'offers.status' => Offer::ACTIVE_STATUS
-        ]);
-
-
     }
 }

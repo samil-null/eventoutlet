@@ -26,7 +26,6 @@ class CreateUserInfoTable extends Migration
             $table->integer('speciality_id')->nullable();
             $table->integer('city_id')->nullable();
             $table->bigInteger('views')->default(0);
-            $table->integer('gender')->default(0);
             $table->timestamps();
         });
     }

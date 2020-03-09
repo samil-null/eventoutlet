@@ -15,6 +15,7 @@ import SpecialOfferCheckBox from "./components/SpecialOfferCheckBox";
 import AdditionField from "./components/AdditionField";
 import UserCalendar from "./components/Datepickers/UserCalendar";
 import PerPageApp from "./components/PerPageApp";
+import SearchInCategory from "./components/SearchInCategory";
 
 new Vue({
     el:'#app',
@@ -33,6 +34,7 @@ new Vue({
         SpecialOfferCheckBox,
         AdditionField,
         UserCalendar,
-        PerPageApp
+        PerPageApp,
+        SearchInCategory
     }
 });

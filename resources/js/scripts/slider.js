@@ -10,7 +10,15 @@ $(document).ready(function() {
             slidesToShow: 4,
             slidesToScroll: 1,
             prevArrow: $(item).find('.algo-media__prev-slide'),
-            nextArrow: $(item).find('.algo-media__next-slide')
+            nextArrow: $(item).find('.algo-media__next-slide'),
+            responsive: [
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1
+                    }
+                }
+            ]
         });
     });
 
@@ -28,6 +36,7 @@ $(document).ready(function() {
                 console.log(info)
             }
           });
+
           $('.slider-nav').slick({
             slidesToShow: 5,
             slidesToScroll: 1,
@@ -36,6 +45,11 @@ $(document).ready(function() {
             arrows:false,
             focusOnSelect: true
           });
+
+          $('#menuBtn').click(function() {
+            $('#menuBody').toggleClass('show')
+          });
+
           setTimeout(() => {
             let startBgImage = $('.slider-for').find('.slick-slide.slick-current img').attr('data-bg');
             $('#profile-slider-bg').css({
