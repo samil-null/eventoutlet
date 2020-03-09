@@ -1,5 +1,5 @@
 <template>
-    <div class="form__select"  :class="{show:isShow}" @click="isShow=!isShow">
+    <div class="form__select" ref="select"  :class="{show:isShow}" @click="isShow=!isShow">
         <div class="form__select-intro">
             <span>{{ select[selectName] || emptySelected }}</span>
             <span class="arrow-svg"></span>
@@ -39,7 +39,14 @@
                         this.select = item;
                     }
                 });
-            }
+            },
+            documentClick(e){
+                let el = this.$refs.select;
+                let target = e.target;
+                if ( (el !== target) && !el.contains(target)) {
+                    this.isShow = false
+                }
+            },
         },
         watch: {
             value(value) {
@@ -47,8 +54,11 @@
             }
         },
         mounted() {
+            document.addEventListener('click', this.documentClick)
             this.setSelected();
-
+        },
+        destroyed() {
+            document.removeEventListener('click', this.documentClick)
         }
     }
 </script>

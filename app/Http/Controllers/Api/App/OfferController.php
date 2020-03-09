@@ -9,7 +9,10 @@ use App\Http\Requests\Api\Offer\StoreOffer;
 use App\Models\Offer;
 use App\Models\PriceOption;
 use App\Models\User;
+use App\Services\Offer\OfferPublishedService;
+use App\Services\Offer\OfferPublishService;
 use App\Services\OfferService;
+use App\Transformers\Api\App\OfferTransformer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Facades\Imager;
@@ -17,23 +20,19 @@ use App\Facades\Imager;
 class OfferController extends ApiAppController
 {
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
-        $user = $request->user();
-        $data = $user->offers()->with('service.priceOption','dates')->get();
+        $query = $this->user->offers();
 
-        $offers = (new OfferFactory($data))->create();
+        if ($request->has('active')) {
+            $query->where('offers.status', Offer::ACTIVE_STATUS);
+        }
+
+        $data = $query->with('service.priceOption','dates')->get();
+        $offers = fractal($data, new OfferTransformer)->toArray()['data'];
 
         return response()->json([
-            'success' => true,
-            'data' => [
-                'offers' => $offers
-            ]
+            'offers' => $offers
         ]);
     }
 
@@ -82,7 +81,7 @@ class OfferController extends ApiAppController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request,  $id)
+    public function show($id)
     {
         $offer = $this->user->offers()->with('dates')->findOrFail($id);
 
@@ -112,17 +111,15 @@ class OfferController extends ApiAppController
      */
     public function update(StoreOffer $request, $id, OfferService $offerService)
     {
-        $user = $request->user();
-
-        $offerService->update($user->offers()->find($id), $request);
+        $offerService->update($this->user->offers()->find($id), $request);
 
     }
 
-    public function published(Request $request, OfferService $offerService)
+    public function published(Request $request, OfferPublishService $publishService)
     {
-        $offerService->published(
+        $publishService->execute(
             $request->input('published'),
-            $request->user()
+            $this->user
         );
     }
 

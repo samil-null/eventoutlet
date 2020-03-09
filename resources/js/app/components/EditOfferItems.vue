@@ -93,7 +93,7 @@
         mounted() {
             axios.get('/app/offers')
                 .then(({data}) => {
-                    let offers = data.data.offers;
+                    let offers = data.offers;
                     this.offers = offers;
                     this.published = offers.map((offer)=> {
                         if (offer.status == 1) {

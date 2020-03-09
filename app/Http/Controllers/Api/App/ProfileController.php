@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\App;
 
+use App\Helpers\SocialHelper;
 use App\Models\City;
 use App\Models\User;
 use App\Models\UserInfo;
@@ -133,7 +134,14 @@ class ProfileController extends ApiAppController
             'status' => User::WAITING_STATUS
         ]);
 
+        //crutches
         $user->info()->update($request->except('name'));
+
+        if ($request->has('instagram')) {
+           $user->info()->update([
+               'instagram' => SocialHelper::instagramConvertToTag($request->input('instagram'))
+           ]);
+        }
 
         return response()->json([
             'success' => true,

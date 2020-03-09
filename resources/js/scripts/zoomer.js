@@ -41,8 +41,8 @@ window.addEventListener('load', function () {
         item.addEventListener('click', function (e) {
 
             BigPicture({
-                el: e.target.closest('div[data-bp]'),
-                gallery:item.querySelectorAll('.glide__slide-search'),
+                el: e.target.closest('li[data-bp]'),
+                gallery:item.querySelectorAll('.glide__view'),
             })
         })
     })

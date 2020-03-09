@@ -76,6 +76,13 @@
                                         ></filter-range-slider>
                                     </div>
                                 @endif
+                                <div class="catalog-filter__item addition-field">
+                                    <search-in-category
+                                        value="{{ request()->input('search') }}"
+                                        field-name="search"
+                                        form="#offers-filter"
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -119,18 +126,38 @@
         </div>
     </div>
     </form>
-
-     <div class="catalog__wrapper">
-        <div class="container">
-            <div class="row">
-                @foreach($users as $user)
-                    @include('site.components.algo.index', ['user' => $user])
-                @endforeach
+    @if ($users->count())
+        <div class="catalog__wrapper">
+            <div class="container">
+                <div class="row">
+                    @foreach($users as $user)
+                        @include('site.components.algo.index', ['user' => $user])
+                    @endforeach
+                </div>
+                {{ $pagination->links('site.components.pagination') }}
             </div>
-            {{ $pagination->links('site.components.pagination') }}
-        </div>
 
-    </div>
+        </div>
+    @else
+        <div class="catalog__nothing">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="catalog__nothing_body">
+                            <div class="catalog__nothing_pic"><img src="/static/eventoutlet/dist/img/general/what.png" alt="" /></div>
+                            <div class="catalog__nothing_title"><span>Ничего не найдено</span></div>
+                            <div class="info-page__head_subtitle">
+                                <p>Упс.... По вашему запросу ничего не найдено попробуйте снова</p>
+                            </div>
+                            <div class="catalog__nothing_button">
+                                <a href="#" onclick="window.history.back()" class="thin-rectangle-btn rectangle-btn-border-green"><span>Вернуться назад</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
 </section>
 @endsection
-

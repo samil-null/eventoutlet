@@ -25,7 +25,7 @@
                             <div class="navbar-general__collapse">
                                 <ul class="navbar-general__main">
                                     <li><a href="{{ route('site.offers.index') }}">Каталог специалистов</a></li>
-                                    <li><a href="#">Стать исполнителем</a></li>
+                                    <li><a href="#" @click="$store.dispatch('OPEN_REGISTER_MODEL')">Стать исполнителем</a></li>
                                 </ul>
                                 <div class="navbar-general__profile">
                                     @guest

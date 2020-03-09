@@ -23,6 +23,9 @@ export default new Vuex.Store({
   actions: {
     SET_USER: (context, payload) => {
         context.commit('SET_USER', payload);
+    },
+    OPEN_REGISTER_MODEL: (context, payload) => {
+        context.commit('OPEN_REGISTER_MODEL', payload);
     }
   }
 });
