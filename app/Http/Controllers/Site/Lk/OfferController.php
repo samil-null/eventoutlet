@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Site\Lk;
 
+use App\Models\Offer;
 use App\Http\Controllers\Controller;
 use App\Utils\Seo\SEO;
 use Illuminate\Http\Request;
@@ -20,9 +21,12 @@ class OfferController extends Controller
 
     public function edit(Request $request, $id)
     {
+        $user = $request->user();
         SEO::page('lk.offer.edit');
 
-        $offer = $request->user()->offers()->findOrFail($id);
+        $offer = $user->offers()->where(['offers.status' => Offer::ACTIVE_STATUS, 'offers.id' => $id])->first();
+
+        if (!$offer) return redirect()->route('site.lk.profile.show'); 
 
         return view('site.lk.offers.edit', compact('offer'));
     }

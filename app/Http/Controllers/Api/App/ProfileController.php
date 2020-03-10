@@ -130,8 +130,7 @@ class ProfileController extends ApiAppController
         $user = $this->user;
 
         $user->update([
-            'name' => $request->input('name'),
-            'status' => User::WAITING_STATUS
+            'name' => $request->input('name')
         ]);
 
         //crutches
