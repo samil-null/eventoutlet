@@ -104806,7 +104806,7 @@ var staticRenderFns = [
       "a",
       {
         staticClass: "back-btn back-btn-white",
-        attrs: { href: "#", onclick: "window.history.back()" }
+        attrs: { href: "/lk/profile" }
       },
       [
         _c("span", { staticClass: "back-arrow-svg" }),
@@ -105091,7 +105091,7 @@ var staticRenderFns = [
       "a",
       {
         staticClass: "back-btn back-btn-white",
-        attrs: { href: "#", onclick: "window.history.back()" }
+        attrs: { href: "/lk/profile" }
       },
       [
         _c("span", { staticClass: "back-arrow-svg" }),
@@ -105831,7 +105831,7 @@ var staticRenderFns = [
       "a",
       {
         staticClass: "back-btn back-btn-white",
-        attrs: { href: "#", onclick: "window.history.back()" }
+        attrs: { href: "/lk/profile" }
       },
       [
         _c("span", { staticClass: "back-arrow-svg" }),

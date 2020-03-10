@@ -14,7 +14,7 @@
                         </div>
                         <div class="col-xl-8 offset-xl-1">
                             <div class="profile-edit__wrapper">
-                                <a href="#" onclick="window.history.back()" class="back-btn back-btn-white">
+                                <a href="/lk/profile" class="back-btn back-btn-white">
                                     <span class="back-arrow-svg"></span>
                                     <span>Назад</span>
                                 </a>
