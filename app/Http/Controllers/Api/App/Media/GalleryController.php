@@ -15,32 +15,19 @@ class GalleryController extends ApiAppController
 {
     public function index(ImageStoreService $storeService)
     {
-
         $collection = fractal($this->user->gallery, new GalleryTransformer)->toArray();
 
         return response()->json([
             'gallery' => $collection['data']
         ]);
-
-
-
     }
 
     public function store(GalleryRequest $request, ImageStoreService $storeService)
     {
-        list($fullPath, $filename) = $storeService->execute($request->file('image'), 'gallery');
-
-        $this->user->gallery()->create([
-            'name' => $filename,
-            'type' => Media::GALLERY_TYPE
-        ]);
+        $images = $storeService->execute($request->file('images'), $this->user, 'gallery');
 
         return response()->json([
-            'success' => true,
-            'data' => [
-                'full_path' => asset($fullPath) ,
-                'image'  => $filename
-            ]
+            'images' => $images 
         ]);
     }
 

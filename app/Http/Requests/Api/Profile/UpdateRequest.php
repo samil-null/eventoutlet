@@ -34,7 +34,9 @@ class UpdateRequest extends FormRequest
     public function messages()
     {
        return [
-            'name.required' => 'Имя не может быть пустым'
+            'name.required' => 'Заполните поле',
+            'speciality_id.required' => 'Заполните поле',
+            'city_id.required' => 'Заполните поле'
        ];
     }
 }

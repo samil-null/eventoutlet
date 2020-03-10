@@ -32,7 +32,15 @@ class RegisterRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.unique' => 'Email уже занят'
+            'email.unique'          => 'Email уже занят',
+            'email.min'         => 'Минимальный длина :min',
+            'email.max'             => 'Максимальная длина :max',
+            'email.required'        => 'Заполните поле',
+            'email.email'           => 'Неверный формат email',
+            'password.min'          => 'Минимальный длина :min',
+            'password.max'          => 'Максимальная длина :max',
+            'password.required'     => 'Заполните поле',
+            'password.confirmed'    => 'Пороли не совподают'
         ];
     }
 }

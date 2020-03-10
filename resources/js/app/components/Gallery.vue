@@ -14,7 +14,7 @@
                 <div class="pe-portfolio__add-photo pe-portfolio__field-item" @click="addImage" v-if="balance > 0">
                     <div class="bold-plus-svg"></div>
                 </div>
-                <input type="file" ref="image" style="display: none;" @change="loadImage">
+                <input type="file" multiple ref="image" style="display: none;" @change="loadImage">
             </div>
             <span class="pe-portfolio__counter" v-if="balance > 0">Еще {{ balance }} фото</span>
         </div>
@@ -39,19 +39,24 @@
         },
         methods: {
             async loadImage() {
-                let input = this.$refs.image;
-                let image = input.files[0];
+                let images = this.$refs.image.files;
+                console.log(images);
+                if (images.length) {
 
-                if (image) {
                     let form = new FormData();
-                    form.append('image', image);
+
+                    for (var i = 0; i < images.length; i++) {
+                        form.append('images[' + i + ']', images[i]);
+                    }
+
                     try {
-                        let response = await axios.post('/app/media/gallery', form);
-
-                        if (response.data.success) {
-                            this.galleryImage.push(response.data.data);
-                        }
-
+                        let response = await axios.post('/app/media/gallery', form, {headers: {'Content-Type': 'multipart/form-data'}});
+                            console.log(response.data.images)
+                            
+                            response.data.images.map(image => {
+                                this.galleryImage.push(image);    
+                            })
+                
                     } catch ({response}) {
                         if (response.status === 422) {
                             console.log(response.data);

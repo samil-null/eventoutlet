@@ -27,4 +27,11 @@ class VideoRequest extends FormRequest
             'video' => 'required|mimes:mp4,ogx,oga,ogv,ogg,webm'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'mimes' => 'Не верный формат'
+        ];
+    }
 }
