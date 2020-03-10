@@ -2012,6 +2012,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Alert",
   props: ['messages'],
@@ -3552,7 +3554,7 @@ __webpack_require__.r(__webpack_exports__);
     loadImage: function loadImage() {
       var _this = this;
 
-      var images, form, i, response, _response, errors;
+      var images, form, i, response, _response;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function loadImage$(_context) {
         while (1) {
@@ -3595,14 +3597,22 @@ __webpack_require__.r(__webpack_exports__);
               _response = _context.t0.response;
 
               if (_response.status === 422) {
-                console.log(_response.data);
-                errors = _response.data.errors.image.map(function (error) {
-                  return {
-                    type: 'error',
-                    body: error
-                  };
-                });
-                this.$emit('error', errors);
+                (function () {
+                  console.log(_response.data);
+                  var errors = [];
+                  var responseErrors = _response.data.errors;
+
+                  for (var key in responseErrors) {
+                    responseErrors[key].forEach(function (err) {
+                      errors.push({
+                        type: 'error',
+                        body: err
+                      });
+                    });
+                  }
+
+                  _this.$emit('error', errors);
+                })();
               }
 
             case 17:
@@ -101110,7 +101120,11 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _vm._m(1, true),
+              _c("div", { staticClass: "alert__head" }, [
+                _c("span", { staticClass: "alert__title" }, [
+                  _vm._v(" " + _vm._s(alert.title) + " ")
+                ])
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "alert__subtitle" }, [
                 _c("p", [_vm._v(_vm._s(alert.body))])
@@ -101136,14 +101150,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("div", { staticClass: "times-svg" })
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "alert__head" }, [
-      _c("span", { staticClass: "alert__title" }, [_vm._v(" Успешно ")])
     ])
   }
 ]

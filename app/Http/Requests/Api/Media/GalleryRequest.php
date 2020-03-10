@@ -32,7 +32,7 @@ class GalleryRequest extends FormRequest
     {
         return [
             'images.*.image' => 'Не верный формат',
-            'image.*.dimensions' => 'Неверные размер фото. Минимальные размер 1080x1080'
+            'images.*.dimensions' => 'Неверные размер фото. Минимальные размер 1080x1080'
         ];
     }
 }

@@ -15,7 +15,9 @@
                 </div>
                 <div class="alert__intro">
                     <div class="times-svg" @click="alert.active = false"></div>
-                    <div class="alert__head"><span class="alert__title"> Успешно </span></div>
+                    <div class="alert__head">
+                        <span class="alert__title"> {{ alert.title }} </span>
+                    </div>
                     <div class="alert__subtitle">
                         <p>{{ alert.body }}</p>
                     </div>

@@ -60,12 +60,18 @@
                     } catch ({response}) {
                         if (response.status === 422) {
                             console.log(response.data);
-                            let errors = response.data.errors.image.map(error => {
-                                return {
-                                    type:'error',
-                                    body:error
-                                }
-                            });
+                            let errors = [];
+                            let responseErrors = response.data.errors;
+
+                            for (let key in responseErrors) {
+                                responseErrors[key].forEach(err => {
+                                    errors.push({
+                                        type:'error',
+                                        body: err
+                                    });
+                                })
+                            }
+
                             this.$emit('error', errors)
                         }
                     }
