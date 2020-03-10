@@ -2012,6 +2012,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Alert",
   props: ['messages'],
@@ -3550,72 +3552,89 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     loadImage: function loadImage() {
-      var input, image, form, response, _response, errors;
+      var _this = this;
+
+      var images, form, i, response, _response;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function loadImage$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              input = this.$refs.image;
-              image = input.files[0];
+              images = this.$refs.image.files;
+              console.log(images);
 
-              if (!image) {
-                _context.next = 16;
+              if (!images.length) {
+                _context.next = 17;
                 break;
               }
 
               form = new FormData();
-              form.append('image', image);
+
+              for (i = 0; i < images.length; i++) {
+                form.append('images[' + i + ']', images[i]);
+              }
+
               _context.prev = 5;
               _context.next = 8;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_modules_axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/app/media/gallery', form));
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_modules_axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/app/media/gallery', form, {
+                headers: {
+                  'Content-Type': 'multipart/form-data'
+                }
+              }));
 
             case 8:
               response = _context.sent;
-
-              if (response.data.success) {
-                this.galleryImage.push(response.data.data);
-              }
-
-              _context.next = 16;
+              console.log(response.data.images);
+              response.data.images.map(function (image) {
+                _this.galleryImage.push(image);
+              });
+              _context.next = 17;
               break;
 
-            case 12:
-              _context.prev = 12;
+            case 13:
+              _context.prev = 13;
               _context.t0 = _context["catch"](5);
               _response = _context.t0.response;
 
               if (_response.status === 422) {
-                console.log(_response.data);
-                errors = _response.data.errors.image.map(function (error) {
-                  return {
-                    type: 'error',
-                    body: error
-                  };
-                });
-                this.$emit('error', errors);
+                (function () {
+                  console.log(_response.data);
+                  var errors = [];
+                  var responseErrors = _response.data.errors;
+
+                  for (var key in responseErrors) {
+                    responseErrors[key].forEach(function (err) {
+                      errors.push({
+                        type: 'error',
+                        body: err
+                      });
+                    });
+                  }
+
+                  _this.$emit('error', errors);
+                })();
               }
 
-            case 16:
+            case 17:
             case "end":
               return _context.stop();
           }
         }
-      }, null, this, [[5, 12]]);
+      }, null, this, [[5, 13]]);
     },
     addImage: function addImage() {
       var input = this.$refs.image;
       input.click();
     },
     removeImage: function removeImage(image, index) {
-      var _this = this;
+      var _this2 = this;
 
       _modules_axios__WEBPACK_IMPORTED_MODULE_1__["default"]["delete"]('/app/media/gallery', {
         params: {
           image: image
         }
       }).then(function (data) {
-        _this.galleryImage.splice(index, 1);
+        _this2.galleryImage.splice(index, 1);
       });
     }
   },
@@ -101101,7 +101120,11 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _vm._m(1, true),
+              _c("div", { staticClass: "alert__head" }, [
+                _c("span", { staticClass: "alert__title" }, [
+                  _vm._v(" " + _vm._s(alert.title) + " ")
+                ])
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "alert__subtitle" }, [
                 _c("p", [_vm._v(_vm._s(alert.body))])
@@ -101127,14 +101150,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("div", { staticClass: "times-svg" })
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "alert__head" }, [
-      _c("span", { staticClass: "alert__title" }, [_vm._v(" Успешно ")])
     ])
   }
 ]
@@ -103307,7 +103322,7 @@ var render = function() {
           _c("input", {
             ref: "image",
             staticStyle: { display: "none" },
-            attrs: { type: "file" },
+            attrs: { type: "file", multiple: "" },
             on: { change: _vm.loadImage }
           })
         ],
@@ -103491,13 +103506,14 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "profile-edit__card-wrapper" }, [
     _c("div", { staticClass: "profile-edit__card profile-special" }, [
-      _c("div", {
+      _c("a", {
         staticClass: "profile-edit__card-photo",
-        style: { "background-image": "url(" + _vm.avatar + ")" }
+        style: { "background-image": "url(" + _vm.avatar + ")" },
+        attrs: { href: "/lk/profile" }
       }),
       _vm._v(" "),
-      _c("div", { staticClass: "profile-edit__name" }, [
-        _c("span", [_vm._v(_vm._s(_vm.name))])
+      _c("a", { staticClass: "profile-edit__name" }, [
+        _c("a", { attrs: { href: "/lk/profile" } }, [_vm._v(_vm._s(_vm.name))])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "profile-edit__prof" }, [

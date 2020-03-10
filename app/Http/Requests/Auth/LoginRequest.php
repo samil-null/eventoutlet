@@ -25,7 +25,20 @@ class LoginRequest extends FormRequest
     {
         return [
             'email'     => 'min:6|max:255|required|email',
-            'password'  => 'min:6|max:255|required|'
+            'password'  => 'min:6|max:255|required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'email.min'         => 'Минимальный длина :min',
+            'email.max'         => 'Максимальная длина :max',
+            'email.required'    => 'Заполните поле',
+            'email.email'       => 'Неверный формат email',
+            'password.min'      => 'Минимальный длина :min',
+            'password.max'      => 'Максимальная длина :max',
+            'password.required' => 'Заполните поле'
         ];
     }
 }

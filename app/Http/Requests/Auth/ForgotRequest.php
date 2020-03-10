@@ -27,4 +27,12 @@ class ForgotRequest extends FormRequest
             'email' => 'email|required'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'email.email'       => 'Неверный формат email',
+            'email.required'    => 'Заполните поле',
+        ];
+    }
 }

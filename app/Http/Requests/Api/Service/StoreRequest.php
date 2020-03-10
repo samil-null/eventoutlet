@@ -48,6 +48,7 @@ class StoreRequest extends FormRequest
             'name.min' => 'Название услуги сликом короткое, минимальная длинна :min',
             'additional_fields.*.required' =>  'Поле не может быть пустым',
             'additional_fields.*.integer' =>  'Значение должно быть числом',
+            'price_option_id.required' => 'Заполните поле'
         ];
     }
 }

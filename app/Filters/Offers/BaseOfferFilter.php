@@ -54,12 +54,12 @@ abstract class BaseOfferFilter
         return $this;
     }
 
-    public function city_id($id)
+    public function city_id($id): void
     {
         $this->builder->where('users_info.city_id', $id);
     }
 
-    public function speciality_id($id)
+    public function speciality_id($id): void
     {
         $this->builder->where('users_info.speciality_id', $id);
     }
@@ -69,7 +69,7 @@ abstract class BaseOfferFilter
         return isset($this->params[$key])?$this->params[$key]:null;
     }
 
-    public function search($query)
+    public function search($query): void
     {
         $this->builder->where('users.name', 'like', "%{$query}%");
     }

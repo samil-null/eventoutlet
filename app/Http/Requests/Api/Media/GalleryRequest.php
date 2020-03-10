@@ -24,7 +24,15 @@ class GalleryRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => 'image|required|dimensions:min_width=1079,min_height=1079'
+            'images.*' => 'image|required|dimensions:min_width=1080,min_height=1080'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'images.*.image' => 'Не верный формат',
+            'images.*.dimensions' => 'Неверные размер фото. Минимальные размер 1080x1080'
         ];
     }
 }

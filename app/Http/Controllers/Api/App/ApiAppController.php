@@ -21,6 +21,7 @@ class ApiAppController extends Controller
                 $this->user = Auth::user();
                 return $next($request);
             }
+            
             abort(403);
         });
     }
