@@ -46,6 +46,10 @@
                                             <label class="form-control-label" for="input-username">Название</label>
                                             <input name="name" type="text" id="input-username" class="form-control form-control-alternative" placeholder="Название" value="{{ $city->name }}">
                                         </div>
+                                        <div class="form-group focused">
+                                            <label class="form-control-label" for="input-seo_name">SEO Название</label>
+                                            <input name="seo_name" type="text" id="input-seo_name" class="form-control form-control-alternative" placeholder="Название" value="{{ $city->seo_name }}">
+                                        </div>
                                     </div>
                                 </div>
                             </div>

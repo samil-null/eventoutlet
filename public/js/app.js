@@ -4311,7 +4311,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (data) {
         if (data.success) {
           _this.servicesMap[index].additional_errors = [];
-          _this.servicesMap[index].status = data.data.service.status;
+          _this.servicesMap[index].status = 0;
           serviceObj.price_errors = [];
           serviceObj.name_errors = [];
 

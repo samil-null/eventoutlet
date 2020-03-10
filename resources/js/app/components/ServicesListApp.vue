@@ -162,7 +162,7 @@
                     .then(data => {
                         if (data.success) {
                             this.servicesMap[index].additional_errors = [];
-                            this.servicesMap[index].status = data.data.service.status;
+                            this.servicesMap[index].status = 0;
 
                             serviceObj.price_errors = [];
                             serviceObj.name_errors = [];

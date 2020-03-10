@@ -86,7 +86,7 @@ class OfferController extends Controller
             ));
         }
 
-        $offer->update($request->only('status'));
+        $offer->update(['status' => $status]);
 
         return redirect()->route('admin.offers.show', $id);
     }

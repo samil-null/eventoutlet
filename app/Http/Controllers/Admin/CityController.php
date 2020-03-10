@@ -41,7 +41,7 @@ class CityController extends Controller
      */
     public function store(StoreCityRequest $request)
     {
-        $city = City::create($request->only('name', 'status'));
+        $city = City::create($request->only('name', 'status', 'seo_name'));
 
         return redirect()->route('admin.cities.show', $city->id);
 
@@ -83,7 +83,7 @@ class CityController extends Controller
 
         $city = City::find($id);
 
-        $city->update($request->only('name', 'status'));
+        $city->update($request->only('name', 'status', 'seo_name'));
 
         return redirect()->route('admin.cities.show', $id);
     }

@@ -79,9 +79,7 @@ class ServiceController extends Controller
             event(new ServiceChangeStatus($service->user, $request->input('status'), $request->input('message')));
         }
 
-        $service->update([
-            'status' => $status
-        ]);
+        $service->update($request->only('name', 'seo_name', 'status'));
 
         return redirect()->route('admin.services.edit', $id);
 

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class City extends Model
 {
     protected $fillable = [
-        'name', 'status'
+        'name', 'status', 'seo_name'
     ];
 
     public const DISABLED_STATUS = 0;

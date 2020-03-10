@@ -43,12 +43,11 @@ class ServiceController extends ApiAppController
      */
     public function store(StoreRequest $request)
     {
-
         $service = $this->service->create($request);
 
         $storeService = $request->user()
                                 ->services()
-                                ->where('id',$service->id)
+                                ->where('service.id',$service->id)
                                 ->with('fields.metaField', 'priceOption')
                                 ->first();
         return response()->json([
@@ -89,20 +88,19 @@ class ServiceController extends ApiAppController
      */
     public function update(StoreRequest $request, $id)
     {
-        $user = $this->user->first();
-
+        $user = $this->user;
         $service = $user->services()->find($id);
-        $this->service->update($request, $service);
-        $updateService = $user->services()
-                        ->find($id)
-                        ->with('priceOption')
-                        ->first();
 
+        if ($service) {
+            $this->service->update($request, $service);
+
+            return response()->json([
+                'success' => true
+            ]);   
+        }
+        
         return response()->json([
-            'success' => true,
-            'data' => [
-                'service' => $updateService
-            ]
+            'success' => true
         ]);
     }
 
