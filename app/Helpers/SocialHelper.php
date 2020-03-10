@@ -6,9 +6,9 @@ namespace App\Helpers;
 
 class SocialHelper
 {
-    public static function instagramConvertToTag(?string $string)
+    public static function instagramConvertToTag($string)
     {
-        if (strpos($string, 'instagram.com') !== false) {
+        if (strpos(trim($string, '/'), 'instagram.com') !== false) {
             $params = explode('/', $string);
             return end($params);
 
