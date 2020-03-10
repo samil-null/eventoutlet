@@ -8,11 +8,14 @@ class SocialHelper
 {
     public static function instagramConvertToTag($string)
     {
-        if (strpos(trim($string, '/'), 'instagram.com') !== false) {
-            $params = explode('/', $string);
+        $trimString = trim(trim($string), '/');
+        
+        if (strpos($trimString, 'instagram.com') !== false) {
+            $params = explode('/', $trimString);
+            
             return end($params);
 
-        } elseif (strpos($string, '@') === 0) {
+        } elseif (strpos($trimString, '@') === 0) {
             return substr($string,1);
         }
 
