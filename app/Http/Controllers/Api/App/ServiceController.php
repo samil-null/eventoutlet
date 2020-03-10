@@ -47,7 +47,7 @@ class ServiceController extends ApiAppController
 
         $storeService = $request->user()
                                 ->services()
-                                ->where('service.id',$service->id)
+                                ->where('services.id',$service->id)
                                 ->with('fields.metaField', 'priceOption')
                                 ->first();
         return response()->json([

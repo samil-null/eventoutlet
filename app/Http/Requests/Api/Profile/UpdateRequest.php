@@ -36,7 +36,9 @@ class UpdateRequest extends FormRequest
        return [
             'name.required' => 'Заполните поле',
             'speciality_id.required' => 'Заполните поле',
-            'city_id.required' => 'Заполните поле'
+            'city_id.required' => 'Заполните поле',
+            '*integer' => 'Заполните поле',
+            '*.not_in' => 'Заполните поле'
        ];
     }
 }

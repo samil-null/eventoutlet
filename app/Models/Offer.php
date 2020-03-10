@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Str;
 use App\Helpers\DateHelper;
 use Illuminate\Database\Eloquent\Model;
 
@@ -88,5 +89,10 @@ class Offer extends Model
     public function modelFilter()
     {
         return $this->provideFilter(\App\Filters\OfferFilter::class);
+    }
+
+    public function setDescriptionAttribute($value)
+    {
+        $this->attributes['description'] = Str::removeEmoji(strip_tags($value));
     }
 }

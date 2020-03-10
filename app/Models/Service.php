@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Str;
 use App\Models\AdditionFieldService;
 use Illuminate\Database\Eloquent\Model;
 
@@ -75,5 +76,15 @@ class Service extends Model
     public function getStatus($name = 'name')
     {
         return $this->statuses[$this->status][$name];
+    }
+
+     public function setDescriptionAttribute($value)
+    {
+        $this->attributes['description'] = Str::removeEmoji(strip_tags($value));
+    }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = Str::removeEmoji(strip_tags($value));
     }
 }
