@@ -46,8 +46,4 @@ window.addEventListener('load', function () {
             })
         })
     })
-
-    $('.catalog-filter__preview').click(function(){
-      $('.catalog-filter').toggleClass('show');
-    });
 });
