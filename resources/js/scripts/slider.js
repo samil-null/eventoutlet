@@ -68,8 +68,8 @@ $(document).ready(function() {
           });
     });
 
-    // $('.catalog-filter__preview').click(function(){
-    //   $('.catalog-filter').toggleClass('show');
-    // });
+    $('.catalog-filter__preview').click(function(){
+      $('.catalog-filter').toggleClass('show');
+    });
 });
 
