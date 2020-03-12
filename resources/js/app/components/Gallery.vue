@@ -38,45 +38,69 @@
             }
         },
         methods: {
-            async loadImage() {
+            loadImage() {
                 let images = this.$refs.image.files;
-                console.log(images);
+
                 if (images.length) {
 
-                    let form = new FormData();
-
-                    for (var i = 0; i < images.length; i++) {
-                        form.append('images[' + i + ']', images[i]);
-                    }
-
-                    try {
-                        let response = await axios.post('/app/media/gallery', form, {headers: {'Content-Type': 'multipart/form-data'}});
-                            console.log(response.data.images)
-                            
-                            response.data.images.map(image => {
-                                this.galleryImage.push(image);    
+                    for (let i = 0; i < images.length; i++) {
+                        let form = new FormData();
+                        form.append('image', images[i])
+                        axios.post('/app/media/gallery', form)
+                            .then(({data}) => {
+                                this.galleryImage.push(data.image)
                             })
-                
-                    } catch ({response}) {
-                        if (response.status === 422) {
-                            console.log(response.data);
-                            let errors = [];
-                            let responseErrors = response.data.errors;
+                            .catch(({response}) => {
+                                let errors = [];
+                                console.log(response)
+                                let responseErrors = response.data.errors.image;
 
-                            for (let key in responseErrors) {
-                                responseErrors[key].forEach(err => {
+                                for (let key in responseErrors) {
                                     errors.push({
                                         type:'error',
-                                        body: err
+                                        body: responseErrors[key]
                                     });
-                                })
-                            }
+                                }
 
-                            this.$emit('error', errors)
-                        }
+                                this.$emit('error', errors)
+                            });
                     }
-
                 }
+                // console.log(images);
+                // if (images.length) {
+                //
+                //
+                //
+                //     for (var i = 0; i < images.length; i++) {
+                //         form.append('images[' + i + ']', images[i]);
+                //     }
+                //
+                //     try {
+                //         let response = axios.post('/app/media/gallery', form, {headers: {'Content-Type': 'multipart/form-data'}});
+                //             console.log(response.data.images)
+                //
+                //             response.data.images.map(image => {
+                //                 this.galleryImage.push(image);
+                //             })
+                //
+                //     } catch ({response}) {
+                //         if (response.status === 422) {
+                //             console.log(response.data);
+                //             let errors = [];
+                //             let responseErrors = response.data.errors;
+                //
+                //             for (let key in responseErrors) {
+                //                 responseErrors[key].forEach(err => {
+                //                     errors.push({
+                //                         type:'error',
+                //                         body: err
+                //                     });
+                //                 })
+                //             }
+                //
+                //
+                //         }
+                //     }
 
             },
             addImage() {

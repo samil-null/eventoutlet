@@ -20,14 +20,15 @@ class GalleryController extends ApiAppController
         return response()->json([
             'gallery' => $collection['data']
         ]);
+
     }
 
     public function store(GalleryRequest $request, ImageStoreService $storeService)
     {
-        $images = $storeService->execute($request->file('images'), $this->user, 'gallery');
+        $images = $storeService->execute($request->file('image'), $this->user, 'gallery');
 
         return response()->json([
-            'images' => $images 
+            'image' => $images 
         ]);
     }
 
