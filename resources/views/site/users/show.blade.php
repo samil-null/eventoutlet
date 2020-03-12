@@ -123,7 +123,7 @@
                                                                 <div class="col-xl-6">
                                                                     <div class="form__label">
                                                                         <span>Ваш сайт</span>
-                                                                        <a href="{{ $user->info->site }}" class="form__icon-input-wrapper">
+                                                                        <a target="_blank" href="{{ $user->info->site }}" class="form__icon-input-wrapper">
                                                                             <div class="exploier-svg input-svg"></div>
                                                                             <div class="delimiter"></div>
                                                                             <div class="profile-core__text">{{ $user->info->site }}</div>
@@ -147,7 +147,7 @@
                                                                 <div class="col-xl-6">
                                                                     <div class="form__label">
                                                                         <span>Instagram</span>
-                                                                        <a href="{{ Social::instagramUrl($user->info->instagram) }}" class="form__icon-input-wrapper">
+                                                                        <a target="_blank" href="{{ Social::instagramUrl($user->info->instagram) }}" class="form__icon-input-wrapper">
                                                                             <div class="inst-svg input-svg"></div>
                                                                             <div class="delimiter"></div>
                                                                             <div class="profile-core__text">{{ Social::instagramTag($user->info->instagram) }}</div>
@@ -159,7 +159,7 @@
                                                             <div class="col-xl-6">
                                                                 <div class="form__label">
                                                                     <span>Вконтакте</span>
-                                                                    <a href="{{ $user->info->vk }}" class="form__icon-input-wrapper">
+                                                                    <a target="_blank" href="{{ $user->info->vk }}" class="form__icon-input-wrapper">
                                                                         <div class="vk-svg input-svg"></div>
                                                                         <div class="delimiter"></div>
                                                                         <div class="profile-core__text">{{ $user->info->vk }}</div>
@@ -171,7 +171,7 @@
                                                             <div class="col-xl-6">
                                                                 <div class="form__label">
                                                                     <span>WhatsApp</span>
-                                                                    <a href="{{ Social::whatsappUrl($user->info->whatsapp) }}" class="form__icon-input-wrapper">
+                                                                    <a target="_blank" href="{{ Social::whatsappUrl($user->info->whatsapp) }}" class="form__icon-input-wrapper">
                                                                         <div class="wa-svg input-svg"></div>
                                                                         <div class="delimiter"></div>
                                                                     <div class="profile-core__text">{{ $user->info->whatsapp }}</div>
@@ -191,24 +191,33 @@
                                             </div>
                                             <div class="profile-edit__body profile-core__list">
                                                 @foreach($user->activeServices as $service)
-                                                    <div class="sidebar__item">
-                                                    <div class="sidebar__core">
-                                                        <div class="sidebar__head">
-                                                            <div class="sidebar__head_item">
-                                                                <span>Услуга</span>
-                                                                <span class="service-name">{{ $service->name }}</span>
+                                                    <div class="profile-edit__body profile-core__list">
+                                                    <!-- Line -->
+                                                    <div class="pe-block pr-block">
+                                                        <div class="special-offer">
+                                                            <div class="special-offer__head">
+                                                                <!-- <div class="special-offer__icon">
+                                                                    <div class="catalog-card__discount-icon">
+                                                                        <div class="percent-svg"></div>
+                                                                    </div>
+                                                                </div> -->
+                                                                <div class="special-offer__item">
+                                                                    <span>Услуга</span>
+                                                                    <span>{{ $service->name }}</span>
+                                                                </div>
+                                                                <div class="special-offer__item profile-core__offer-item">
+                                                                    <span>Стоимость</span>
+                                                                    <span>{{ $service->price }} {{ $service->priceOption->name }}</span>
+                                                                </div>
                                                             </div>
-                                                            <div class="sidebar__slash"></div>
-                                                            <div class="sidebar__head_item">
-                                                                <span>Стоимость</span>
-                                                                <span class="sidebar-price">{{ $service->price }} {{ $service->priceOption->name }}</span>
+                                                            <div class="special-offer__desctipton">
+                                                                <div class="special-offer__desctipton-title">
+                                                                    <span>Описание</span>
+                                                                </div>
+                                                                <div class="special-offer__desctipton-body">
+                                                                    <p>{{ $service->description }}.</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="sidebar__description">
-                                                            <span>Описание</span>
-                                                            <p>
-                                                                {{ $service->description }}
-                                                            </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -230,7 +239,7 @@
                                                 </div>
                                             </div>
                                             <div class="sidebar__title">
-                                                <span>Спецпредложения %</span>
+                                                <span>Спецпредложения %</span> 
                                             </div>
                                             @foreach($offers as $offer)
                                                 <div class="sidebar__item">
@@ -240,7 +249,7 @@
                                                             <span>Услуга</span>
                                                             <span class="service-name">{{ $offer->serviceName }}</span>
                                                         </div>
-                                                        <div class="sidebar__slash"></div>
+                                                        <!-- <div class="sidebar__slash"></div> -->
                                                         <div class="sidebar__head_item">
                                                             <span>Дата</span>
                                                             <span class="sidebar-price">{{ $offer->dates }}</span>
@@ -251,7 +260,7 @@
                                                             <span>Цена со скидкой</span>
                                                             <span class="service-name">{{ $offer->price }} {{ $offer->priceOption }}</span>
                                                         </div>
-                                                        <div class="sidebar__slash"></div>
+                                                        <!-- <div class="sidebar__slash"></div> -->
                                                         <div class="sidebar__head_item">
                                                             <span>Скидка</span>
                                                             <span class="sidebar-price">{{ $offer->discount }}%</span>
