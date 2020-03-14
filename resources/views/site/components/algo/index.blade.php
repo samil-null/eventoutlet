@@ -4,7 +4,7 @@
             <div class="catalog-card__head-photo" style="background-image: url({{ Imager::avatar($user->avatar, 'middle') }});"></div>
             <div class="catalog-card__head-info catalog-card-name">
                 <span class="catalog-card__first-title">
-                    <a href="{{ route('site.users.show', $user->id) }}">{{ $user->name }}</a>
+                    <a href="{{ route('site.users.show', $user->slug) }}">{{ $user->name }}</a>
                 </span>
                 <span class="catalog-card__second-title">{{ $user->speciality }}</span>
             </div>
@@ -37,7 +37,7 @@
                     @if($user->isSpecials)
                         <div class="catalog-card__discount-info">
                             <span>Скидка: {{ $user->offer->discount }}%</span>
-                            <span><a href="{{ route('site.users.show', $user->id) }}">Все скидки</a></span>
+                            <span><a href="{{ route('site.users.show', $user->slug) }}">Все скидки</a></span>
                         </div>
                     @endif
                 </div>

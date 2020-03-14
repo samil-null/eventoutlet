@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2",
         "artesaos/seotools": "^0.16.0",
+        "cviebrock/eloquent-sluggable": "6.0.*",
         "fideloper/proxy": "^4.0",
         "fzaninotto/faker": "^1.9",
         "htmlmin/htmlmin": "^6.0",

@@ -123,7 +123,7 @@
                                                                 <div class="col-xl-6">
                                                                     <div class="form__label">
                                                                         <span>Ваш сайт</span>
-                                                                        <a href="{{ $user->info->site }}" class="form__icon-input-wrapper">
+                                                                        <a target="_blank" href="{{ $user->info->site }}" class="form__icon-input-wrapper">
                                                                             <div class="exploier-svg input-svg"></div>
                                                                             <div class="delimiter"></div>
                                                                             <div class="profile-core__text">{{ $user->info->site }}</div>
@@ -135,7 +135,7 @@
                                                                 <div class="col-xl-6">
                                                                     <div  class="form__label">
                                                                         <span>Email</span>
-                                                                        <a href="mailto:{{ $user->info->vk }}" class="form__icon-input-wrapper">
+                                                                        <a href="mailto:{{ $user->info->email }}" class="form__icon-input-wrapper">
                                                                             <div class="at-svg input-svg"></div>
                                                                             <div class="delimiter"></div>
                                                                             <div class="profile-core__text">{{ $user->info->email }}</div>

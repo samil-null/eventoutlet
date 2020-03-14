@@ -10,9 +10,11 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
-    public function show($id)
+    public function show($slug)
     {
-        $user = User::with('activeServices.activeOffers.dates', 'activeServices.priceOption', 'speciality')->findOrFail($id);
+        $user = User::with('activeServices.activeOffers.dates', 'activeServices.priceOption', 'speciality')
+            ->where('slug', $slug)
+            ->firstOrFail();
 
         $dates = collect([]);
         $dataOffers = collect([]);

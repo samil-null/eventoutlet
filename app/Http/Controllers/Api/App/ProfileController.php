@@ -119,11 +119,9 @@ class ProfileController extends ApiAppController
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\Api\Profile\UpdateRequest  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UpdateRequest $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(UpdateRequest $request, $id)
     {
@@ -133,14 +131,8 @@ class ProfileController extends ApiAppController
             'name' => $request->input('name')
         ]);
 
-        //crutches
-        $user->info()->update($request->except('name'));
-
-        if ($request->has('instagram')) {
-           $user->info()->update([
-               'instagram' => SocialHelper::instagramConvertToTag($request->input('instagram'))
-           ]);
-        }
+        UserInfo::where('user_id', $user->id)->first()
+                ->update($request->except('name'));
 
         return response()->json([
             'success' => true,

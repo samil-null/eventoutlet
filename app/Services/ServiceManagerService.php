@@ -6,13 +6,11 @@ namespace App\Services;
 
 use App\Exceptions\AdditionFieldValidateException;
 use App\Models\AdditionFieldService;
+use App\Models\Offer;
 use App\Models\Service;
-use http\Client\Curl\User;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
 
 class ServiceManagerService
 {
@@ -27,9 +25,8 @@ class ServiceManagerService
         'required' => 'Поле обязательно для заполнения'
     ];
 
-    public function create($request)
+    public function create($request, $user)
     {
-        $user = $request->user();
         $fields = $user->speciality->fields;
 
         if ($user->services()->count() >= self::MAX_SERVICES) {
@@ -42,9 +39,14 @@ class ServiceManagerService
             $additionFields = $this->createAdditionFields(collect($request->input('additional_fields')), $fields);
         }
 
-        $service = $user->services()->save(
-            new Service($request->only('name', 'price_option_id', 'price', 'description'))
-        );
+        $service = $user->services()->create([
+            'name' => $request->name,
+            'price_option_id' => $request->price_option_id,
+            'price' => $request->price,
+            'description' => $request->price,
+            'status' => Offer::WAITING_STATUS
+        ]);
+
         if (count($additionFields)) {
             $service->fields()->saveMany($additionFields);
         }

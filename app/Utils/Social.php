@@ -20,4 +20,9 @@ class Social
     {
         return 'https://wa.me/' . preg_replace("/[^0-9]/", '', $whatsapp);
     }
+
+    public function webSiteUrl($site)
+    {
+        return 'https://' . $site;
+    }
 }

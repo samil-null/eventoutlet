@@ -96,6 +96,7 @@ class AlgoFactory implements AlgoFactoryInterface
     {
         return new Algo(
             $data->id,
+            $data->slug,
             $data->name,
             $data->avatar,
             $this->bindSpeciality($data->speciality_id),

@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use Str;
+
 use EloquentFilter\Filterable;
 use App\Filters\UserFilter;
 use Hash;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -15,6 +18,7 @@ class User extends Authenticatable
     use LaratrustUserTrait;
     use Filterable;
     use Notifiable;
+    use Sluggable;
 
     public const NEW_STATUS = 0;
 
@@ -112,19 +116,6 @@ class User extends Authenticatable
         )->where('offers.status', Offer::ACTIVE_STATUS);
     }
 
-    public function maxOfferPrice()
-    {
-        return $this->hasManyThrough(
-            Offer::class,
-            Service::class,
-            'user_id',
-            'service_id',
-            'id',
-            'id'
-        )->selectRaw('max(offers.discount_price) as max_price, user_id')
-            ->groupBy('laravel_through_key');
-    }
-
     public function speciality()
     {
         return $this->hasOneThrough(
@@ -134,8 +125,7 @@ class User extends Authenticatable
             'id',
             'id',
             'speciality_id'
-        );
-
+        )->withDefault();
     }
 
     public function city()
@@ -147,7 +137,7 @@ class User extends Authenticatable
             'id',
             'id',
             'city_id'
-        );
+        )->withDefault();
     }
 
     public function checkPassword($password)
@@ -185,5 +175,22 @@ class User extends Authenticatable
     public function modelFilter()
     {
         return $this->provideFilter(\App\Filters\UserFilter::class);
+    }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = Str::removeEmoji(strip_tags($value));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
     }
 }
