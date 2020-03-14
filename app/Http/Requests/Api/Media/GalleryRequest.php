@@ -24,7 +24,7 @@ class GalleryRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => 'image|required|dimensions:min_width=1080,min_height=1080'
+            'image' => 'image|required|dimensions:min_width=1080,min_height=1080|max:500000'
         ];
     }
 
