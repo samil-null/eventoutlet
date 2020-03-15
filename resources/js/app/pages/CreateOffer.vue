@@ -9,6 +9,7 @@
                                 v-if="user.id"
                                 :avatar="user.avatar.original"
                                 :name="user.name"
+                                :status="user.status_name"
                                 :speciality="user.info.speciality"
                             />
                         </div>
@@ -73,8 +74,8 @@
 
                                     <div class="pe-block__add-btn">
                                         <button type="submit" class="add-btn add-btn-green">
-                                            <div class="plus"><span></span> <span></span></div>
-                                            <span>Добавить спецпредложение</span>
+                                        
+                                            <span>Сохронить спецпредложение</span>
                                         </button>
                                     </div>
                                 </form>

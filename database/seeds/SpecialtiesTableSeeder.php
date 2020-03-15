@@ -8,18 +8,26 @@ class SpecialtiesTableSeeder extends Seeder
     private $specialties = [
         [
             'name' => 'Фотограф',
+            'seo_name' => 'Фотографа',
+            'plural_name' => 'Фотографов',
             'status' => 1
         ],
         [
             'name' => 'Ведущий',
-            'status' => 1
+            'seo_name' => 'Ведущего',
+            'plural_name' => 'Ведущих',
+            'status' => 1,
         ],
         [
             'name' => 'Звукорежиссер',
+            'seo_name' => 'Звукорежиссера',
+            'plural_name' => 'Звукорежесеров',
             'status' => 1
         ],
         [
             'name' => 'Декоратор',
+            'seo_name' => 'Декоратора',
+            'plural_name' => 'Декораторов',
             'status' => 1
         ]
     ];

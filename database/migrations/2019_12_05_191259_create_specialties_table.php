@@ -17,6 +17,7 @@ class CreateSpecialtiesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name', 255)->uniqid();
             $table->string('seo_name', 255)->nullable();
+            $table->string('plural_name', 255)->nullable();
             $table->integer('status')->default(0);
             $table->timestamps();
         });

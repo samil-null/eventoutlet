@@ -1,7 +1,7 @@
 @extends('site.layout.index')
 
 @section('content')
-    <section id="profile" class="profile" itemscope itemtype="http://schema.org/ProfilePage">
+    <section id="profile" class="profile">
         <div class="profile-slider">
             <div class="profile-slider__wrapper">
                 <div class="profile-slider__background" id="profile-slider-bg" style="background-image: url(./img/slider/o.jpg);"></div>
@@ -122,8 +122,8 @@
                                                             @if($user->info->site)
                                                                 <div class="col-xl-6">
                                                                     <div class="form__label">
-                                                                        <span>Ваш сайт</span>
-                                                                        <a target="_blank" href="{{ $user->info->site }}" class="form__icon-input-wrapper">
+                                                                        <span>Сайт</span>
+                                                                        <a target="_blank" href="{{ Social::webSiteUrl($user->info->site) }}" class="form__icon-input-wrapper">
                                                                             <div class="exploier-svg input-svg"></div>
                                                                             <div class="delimiter"></div>
                                                                             <div class="profile-core__text">{{ $user->info->site }}</div>
@@ -159,7 +159,7 @@
                                                             <div class="col-xl-6">
                                                                 <div class="form__label">
                                                                     <span>Вконтакте</span>
-                                                                    <a target="_blank" href="{{ $user->info->vk }}" class="form__icon-input-wrapper">
+                                                                    <a target="_blank" href="{{ Social::webSiteUrl($user->info->vk) }}" class="form__icon-input-wrapper">
                                                                         <div class="vk-svg input-svg"></div>
                                                                         <div class="delimiter"></div>
                                                                         <div class="profile-core__text">{{ $user->info->vk }}</div>

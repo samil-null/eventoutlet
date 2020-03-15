@@ -76,13 +76,13 @@
                                         ></filter-range-slider>
                                     </div>
                                 @endif
-                                <div class="catalog-filter__item addition-field">
+                                {{-- <div class="catalog-filter__item addition-field">
                                     <search-in-category
                                         value="{{ request()->input('search') }}"
                                         field-name="search"
                                         form="#offers-filter"
                                     />
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>

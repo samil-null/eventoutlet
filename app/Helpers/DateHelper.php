@@ -32,6 +32,10 @@ class DateHelper
     {
         $startDate = $dates->min('date');
         $endDate = $dates->max('date');
+        
+        if ($dates->count() == 1) {
+            return Carbon::parse($dates->first()->date)->format('d.m.y');
+        }
 
         $parseStartDate = Carbon::parse($startDate);
         $parseEndDate = Carbon::parse($endDate);

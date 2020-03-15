@@ -43,7 +43,7 @@ class User extends Authenticatable
 
         self::WAITING_STATUS => [
             'name' => 'Ожидает модерации',
-            'public_name' => 'Ваш аккаунт на модерации'
+            'public_name' => 'На модерации'
         ],
         self::ACTIVE_STATUS => [
             'name' => 'Активен',
@@ -51,11 +51,11 @@ class User extends Authenticatable
         ],
         self::REJECTED_STATUS => [
             'name' => 'Отклонен',
-            'public_name' => 'Ваша заявка отклонена, проверте свою почту'
+            'public_name' => 'Отклонен'
         ],
         self::BANED_STATUS => [
             'name' => 'Заблокирован',
-            'public_name' => 'Ваш аккаунт заблокирован'
+            'public_name' => 'Заблокирован'
         ]
     ];
 

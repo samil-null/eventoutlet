@@ -34,7 +34,6 @@ Route::group(['namespace' => 'Site'], function () {
             'store' => 'site.lk.offers.store',
             'edit' => 'site.lk.offers.edit'
         ]);
-
     });
 
     Route::get('/offers', 'OfferController@index')->name('site.offers.index');
@@ -56,8 +55,11 @@ Route::group(['prefix' => 'app', 'namespace' => 'Api\App', 'middleware' => ['rol
     Route::resource('/users', 'UserController');
 
     Route::resource('/profiles', 'ProfileController');
+
     Route::resource('/offers', 'OfferController');
     Route::post('/offers/published', 'OfferController@published');
+    
+    Route::get('/services/count', 'ServiceController@count');
     Route::resource('/services', 'ServiceController');
     Route::resource('/specialties', 'SpecialityController');
 

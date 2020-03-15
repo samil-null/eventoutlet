@@ -3790,8 +3790,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['name', 'speciality', 'avatar', 'editable', 'link'],
+  props: ['name', 'speciality', 'avatar', 'editable', 'link', 'status'],
   name: "UserCard"
 });
 
@@ -4684,6 +4686,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -4820,6 +4823,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! dayjs */ "./node_modules/dayjs/dayjs.min.js");
 /* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _components_Profile_UserCard__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/Profile/UserCard */ "./resources/js/app/components/Profile/UserCard.vue");
+//
 //
 //
 //
@@ -5056,6 +5060,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
 /* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_10__);
 /* harmony import */ var _components_Profile_UserCard__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/Profile/UserCard */ "./resources/js/app/components/Profile/UserCard.vue");
+//
+//
+//
 //
 //
 //
@@ -5556,6 +5563,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -5567,7 +5580,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       user: {},
-      offers: []
+      offers: [],
+      serviceCount: 0
     };
   },
   computed: {},
@@ -5581,6 +5595,10 @@ __webpack_require__.r(__webpack_exports__);
     _modules_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/app/offers?active=1').then(function (_ref2) {
       var data = _ref2.data;
       _this.offers = data.offers;
+    });
+    _modules_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/app/services/count').then(function (_ref3) {
+      var data = _ref3.data;
+      _this.serviceCount = data.count;
     });
   }
 });
@@ -103509,7 +103527,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "profile-edit__prof" }, [
-        _c("span", [_vm._v(_vm._s(_vm.speciality))])
+        _c("span", [_vm._v("Статус: " + _vm._s(_vm.status))])
       ]),
       _vm._v(" "),
       _vm.editable
@@ -103739,7 +103757,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "catalog-select__body-title" }, [
-      _c("span", [_vm._v("Выберете город")])
+      _c("span", [_vm._v("Выберете специальность")])
     ])
   },
   function() {
@@ -104600,6 +104618,7 @@ var render = function() {
                         attrs: {
                           avatar: _vm.user.avatar.original,
                           name: _vm.user.name,
+                          status: _vm.user.status_name,
                           speciality: _vm.user.info.speciality
                         }
                       })
@@ -104835,15 +104854,7 @@ var staticRenderFns = [
       _c(
         "button",
         { staticClass: "add-btn add-btn-green", attrs: { type: "submit" } },
-        [
-          _c("div", { staticClass: "plus" }, [
-            _c("span"),
-            _vm._v(" "),
-            _c("span")
-          ]),
-          _vm._v(" "),
-          _c("span", [_vm._v("Добавить спецпредложение")])
-        ]
+        [_c("span", [_vm._v("Сохронить спецпредложение")])]
       )
     ])
   }
@@ -104886,6 +104897,7 @@ var render = function() {
                         attrs: {
                           avatar: _vm.user.avatar.original,
                           name: _vm.user.name,
+                          status: _vm.user.status_name,
                           speciality: _vm.user.info.speciality
                         }
                       })
@@ -105169,6 +105181,7 @@ var render = function() {
                     ? _c("user-card", {
                         attrs: {
                           avatar: _vm.user.avatar.original,
+                          status: _vm.user.status_name,
                           name: _vm.user.name,
                           speciality: _vm.user.info.speciality
                         }
@@ -105786,6 +105799,8 @@ var render = function() {
                         1
                       ),
                       _vm._v(" "),
+                      _c("div", { attrs: { id: "add-service" } }),
+                      _vm._v(" "),
                       _vm.renderServiceApp && _vm.services.length <= 6
                         ? _c("create-service-app", {
                             attrs: {
@@ -105938,6 +105953,7 @@ var render = function() {
                     attrs: {
                       avatar: _vm.user.avatar.original,
                       name: _vm.user.name,
+                      status: _vm.user.status_name,
                       speciality: _vm.user.info.speciality,
                       editable: true
                     }
@@ -106088,14 +106104,23 @@ var render = function() {
                       : _vm._e(),
                     _vm._v(" "),
                     _c("div", { staticClass: "pe-block__add-btn" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "add-btn add-btn-corall",
-                          attrs: { href: _vm.createOfferLink }
-                        },
-                        [_c("span", [_vm._v("Добавить спецпредложение")])]
-                      )
+                      _vm.serviceCount
+                        ? _c(
+                            "a",
+                            {
+                              staticClass: "add-btn add-btn-corall",
+                              attrs: { href: _vm.createOfferLink }
+                            },
+                            [_c("span", [_vm._v("Добавить спецпредложение")])]
+                          )
+                        : _c(
+                            "a",
+                            {
+                              staticClass: "add-btn add-btn-corall",
+                              attrs: { href: "/lk/profile/edit/#add-service" }
+                            },
+                            [_c("span", [_vm._v("Добавить услугу")])]
+                          )
                     ])
                   ])
                 ],

@@ -8,6 +8,7 @@
                             <user-card
                                 v-if="userCardRender"
                                 :avatar="user.avatar.original"
+                                :status="user.status_name"
                                 :name="user.name"
                                 :speciality="user.info.speciality"
                             />
@@ -225,7 +226,9 @@
                                             @create-service="createService"
                                         ></services-list-app>
                                     </div>
+                                    <div id="add-service"></div>
                                     <create-service-app
+                                        
                                         v-if="renderServiceApp && services.length <= 6"
                                         :price-options="priceOptions"
                                         :additional-fields="additionalFields"

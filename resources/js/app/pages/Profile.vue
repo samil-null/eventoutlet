@@ -8,6 +8,7 @@
                                 v-if="user.id"
                                 :avatar="user.avatar.original"
                                 :name="user.name"
+                                :status="user.status_name"
                                 :speciality="user.info.speciality"
                                 :editable="true"
                             />
@@ -55,7 +56,12 @@
                                     </div>
 
                                     <div class="pe-block__add-btn">
-                                        <a :href="createOfferLink" class="add-btn add-btn-corall"> <span>Добавить спецпредложение</span> </a>
+                                        <a :href="createOfferLink" v-if="serviceCount" class="add-btn add-btn-corall"> 
+                                            <span>Добавить спецпредложение</span> 
+                                        </a>
+                                        <a href="/lk/profile/edit/#add-service" v-else class="add-btn add-btn-corall"> 
+                                            <span>Добавить услугу</span> 
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -76,7 +82,8 @@
         data() {
             return {
                 user: {},
-                offers:[]
+                offers:[],
+                serviceCount:0
             }
         },
         computed: {
@@ -91,6 +98,11 @@
             axios.get('/app/offers?active=1')
                 .then(({data}) => {
                     this.offers = data.offers;
+                })
+            
+            axios.get('/app/services/count')
+                .then(({data}) => {
+                    this.serviceCount = data.count;
                 })
         }
     }

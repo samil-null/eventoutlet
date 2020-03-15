@@ -9,6 +9,7 @@
                                 v-if="user.id"
                                 :avatar="user.avatar.original"
                                 :name="user.name"
+                                :status="user.status_name"
                                 :speciality="user.info.speciality"
                             />
                         </div>

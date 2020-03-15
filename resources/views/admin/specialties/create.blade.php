@@ -46,6 +46,10 @@
                                             <label class="form-control-label" for="input-seo-name">SEO Название</label>
                                             <input type="text" required name="name" id="input-seo-name" class="form-control form-control-alternative" placeholder="Название" value="{{ $speciality->seo_name }}">
                                         </div>
+                                        <div class="form-group focused">
+                                            <label class="form-control-label" for="input-plural-name">Название во множественном числе (Винительный падеж)</label>
+                                            <input type="text" required name="plural_name" id="input-plural-name" class="form-control form-control-alternative" placeholder="Название" value="{{ $speciality->plural_name }}">
+                                        </div>
                                     </div>
                                 </div>
                             </div>

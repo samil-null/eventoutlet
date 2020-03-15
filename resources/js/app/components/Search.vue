@@ -13,7 +13,7 @@
                           </div>
                           <div class="catalog-select__body ">
                             <div class="catalog-select__body-title">
-                                <span>Выберете город</span>
+                                <span>Выберете специальность</span>
                             </div>
                             <div class="form__select-wrapper">
                               <div class="form__select-list">

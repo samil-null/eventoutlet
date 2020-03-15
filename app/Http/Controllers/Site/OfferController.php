@@ -19,6 +19,7 @@ use App\Services\FilterBuilderService;
 use App\Services\OfferFilterService;
 use App\Services\UserFilterService;
 use App\Utils\Seo\SEO;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
@@ -40,7 +41,12 @@ class OfferController extends Controller
         $data = $result->get()->paginate($perPage);
         $users = $factory->load($data, $request->has('specials_offers'))->create();
 
-        SEO::filter('Фотографа', 'Москве');
+        $city = City::find($request->input('city_id'));
+        $speciality = Specialty::find($request->input('speciality_id'));
+
+        Seo::offers($city, $speciality, $request->has('specials_offers'));
+
+        //SEO::filter('Фотографа', 'Москве');
 
         $filters = [
             'availableFilters' => $result->getAvailableFilters(),
@@ -73,5 +79,6 @@ class OfferController extends Controller
             'pagination' => $data->appends($request->input()),
             'perPage' => $perPage
         ]);
+
     }
 }

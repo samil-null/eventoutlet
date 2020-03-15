@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\App;
 use App\Http\Requests\Api\Service\StoreRequest;
 use App\Services\ServiceManagerService;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ServiceController extends ApiAppController
@@ -23,18 +24,17 @@ class ServiceController extends ApiAppController
     public function index()
     {
         return response()->json([
-            'services' => $this->user->services()->with(['priceOption', 'fields.metaField'])->get()
+            'services' => $this->user->services()
+                                ->with(['priceOption', 'fields.metaField'])->get()
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    
+    public function count()
     {
-        //
+        return response()->json([
+            'count' => $this->user->services()->count() 
+        ]);
     }
 
     /**
@@ -45,11 +45,13 @@ class ServiceController extends ApiAppController
     {
         $service = $this->service->create($request, $this->user);
 
+        $this->user->update(['status' => User::WAITING_STATUS]);
+
         $storeService = $this->user
-                                ->services()
-                                ->where('services.id',$service->id)
-                                ->with('fields.metaField', 'priceOption')
-                                ->first();
+                            ->services()
+                            ->where('services.id',$service->id)
+                            ->with('fields.metaField', 'priceOption')
+                            ->first();
 
         return response()->json([
             'success'   => true,

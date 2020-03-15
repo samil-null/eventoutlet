@@ -3,7 +3,9 @@
         <div class="profile-edit__card profile-special">
             <a href="/lk/profile" class="profile-edit__card-photo" :style="{'background-image':'url('+ avatar +')'}"></a>
             <a class="profile-edit__name"><a href="/lk/profile">{{ name }}</a></a>
-            <div class="profile-edit__prof"><span>{{ speciality }}</span></div>
+            <div class="profile-edit__prof">
+                <span>Статус: {{ status }}</span>
+            </div>
             <div class="pe-block__add-btn" v-if="editable">
                 <a href="/lk/profile/edit" class="add-btn">
                     <span>Редактировать профиль</span>
@@ -15,7 +17,7 @@
 
 <script>
     export default {
-        props:['name', 'speciality', 'avatar', 'editable', 'link'],
+        props:['name', 'speciality', 'avatar', 'editable', 'link', 'status'],
         name: "UserCard"
     }
 </script>
