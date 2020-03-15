@@ -127,6 +127,8 @@
                     type:'success',
                     body:'Ваши предложения успешно опубликованы'
                 }]);
+
+                location.href = '/lk/profile'
             },
             updateOffer() {
                 let dates = [];
@@ -148,6 +150,8 @@
                             type:'success',
                             body:'Ваши предложение успешно обновлено'
                         }]);
+
+                        location.href = '/lk/profile'
                     })
                     .catch(({response}) => {
                         if (response.status === 422) {

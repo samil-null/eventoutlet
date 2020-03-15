@@ -31,7 +31,7 @@ class SEO
             'title' => 'Личный кабинет',
             'description' => 'Личный кабинет',
             'url' => [
-                'route' => 'site.lk',
+                'route' => 'site.lk.profile.show',
                 'params' => ''
             ]
         ],
@@ -39,7 +39,7 @@ class SEO
             'title' => 'Редактирование анкеты',
             'description' => 'Редактирование анкеты',
             'url' => [
-                'route' => 'site.lk',
+                'route' => 'site.lk.profile.edit',
                 'params' => ''
             ]
         ],
@@ -47,7 +47,7 @@ class SEO
             'title' => 'Добавить спецпредложение',
             'description' => 'Добавить спецпредложение',
             'url' => [
-                'route' => 'site.lk',
+                'route' => 'site.lk.offers.create',
                 'params' => ''
             ]
         ],
@@ -55,8 +55,8 @@ class SEO
             'title' => 'Редактирование спецпредложения',
             'description' => 'Редактирование спецпредложения',
             'url' => [
-                'route' => 'site.lk',
-                'params' => ''
+                'route' => 'site.lk.offers.edit',
+                'params' => [0]
             ]
         ],
         'about' => [
@@ -104,13 +104,14 @@ class SEO
         $title = self::$pages[$page]['title'];
         $description = self::$pages[$page]['description'];
         $route = self::$pages[$page]['url']['route'];
+        $params = self::$pages[$page]['url']['params'];
 
         SEOMeta::setTitle($title);
         SEOMeta::setDescription($description);
         JsonLd::setType('WebPage');
         JsonLd::setDescription($description);
         JsonLd::setTitle($title);
-        JsonLd::setUrl(route($route));
+        JsonLd::setUrl(route($route, $params));
         OpenGraph::setTitle($title);
         OpenGraph::setDescription($description);
 

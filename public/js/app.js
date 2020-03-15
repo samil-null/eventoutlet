@@ -4950,6 +4950,7 @@ __webpack_require__.r(__webpack_exports__);
         type: 'success',
         body: 'Ваши предложения успешно опубликованы'
       }]);
+      location.href = '/lk/profile';
     },
     updateOffer: function updateOffer() {
       var _this = this;
@@ -4971,6 +4972,8 @@ __webpack_require__.r(__webpack_exports__);
           type: 'success',
           body: 'Ваши предложение успешно обновлено'
         }]);
+
+        location.href = '/lk/profile';
       })["catch"](function (_ref2) {
         var response = _ref2.response;
 
