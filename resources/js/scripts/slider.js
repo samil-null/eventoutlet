@@ -32,9 +32,6 @@ $(document).ready(function() {
             asNavFor: '.slider-nav',
             prevArrow: $('.profile-slider__prev'),
             nextArrow: $('.profile-slider__next'),
-            afterChange(info) {
-                console.log(info)
-            }
           });
 
           $('.slider-nav').slick({

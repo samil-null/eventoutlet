@@ -286,3 +286,7 @@
         </div>
     </section>
 @endsection
+@push('scripts')
+    <script src="{{ asset('js/pages/users.js') }}"></script>
+    <script src="{{ asset('js/common/algo.js') }}"></script>
+@endpush
