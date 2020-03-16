@@ -26,6 +26,12 @@
 /******/ 		return module.exports;
 /******/ 	}
 /******/
+/******/ 	// The chunk loading function for additional chunks
+/******/ 	// Since all referenced chunks are already included
+/******/ 	// in this file, this function is empty here.
+/******/ 	__webpack_require__.e = function requireEnsure() {
+/******/ 		return Promise.resolve();
+/******/ 	};
 /******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
@@ -2204,9 +2210,19 @@ __webpack_require__.r(__webpack_exports__);
     LoginForm: _LoginForm__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   mounted: function mounted() {
+    var _this = this;
+
     if (this.user) {
       this.auth = true;
     }
+
+    document.querySelectorAll('.open-register-modal').forEach(function (item) {
+      item.addEventListener('click', function (e) {
+        _this.openModal();
+
+        _this.switchForm('register');
+      });
+    });
   }
 });
 
@@ -3962,7 +3978,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   components: {
     'v-calendar': function vCalendar() {
-      return Promise.resolve(/*! import() */).then(__webpack_require__.t.bind(null, /*! v-calendar/lib/components/date-picker.umd */ "./node_modules/v-calendar/lib/components/date-picker.umd.js", 7));
+      return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.t.bind(null, /*! v-calendar/lib/components/date-picker.umd */ "./node_modules/v-calendar/lib/components/date-picker.umd.js", 7));
     }
   },
   mounted: function mounted() {
@@ -101353,7 +101369,7 @@ var staticRenderFns = [
                     "a",
                     {
                       staticClass: "thin-rectangle-btn thin-rectangle-btn-dark",
-                      attrs: { href: "#" }
+                      attrs: { href: "/about" }
                     },
                     [_c("span", [_vm._v("Обучение работе с сервисом")])]
                   )
@@ -104423,7 +104439,7 @@ var render = function() {
         _c("span", { staticClass: "checkmark" })
       ]),
       _vm._v(" "),
-      !_vm.fixedState
+      _vm.checked
         ? [
             _c("input", {
               attrs: { type: "hidden", name: "specials_offers[date_from]" },
@@ -122429,6 +122445,9 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('.catalog-filter__preview').click(function () {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.catalog-filter').toggleClass('show');
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#close-mobile-filter').click(function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.catalog-filter').removeClass('show');
   });
 });
 

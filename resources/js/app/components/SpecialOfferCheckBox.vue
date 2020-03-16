@@ -5,7 +5,7 @@
             <input type="checkbox" @change="changeSpecial" v-model="checked">
             <span class="checkmark"></span>
         </label>
-        <template v-if="!fixedState">
+        <template v-if="checked">
             <input type="hidden" name="specials_offers[date_from]" :value="dateFrom">
             <input type="hidden" name="specials_offers[date_to]" :value="dateTo">
         </template>

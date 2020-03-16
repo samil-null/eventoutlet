@@ -24,7 +24,7 @@
                                 <button type="submit" style="display: none"  id="offers-filter-submit"></button>
                                 <div class="catalog-filter__control">
                                     <span>Фильтры поиска</span>
-                                    <div class="times-svg"></div>
+                                    <div id="close-mobile-filter" class="times-svg"></div>
                                 </div>
                                 @if(in_array('city',$filters['availableFilters']))
                                     <div class="catalog-filter__item">

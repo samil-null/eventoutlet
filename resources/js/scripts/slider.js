@@ -71,5 +71,9 @@ $(document).ready(function() {
     $('.catalog-filter__preview').click(function(){
       $('.catalog-filter').toggleClass('show');
     });
+
+    $('#close-mobile-filter').click(function(){
+      $('.catalog-filter').removeClass('show');
+    });
 });
 

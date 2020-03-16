@@ -1,7 +1,8 @@
 {
     "/js/admin/index.js": "/js/admin/index.js",
     "/js/api/video/index.js": "/js/api/video/index.js",
-    "/js/app.js": "/js/app.js",
+    "/js/common/algo.js": "/js/common/algo.js",
+    "/js/pages/home.js": "/js/pages/home.js",
     "/css/app.css": "/css/app.css",
     "/css/admin/index.css": "/css/admin/index.css"
 }

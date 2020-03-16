@@ -42,7 +42,9 @@
                             <div class="navbar-general__collapse">
                                 <ul class="navbar-general__main">
                                     <li><a href="{{ route('site.offers.index') }}">Каталог специалистов</a></li>
-                                    <li><a href="#" @click="$store.dispatch('OPEN_REGISTER_MODEL')">Стать исполнителем</a></li>
+                                    @guest
+                                    <li><a href="#" class="open-register-modal">Стать исполнителем</a></li>
+                                    @endguest
                                 </ul>
                                 <div class="navbar-general__profile">
                                     @guest
@@ -132,7 +134,6 @@
           </footer>
     </div>
     </body>
-    <script src="{{ asset('static/eventoutlet/dist/assets/js/app.js') }}"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
+    @stack('scripts')
 </html>
 

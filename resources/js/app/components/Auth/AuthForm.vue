@@ -59,7 +59,7 @@
                                                                 <p>Давайте знакомиться. Ознакомитесь с нашим сервисов, чем он будет вам полезен и как выгодно и эффективно его использовать.</p>
                                                             </div>
                                                             <div class="acquainted__button">
-                                                                <a href="#" class="thin-rectangle-btn thin-rectangle-btn-dark">
+                                                                <a href="/about" class="thin-rectangle-btn thin-rectangle-btn-dark">
                                                                     <span>Обучение работе с сервисом</span>
                                                                 </a>
                                                             </div>
@@ -133,6 +133,13 @@
             if (this.user) {
                 this.auth = true
             }
+            
+            document.querySelectorAll('.open-register-modal').forEach(item => {
+                item.addEventListener('click', (e) => {
+                    this.openModal();
+                    this.switchForm('register');
+                })
+            })
         }
     }
 </script>
