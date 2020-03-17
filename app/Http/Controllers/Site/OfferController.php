@@ -46,8 +46,6 @@ class OfferController extends Controller
 
         Seo::offers($city, $speciality, $request->has('specials_offers'));
 
-        //SEO::filter('Фотографа', 'Москве');
-
         $filters = [
             'availableFilters' => $result->getAvailableFilters(),
             'cities' => [

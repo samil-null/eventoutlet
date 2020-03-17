@@ -49,7 +49,7 @@ Route::group(['namespace' => 'Site'], function () {
  */
 
 
-
+//http://127.0.0.1:8000/offers?city_id=2&speciality_id=2&specials_offers%5Bdate_from%5D=2020-03-17&specials_offers%5Bdate_to%5D=2020-03-31&discount%5Bfrom%5D=10&discount%5Bto%5D=70&per_page=10&specials_offers%5Bdate_from%5D=17-03-2020&specials_offers%5Bdate_to%5D=17-04-2020
 Route::group(['prefix' => 'app', 'namespace' => 'Api\App', 'middleware' => ['role:executor']], function() {
 
     Route::resource('/users', 'UserController');
