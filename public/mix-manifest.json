@@ -5,6 +5,7 @@
     "/js/pages/home.js": "/js/pages/home.js",
     "/css/app.css": "/css/app.css",
     "/css/admin/index.css": "/css/admin/index.css",
+    "/js/pages/lk.js": "/js/pages/lk.js",
     "/js/pages/offers.js": "/js/pages/offers.js",
     "/js/pages/users.js": "/js/pages/users.js"
 }

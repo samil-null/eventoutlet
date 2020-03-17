@@ -51773,9 +51773,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var slick_carousel__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(slick_carousel__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _app_components_Auth_AuthForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../app/components/Auth/AuthForm */ "./resources/js/app/components/Auth/AuthForm.vue");
-/* harmony import */ var _app_components_Datepickers_UserCalendar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../app/components/Datepickers/UserCalendar */ "./resources/js/app/components/Datepickers/UserCalendar.vue");
-/* harmony import */ var _scripts_header__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../scripts/header */ "./resources/js/scripts/header.js");
+/* harmony import */ var _scripts_header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../scripts/header */ "./resources/js/scripts/header.js");
+/* harmony import */ var _app_components_Auth_AuthForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../app/components/Auth/AuthForm */ "./resources/js/app/components/Auth/AuthForm.vue");
+/* harmony import */ var _app_components_Datepickers_UserCalendar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../app/components/Datepickers/UserCalendar */ "./resources/js/app/components/Datepickers/UserCalendar.vue");
+
 
 
 
@@ -51785,8 +51786,8 @@ __webpack_require__.r(__webpack_exports__);
 new vue__WEBPACK_IMPORTED_MODULE_2___default.a({
   el: '#app',
   components: {
-    AuthForm: _app_components_Auth_AuthForm__WEBPACK_IMPORTED_MODULE_3__["default"],
-    UserCalendar: _app_components_Datepickers_UserCalendar__WEBPACK_IMPORTED_MODULE_4__["default"]
+    AuthForm: _app_components_Auth_AuthForm__WEBPACK_IMPORTED_MODULE_4__["default"],
+    UserCalendar: _app_components_Datepickers_UserCalendar__WEBPACK_IMPORTED_MODULE_5__["default"]
   }
 });
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function ($) {

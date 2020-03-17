@@ -22,8 +22,7 @@ $(document).ready(function () {
     $('.form-filter-trigger').click(function () {
         $('#offers-filter').submit()
     })
-})
-;
+});
 
 new Vue({
     el:'#app',

@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -328,7 +328,7 @@ module.exports = function escape(url) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var topLevel = typeof global !== 'undefined' ? global :
     typeof window !== 'undefined' ? window : {}
-var minDoc = __webpack_require__(/*! min-document */ 6);
+var minDoc = __webpack_require__(/*! min-document */ 7);
 
 var doccy;
 
@@ -41360,7 +41360,7 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
 
 /***/ }),
 
-/***/ 5:
+/***/ 6:
 /*!***********************************************!*\
   !*** multi ./resources/js/api/video/index.js ***!
   \***********************************************/
@@ -41372,7 +41372,7 @@ module.exports = __webpack_require__(/*! /home/arthas/Documents/project/eventout
 
 /***/ }),
 
-/***/ 6:
+/***/ 7:
 /*!******************************!*\
   !*** min-document (ignored) ***!
   \******************************/

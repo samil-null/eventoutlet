@@ -6,6 +6,6 @@
     offer-id="{{ $offer->id }}">
 </edit-offer>
 @push('scripts')
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/pages/lk.js') }}"></script>
 @endpush
 @endsection
