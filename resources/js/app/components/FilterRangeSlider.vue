@@ -50,7 +50,12 @@
         },
         methods:{
             apply() {
-                document.querySelector(this.form).submit()
+                if (window.innerWidth >= 767) {
+                    document.querySelector(this.form).submit()
+                } else {
+                    this.show = false
+                }
+
             },
             documentClick(e){
                 let el = this.$refs.select;

@@ -31,3 +31,13 @@
 .catalog-nav__first {
     height: 148px;
 }
+
+.form-filter-trigger-wrapper {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .form-filter-trigger-wrapper {
+        display: block;
+    }
+}

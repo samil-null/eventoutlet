@@ -43,9 +43,7 @@ $(document).ready(function() {
             focusOnSelect: true
           });
 
-          $('#menuBtn').click(function() {
-            $('#menuBody').toggleClass('show')
-          });
+
 
           setTimeout(() => {
             let startBgImage = $('.slider-for').find('.slick-slide.slick-current img').attr('data-bg');
@@ -65,12 +63,6 @@ $(document).ready(function() {
           });
     });
 
-    $('.catalog-filter__preview').click(function(){
-      $('.catalog-filter').toggleClass('show');
-    });
 
-    $('#close-mobile-filter').click(function(){
-      $('.catalog-filter').removeClass('show');
-    });
 });
 

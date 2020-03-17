@@ -76,6 +76,14 @@
                                         ></filter-range-slider>
                                     </div>
                                 @endif
+
+                                <div class="catalog-filter__item addition-field form-filter-trigger-wrapper">
+                                    <div class="catalog-select__button">
+                                        <a href="#" class="rectangle-btn-border rectangle-btn-border-green form-filter-trigger">
+                                            <span>Применить</span>
+                                        </a>
+                                    </div>
+                                </div>
                                 {{-- <div class="catalog-filter__item addition-field">
                                     <search-in-category
                                         value="{{ request()->input('search') }}"

@@ -48,9 +48,13 @@
                         item.remove()
                     });
                 }
-                setTimeout(() => {
-                    document.querySelector(this.form).submit();
-                },0)
+                if (window.innerWidth >= 767) {
+                    setTimeout(() => {
+                        document.querySelector(this.form).submit();
+                    }, 0)
+                } else {
+                    this.show = false
+                }
 
             },
             documentClick(e){

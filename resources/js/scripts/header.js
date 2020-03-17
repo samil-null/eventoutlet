@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 window.addEventListener('load', function () {
     let profileBlock = document.querySelector('.navbar-general__profile-body');
     if (profileBlock) {
@@ -5,5 +7,9 @@ window.addEventListener('load', function () {
             this.classList.toggle('show');
         })
     }
+
+    $('#menuBtn').click(function() {
+        $('#menuBody').toggleClass('show')
+    });
 });
 
