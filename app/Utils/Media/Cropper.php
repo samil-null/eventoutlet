@@ -95,7 +95,7 @@ class Cropper
 
         $image->save($data['savePath']);
         ImageOptimizer::optimize($data['savePath']);
-        
+
         return $data['url'];
     }
 
