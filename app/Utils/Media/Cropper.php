@@ -3,6 +3,7 @@
 
 namespace App\Utils\Media;
 
+use ImageOptimizer;
 use App\Helpers\ImagePathHelper;
 use Illuminate\Support\Facades\Storage;
 use Image;
@@ -74,7 +75,7 @@ class Cropper
             $constraint->upsize();
         });
         $image->save($data['savePath']);
-
+        ImageOptimizer::optimize($data['savePath']);
         return $data['url'];
     }
 
@@ -93,7 +94,8 @@ class Cropper
         });
 
         $image->save($data['savePath']);
-
+        ImageOptimizer::optimize($data['savePath']);
+        
         return $data['url'];
     }
 
