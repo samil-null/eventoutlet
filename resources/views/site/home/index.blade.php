@@ -53,7 +53,7 @@
                                     <span>Кому нужен этот портал?</span>
                                 </div>
                                 <div class="whats-it__block_subtitle">
-                                    <p>Если вам просто нужен специалист event-индустрии на конкретный день</p>
+                                    <p>Вы готовитесь к мероприятию или празднику</p>
                                 </div>
                                 <div class="whats-it__block_button">
                                     <a href="{{ route('site.about') }}" class="thin-rectangle-btn rectangle-btn-border rectangle-btn-border-green">
@@ -74,7 +74,7 @@
                                     <span>Как это работает?</span>
                                 </div>
                                 <div class="whats-it__block_subtitle">
-                                    <p>Если вам просто нужен специалист event-индустрии на конкретный день</p>
+                                    <p>Если ваше мероприятие проходит в ближайший 31 день</p>
                                 </div>
                                 <div class="whats-it__block_button">
                                     <a href="{{ route('site.about') }}" class="thin-rectangle-btn rectangle-btn-border rectangle-btn-border-green">
@@ -93,7 +93,7 @@
                                 </div>
                                 <div class="whats-it__block_title"><span>Как найти специалиста?</span></div>
                                 <div class="whats-it__block_subtitle">
-                                    <p>Если вам просто нужен специалист event-индустрии на конкретный день</p>
+                                    <p>Выбираете свою дату или интервал дат и кто нужен</p>
                                 </div>
                                 <div class="whats-it__block_button">
                                     <a href="{{ route('site.about') }}" class="thin-rectangle-btn rectangle-btn-border rectangle-btn-border-green">
@@ -114,7 +114,7 @@
                                     <span>Что вы получаете?</span>
                                 </div>
                                 <div class="whats-it__block_subtitle">
-                                    <p>Если вам просто нужен специалист event-индустрии на конкретный день</p>
+                                    <p>Экономия бюджета и времени на поиске специалистов</p>
                                 </div>
                                 <div class="whats-it__block_button">
                                     <a href="{{ route('site.about') }}" class="thin-rectangle-btn rectangle-btn-border rectangle-btn-border-green">
@@ -181,8 +181,8 @@
                                 </div>
                                 <div class="whats-it__benefit_subtitle">
                                     <p>
-                                        Если не нашли сегодня то, что вам надо, заходите завтра! Новые предложения появляются каждый
-                                        день, не упустите самое привлекательное
+                                        Если не нашли сегодня то, что вам надо, заходите завтра!
+                                        Или подписывайтесь на рассылку по вашей дате
                                     </p>
                                 </div>
                             </div>
@@ -192,7 +192,7 @@
 
                 <div class="whats-it__benefits_button">
                     <a href="{{ route('site.offers.index') }}" class="benefits-btn yellow">
-                        <span>Подобрать исполнителя</span>
+                        <span>Найти исполнителя</span>
                         <div class="full-arrow-svg"></div>
                     </a>
                 </div>
@@ -206,7 +206,7 @@
             <div class="row">
                 <div class="col-xl-10 offset-xl-1">
                     <div class="whats-it__title">
-                        <span>Поиск актуальных предложений на портале Event Outlet со скидкой</span>
+                        <span>Поиск актуальных предложений на портале Event Outlet со скидкой.</span>
                     </div>
                 </div>
             </div>
@@ -236,7 +236,7 @@
                 <div class="col-xl-7 offset-xl-3">
                     <div class="whats-it__subtitle">
                         <p>
-                            Каждый день наш каталог специалистов пополняется новыми профессионалами и скидками, не пропустите)
+                            Каждый день наш каталог пополняется новыми предложениями. Не пропустите!
                         </p>
                     </div>
                 </div>

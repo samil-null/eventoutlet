@@ -55,7 +55,7 @@
                                         <div class="navbar-general__profile">
                                             <div class="navbar-general__profile-body">
                                                 <div class="navbar-general__profile-preview">
-                                                    <span>{{ Auth::user()->name??Auth::user()->email }}</span>
+                                                    <a href="{{ route('site.lk.profile.show') }}" class="profile-preview__link">{{ Auth::user()->name??Auth::user()->email }}</a>
                                                     <div class="navbar-general__profile-photo"
                                                          style="background-image:url({{ Imager::avatar(Auth::user()->avatar) }})"></div>
                                                     <div class="arrow-svg"></div>
@@ -104,10 +104,8 @@
                 <div class="col-md-6 col-xl-7">
                   <div class="footer__discription">
                     <p>
-                      Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat,
-                      leo eget bibendum sodales, augue velit cursus nunc.Donec sodales sagittis magna. Sed
-                      consequat, leo eget bibendum sodales, augue velit cursus nunc Sed fringilla mauris sit
-                      amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue
+                      Event Outlet – информационный портал по поиску исполнителей на мероприятия.
+                      Обращаем ваше внимание на то, что данный портал, а также вся информация об услугах, товарах и ценах, предоставленная на нём, носит исключительно информационный характер и ни при каких условиях не является публичной офертой, определяемой положениями Статьи 437 Гражданского кодекса Российской Федерации. Для получения подробной информации о стоимости указанных товаров и (или) услуг, пожалуйста, обращайтесь к исполнителю напрямую по указанным контактным данным в его анкете.
                     </p>
                   </div>
                 </div>
