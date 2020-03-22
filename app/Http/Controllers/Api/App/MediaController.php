@@ -93,9 +93,7 @@ class MediaController extends Controller
         ])->delete();
 
         return response()->json([
-            'success' => true,
-            'data' => [
-            ]
+            'success' => true
         ]);
     }
 

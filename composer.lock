@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b38766eedc07d74b9bdb6569b465c38b",
+    "content-hash": "66667a871ef6419b9a03e59a9ae1bb63",
     "packages": [
         {
             "name": "alchemy/binary-driver",
@@ -133,6 +133,67 @@
                 "webmaster"
             ],
             "time": "2019-09-05T13:49:10+00:00"
+        },
+        {
+            "name": "buglinjo/laravel-webp",
+            "version": "v2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/buglinjo/laravel-webp.git",
+                "reference": "0d2bccea121e5fc9a81502db77eb73820608d01d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/buglinjo/laravel-webp/zipball/0d2bccea121e5fc9a81502db77eb73820608d01d",
+                "reference": "0d2bccea121e5fc9a81502db77eb73820608d01d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gd": "*",
+                "illuminate/support": "~5.1|~6.0|~7.0|~8.0",
+                "php": "~7.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=5.4.3",
+                "squizlabs/php_codesniffer": "^2.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Buglinjo\\LaravelWebp\\WebpServiceProvider"
+                    ],
+                    "aliases": {
+                        "Webp": "Buglinjo\\LaravelWebp\\Webp"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Buglinjo\\LaravelWebp\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Irakli Tchitadze",
+                    "email": "irakli.tchitadze@gmail.com",
+                    "homepage": "http://buglinjo.me",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel 5 package for WebP image format",
+            "homepage": "https://github.com/buglinjo/laravel-webp",
+            "keywords": [
+                "Buglinjo",
+                "LaravelWebp",
+                "Webp",
+                "laravel"
+            ],
+            "time": "2020-03-03T18:42:40+00:00"
         },
         {
             "name": "cocur/slugify",

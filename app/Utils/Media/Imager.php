@@ -52,4 +52,9 @@ class Imager
     {
         return $this->cropper->fit($filename, 'gallery' , 'gallery_preview');
     }
+
+    public function gallery($filename)
+    {
+        return $this->cropper->resize($filename, 'gallery' , 'gallery');
+    }
 }

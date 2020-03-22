@@ -3,7 +3,7 @@
 
 namespace App\Services\Image;
 
-
+use Webp;
 use App\Models\Media;
 use App\Helpers\ImagePathHelper;
 use App\Models\User;
