@@ -21,6 +21,10 @@ class Cropper
             'height' => 200,
             'width' => 200
         ],
+        'gallery' => [
+            'height' => null,
+            'width' => 851
+        ],
         'gallery_preview' => [
             'height' => 400,
             'width' => 400
@@ -74,11 +78,30 @@ class Cropper
         return $data['url'];
     }
 
+    public function resize($filename, $store, $options)
+    {
+        $data = $this->prepare($filename, $store, $options, 'resize');
+
+        if (is_string($data)) return $data;
+        $image = $data['image'];
+
+        if (!$image) return null;
+
+        $image->resize($data['options']['width'], $data['options']['height'], function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+
+        $image->save($data['savePath']);
+
+        return $data['url'];
+    }
+
 
     public function original($filename, $store)
     {
         $storage = $this->getStorage($store);
-        
+
         if (is_array($storage)) {
             return asset(ImagePathHelper::getFullStorePath($filename, $storage, true));
         }

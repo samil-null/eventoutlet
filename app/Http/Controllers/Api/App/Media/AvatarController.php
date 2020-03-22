@@ -4,6 +4,7 @@
 namespace App\Http\Controllers\Api\App\Media;
 
 
+use App\Helpers\AvatarHelper;
 use App\Helpers\ImagePathHelper;
 use App\Http\Controllers\Api\App\ApiAppController;
 use Illuminate\Http\Request;

@@ -171,6 +171,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
        // HTMLMin\HTMLMin\HTMLMinServiceProvider::class,
+        Buglinjo\LaravelWebp\WebpServiceProvider::class,
         App\Providers\ImgCropProvider::class,
         App\Providers\ImagerProvider::class,
         App\Providers\MacroProvider::class,
@@ -249,6 +250,7 @@ return [
         //'HTMLMin' => HTMLMin\HTMLMin\Facades\HTMLMin::class,
         'VideoThumbnail' => Pawlox\VideoThumbnail\Facade\VideoThumbnail::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Webp' => Buglinjo\LaravelWebp\Facades\Webp::class,
     ],
 
 ];
