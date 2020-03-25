@@ -170,6 +170,5 @@
 </section>
 @endsection
 @push('scripts')
-    <script src="{{ asset('js/pages/offers.js') }}"></script>
-    <script src="{{ asset('js/common/algo.js') }}"></script>
+    <script src="{{ asset('js/pages/offers.js') }}?global={{ env('JS_VERSION') }}&local=1"></script>
 @endpush

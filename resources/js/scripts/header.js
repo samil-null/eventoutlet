@@ -1,6 +1,7 @@
 import $ from 'jquery';
 
-window.addEventListener('load', function () {
+
+$(document).ready(function() {
     let profileBlock = document.querySelector('.navbar-general__profile-body');
     if (profileBlock) {
         profileBlock.addEventListener('click', function () {
@@ -8,8 +9,9 @@ window.addEventListener('load', function () {
         })
     }
 
+    
     $('#menuBtn').click(function() {
         $('#menuBody').toggleClass('show')
     });
-});
+})
 

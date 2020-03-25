@@ -74,8 +74,8 @@
 
                                     <div class="pe-block__add-btn">
                                         <button type="submit" class="add-btn add-btn-green">
-                                        
-                                            <span>Сохронить спецпредложение</span>
+
+                                            <span>Сохранить спецпредложение</span>
                                         </button>
                                     </div>
                                 </form>

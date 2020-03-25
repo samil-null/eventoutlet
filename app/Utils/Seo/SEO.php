@@ -5,6 +5,7 @@ namespace App\Utils\Seo;
 
 use App\Models\City;
 use App\Models\Specialty;
+use App\Models\UserInfo;
 use SEOMeta;
 use OpenGraph;
 use JsonLd;
@@ -77,15 +78,6 @@ class SEO
         SEOMeta::setTitle($title);
         SEOMeta::setDescription($description);
 
-        OpenGraph::setTitle($title);
-        OpenGraph::setDescription($description);
-        OpenGraph::setUrl(route('site.users.show', $user->slug));
-
-        JsonLd::setType('WebPage');
-        JsonLd::setTitle($title);
-        JsonLd::setDescription($description);
-        JsonLd::addImage(AvatarHelper::original($user->avatar));
-        //self::createSocials($user->info)
         $sameAs = [];
 
         if ($user->info->vk) {
@@ -95,8 +87,73 @@ class SEO
         if ($user->info->site) {
             $sameAs[] = Social::webSiteUrl($user->info->site);
         }
-        JsonLd::addValue('sameAs', $sameAs);
 
+        if ($user->info->instagram) {
+            $sameAs[] = Social::instagramUrl($user->info->instagram);
+        }
+
+        JsonLd::addValue('name', $user->name);
+        JsonLd::addValue('url', route('site.users.show', $user->slug));
+
+        JsonLd::addValue('location', [
+            'type' => 'Place',
+            'address' => [
+                'type' => 'PostalAddress',
+                'addressLocality' => $user->city->name,
+                'addressRegion' => 'Россия'
+            ]
+        ]);
+
+        if ($user->info->user_type == UserInfo::PERSONAL) {
+            self::personal($user, $title, $description);
+        } elseif($user->info->user_type == UserInfo::ORGANIZATION) {
+            self::organization($user, $sameAs);
+        }
+
+        OpenGraph::setTitle($title);
+        OpenGraph::setDescription($description);
+        OpenGraph::setUrl(route('site.users.show', $user->slug));
+
+    }
+
+    protected static function personal($user, $title, $description)
+    {
+        JsonLd::setType('Person');
+        JsonLd::addValue('image', AvatarHelper::original($user->avatar));
+        if ($user->info->email) {
+            JsonLd::addValue('email', $user->info->email);
+        }
+
+        if ($user->info->phone) {
+            JsonLd::addValue('telephone', $user->info->phone);
+        }
+        JsonLd::addValue('jobTitle', $user->speciality->name);
+
+
+    }
+
+    protected static function organization($user, $sameAs)
+    {
+        JsonLd::setType('Organization');
+
+        JsonLd::addValue('logo', AvatarHelper::original($user->avatar));
+        $contactPoint = [
+            'contactType' => 'Sales',
+            'areaServed' => 'RU',
+            'availableLanguage' => 'Russian'
+        ];
+
+        if ($user->info->email) {
+            $contactPoint['email'] = $user->info->email;
+        }
+
+        if ($user->info->phone) {
+            $contactPoint['telephone'] = $user->info->phone;
+        }
+
+        JsonLd::addValue('contactPoint', $contactPoint);
+
+        JsonLd::addValue('sameAs', $sameAs);
     }
 
     public static function page($page)

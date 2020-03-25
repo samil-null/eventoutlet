@@ -7,6 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserInfo extends Model
 {
+    const PERSONAL = 1;
+
+    const ORGANIZATION = 2;
+
+    public $user_types = [
+        [
+            'name' => 'Физ. лицо',
+            'id' => self::PERSONAL
+        ],
+        [
+            'name' => 'Компания',
+            'id' => self::ORGANIZATION
+        ]
+    ];
 
     protected $table = 'users_info';
 

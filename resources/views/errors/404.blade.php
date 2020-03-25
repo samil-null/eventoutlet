@@ -7,7 +7,7 @@
             <img src="/static/eventoutlet/dist/img/general/404.png" alt="">
         </div>
         <div class="fof-page__title">
-            <span>Что то пошло не так</span>
+            <span>Что-то пошло не так</span>
         </div>
         <div class="fof-page__button">
             <a href="/" class="rectangle-btn-border rectangle-btn-border-green">
@@ -17,3 +17,6 @@
     </div>
 </section>
 @endsection
+@push('scripts')
+    <script src="{{ asset('js/pages/home.js') }}?global={{ env('JS_VERSION') }}&local=1"></script>
+@endpush
