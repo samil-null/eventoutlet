@@ -20,9 +20,7 @@ class HomeController extends Controller
 
         $filter = (new SpecialOfferFilter($request))->apply();
 
-        $users = $factory->load(
-            $filter->get()->take(2)->get(),
-            true)
+        $users = $factory->load($filter->get()->orderBy('users.id', 'DESC')->get()->take(2)->get(), true)
             ->create();
 
         $specialities = (new Specialty())
