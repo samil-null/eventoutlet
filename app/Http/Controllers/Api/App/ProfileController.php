@@ -113,7 +113,8 @@ class ProfileController extends ApiAppController
                 'gallery' => $gallery,
                 'videos' => $videos,
                 'cities' => $cities,
-                'genders' => $genders
+                'genders' => $genders,
+                'user_types' => (new UserInfo())->user_types
             ]
         ]);
     }

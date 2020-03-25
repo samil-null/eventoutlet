@@ -20,28 +20,29 @@ class UserTransformer extends TransformerAbstract
     public function transform(User $user)
     {
         return [
-            'id' => $user->id,
-            'name' => $user->name,
-            'email' => $user->email,
-            'status' => $user->status,
-            'status_name' => $user->getStatus('public_name'),
+            'id'            => (int) $user->id,
+            'name'          => (string) $user->name,
+            'email'         => (string) $user->email,
+            'status'        => (int) $user->status,
+            'status_name'   => (string) $user->getStatus('public_name'),
             'avatar' => [
-                'small' => AvatarHelper::small($user->avatar),
-                'middle' => AvatarHelper::middle($user->avatar),
-                'original' => AvatarHelper::original($user->avatar)
+                'small'     => (string) AvatarHelper::small($user->avatar),
+                'middle'    => (string) AvatarHelper::middle($user->avatar),
+                'original'  => (string) AvatarHelper::original($user->avatar)
             ],
             'info' => [
-                'email' => $user->info->email,
-                'site' => $user->info->site,
-                'instagram' => $user->info->instagram,
-                'vk' => $user->info->vk,
-                'whatsapp' => $user->info->whatsapp,
-                'about_me' => $user->info->about_me,
-                'phone' => $user->info->phone,
-                'speciality_id' => $user->info->speciality_id,
-                'city_id' => $user->info->city_id,
-                'gender' => $user->info->gender,
-                'speciality' => $user->info->speciality->name
+                'email'         => (string) $user->info->email,
+                'user_type'     => (int) $user->info->user_type,
+                'site'          => (string) $user->info->site,
+                'instagram'     => (string) $user->info->instagram,
+                'vk'            => (string) $user->info->vk,
+                'whatsapp'      => (string) $user->info->whatsapp,
+                'about_me'      => (string) $user->info->about_me,
+                'phone'         => (string) $user->info->phone,
+                'speciality_id' => (int) $user->info->speciality_id,
+                'city_id'       => (int) $user->info->city_id,
+                'gender'        => (int) $user->info->gender,
+                'speciality'    => (string) $user->info->speciality->name
             ]
         ];
     }

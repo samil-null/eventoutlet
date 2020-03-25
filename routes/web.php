@@ -43,6 +43,9 @@ Route::group(['namespace' => 'Site'], function () {
 
 });
 
+//feedback
+Route::post('/app/feedback', 'Api\App\FeedbackController@index');
+
 
 /**
  * executor routes

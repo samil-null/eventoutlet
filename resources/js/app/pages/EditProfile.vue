@@ -68,6 +68,20 @@
                                                             <span class="validation" v-for="error in errors.city_id">{{ error }}</span>
                                                         </label>
                                                     </div>
+                                                    <div class="col-xl-6">
+                                                        <label class="form__label" :class="{invalid:!!errors.city_id.length}">
+                                                            <span>Тип аккаунт</span>
+                                                            <select-app
+                                                                :options="usersTypes"
+                                                                select-value="id"
+                                                                select-name="name"
+                                                                v-model="form.user_type"
+                                                                description="Выберете город"
+                                                                empty-selected="Выберете город"
+                                                            ></select-app>
+                                                            <span class="validation" v-for="error in errors.user_type">{{ error }}</span>
+                                                        </label>
+                                                    </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-xl-12">
@@ -228,7 +242,7 @@
                                     </div>
                                     <div id="add-service"></div>
                                     <create-service-app
-                                        
+
                                         v-if="renderServiceApp && services.length <= 6"
                                         :price-options="priceOptions"
                                         :additional-fields="additionalFields"
@@ -286,6 +300,7 @@
                 videos:null,
                 additionalFields:[],
                 cities:[],
+                usersTypes:[],
                 form: {
                     name:null,
                     email:null,
@@ -296,12 +311,14 @@
                     vk: null,
                     speciality_id:0,
                     whatsapp:null,
-                    city_id:0
+                    city_id:0,
+                    user_type:0
                 },
                 errors:{
                     name:[],
                     speciality_id:[],
                     city_id:[],
+                    user_type:[]
                 }
             }
         },
@@ -327,6 +344,7 @@
                             this.errors.name = errors.name || [];
                             this.errors.speciality_id = errors.speciality_id || [];
                             this.errors.city_id = errors.city_id || [];
+                            this.errors.user_type = errors.user_type || [];
                         }
                     })
             },
@@ -380,12 +398,14 @@
                     this.priceOptions = data.price_options;
                     this.avatar = data.avatar;
                     this.cities = data.cities;
+                    this.usersTypes = data.user_types;
                     return data.user
                 })
                 .then(user => {
                     form.name = user.name;
                     this.additionalFields = user.speciality.fields;
                     this.speciality = user.speciality|| {};
+
                     return user.info;
                 })
                 .then(info => {
@@ -399,6 +419,7 @@
                     form.speciality_id = info.speciality_id;
                     form.whatsapp = info.whatsapp;
                     form.city_id = info.city_id;
+                    form.user_type = info.user_type;
                     this.renderServiceApp = true;
                 })
         },

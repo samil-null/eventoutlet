@@ -135,3 +135,6 @@
         </div>
     </section>
 @endsection
+@push('scripts')
+    <script src="{{ asset('js/pages/home.js') }}?global={{ env('JS_VERSION') }}&local=1"></script>
+@endpush

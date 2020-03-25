@@ -22,8 +22,8 @@
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="/favicons/ms-icon-144x144.png">
         <meta name="theme-color" content="#ffffff">
-        <link rel="stylesheet" href="{{ asset('/static/eventoutlet/dist/css/style.bundle.css') }}">
-        <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
+       <link rel="stylesheet" href="{{ asset('/static/eventoutlet/dist/css/style.bundle.css') }}?global={{ env('CSS_VERSION') }}&local=1">
+       <link rel="stylesheet" href="{{ asset('/css/app.css') }}?global={{ env('CSS_VERSION') }}&local=1">
     </head>
     <body class="Site">
     <!-- main wrapper -->
@@ -88,6 +88,7 @@
             @yield('content')
 
         </div>
+        <feedback></feedback>
         <footer class="footer">
 
             <div class="container">
@@ -115,7 +116,7 @@
                       <ul>
                         <li><a href="{{ route('site.home') }}">Главная</a></li>
                         <li><a href="{{ route('site.offers.index') }}">Каталог специалистов</a></li>
-                        <li><a href="#">Стать исполнителем</a></li>
+                        <li><a href="#" class="feedback-open-trigger">Стать исполнителем</a></li>
                       </ul>
                     </div>
                     <div class="footer-nav__item">
@@ -131,6 +132,7 @@
             </div>
           </footer>
     </div>
+
     </body>
     @stack('scripts')
 </html>

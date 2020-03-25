@@ -9,6 +9,8 @@ import FilterRangeSlider from "../app/components/FilterRangeSlider";
 import SpecialOfferCheckBox from "../app/components/SpecialOfferCheckBox";
 import AdditionField from "../app/components/AdditionField";
 import PerPageApp from "../app/components/PerPageApp";
+import Feedback from '../app/components/Feedback';
+import '../common/algo'
 
 $(document).ready(function () {
     $('.catalog-filter__preview').click(function(){
@@ -35,6 +37,7 @@ new Vue({
         SpecialOfferCheckBox,
         AdditionField,
         PerPageApp,
+        Feedback
         //SearchInCategory
     }
 });

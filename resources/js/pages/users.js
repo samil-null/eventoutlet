@@ -4,13 +4,14 @@ import Vue from 'vue'
 import '../scripts/header';
 import AuthForm from "../app/components/Auth/AuthForm";
 import UserCalendar from "../app/components/Datepickers/UserCalendar";
-import '../scripts/header'
+import Feedback from '../app/components/Feedback';
 
 new Vue({
     el:'#app',
     components: {
         AuthForm,
         UserCalendar,
+        Feedback
     }
 });
 
@@ -36,9 +37,7 @@ $(document).ready(function($) {
         focusOnSelect: true
       });
 
-      $('#menuBtn').click(function() {
-        $('#menuBody').toggleClass('show')
-      });
+      
 
       setTimeout(() => {
         let startBgImage = $('.slider-for').find('.slick-slide.slick-current img').attr('data-bg');
