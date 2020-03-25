@@ -162,6 +162,7 @@ class SEO
         $description = self::$pages[$page]['description'];
         $route = self::$pages[$page]['url']['route'];
         $params = self::$pages[$page]['url']['params'];
+        
 
         SEOMeta::setTitle($title);
         SEOMeta::setDescription($description);
@@ -169,6 +170,7 @@ class SEO
         JsonLd::setDescription($description);
         JsonLd::setTitle($title);
         JsonLd::setUrl(route($route, $params));
+        JsonLd::addValue('image', '/assets/og-logo.jpg');
         OpenGraph::setTitle($title);
         OpenGraph::setDescription($description);
 
@@ -228,6 +230,7 @@ class SEO
 
         JsonLd::setType('WebPage');
         JsonLd::setTitle($title);
+        JsonLd::addValue('image', '/assets/og-logo.jpg');
         JsonLd::setDescription($description);
     }
 
