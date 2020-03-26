@@ -33,8 +33,8 @@
                         </div>
                         <div class="whats-it__subtitle">
                             <p>
-                                Если ваше мероприятие в ближайшие 31 день, а кого-то из специалистов или площадку вы еще не нашли,
-                                наш портал поможет вам! Вы сможете найти любого подрядчика на вашу дату со скидкой от 10% до 70%.
+                                Если ваше мероприятие в ближайший 31 день, а кого-то из специалистов или площадку
+                                вы еще не нашли, наш портал поможет вам! Вы сможете найти любого подрядчика на вашу дату со скидкой от 10% до 70%
                             </p>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                                     <span>Кому нужен этот портал?</span>
                                 </div>
                                 <div class="whats-it__block_subtitle">
-                                    <p>Если вам просто нужен специалист event-индустрии на конкретный день</p>
+                                    <p>Вы готовитесь к мероприятию или празднику</p>
                                 </div>
                                 <div class="whats-it__block_button">
                                     <a href="{{ route('site.about') }}" class="thin-rectangle-btn rectangle-btn-border rectangle-btn-border-green">
@@ -74,7 +74,7 @@
                                     <span>Как это работает?</span>
                                 </div>
                                 <div class="whats-it__block_subtitle">
-                                    <p>Если вам просто нужен специалист event-индустрии на конкретный день</p>
+                                    <p>Если ваше мероприятие проходит в ближайший 31 день</p>
                                 </div>
                                 <div class="whats-it__block_button">
                                     <a href="{{ route('site.about') }}" class="thin-rectangle-btn rectangle-btn-border rectangle-btn-border-green">
@@ -93,7 +93,7 @@
                                 </div>
                                 <div class="whats-it__block_title"><span>Как найти специалиста?</span></div>
                                 <div class="whats-it__block_subtitle">
-                                    <p>Если вам просто нужен специалист event-индустрии на конкретный день</p>
+                                    <p>Выбираете свою дату или интервал дат и кто нужен</p>
                                 </div>
                                 <div class="whats-it__block_button">
                                     <a href="{{ route('site.about') }}" class="thin-rectangle-btn rectangle-btn-border rectangle-btn-border-green">
@@ -114,7 +114,7 @@
                                     <span>Что вы получаете?</span>
                                 </div>
                                 <div class="whats-it__block_subtitle">
-                                    <p>Если вам просто нужен специалист event-индустрии на конкретный день</p>
+                                    <p>Экономия бюджета и времени на поиске специалистов</p>
                                 </div>
                                 <div class="whats-it__block_button">
                                     <a href="{{ route('site.about') }}" class="thin-rectangle-btn rectangle-btn-border rectangle-btn-border-green">
@@ -139,7 +139,8 @@
                                 </div>
                                 <div class="whats-it__benefit_subtitle">
                                     <p>
-                                        Всегда актуальные предложения по самой низкой цене. Новые предложения появляются каждый день
+                                        Всегда актуальные предложения по самой низкой цене.
+                                        Новые предложения появляются каждый день
                                     </p>
                                 </div>
                                 <div class="whats-it__benefit_button">
@@ -181,8 +182,8 @@
                                 </div>
                                 <div class="whats-it__benefit_subtitle">
                                     <p>
-                                        Если не нашли сегодня то, что вам надо, заходите завтра! Новые предложения появляются каждый
-                                        день, не упустите самое привлекательное
+                                        Если не нашли сегодня то, что вам надо, заходите завтра!
+                                        Или подписывайтесь на рассылку по вашей дате
                                     </p>
                                 </div>
                             </div>
@@ -192,7 +193,7 @@
 
                 <div class="whats-it__benefits_button">
                     <a href="{{ route('site.offers.index') }}" class="benefits-btn yellow">
-                        <span>Подобрать исполнителя</span>
+                        <span>Найти исполнителя</span>
                         <div class="full-arrow-svg"></div>
                     </a>
                 </div>
@@ -211,7 +212,7 @@
                 </div>
             </div>
             <div class="finda__wrapper">
-                <img src="/static/eventoutlet/dist/img/general/anim.png" alt="" />
+                <video src="/assets/video/anim.mp4" width="1200" autoplay="" muted loop="" class="guide-video"></video>
             </div>
             <div class="finda__button">
                 <a href="{{ route('site.offers.index') }}" class="benefits-btn red-border">
@@ -236,7 +237,7 @@
                 <div class="col-xl-7 offset-xl-3">
                     <div class="whats-it__subtitle">
                         <p>
-                            Каждый день наш каталог специалистов пополняется новыми профессионалами и скидками, не пропустите)
+                            Каждый день наш каталог пополняется новыми предложениями. Не пропустите!
                         </p>
                     </div>
                 </div>
@@ -247,7 +248,7 @@
 <section id="profitable-cards" class="profitable-cards">
     <div class="container">
         <div class="catalog__wrapper">
-            <div class="container">
+            <div class="">
                 <div class="row">
                     @foreach($users as $user)
                         @include('site.components.algo.index', ['user' => $user])

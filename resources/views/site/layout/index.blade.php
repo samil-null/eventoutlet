@@ -55,7 +55,7 @@
                                         <div class="navbar-general__profile">
                                             <div class="navbar-general__profile-body">
                                                 <div class="navbar-general__profile-preview">
-                                                    <span>{{ Auth::user()->name??Auth::user()->email }}</span>
+                                                    <a href="{{ route('site.lk.profile.show') }}" class="profile-preview__link">{{ Auth::user()->name??Auth::user()->email }}</a>
                                                     <div class="navbar-general__profile-photo"
                                                          style="background-image:url({{ Imager::avatar(Auth::user()->avatar) }})"></div>
                                                     <div class="arrow-svg"></div>
@@ -105,10 +105,7 @@
                 <div class="col-md-6 col-xl-7">
                   <div class="footer__discription">
                     <p>
-                      Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat,
-                      leo eget bibendum sodales, augue velit cursus nunc.Donec sodales sagittis magna. Sed
-                      consequat, leo eget bibendum sodales, augue velit cursus nunc Sed fringilla mauris sit
-                      amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue
+                      © 2020 Event Outlet – информационный портал по поиску исполнителей на мероприятия.
                     </p>
                   </div>
                 </div>
@@ -117,17 +114,11 @@
                     <div class="footer-nav__item">
                       <ul>
                         <li><a href="{{ route('site.home') }}">Главная</a></li>
-                        <li><a href="{{ route('site.offers.index') }}">Каталог специалистов</a></li>
-                        <li><a href="#" class="feedback-open-trigger">Стать исполнителем</a></li>
+                        <li><a href="#" class="feedback-open-trigger">Обратная связь</a></li>
+                        <li><a href="#">Оферта</a></li>
                       </ul>
                     </div>
-                    <div class="footer-nav__item">
-                      <ul>
-                        <li><a href="#">Вход</a></li>
-                        <li><a href="#">Регистрация</a></li>
-                        <li><a href="{{ route('site.about') }}">Как пользоваться?</a></li>
-                      </ul>
-                    </div>
+
                   </div>
                 </div>
               </div>
