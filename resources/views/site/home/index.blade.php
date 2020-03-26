@@ -33,8 +33,8 @@
                         </div>
                         <div class="whats-it__subtitle">
                             <p>
-                                Если ваше мероприятие в ближайшие 31 день, а кого-то из специалистов или площадку вы еще не нашли,
-                                наш портал поможет вам! Вы сможете найти любого подрядчика на вашу дату со скидкой от 10% до 70%.
+                                Если ваше мероприятие в ближайший 31 день, а кого-то из специалистов или площадку
+                                вы еще не нашли, наш портал поможет вам! Вы сможете найти любого подрядчика на вашу дату со скидкой от 10% до 70%
                             </p>
                         </div>
                     </div>
@@ -139,7 +139,8 @@
                                 </div>
                                 <div class="whats-it__benefit_subtitle">
                                     <p>
-                                        Всегда актуальные предложения по самой низкой цене. Новые предложения появляются каждый день
+                                        Всегда актуальные предложения по самой низкой цене.
+                                        Новые предложения появляются каждый день
                                     </p>
                                 </div>
                                 <div class="whats-it__benefit_button">
@@ -206,12 +207,12 @@
             <div class="row">
                 <div class="col-xl-10 offset-xl-1">
                     <div class="whats-it__title">
-                        <span>Поиск актуальных предложений на портале Event Outlet со скидкой.</span>
+                        <span>Поиск актуальных предложений на портале Event Outlet со скидкой</span>
                     </div>
                 </div>
             </div>
             <div class="finda__wrapper">
-                <img src="/static/eventoutlet/dist/img/general/anim.png" alt="" />
+                <video src="/assets/video/anim.mp4" width="1200" autoplay="" muted loop="" class="guide-video"></video>
             </div>
             <div class="finda__button">
                 <a href="{{ route('site.offers.index') }}" class="benefits-btn red-border">
@@ -247,7 +248,7 @@
 <section id="profitable-cards" class="profitable-cards">
     <div class="container">
         <div class="catalog__wrapper">
-            <div class="container">
+            <div class="">
                 <div class="row">
                     @foreach($users as $user)
                         @include('site.components.algo.index', ['user' => $user])

@@ -191,20 +191,16 @@
                                             </div>
                                             
                                                 @foreach($user->activeServices as $service)
-                                                    <div class="profile-edit__body profile-core__list">
+                                                    <div class="profile-edit__body profile-core__list tmin_price">
                                                     <!-- Line -->
                                                     <div class="pe-block pr-block">
                                                         <div class="special-offer">
                                                             <div class="special-offer__head">
-                                                                <!-- <div class="special-offer__icon">
-                                                                    <div class="catalog-card__discount-icon">
-                                                                        <div class="percent-svg"></div>
-                                                                    </div>
-                                                                </div> -->
                                                                 <div class="special-offer__item">
                                                                     <span>Услуга</span>
                                                                     <span>{{ $service->name }}</span>
                                                                 </div>
+                                                                <div class="sidebar__slash"></div>
                                                                 <div class="special-offer__item profile-core__offer-item">
                                                                     <span>Стоимость</span>
                                                                     <span>{{ $service->price }} {{ $service->priceOption->name }}</span>
