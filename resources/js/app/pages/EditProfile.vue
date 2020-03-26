@@ -76,8 +76,8 @@
                                                                 select-value="id"
                                                                 select-name="name"
                                                                 v-model="form.user_type"
-                                                                description="Выберете город"
-                                                                empty-selected="Выберете город"
+                                                                description="Выберете тип"
+                                                                empty-selected="Выберете тип"
                                                             ></select-app>
                                                             <span class="validation" v-for="error in errors.user_type">{{ error }}</span>
                                                         </label>
