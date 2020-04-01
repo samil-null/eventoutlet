@@ -107,8 +107,10 @@ class SEO
         if ($user->info->user_type == UserInfo::PERSONAL) {
             self::personal($user, $title, $description);
         } elseif($user->info->user_type == UserInfo::ORGANIZATION) {
-            self::organization($user, $sameAs);
+            self::organization($user);
         }
+
+        JsonLd::addValue('sameAs', $sameAs);
 
         OpenGraph::setTitle($title);
         OpenGraph::setDescription($description);
@@ -132,7 +134,7 @@ class SEO
 
     }
 
-    protected static function organization($user, $sameAs)
+    protected static function organization($user)
     {
         JsonLd::setType('Organization');
 
@@ -153,7 +155,7 @@ class SEO
 
         JsonLd::addValue('contactPoint', $contactPoint);
 
-        JsonLd::addValue('sameAs', $sameAs);
+        
     }
 
     public static function page($page)

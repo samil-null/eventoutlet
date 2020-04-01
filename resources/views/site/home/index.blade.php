@@ -6,17 +6,19 @@
       <div class="header-hero__wrapper">
         <div class="header-hero__figure"></div>
         <div class="row">
-          <div class="col-xl-8 offset-xl-2">
+          <div class="col-12 col-sm-12 col-md-10 col-xl-8 offset-md-1 offset-xl-2">
             <div class="header-hero__title">
               <span> Поиск свободных специалистов для вашего мероприятия со скидкой </span>
             </div>
             <div class="header-hero__subtitle"><span>Найдите специалиста для проекта в 2 клика</span></div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
             <search
                 :specialities="{{ $specialities }}"
                 start-date="{{ $startDate }}"
                 end-date="{{ $endDate }}"
             ></search>
-          </div>
         </div>
       </div>
     </div>
