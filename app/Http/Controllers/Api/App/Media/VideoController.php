@@ -24,13 +24,17 @@ class VideoController extends ApiAppController
 
     public function store(VideoRequest $request, VideoStoreService $storeService)
     {
-        list($video_path, $thumb_path) = $storeService->execute($request->file('video'), $this->user);
+        list($video_path, $thumb_path) = $storeService->execute($request->post('link'), $this->user);
 
         return response()->json([
             'video' => [
-                'video' => asset($video_path),
-                'thumb' => asset($thumb_path),
+                'video' => $video_path,
+                'thumb' => $thumb_path,
             ]
+        ]);
+
+        return response()->json([
+            'response' => 'sdwdwedweefwerfw'
         ]);
     }
 

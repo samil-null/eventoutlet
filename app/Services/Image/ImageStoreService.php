@@ -20,7 +20,8 @@ class ImageStoreService
 
 	        $user->gallery()->create([
             	'name' => $filename,
-            	'type' => Media::GALLERY_TYPE
+                'type' => Media::GALLERY_TYPE,
+                'source' => Media::STORE_SOURCE
         	]);
 
             return [

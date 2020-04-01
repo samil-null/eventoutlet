@@ -3,6 +3,7 @@ import '../scripts/header';
 import AuthForm from "../app/components/Auth/AuthForm";
 import Search from '../app/components/Search';
 import Feedback from '../app/components/Feedback';
+import Oferta from '../app/components/Oferta';
 import '../common/algo'
 
 new Vue({
@@ -10,6 +11,7 @@ new Vue({
     components: {
         AuthForm,
         Search,
-        Feedback
+        Feedback,
+        Oferta
     }
 });

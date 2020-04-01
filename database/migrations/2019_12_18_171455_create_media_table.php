@@ -16,8 +16,9 @@ class CreateMediaTable extends Migration
         Schema::create('media', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id');
-            $table->string('type',125);
-            $table->string('name',255);
+            $table->string('type',32);
+            $table->string('source', 32);
+            $table->string('name',125);
             $table->timestamps();
         });
     }

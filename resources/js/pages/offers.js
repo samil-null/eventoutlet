@@ -10,6 +10,7 @@ import SpecialOfferCheckBox from "../app/components/SpecialOfferCheckBox";
 import AdditionField from "../app/components/AdditionField";
 import PerPageApp from "../app/components/PerPageApp";
 import Feedback from '../app/components/Feedback';
+import Oferta from '../app/components/Oferta';
 import '../common/algo'
 
 $(document).ready(function () {
@@ -37,7 +38,8 @@ new Vue({
         SpecialOfferCheckBox,
         AdditionField,
         PerPageApp,
-        Feedback
+        Feedback,
+        Oferta
         //SearchInCategory
     }
 });

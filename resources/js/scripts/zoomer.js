@@ -24,17 +24,22 @@ window.addEventListener('load', function () {
     }
 
 
+    let videoLoaderBlock = document.querySelector('.video-loader-block');
 
-    document.querySelectorAll('.zoomer-video').forEach(item => {
-        item.addEventListener('click', e => {
+    if (videoLoaderBlock) {
+        videoLoaderBlock.addEventListener('click', function(e) {
             e.preventDefault();
             let video  = e.target.closest('div[data-video]');
-            BigPicture({
-                el: video,
-                iframeSrc: video.dataset.video
-            })
-        })
-    });
+
+            if (video) {
+                BigPicture({
+                    el: video,
+                    iframeSrc: video.dataset.video
+                })
+            }
+        
+        });
+    }
 
     document.querySelectorAll('.catalog-card__media').forEach(item => {
         console.log(item);

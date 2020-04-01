@@ -89,6 +89,7 @@
 
         </div>
         <feedback></feedback>
+        <oferta></oferta>
         <footer class="footer">
 
             <div class="container">
@@ -115,7 +116,7 @@
                       <ul>
                         <li><a href="{{ route('site.home') }}">Главная</a></li>
                         <li><a href="#" class="feedback-open-trigger">Обратная связь</a></li>
-                        <li><a href="#">Оферта</a></li>
+                        <li><a href="#" class="oferta-open-trigger">Оферта</a></li>
                       </ul>
                     </div>
 

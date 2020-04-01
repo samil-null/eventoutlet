@@ -29,7 +29,10 @@
                         <div class="main-form__input catalog-select catalog-select_datepicker" ref="calendar" :class="{show:showDatePick}">
                           <div class="main-form__input-content" @click="showDatePick = true">
                             <span>
-                                <template v-if="displayFromDate && displayToDate">
+                                <template v-if="rawValues.from === rawValues.to">
+                                  {{ displayToDate }}
+                                </template>
+                                <template v-else-if="displayFromDate && displayToDate">
                                     {{ displayFromDate }} - {{ displayToDate }}
                                 </template>
                                 <template v-else>
@@ -96,7 +99,11 @@
                 displayFromDate:null,
                 displayToDate:null,
                 showDatePick:false,
-                showSpeciality:false
+                showSpeciality:false,
+                rawValues: {
+                  to:NaN,
+                  from:NaN
+                }
             }
         },
         methods: {
@@ -129,6 +136,7 @@
             dateFrom() {
                 let data = dayjs(this.range.start);
                 if (data.$y) {
+                    this.rawValues.from = data.format('YYYY-MM-DD');
                     this.displayFromDate = data.format('DD.MM');
                     return data.format('YYYY-MM-DD')
                 }
@@ -138,11 +146,15 @@
             dateTo() {
                 let data = dayjs(this.range.end);
                 if (data.$y) {
+                    this.rawValues.to = data.format('YYYY-MM-DD');
                     this.displayToDate = data.format('DD.MM.YY');
                     return data.format('YYYY-MM-DD')
                 }
                 this.displayToDate = null;
                 return false;
+            },
+            hasDuplicate() {
+
             }
         },
         components: {

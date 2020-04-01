@@ -3,12 +3,15 @@
 
 namespace App\Helpers;
 
+use App\Models\Media;
 
 class VideoPathHelper
 {
-    public static function url($name)
+    public static function url($name, $store)
     {
-        return asset('videos/' . $name);
+        if (Media::YT_SOURCE == $store) {
+            return 'http://www.youtube.com/embed/' . $name;
+        }
     }
 
     public static function getThumbName($filename)
@@ -21,14 +24,29 @@ class VideoPathHelper
     }
 
 
-    public static function thumbUrl($filename)
+    public static function thumbUrl($name, $store)
     {
-        return asset('videos/thumbs/' . self::getThumbName($filename));
+
+        if (Media::YT_SOURCE == $store) {
+            return 'https://img.youtube.com/vi/' . $name . '/2.jpg';
+        } elseif (Media::VIMEO_SOURCE == $store) {
+
+            $apiData = unserialize( file_get_contents( "http://vimeo.com/api/v2/video/$name.php" ) );
+
+            if (is_array( $apiData ) && count( $apiData ) > 0 ) {
+                $videoInfo = $apiData[ 0 ];
+                return $videoInfo[ 'thumbnail_large' ];
+            }
+        }
     }
 
-    public static function renderUrl($name)
+    public static function renderUrl($name, $store)
     {
-        return asset('/app/media/video/render?name=' . $name);
+        if (Media::YT_SOURCE == $store) {
+            return 'http://www.youtube.com/embed/' . $name;
+        } elseif (Media::VIMEO_SOURCE == $store) {
+            return 'https://player.vimeo.com/video/' . $name;
+        }
     }
 
     public static function getRealVideoPath($filename)

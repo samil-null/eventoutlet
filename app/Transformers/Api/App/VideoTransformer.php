@@ -11,10 +11,10 @@ class VideoTransformer extends TransformerAbstract
     public function transform(Media $video)
     {
         return [
-            'video' => (string) VideoPathHelper::url($video->name),
-            'thumb' => (string) VideoPathHelper::thumbUrl($video->name),
+            'video' => (string) VideoPathHelper::url($video->name, $video->source),
+            'thumb' => (string) VideoPathHelper::thumbUrl($video->name, $video->source),
             'name' => (string) $video->name,
-            'render' => VideoPathHelper::renderUrl($video->name)
+            'render' => VideoPathHelper::renderUrl($video->name, $video->source)
         ];
     }
 }

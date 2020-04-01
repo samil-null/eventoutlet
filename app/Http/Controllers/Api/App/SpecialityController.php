@@ -13,6 +13,7 @@ class SpecialityController extends Controller
      */
     public function index()
     {
+    	
         return response()->json([
             'specialties'=> Specialty::all(['id','name'])
         ]);

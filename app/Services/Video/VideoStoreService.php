@@ -8,26 +8,25 @@ use App\Models\Media;
 use VideoThumbnail;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
+use App\Helpers\VideoHandler;
+use App\Helpers\VideoPathHelper;
 
 class VideoStoreService
 {
-    public function execute(UploadedFile $video, $user)
+    public function execute($video, $user)
     {
-        $hash = Str::random(21);
-        $name = $hash . '.' .$video->getClientOriginalExtension();
-        $path = $video->storeAs('videos', $name);
-
-        VideoThumbnail::createThumbnail(
-            storage_path('app/videos/' . $name),
-            storage_path('app/videos/thumbs/'),
-            $hash . '.jpeg',
-            random_int(10, 15), 1920, 1080);
+        $result = VideoHandler::handle($video);
 
         $user->videos()->create([
-            'name' => $name,
-            'type' => Media::VIDEO_TYPE
+            'name' => $result->code,
+            'type' => Media::VIDEO_TYPE,
+            'source' => $result->source
         ]);
 
-        return [$path, 'videos/thumbs/' . $hash . '.jpeg'];
+        return [
+            VideoPathHelper::renderUrl($result->code, $result->source),
+            VideoPathHelper::thumbUrl($result->code, $result->source)
+        ];
+
     }
 }

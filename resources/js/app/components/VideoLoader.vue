@@ -1,13 +1,13 @@
 <template>
     <div>
-        <div class="pe-portfolio__block">
+        <div class="pe-portfolio__block video-loader-block">
             <div class="pe-portfolio__field">
                 <div class="pe-portfolio__added-photo pe-portfolio__field-item"
                      v-for="(video,index) in videosList"
                      :style="{'background-image':'url(' + video.thumb  +')'}"
                 >
                     <div class="pe-portfolio__bg"></div>
-                    <div class="pe-portfolio__increase-photo zoomer-video" :data-video="video.render">
+                    <div class="pe-portfolio__increase-photo zoomer-video" :data-video="video.video">
                         <div class="increase-svg"></div>
                     </div>
                     <div class="pe-portfolio__delete-photo" @click="removeImage(video.name, index)">
@@ -15,25 +15,28 @@
                     </div>
                 </div>
 
-                <div class="pe-portfolio__add-photo pe-portfolio__field-item" @click="addImage">
+                <div class="pe-portfolio__add-photo pe-portfolio__field-item" @click="openModal = true">
                     <div class="bold-plus-svg"></div>
                 </div>
             </div>
-            <input type="file" ref="image" style="display: none;" @change="loadImage" accept="video/mp4,video/x-m4v,video/*">
+            <!-- <input type="file" ref="image" style="display: none;" @change="loadVideo" accept="video/mp4,video/x-m4v,video/*"> -->
             <span class="pe-portfolio__counter" v-if="balance > 0" >Еще {{ balance }} видео</span>
         </div>
+        <modal-video-loader @close="openModal = false" :open-modal="openModal" @save-video="loadVideo"></modal-video-loader>
     </div>
 </template>
 
 <script>
     import axios from '../modules/axios'
+    import ModalVideoLoader from './ModalVideoLoader';
 
     export default {
         name: "VideoLoader",
         props:['limit'],
         data() {
             return {
-                videosList:[]
+                videosList:[],
+                openModal:false,
             }
         },
         computed: {
@@ -42,23 +45,11 @@
             }
         },
         methods: {
-            loadImage() {
-                let input = this.$refs.image;
-                let video = input.files[0];
-
-                if (video) {
-                    let form = new FormData();
-                    form.append('video', video);
-                    axios.post('/app/media/videos', form)
-                        .then(({data}) => {
-                            this.videosList.push(data.video);
-                        });
-                }
-
-            },
-            addImage() {
-                let input = this.$refs.image;
-                input.click();
+            loadVideo(link) {
+                axios.post('/app/media/videos', {link})
+                    .then(({data}) => {
+                        this.videosList.push(data.video);
+                    });
             },
             removeImage(video, index) {
                 axios.delete('/app/media/videos?video=' + video)
@@ -72,6 +63,9 @@
                 .then(({data}) => {
                     this.videosList = data.videos;
                 })
+        },
+        components: {
+            ModalVideoLoader
         }
     }
 </script>

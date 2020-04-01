@@ -22,7 +22,8 @@ class HomeController extends Controller
 
         $users = $factory->load(
             $filter->get()->orderBy('users.id', 'DESC')->take(2)->get(),
-            true)
+            true
+            )
             ->create();
 
         $specialities = (new Specialty())

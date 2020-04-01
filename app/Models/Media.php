@@ -10,6 +10,12 @@ class Media extends Model
 
     public const VIDEO_TYPE = 'video';
 
+    const YT_SOURCE = 'youtube';
+
+    const VIMEO_SOURCE = 'vimeo';
+
+    const STORE_SOURCE = 'store';
+
     protected $table = 'media';
 
     protected $guarded = [];
