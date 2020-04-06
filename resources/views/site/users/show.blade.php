@@ -13,6 +13,15 @@
                                     <img src="{{ Imager::gallery($image->name) }}" class="" data-bg="{{ Imager::gallerySmall($image->name) }}" alt="">
                                 </div>
                             @endforeach
+                            @foreach ($user->videos as $video)
+                                <div class="profile-slider__item profile-slider__item_video">
+                                    <iframe type="text/html" class="profile-slider__iframe"
+                                    src="{{ App\Helpers\VideoPathHelper::renderUrl($video->name, $video->source) }}"
+                                    data-bg="{{ Imager::gallerySmall($video->name) }}"
+                                    frameborder="0"></iframe>
+                                </div>
+                            @endforeach
+
                         </div>
                         <div class="profile-slider__controls">
                             <div class="profile-slider__prev">
@@ -29,6 +38,11 @@
                                 <div class="slider-nav__canvas-item">
                                     <div class="profile-slider__nav_item" style="background-image: url({{ Imager::gallerySmall($image->name) }});"></div>
                                 </div>
+                            @endforeach
+                            @foreach ($user->videos as $video)
+                            <div class="slider-nav__canvas-item">
+                                <div class="profile-slider__nav_item" style="background-image: url({{ App\Helpers\VideoPathHelper::thumbUrl($video->name, $video->source) }});"></div>
+                            </div>
                             @endforeach
                         </div>
                     </div>

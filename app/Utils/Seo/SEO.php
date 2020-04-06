@@ -67,6 +67,14 @@ class SEO
                 'route' => 'site.about',
                 'params' => ''
             ]
+        ],
+        'forgot' => [
+            'title' => 'Восстановление пароля',
+            'description' => 'Страница восстановление пароля',
+            'url' => [
+                'route' => 'site.about',
+                'params' => ''
+            ]
         ]
     ];
 

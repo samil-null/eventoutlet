@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Events\User\UserForgotPassword;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\ChangePassword;
 use App\Http\Requests\Auth\ForgotRequest;
 use App\Models\User;
+use App\Utils\Seo\SEO;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -16,7 +18,6 @@ class ForgotController extends Controller
         $user = User::where('email', $request->input('email'))->first();
 
         if ($user) {
-
             $token = Str::random(54);
             $user->update(['remember_token' => $token]);
             event(new UserForgotPassword($user, $token));
@@ -34,9 +35,22 @@ class ForgotController extends Controller
                 ->first();
 
         if ($user) {
-            echo "good";
+            SEO::page('forgot');
+            return view('site.auth.forgot', compact('token'));
         } else {
             return redirect()->route('site.home');
         }
+    }
+
+    public function change(ChangePassword $request)
+    {
+        User::where('remember_token', $request->input('token'))->update([
+            'password' => bcrypt($request->input('password')),
+            'remember_token' => Str::random(54)
+        ]);
+
+        return response()->json([
+            'success' => true
+        ]);
     }
 }

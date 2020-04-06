@@ -19,6 +19,7 @@ mix.js('resources/js/pages/offers.js', 'public/js/pages');
 mix.js('resources/js/pages/users.js', 'public/js/pages');
 mix.js('resources/js/common/algo.js', 'public/js/common');
 mix.js('resources/js/pages/lk.js', 'public/js/pages');
+mix.js('resources/js/pages/change.js', 'public/js/pages');
 
 
 mix.js('resources/js/admin/index.js', 'public/js/admin')

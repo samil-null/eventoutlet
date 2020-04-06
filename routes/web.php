@@ -16,8 +16,9 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::post('/login', 'LoginController@index')->name('login');
     Route::get('/logout', 'LogoutController@index')->name('logout');
     Route::get('/verification/{token}', 'VerificationController@verify')->name('verification');
-    Route::post('/forgot', 'ForgotController@forgot')->name('forgot');
     Route::get('/forgot/{token}', 'ForgotController@remember')->name('remember');
+    Route::post('/forgot/change', 'ForgotController@change');
+    Route::post('/forgot', 'ForgotController@forgot')->name('forgot');
 });
 
 Route::group(['namespace' => 'Site'], function () {
@@ -61,7 +62,7 @@ Route::group(['prefix' => 'app', 'namespace' => 'Api\App', 'middleware' => ['rol
 
     Route::resource('/offers', 'OfferController');
     Route::post('/offers/published', 'OfferController@published');
-    
+
     Route::get('/services/count', 'ServiceController@count');
     Route::resource('/services', 'ServiceController');
     Route::resource('/specialties', 'SpecialityController');
