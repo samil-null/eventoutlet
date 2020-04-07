@@ -14,4 +14,11 @@ class PageController extends Controller
 
         return view('site.pages.about');
     }
+
+    public function process()
+    {
+        SEO::page('about');
+
+        return view('site.pages.process');
+    }
 }

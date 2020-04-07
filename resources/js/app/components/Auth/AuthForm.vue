@@ -59,7 +59,7 @@
                                                                 <p>Давайте знакомиться. Ознакомитесь с нашим сервисов, чем он будет вам полезен и как выгодно и эффективно его использовать.</p>
                                                             </div>
                                                             <div class="acquainted__button">
-                                                                <a href="/about" class="thin-rectangle-btn thin-rectangle-btn-dark">
+                                                                <a href="/process" class="thin-rectangle-btn thin-rectangle-btn-dark">
                                                                     <span>Обучение работе с сервисом</span>
                                                                 </a>
                                                             </div>

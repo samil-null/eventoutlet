@@ -41,6 +41,7 @@ Route::group(['namespace' => 'Site'], function () {
     Route::get('/users/{id}', 'UserController@show')->name('site.users.show');
 
     Route::get('/about', 'PageController@about')->name('site.about');
+    Route::get('/process', 'PageController@process')->name('site.process');
 
 });
 

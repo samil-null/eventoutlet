@@ -16,6 +16,7 @@ import AdditionField from "./components/AdditionField";
 import UserCalendar from "./components/Datepickers/UserCalendar";
 import PerPageApp from "./components/PerPageApp";
 import SearchInCategory from "./components/SearchInCategory";
+import Oferta from "./components/Oferta";
 
 new Vue({
     el:'#app',
@@ -35,6 +36,7 @@ new Vue({
         AdditionField,
         UserCalendar,
         PerPageApp,
-        SearchInCategory
+        SearchInCategory,
+        Oferta
     }
 });

@@ -48,7 +48,7 @@
             <div class="additional_filters__checkbox">
                 <label class="filter-checkbox">
                     Публикую данное предложение вы подвтерждаете свою готовность принять заказ по указанным вами
-                    условиям. <a href="#">Более подробные условия работы портала Event Outlet.</a>
+                    условиям. <a href="#" class="oferta-open-trigger">Более подробные условия работы портала Event Outlet.</a>
                     <input type="checkbox" checked="checked" /> <span class="checkmark"></span>
                 </label>
             </div>
