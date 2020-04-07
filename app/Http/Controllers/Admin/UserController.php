@@ -95,9 +95,9 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        // if ($user->status != $request->status) {
-        //     event(new UserChangeStatus($request->status, $user));
-        // }
+        if ($user->status != $request->status) {
+            event(new UserChangeStatus($request->status, $user));
+        }
 
         $roles = Role::whereIn('name', $request->roles)->get();
         $user->syncRoles($roles);

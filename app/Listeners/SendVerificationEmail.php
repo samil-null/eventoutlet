@@ -20,5 +20,11 @@ class SendVerificationEmail
             $message->from('info@eventoutlet.ru');
             $message->to($event->user->email);
         });
+
+        Mail::send('mails.user.success-register', ['user' => $event->user], function ($message) use ($event) {
+            $message->subject('Регистрация на EventOutlet');
+            $message->from('info@eventoutlet.ru');
+            $message->to($event->user->email);
+        });
     }
 }

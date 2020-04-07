@@ -7,7 +7,7 @@ $(document).ready(function() {
         $($(item).find('.algo-media__slider')).slick({
             dots: false,
             infinite: false,
-            speed: 300,
+            speed: 500,
             slidesToShow: 4,
             slidesToScroll: 1,
             prevArrow: $(item).find('.algo-media__prev-slide'),

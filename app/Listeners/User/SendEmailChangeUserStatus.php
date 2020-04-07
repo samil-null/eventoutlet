@@ -19,25 +19,30 @@ class SendEmailChangeUserStatus
     public function handle($event)
     {
         $template = 'mails.user.status.';
-
+        $subject = null;
         switch ($event->status) {
             case (User::ACTIVE_STATUS):
                 $template .= 'active';
+                $subject = 'Добро пожаловать на EventOutlet';
                 break;
-            case (User::WAITING_STATUS):
-                $template .= 'wait';
-                break;
+            // case (User::WAITING_STATUS):
+            //     $template .= 'wait';
+            //     break;
             case (User::REJECTED_STATUS):
                 $template .= 'reject';
+                $subject = 'Ошибка при регистрации на EventOutlet';
                 break;
-            case (User::BANED_STATUS):
-                $template .= 'baned';
-                break;
+            // case (User::BANED_STATUS):
+            //     $template .= 'baned';
+            //     break;
         }
-
-        Mail::send($template, ['user' => $event->user], function ($message) use ($event) {
-            $message->from('info@eventoutlet.ru');
-            $message->to($event->user->email);
-        });
+        if ($subject) {
+            Mail::send($template, ['user' => $event->user], function ($message) use ($event, $subject) {
+                $message->from('info@eventoutlet.ru');
+                $message->subject($subject);
+                $message->to($event->user->email);
+            });
+        }   
+        
     }
 }
