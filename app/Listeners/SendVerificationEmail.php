@@ -17,13 +17,13 @@ class SendVerificationEmail
     public function handle(RegisterNewUser $event)
     {
         Mail::send('mails.verification', ['user' => $event->user], function ($message) use ($event) {
-            $message->from('info@eventoutlet.ru');
+            $message->from('admin@eventoutlet.ru');
             $message->to($event->user->email);
         });
 
         Mail::send('mails.user.success-register', ['user' => $event->user], function ($message) use ($event) {
             $message->subject('Регистрация на EventOutlet');
-            $message->from('info@eventoutlet.ru');
+            $message->from('admin@eventoutlet.ru');
             $message->to($event->user->email);
         });
     }

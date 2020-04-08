@@ -27,9 +27,10 @@ class VideoHandler
 
     public static function vimeoHandler($link)
     {
-    
+        $link = trim($link, '/');
+        $params = explode('/', $link);
         return (object) [
-            'code'      => substr(parse_url($link, PHP_URL_PATH), 1),
+            'code'      => end($params),
             'source'    => Media::VIMEO_SOURCE
         ];
     }

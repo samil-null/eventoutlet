@@ -38,7 +38,7 @@ class SendEmailChangeUserStatus
         }
         if ($subject) {
             Mail::send($template, ['user' => $event->user], function ($message) use ($event, $subject) {
-                $message->from('info@eventoutlet.ru');
+                $message->from('admin@eventoutlet.ru');
                 $message->subject($subject);
                 $message->to($event->user->email);
             });

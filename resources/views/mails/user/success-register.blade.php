@@ -77,7 +77,7 @@ a[x-apple-data-detectors] {
                   <td width="174" class="es-m-p0r es-m-p20b" align="center" style="padding:0;Margin:0;"> 
                    <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;"> 
                      <tr style="border-collapse:collapse;"> 
-                      <td align="center" style="padding:0;Margin:0;padding-top:20px;font-size:0px;"><img class="adapt-img" src="{{ asset('assets/emails/logo.png') }}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="172"></td> 
+                      <td align="center" style="padding:0;Margin:0;padding-top:20px;font-size:0px;"><img class="adapt-img" src="{{ asset('/assets/mails/logo.png') }}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="172"></td> 
                      </tr> 
                    </table></td> 
                   <td class="es-hidden" width="20" style="padding:0;Margin:0;"></td> 

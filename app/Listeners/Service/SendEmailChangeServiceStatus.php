@@ -42,7 +42,7 @@ class SendEmailChangeServiceStatus
         }
 
         Mail::send($template, ['user' => $event->user, '_message' => $event->message], function ($message) use ($event) {
-            $message->from('info@eventoutlet.ru');
+            $message->from('admin@eventoutlet.ru');
             $message->to($event->user->email);
         });
 

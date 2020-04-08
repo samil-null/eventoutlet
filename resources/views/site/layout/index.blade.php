@@ -46,11 +46,16 @@
                                     <li><a href="#" class="open-register-modal">Стать исполнителем</a></li>
                                     @endguest
                                 </ul>
+                                <div class="search-block">
+                                    <form action="{{ route('site.offers.index') }}">
+                                        <label class="search-block__label" for="input-search">
+                                            <input name="search" id="input-search" type="search" placeholder="Поиск">
+                                            <div class="search-svg"></div>
+                                        </label>
+                                    </form>
+                                </div>
                                 <div class="navbar-general__profile">
-                                    @guest
-                                    <auth-form
-                                    ></auth-form>
-                                    @endguest
+                                    
                                     @auth
                                         <div class="navbar-general__profile">
                                             <div class="navbar-general__profile-body">
@@ -69,6 +74,10 @@
                                         </div>
                                     @endauth
                                 </div>
+                                @guest
+                                <auth-form
+                                ></auth-form>
+                                @endguest
                             </div>
                             <div id="menuBtn" class="navbar-burger">
                                 <span></span>
