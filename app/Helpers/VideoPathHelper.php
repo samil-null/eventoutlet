@@ -28,7 +28,7 @@ class VideoPathHelper
     {
 
         if (Media::YT_SOURCE == $store) {
-            return 'https://img.youtube.com/vi/' . $name . '/2.jpg';
+            return 'https://img.youtube.com/vi/' . $name . '/sddefault.jpg';
         } elseif (Media::VIMEO_SOURCE == $store) {
 
             $apiData = unserialize( file_get_contents( "http://vimeo.com/api/v2/video/$name.php" ) );

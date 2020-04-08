@@ -6,7 +6,7 @@
             <div class="profile-slider__wrapper">
                 <div class="profile-slider__background" id="profile-slider-bg" style="background-image: url(./img/slider/o.jpg);"></div>
                 <div class="profile-slider__body">
-                    <div class="profile-slider__main">
+                    <div class="profile-slider__main video-loader-block">
                         <div class="slider-for">
                             @foreach ($user->gallery as $image)
                                 <div class="profile-slider__item">
@@ -14,12 +14,20 @@
                                 </div>
                             @endforeach
                             @foreach ($user->videos as $video)
-                                <div class="profile-slider__item profile-slider__item_video">
+                                <div class="profile-slider__item">
+                                    <div class="profile-slider__play-btn" data-video="{{ App\Helpers\VideoPathHelper::renderUrl($video->name, $video->source) }}">
+                                        <div class="play-svg">
+
+                                        </div>
+                                    </div>
+                                    <img src="{{ App\Helpers\VideoPathHelper::thumbUrl($video->name, $video->source) }}" class="" data-bg="{{ App\Helpers\VideoPathHelper::thumbUrl($video->name, $video->source) }}" alt="">
+                                </div>
+                                {{-- <div class="profile-slider__item profile-slider__item_video">
                                     <iframe type="text/html" class="profile-slider__iframe"
-                                    src="{{ App\Helpers\VideoPathHelper::renderUrl($video->name, $video->source) }}"
+                                    src="{{ App\Helpers\VideoPathHelper::thumbUrl($video->name, $video->source) }}"
                                     data-bg="{{ Imager::gallerySmall($video->name) }}"
                                     frameborder="0"></iframe>
-                                </div>
+                                </div> --}}
                             @endforeach
 
                         </div>

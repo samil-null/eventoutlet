@@ -2,16 +2,19 @@ import $ from 'jquery'
 import 'slick-carousel';
 import Vue from 'vue'
 import '../scripts/header';
+import '../scripts/zoomer';
 import AuthForm from "../app/components/Auth/AuthForm";
 import UserCalendar from "../app/components/Datepickers/UserCalendar";
 import Feedback from '../app/components/Feedback';
+import Oferta from '../app/components/Oferta';
 
 new Vue({
     el:'#app',
     components: {
         AuthForm,
         UserCalendar,
-        Feedback
+        Feedback,
+        Oferta
     }
 });
 

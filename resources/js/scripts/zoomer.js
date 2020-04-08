@@ -25,7 +25,7 @@ window.addEventListener('load', function () {
 
 
     let videoLoaderBlock = document.querySelector('.video-loader-block');
-
+  
     if (videoLoaderBlock) {
         videoLoaderBlock.addEventListener('click', function(e) {
             e.preventDefault();
