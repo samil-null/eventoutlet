@@ -40,8 +40,8 @@
 								</p>
 							</div>
 						</div>
-						<div class="how-go__pic">
-							<img src="/static/eventoutlet/dist/img/how/reg.png" alt="">
+						<div class="how-go__pic" style="background-image: url(/static/eventoutlet/dist/img/how/reg.png)">
+							
 						</div>
 					</div>
 				</div>
@@ -58,8 +58,8 @@
 							</div>
 						</div>
 
-						<div class="how-go__pic">
-							<img src="/static/eventoutlet/dist/img/how/reg.png" alt="">
+						<div class="how-go__pic" style="background-image: url(/static/eventoutlet/dist/img/how/reg1.png)">
+						
 						</div>
 					</div>
 				</div>
@@ -81,8 +81,8 @@
 							</div>
 						</div>
 
-						<div class="how-go__pic">
-							<img src="/static/eventoutlet/dist/img/how/reg.png" alt="">
+						<div class="how-go__pic" style="background-image: url(/static/eventoutlet/dist/img/how/reg2.png)">
+							
 						</div>
 					</div>
 				</div>

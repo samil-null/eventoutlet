@@ -67,7 +67,7 @@
                                     <div class="catalog-filter__item addition-field">
                                         <filter-range-slider
                                             :from-range="10"
-                                            :to-range="70"
+                                            :to-range="50"
                                             value-from="{{ $filters['discount']['from'] }}"
                                             value-to="{{ $filters['discount']['to'] }}"
                                             form="#offers-filter"
