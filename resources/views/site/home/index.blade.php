@@ -23,7 +23,7 @@
       </div>
     </div>
   </header>
-
+ 
 <section id="whats" class="whats">
     <div class="container">
         <div class="whats-it">
@@ -36,7 +36,7 @@
                         <div class="whats-it__subtitle">
                             <p>
                                 Если ваше мероприятие в ближайший 31 день, а кого-то из специалистов или площадку
-                                вы еще не нашли, наш портал поможет вам! Вы сможете найти любого подрядчика на вашу дату со скидкой от 10% до 70%
+                                вы еще не нашли, наш портал поможет вам! Вы сможете найти любого подрядчика на вашу дату со скидкой от 10% до 50%
                             </p>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
             <div class="whats-it__count">
                 <div class="row">
                     <!-- Item -->
-                    <div class="col-xl-3 d-flex">
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3 d-flex">
                         <div class="whats-it__block">
                             <div class="whats-it__block_wrapp">
                                 <div class="whats-it__block_pic">
@@ -66,7 +66,7 @@
                         </div>
                     </div>
                     <!-- Item -->
-                    <div class="col-xl-3 d-flex">
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3 d-flex">
                         <div class="whats-it__block">
                             <div class="whats-it__block_wrapp">
                                 <div class="whats-it__block_pic">
@@ -87,7 +87,7 @@
                         </div>
                     </div>
                     <!-- Item -->
-                    <div class="col-xl-3 d-flex">
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3 d-flex">
                         <div class="whats-it__block">
                             <div class="whats-it__block_wrapp">
                                 <div class="whats-it__block_pic">
@@ -106,7 +106,7 @@
                         </div>
                     </div>
                     <!-- Item -->
-                    <div class="col-xl-3 d-flex">
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3 d-flex">
                         <div class="whats-it__block">
                             <div class="whats-it__block_wrapp">
                                 <div class="whats-it__block_pic">
@@ -132,7 +132,7 @@
             <div class="whats-it__benefits">
                 <div class="row">
                     <!-- Item -->
-                    <div class="col-xl-4 d-flex">
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 d-flex">
                         <div class="whats-it__benefit">
                             <div class="whats-it__benefit_wrapper">
                                 <div class="whats-it__benefit_head">
@@ -155,7 +155,7 @@
                         </div>
                     </div>
                     <!-- Item -->
-                    <div class="col-xl-4 d-flex">
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 d-flex">
                         <div class="whats-it__benefit">
                             <div class="whats-it__benefit_wrapper">
                                 <div class="whats-it__benefit_head">
@@ -175,7 +175,7 @@
                         </div>
                     </div>
                     <!-- Item -->
-                    <div class="col-xl-4 d-flex">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 d-flex">
                         <div class="whats-it__benefit">
                             <div class="whats-it__benefit_wrapper">
                                 <div class="whats-it__benefit_head">
@@ -214,7 +214,7 @@
                 </div>
             </div>
             <div class="finda__wrapper">
-                <video src="/assets/video/anim.mp4" width="1200" autoplay="" muted loop="" class="guide-video"></video>
+                <video src="/assets/video/animation.mp4" width="1200" autoplay="" muted loop="" class="guide-video"></video>
             </div>
             <div class="finda__button">
                 <a href="{{ route('site.offers.index') }}" class="benefits-btn red-border">
