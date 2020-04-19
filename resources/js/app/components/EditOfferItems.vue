@@ -9,9 +9,9 @@
                     <div class="catalog-card__discount-icon"><div class="percent-svg"></div></div>
                 </div>
                 <div class="special-offer__item "><span>Дата</span> <span>{{ offer.dates }}</span></div>
-                <div class="special-offer__item"><span>Услуга</span> <span>{{ offer.serviceName }}</span></div>
+                <div class="special-offer__item"><span>Услуга</span> <span>{{ offer.service_name }}</span></div>
                 <div class="special-offer__item">
-                    <span>Цена со скидкой</span> <span>{{ offer.price }} {{ offer.priceOption }}</span>
+                    <span>Цена со скидкой</span> <span>{{ offer.price }} {{ offer.price_option }}</span>
                 </div>
                 <div class="special-offer__item">
                     <span>Скидка</span> <span>{{ offer.discount }}%</span>
@@ -66,9 +66,9 @@
     import axios from "../modules/axios";
 
     export default {
+        props: ['offers'],
         data() {
             return {
-                offers:[],
                 published:[]
             }
         },
@@ -76,7 +76,7 @@
 
             deleteOffer(id, index, e) {
                 e.preventDefault();
-                axios.delete('/app/offers/'+id)
+                axios.delete('/app/offers/' + id)
                     .then((data) => {
                         this.offers.splice(index, 1);
                     })
@@ -90,17 +90,19 @@
                     });
             }
         },
-        mounted() {
-            axios.get('/app/offers')
-                .then(({data}) => {
-                    let offers = data.offers;
-                    this.offers = offers;
-                    this.published = offers.map((offer)=> {
-                        if (offer.status == 1) {
-                            return offer.id;
-                        }
-                    })
-                })
+        watch: {
+            offers(value) {
+                this.published = value.map((offer)=> {
+                    if (offer.status == 1) {
+                        return offer.id;
+                    }
+                });
+
+                return value;
+            }
+        },
+        created() {
+
         }
     }
 </script>

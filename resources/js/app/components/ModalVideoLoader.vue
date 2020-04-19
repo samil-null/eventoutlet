@@ -4,7 +4,7 @@
 		<div class="container">
 			<div class="row no-gutters">
 				<div class="col-xl-8 offset-xl-2">
-					
+
 					<div class="modal-body">
 						<div class="modal__f-figure"></div>
 						<div class="modal__s-figure"></div>
@@ -23,6 +23,7 @@
 											<label class="modal__label" for="">
 												<span class="modal__input-name">Ссылка на видео</span>
 												<input type="text" v-model="link" placeholder="https://">
+                                                <span class="validation" v-for="error in errors.link">{{ error }}</span>
 											</label>
                                             <div class="pe-block__save-button pe-block__save-button_no-mt">
                                                 <button type="submit" class="rectangle-btn rectangle-btn-green">
@@ -48,18 +49,33 @@
 </template>
 
 <script>
+    import axios from "../modules/axios";
+
     export default {
         props:['openModal'],
         data() {
             return {
                 link:'',
                 active:true,
+                errors: {
+                    link:[]
+                }
             }
         },
         methods: {
             send() {
-                this.$emit('save-video', this.link);
-                this.$emit('close');
+                axios.post('/app/media/videos', {link:this.link})
+                    .then(({data}) => {
+                        this.errors.link = [];
+                        this.$emit('save-video', data.video);
+                        this.$emit('close');
+                    })
+                    .catch(({ response }) => {
+                        if (response.status === 422) {
+                            let errors = response.data.errors;
+                            this.errors.link = errors.link || [];
+                        }
+                    });
                 this.link = '';
             }
         }

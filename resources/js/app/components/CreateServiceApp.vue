@@ -40,7 +40,7 @@
                     <div class="row">
                         <div class="col-xl-9">
                             <label class="form__label" :class="{invalid:!!errors.description.length}">
-                                <span>Расскажите о себе</span>
+                                <span>Условия работы</span>
                                 <textarea-app
                                     limit="500"
                                     placeholder="Начните писать"
@@ -122,8 +122,8 @@
                             this.additional.forEach(item => {
                                 item.value = '';
                             });
-                            this.$emit('create-service', data.data.service);      
-                        }      
+                            this.$emit('create-service', data.data.service);
+                        }
                     })
                     .catch(({response}) => {
                         if (response.status === 422) {

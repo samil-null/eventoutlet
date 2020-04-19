@@ -15,7 +15,7 @@
                     </div>
                 </div>
 
-                <div class="pe-portfolio__add-photo pe-portfolio__field-item" @click="openModal = true">
+                <div class="pe-portfolio__add-photo pe-portfolio__field-item" v-if="balance" @click="openModal = true">
                     <div class="bold-plus-svg"></div>
                 </div>
             </div>
@@ -46,10 +46,7 @@
         },
         methods: {
             loadVideo(link) {
-                axios.post('/app/media/videos', {link})
-                    .then(({data}) => {
-                        this.videosList.push(data.video);
-                    });
+                this.videosList.push(link);
             },
             removeImage(video, index) {
                 axios.delete('/app/media/videos?video=' + video)

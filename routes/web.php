@@ -21,6 +21,10 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::post('/forgot', 'ForgotController@forgot')->name('forgot');
 });
 
+Route::get('/debug-sentry', function () {
+    throw new Exception('My first Sentry error!');
+});
+
 Route::group(['namespace' => 'Site'], function () {
 
     Route::get('/', 'HomeController@index')->name('site.home');
@@ -112,6 +116,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['rol
         'destroy'   => 'admin.cities.destroy'
     ]);
 
+    Route::put('/services/change-status', 'ServiceController@changeStatuses')->name('admin.services.change_status');
     Route::resource('/services', 'ServiceController')->names([
         'index'     => 'admin.services.index',
         'show'      => 'admin.services.show',
@@ -122,6 +127,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['rol
         'destroy'   => 'admin.services.destroy'
     ]);
 
+    Route::put('/offers/change-status', 'OfferController@changeStatuses')->name('admin.offers.change_status');
     Route::resource('/offers', 'OfferController')->names([
         'index'     => 'admin.offers.index',
         'show'      => 'admin.offers.show',
@@ -147,5 +153,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['rol
         'store'     => 'admin.roles.store',
         'update'    => 'admin.roles.update',
         'destroy'   => 'admin.roles.destroy'
+    ]);
+
+    Route::resource('/settings', 'SettingsController')->only('index', 'store')->names([
+        'index' => 'admin.settings.index',
+        'store' => 'admin.settings.store',
     ]);
 });

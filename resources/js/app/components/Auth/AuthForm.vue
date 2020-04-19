@@ -56,7 +56,7 @@
                                                                 <span>Мы еще не знакомы?</span>
                                                             </div>
                                                             <div class="acquainted__subtitle">
-                                                                <p>Давайте знакомиться. Ознакомитесь с нашим сервисов, чем он будет вам полезен и как выгодно и эффективно его использовать.</p>
+                                                                <p>Давайте знакомиться! Чем мы будем вам полезны и как выгодно и эффективно использовать EventOutlet</p>
                                                             </div>
                                                             <div class="acquainted__button">
                                                                 <a href="/process" class="thin-rectangle-btn thin-rectangle-btn-dark">
@@ -133,7 +133,7 @@
             if (this.user) {
                 this.auth = true
             }
-            
+
             document.querySelectorAll('.open-register-modal').forEach(item => {
                 item.addEventListener('click', (e) => {
                     this.openModal();

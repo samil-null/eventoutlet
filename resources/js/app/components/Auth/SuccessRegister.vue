@@ -6,7 +6,7 @@
                     <span>Аккаунт успешно создан!</span>
                 </div>
                 <div class="modal__subtitle">
-                    <span>Вам на почту было отправленно письмо для подтверждения</span>
+                    <span>Вам на почту было отправлено письмо для подтверждения</span>
                 </div>
                 <div class="modal__form">
                     <a href="#" @click="$emit('switch-to-login')" class="rectangle-btn-border rectangle-btn-border-green">

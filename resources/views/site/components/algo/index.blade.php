@@ -10,7 +10,7 @@
             </div>
             @if($user->info->instagram)
             <div class="catalog-card__head-info catalog-card-insta">
-                <a href="{{ Social::instagramUrl($user->info->instagram) }}" class="catalog-card__first-title">{{ Social::instagramTag($user->info->instagram) }}</a>
+                <a href="{{ Social::instagramUrl($user->info->instagram) }}" target="_blank" class="catalog-card__first-title">{{ Social::instagramTag($user->info->instagram) }}</a>
                 <span class="catalog-card__second-title">Instagram</span>
             </div>
             @endif
@@ -81,17 +81,17 @@
             @endif
             @if ($user->info->email)
                 <div class="contacts-block__item">
-                    <a href="mailto:{{ $user->info->email }}"><div class="at-svg contacts-block-svg"></div> </a>
+                    <a href="mailto:{{ $user->info->email }}" target="_blank"><div class="at-svg contacts-block-svg"></div> </a>
                 </div>
             @endif
             @if($user->info->whatsapp)
                 <div class="contacts-block__item">
-                    <a href="{{ Social::whatsappUrl($user->info->whatsapp) }}"> <div class="wa-svg contacts-block-svg"></div> </a>
+                    <a href="{{ Social::whatsappUrl($user->info->whatsapp) }}" target="_blank"> <div class="wa-svg contacts-block-svg"></div> </a>
                 </div>
             @endif
             @if($user->info->phone)
                 <div class="contacts-block__item">
-                    <a href="tel:{{ $user->info->phone }}"> <div class="phone-svg contacts-block-svg"></div> </a>
+                    <a href="tel:{{ $user->info->phone }}" target="_blank"> <div class="phone-svg contacts-block-svg"></div> </a>
                 </div>
             @endif
         </div>

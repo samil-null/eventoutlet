@@ -85,6 +85,17 @@ class ServiceController extends Controller
 
     }
 
+    public function changeStatuses(Request $request)
+    {
+        foreach ($request->services_status as $id => $status) {
+            Service::find($id)->update([
+                'status' => $status
+            ]);
+        }
+
+        return redirect()->back();
+    }
+
     /**
      * Remove the specified resource from storage.
      *

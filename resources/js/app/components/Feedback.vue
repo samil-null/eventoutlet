@@ -29,7 +29,7 @@
                              <span class="validation" v-for="error in errors.name">{{ error }}</span>
                           </label>
                           <label class="modal__label" for="" :class="{invalid:!!errors.email.length}">
-                            <span class="modal__input-name">Ваш почта</span>
+                            <span class="modal__input-name">Ваша почта</span>
                             <input type="email" placeholder="eventoutlet@gmail.com" v-model="email">
                              <span class="validation" v-for="error in errors.email">{{ error }}</span>
                           </label>
@@ -45,7 +45,7 @@
                              <span class="validation" v-for="error in errors.topic">{{ error }}</span>
                             </div>
                           </label>
-    
+
                           <button type="submit" class="rectangle-btn rectangle-btn-green">
                             <span>Отправить</span>
                           </button>
@@ -72,7 +72,7 @@
         </div>
       </div>
     </div>
-    
+
 </template>
 
 <script>

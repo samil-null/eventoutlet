@@ -1,7 +1,7 @@
 @extends('admin.layout.index')
 
 @section('content')
-
+    @include('admin.components.alerts.delete', ['route' => route('admin.users.destroy', $user->id)])
     <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-size: cover; background-position: center;">
         <!-- Mask -->
         <span class="mask bg-gradient-default opacity-8"></span>
@@ -57,7 +57,7 @@
                                 <i class="ni location_pin mr-2"></i>{{ $user->city->name }}
                             </div>
                             <hr class="my-4">
-                            <a href="{{ route('site.users.show', $user->id) }}">Просмотреть страницу</a>
+                            <a href="{{ route('site.users.show', $user->slug) }}">Просмотреть страницу</a>
                         </div>
                     </div>
                 </div>
@@ -79,6 +79,7 @@
                                 </div>
                             </div>
                             <div class="col-4 text-right">
+                                <button href="#!" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-notification">Удалить</button>
                                 <a href="#!" class="btn btn-sm btn-primary send-data-form">Сохранить</a>
                             </div>
                         </div>
@@ -247,15 +248,20 @@
                                     <textarea rows="8" class="form-control form-control-alternative" placeholder="A few words about you ...">{{ $user->info->about_me }}</textarea>
                                 </div>
                             </div>
-                            <hr class="my-4">
-                            <h6 class="heading-small text-muted mb-4">Услуги</h6>
+                        </form>
+                        <hr class="my-4">
+                        <form action="{{ route('admin.services.change_status') }}" method="post">
+                            @method('put')
+                            @csrf
+                            <h6 class="heading-small text-muted mb-4">
+                                Услуги <button class="btn btn-sm btn-primary">Сохранить</button>
+                            </h6>
                             <div class="table-responsive card shadow mb-5">
                                 <table class="table align-items-center table-flush">
                                     <thead class="thead-light">
                                     <tr>
                                         <th scope="col">Название</th>
                                         <th scope="col">Цена</th>
-                                        <th scope="col">Скидка</th>
                                         <th scope="col">Статус</th>
                                         <th></th>
                                     </tr>
@@ -274,12 +280,13 @@
                                                 {{ $service->price }}
                                             </td>
                                             <td>
-
-                                            </td>
-                                            <td>
-                                              <span class="badge badge-dot mr-4">
-                                                <i class="custom-status-{{ $service->status }}"></i> {{ $service->getStatus() }}
-                                              </span>
+                                                <select class="form-control form-control-alternative" name="services_status[{{ $service->id }}]">
+                                                    @foreach($service->statuses as $value => $name)
+                                                        <option value="{{ $value }}"
+                                                                @if($service->status == $value) selected @endif
+                                                        >{{ $name['name'] }}</option>
+                                                    @endforeach
+                                                </select>
                                             </td>
                                             <td>
 
@@ -289,8 +296,12 @@
                                     </tbody>
                                 </table>
                             </div>
+                        </form>
+                        <form action="{{ route('admin.offers.change_status') }}" method="post">
+                            @method('put')
+                            @csrf
                             <hr class="my-4">
-                            <h6 class="heading-small text-muted mb-4">Спецпредложения</h6>
+                            <h6 class="heading-small text-muted mb-4">Спецпредложения<button class="btn btn-sm btn-primary">Сохранить</button></h6>
                             <div class="table-responsive card shadow mb-5">
                                 <table class="table align-items-center table-flush">
                                     <thead class="thead-light">
@@ -319,9 +330,13 @@
                                                 {{ $offer->discount }} %
                                             </td>
                                             <td>
-                                              <span class="badge badge-dot mr-4">
-                                                <i class="custom-status-{{ $offer->status }}"></i> {{ $offer->getStatus('name') }}
-                                              </span>
+                                                <select class="form-control form-control-alternative"  name="offers_status[{{ $offer->id }}]">
+                                                    @foreach($offer->statuses as $value => $name)
+                                                        <option value="{{ $value }}"
+                                                                @if($offer->status == $value) selected @endif
+                                                        >{{ $name['name'] }}</option>
+                                                    @endforeach
+                                                </select>
                                             </td>
                                             <td>
 

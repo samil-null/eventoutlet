@@ -177,6 +177,8 @@ return [
         App\Providers\MacroProvider::class,
         Pawlox\VideoThumbnail\VideoThumbnailServiceProvider::class,
         EloquentFilter\ServiceProvider::class,
+        Fobia\Database\SphinxConnection\SphinxServiceProvider::class,
+        anlutro\LaravelSettings\ServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -187,7 +189,6 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
     ],
 
     /*
@@ -251,6 +252,7 @@ return [
         'VideoThumbnail' => Pawlox\VideoThumbnail\Facade\VideoThumbnail::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Webp' => Buglinjo\LaravelWebp\Facades\Webp::class,
+        'Setting' => anlutro\LaravelSettings\Facade::class
     ],
 
 ];

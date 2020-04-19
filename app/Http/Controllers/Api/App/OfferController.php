@@ -28,7 +28,7 @@ class OfferController extends ApiAppController
             $query->where('offers.status', Offer::ACTIVE_STATUS);
         }
 
-        $data = $query->with('service.priceOption','dates')->get();
+        $data = $query->with('service.priceOption','dates')->orderBy('offers.created_at', 'DESC')->get();
         $offers = fractal($data, new OfferTransformer)->toArray()['data'];
 
         return response()->json([

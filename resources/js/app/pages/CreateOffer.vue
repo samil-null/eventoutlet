@@ -81,6 +81,7 @@
                                 </form>
                                 <edit-offer-items
                                     @success-update="successPublishedOffers"
+                                    :offers="offers"
                                 />
                             </div>
                         </div>
@@ -121,7 +122,7 @@
                 minDate:null,
                 maxDate:null,
                 alertMessages:[],
-                isActiveAlert:false
+                isActiveAlert:false,
             }
         },
         methods: {
@@ -142,8 +143,23 @@
 
                 axios.post('/app/offers', payload)
                     .then(({data}) => {
-                        location.href = data.data.url;
-                        //
+                        //location.href = data.data.url;
+                        axios.get('/app/offers')
+                            .then(({data}) => {
+                                let offers = data.offers;
+                                this.offers = offers;
+                            });
+
+                        this.triggerAlert([{
+                            type:'success',
+                            body:'Ваше предложение успешно добавлено'
+                        }]);
+
+                        this.discount = null;
+                        this.selectService = 0;
+                        this.discount = 0;
+                        this.dates = [];
+                        this.description = null;
                     })
                     .catch(({response}) => {
                         if (response.status === 422) {
@@ -177,6 +193,12 @@
             }
         },
         mounted() {
+            axios.get('/app/offers')
+                .then(({data}) => {
+                    let offers = data.offers;
+                    this.offers = offers;
+                });
+
             axios.get('/app/users')
                 .then(({data}) => {
                     this.user = data.user;

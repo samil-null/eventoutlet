@@ -29,11 +29,11 @@ class ServiceController extends ApiAppController
         ]);
     }
 
-    
+
     public function count()
     {
         return response()->json([
-            'count' => $this->user->services()->count() 
+            'count' => $this->user->services()->count()
         ]);
     }
 

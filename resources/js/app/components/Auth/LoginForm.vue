@@ -15,7 +15,7 @@
                     <span v-if="noAccount">Неверная почта или пароль</span>
                     <form @submit.prevent="send">
                         <label class="modal__label" for="login-email-input" :class="{invalid:(noAccount || errors.email.length)}">
-                            <span class="modal__input-name">Ваша почта </span>
+                            <span class="modal__input-name">Ваша почта</span>
                             <input type="email" id="login-email-input" name="email" v-model="email" placeholder="eventoutlet@gmail.com">
                             <span class="validation" v-for="error in errors.email">{{ error }}</span>
                         </label>

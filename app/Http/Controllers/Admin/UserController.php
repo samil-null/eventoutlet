@@ -115,6 +115,20 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+
+        $user->gallery()->delete();
+        $user->videos()->delete();
+
+        foreach ($user->offers as $offer) {
+            $offer->dates()->delete();
+        }
+
+        $user->offers()->delete();
+        $user->services()->delete();
+
+        $user->delete();
+
+        return redirect()->route('admin.users.index');
     }
 }

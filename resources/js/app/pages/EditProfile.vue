@@ -241,13 +241,14 @@
                                         ></services-list-app>
                                     </div>
                                     <div id="add-service"></div>
-                                    <create-service-app
+                                    <template v-if="renderServiceApp && services.length < 6">
+                                        <create-service-app
+                                            :price-options="priceOptions"
+                                            :additional-fields="additionalFields"
+                                            @create-service="createService"
+                                        ></create-service-app>
+                                    </template>
 
-                                        v-if="renderServiceApp && services.length <= 6"
-                                        :price-options="priceOptions"
-                                        :additional-fields="additionalFields"
-                                        @create-service="createService"
-                                    ></create-service-app>
                                     <div class="pe-block__save-button">
                                         <button type="submit" class="rectangle-btn rectangle-btn-green">
                                             <span>Сохранить анкету</span>
@@ -332,7 +333,6 @@
                             this.errors.city_id = [];
 
                             location.href = '/lk/profile'
-
                         }
                     }).catch(({ response }) => {
                         if (response.status === 422) {

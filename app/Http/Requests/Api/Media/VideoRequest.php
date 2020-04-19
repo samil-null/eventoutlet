@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Api\Media;
 
+use App\Rules\VideoSourceRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class VideoRequest extends FormRequest
@@ -24,14 +25,14 @@ class VideoRequest extends FormRequest
     public function rules()
     {
         return [
-            'link' => 'required'
+            'link' => ['required', new VideoSourceRule()]
         ];
     }
 
     public function messages()
     {
         return [
-            'mimes' => 'Не верный формат'
+            'required' => 'Заполните поле'
         ];
     }
 }

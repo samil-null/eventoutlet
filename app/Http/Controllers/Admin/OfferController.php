@@ -7,7 +7,6 @@ use App\Helpers\DateHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Offer;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 
 class OfferController extends Controller
 {
@@ -64,7 +63,7 @@ class OfferController extends Controller
      */
     public function edit($id)
     {
-        
+
     }
 
     /**
@@ -91,6 +90,16 @@ class OfferController extends Controller
         return redirect()->route('admin.offers.show', $id);
     }
 
+    public function changeStatuses(Request $request)
+    {
+        foreach ($request->offers_status as $id => $status) {
+            Offer::find($id)->update([
+                'status' => $status
+            ]);
+        }
+
+        return redirect()->back();
+    }
     /**
      * Remove the specified resource from storage.
      *

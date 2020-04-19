@@ -91,6 +91,15 @@ return [
             'prefix_indexes' => true,
         ],
 
+        'sphinx' => [
+            'driver'   => 'mysql',
+            'host'     => '127.0.0.1',
+            'port' => 9306,
+            'database' => ''
+//            'database' => env('DB_DATABASE', 'forge'),
+//            'username' => env('DB_USERNAME', 'forge'),
+//            'password' => env('DB_PASSWORD', ''),
+        ],
     ],
 
     /*

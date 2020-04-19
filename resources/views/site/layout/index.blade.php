@@ -55,7 +55,7 @@
                                     </form>
                                 </div>
                                 <div class="navbar-general__profile">
-                                    
+
                                     @auth
                                         <div class="navbar-general__profile">
                                             <div class="navbar-general__profile-body">
@@ -112,20 +112,21 @@
               </div>
 
               <div class="row">
-                <div class="col-md-6 col-xl-7">
+                <div class="col-md-6">
                   <div class="footer__discription">
                     <p>
                       © 2020 Event Outlet – информационный портал по поиску исполнителей на мероприятия.
                     </p>
                   </div>
                 </div>
-                <div class="col-md-6 col-xl-5">
+                <div class="col-md-6">
                   <div class="footer-nav">
                     <div class="footer-nav__item">
                       <ul>
                         <li><a href="{{ route('site.home') }}">Главная</a></li>
                         <li><a href="#" class="feedback-open-trigger">Обратная связь</a></li>
                         <li><a href="#" class="oferta-open-trigger">Оферта</a></li>
+                          <li><a href="{{ route('site.process') }}">Как работает портал</a></li>
                       </ul>
                     </div>
 

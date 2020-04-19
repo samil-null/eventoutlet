@@ -43,7 +43,7 @@ class ServiceManagerService
             'name' => $request->name,
             'price_option_id' => $request->price_option_id,
             'price' => $request->price,
-            'description' => $request->price,
+            'description' => $request->description,
             'status' => Offer::WAITING_STATUS
         ]);
 
