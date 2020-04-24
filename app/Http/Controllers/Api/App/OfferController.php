@@ -28,10 +28,11 @@ class OfferController extends ApiAppController
             $query->where('offers.status', Offer::ACTIVE_STATUS);
         }
 
-        $data = $query->with('service.priceOption','dates')->orderBy('offers.created_at', 'DESC')->get();
+        $data = $query->with('service.priceOption','dates')->withCount('dates')->orderBy('offers.id', 'DESC')->orderBy('dates_count', 'DESC')->get();
         $offers = fractal($data, new OfferTransformer)->toArray()['data'];
 
         return response()->json([
+            'data' => $data,
             'offers' => $offers
         ]);
     }

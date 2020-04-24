@@ -91,8 +91,14 @@ class Offer extends Model
         return $this->provideFilter(\App\Filters\OfferFilter::class);
     }
 
+    public function hasDisabled()
+    {
+        return (bool) $this->dates()->count();
+    }
+
     public function setDescriptionAttribute($value)
     {
         $this->attributes['description'] = Str::removeEmoji(strip_tags($value));
     }
+    
 }

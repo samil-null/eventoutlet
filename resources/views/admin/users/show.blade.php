@@ -228,9 +228,9 @@
                             <div class="pl-lg-4">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <div class="admin-gallery">
+                                        <div class="admin-gallery admin-gallery_video">
                                             @foreach($user->videos as $video)
-                                                <a href="/videos/{{ $video->name }}" class="card admin-gallery__item video-gallery">
+                                                <a href="{{ App\Helpers\VideoPathHelper::url($video->name, $video->source) }}" data-video="{{ App\Helpers\VideoPathHelper::url($video->name, $video->source) }}" class="card admin-gallery__item video-gallery" style="background-image: url({{ App\Helpers\VideoPathHelper::thumbUrl($video->name, $video->source) }})">
 
                                                 </a>
                                             @endforeach

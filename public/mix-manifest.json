@@ -1,10 +1,9 @@
 {
     "/js/admin/index.js": "/js/admin/index.js",
-    "/js/api/video/index.js": "/js/api/video/index.js",
+    "/js/app.js": "/js/app.js",
+    "/css/admin/index.css": "/css/admin/index.css",
     "/js/common/algo.js": "/js/common/algo.js",
     "/js/pages/change.js": "/js/pages/change.js",
-    "/css/app.css": "/css/app.css",
-    "/css/admin2/index.css": "/css/admin2/index.css",
     "/js/pages/home.js": "/js/pages/home.js",
     "/js/pages/lk.js": "/js/pages/lk.js",
     "/js/pages/offers.js": "/js/pages/offers.js",
