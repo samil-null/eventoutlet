@@ -253,7 +253,7 @@
                         <form action="{{ route('admin.services.change_status') }}" method="post">
                             @method('put')
                             @csrf
-                            <h6 class="heading-small text-muted mb-4">
+                            <h6 class="heading-small text-muted mb-4 d-flex justify-content-between">
                                 Услуги <button class="btn btn-sm btn-primary">Сохранить</button>
                             </h6>
                             <div class="table-responsive card shadow mb-5">
@@ -301,7 +301,9 @@
                             @method('put')
                             @csrf
                             <hr class="my-4">
-                            <h6 class="heading-small text-muted mb-4">Спецпредложения<button class="btn btn-sm btn-primary">Сохранить</button></h6>
+                            <h6 class="heading-small text-muted mb-4 d-flex justify-content-between">
+                                Спецпредложения<button class="btn btn-sm btn-primary">Сохранить</button>
+                            </h6>
                             <div class="table-responsive card shadow mb-5">
                                 <table class="table align-items-center table-flush">
                                     <thead class="thead-light">

@@ -12,7 +12,7 @@ const mix = require('laravel-mix');
  */
 
 //mix.sass('resources/sass/app.scss', 'public/css');
-mix.sass('resources/sass/admin/index.scss', 'public/css/admin');
+//mix.sass('resources/sass/admin/index.scss', 'public/css/admin');
 
 mix.js('resources/js/app/app.js', 'public/js/');
 mix.js('resources/js/pages/home.js', 'public/js/pages');
@@ -22,7 +22,7 @@ mix.js('resources/js/common/algo.js', 'public/js/common');
 mix.js('resources/js/pages/lk.js', 'public/js/pages');
 mix.js('resources/js/pages/change.js', 'public/js/pages');
 
-mix.js('resources/js/admin/index.js', 'public/js/admin');
+//mix.js('resources/js/admin/index.js', 'public/js/admin');
 
 
-// /mix.js('resources/js/api/video/index.js', 'public/js/api/video');
+//mix.js('resources/js/api/video/index.js', 'public/js/api/video');

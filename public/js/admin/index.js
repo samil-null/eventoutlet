@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -48677,14 +48677,26 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
 
 /***/ }),
 
-/***/ 7:
-/*!*******************************************!*\
-  !*** multi ./resources/js/admin/index.js ***!
-  \*******************************************/
+/***/ "./resources/sass/admin/index.scss":
+/*!*****************************************!*\
+  !*** ./resources/sass/admin/index.scss ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 0:
+/*!*****************************************************************************!*\
+  !*** multi ./resources/js/admin/index.js ./resources/sass/admin/index.scss ***!
+  \*****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/arthas/Documents/project/eventoutlet/resources/js/admin/index.js */"./resources/js/admin/index.js");
+__webpack_require__(/*! /home/arthas/Documents/project/eventoutlet/resources/js/admin/index.js */"./resources/js/admin/index.js");
+module.exports = __webpack_require__(/*! /home/arthas/Documents/project/eventoutlet/resources/sass/admin/index.scss */"./resources/sass/admin/index.scss");
 
 
 /***/ })
