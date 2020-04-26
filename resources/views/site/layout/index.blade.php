@@ -29,7 +29,7 @@
     <!-- main wrapper -->
     <div class="wrapper" id="app">
         <nav id="menuBody" class="navbar-general">
-            <div class="container container-bg">
+            <div class="container @if (\Route::current()->getName() == 'site.home') container-bg @endif">
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="navbar-general__row">
