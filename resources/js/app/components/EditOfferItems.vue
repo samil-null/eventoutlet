@@ -1,7 +1,7 @@
 <template>
 <div>
     <div class="profile-special__title"><span>Ваши спецпредложения</span></div>
-    <div class="profile-edit__body" v-for="(offer, index) in offers">
+    <div class="profile-edit__body" v-for="(offer, index) in offers" :class="{disabled:offer.has_disabled}">
     <div class="pe-block pr-block">
         <div class="special-offer">
             <div class="special-offer__head">

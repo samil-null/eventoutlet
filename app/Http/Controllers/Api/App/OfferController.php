@@ -28,8 +28,19 @@ class OfferController extends ApiAppController
             $query->where('offers.status', Offer::ACTIVE_STATUS);
         }
 
-        $data = $query->with('service.priceOption','dates')->withCount('dates')->orderBy('offers.id', 'DESC')->orderBy('dates_count', 'DESC')->get();
-        $offers = fractal($data, new OfferTransformer)->toArray()['data'];
+        $data = $query->with('service.priceOption','dates')->withCount('dates')->orderBy('offers.id', 'DESC')->get();
+        $sortable = collect();
+        $disabled = collect();
+
+        $data->each(function ($item, $key) use ($sortable, $disabled) {
+            if ($item->dates_count == 0) {
+                $disabled->push($item);
+            } else {
+                $sortable->push($item);
+            }
+        });
+
+        $offers = fractal($sortable->merge($disabled), new OfferTransformer)->toArray()['data'];
 
         return response()->json([
             'data' => $data,

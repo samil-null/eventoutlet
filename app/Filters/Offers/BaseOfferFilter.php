@@ -73,11 +73,13 @@ abstract class BaseOfferFilter
     {
 //        $pdo = new \PDO('mysql:host=127.0.0.1;port=9306');
 //        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//        $connection = \DB::connection('sphinx');
-//        $userIds = $connection->table('users');
-//        dump($userIds->get());
+        $connection = \DB::connection('sphinx');
+        $userIds = $connection->table('idx_users_name')
+            ->where('status' , User::ACTIVE_STATUS)
+            ->match('name', $query);
 
-        $this->builder->where('users.name', 'like', "%{$query}%");
+        $this->builder->whereIn('users.id', $userIds->get('id')->pluck('id'));
+
     }
 
     public function get()

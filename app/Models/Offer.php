@@ -93,12 +93,12 @@ class Offer extends Model
 
     public function hasDisabled()
     {
-        return (bool) $this->dates()->count();
+        return !(bool) $this->dates()->count();
     }
 
     public function setDescriptionAttribute($value)
     {
         $this->attributes['description'] = Str::removeEmoji(strip_tags($value));
     }
-    
+
 }

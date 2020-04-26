@@ -5,7 +5,7 @@
     <div class="container-fluid mt--7">
         <!-- Table -->
         <div class="row">
-            <div class="col-lg-9">
+            <div class="col-lg-8">
                 <div class="card shadow">
                     <div class="card-header border-0">
                         <h3 class="mb-0">Пользователи</h3>
@@ -17,7 +17,6 @@
                                 <th scope="col">Имя</th>
                                 <th scope="col">E-mail</th>
                                 <th scope="col">Статус</th>
-                                <th scope="col">Users</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -43,9 +42,6 @@
                                                 <i class="custom-status-{{ $user->status }}"></i> {{ $user->getStatus('name') }}
                                               </span>
                                         </td>
-                                        <td>
-                                            <span>pass</span>
-                                        </td>
                                     </tr>
                                 @endforeach
                                     @endif
@@ -58,7 +54,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                 <form class="card shadow">
                     <div class="card-header border-0">
                         <div class="row align-items-center">
@@ -75,7 +71,7 @@
                         <div class="form-group focused">
                             <label class="form-control-label" for="input-speciality">Специальность</label>
                             <select class="form-control form-control-alternative" id="input-speciality" name="speciality_id">
-                                <option value="">Нет</option>
+                                <option>Нет</option>
                                 @foreach(\App\Models\Specialty::all() as $speciality)
                                     <option value="{{ $speciality->id }}" @if($request->get('speciality_id') == $speciality->id) selected @endif>{{ $speciality->name }}</option>
                                 @endforeach
@@ -84,7 +80,7 @@
                         <div class="form-group focused">
                             <label class="form-control-label" for="input-speciality">Город</label>
                             <select class="form-control form-control-alternative" id="input-speciality" name="city_id">
-                                <option value="">Нет</option>
+                                <option>Нет</option>
                                 @foreach(\App\Models\City::all() as $city)
                                     <option value="{{ $city->id }}" @if($request->get('city_id') == $city->id) selected @endif>{{ $city->name }}</option>
                                 @endforeach
@@ -99,6 +95,10 @@
                                     <option value="{{ $status }}" @if($request->get('status') == $status) selected @endif>{{ $name['name'] }}</option>
                                 @endforeach
                             </select>
+                        </div>
+
+                        <div class="form-group focused">
+                            <a  href="{{ route('admin.users.index', ['require_moderation' => 1]) }}" class="btn btn-secondary">Требуют модерации</a>
                         </div>
                     </div>
                 </form>

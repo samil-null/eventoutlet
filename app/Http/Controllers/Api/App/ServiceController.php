@@ -21,11 +21,17 @@ class ServiceController extends ApiAppController
     /**
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
+
+        $builder = $this->user->services();
+
+        if ($request->has('status')) {
+            $builder->where('status', $request->input('status'));
+        }
+
         return response()->json([
-            'services' => $this->user->services()
-                                ->with(['priceOption', 'fields.metaField'])->get()
+            'services' => $builder->with(['priceOption', 'fields.metaField'])->get()
         ]);
     }
 

@@ -18,6 +18,23 @@
                                 <div class="profile-edit__title lk__title">
                                     <span>Здравствуйте, {{ user.name }}</span>
                                 </div>
+                                <!-- have no offers -->
+                                <div  class="lk__havent-offers">
+                                    <div class="lk__havent-offers-title" v-if="!offers.length" >
+                                        <span>
+                                          У вас еще нет опубликованных спецпредложений, вам нужно срочно их опубликовать
+                                        </span>
+                                    </div>
+
+                                    <div class="pe-block__add-btn">
+                                        <a :href="createOfferLink" v-if="serviceCount" class="add-btn add-btn-corall">
+                                            <span>Добавить спецпредложение</span>
+                                        </a>
+                                        <a href="/lk/profile/edit/#add-service" v-else class="add-btn add-btn-corall">
+                                            <span>Добавить услугу</span>
+                                        </a>
+                                    </div>
+                                </div>
                                 <template v-if="offers.length">
                                     <div class="profile-edit__body lk__body" v-for="offer in offers">
                                         <!-- Line -->
@@ -47,23 +64,6 @@
                                         </div>
                                     </div>
                                 </template>
-                                <!-- have no offers -->
-                                <div  class="lk__havent-offers">
-                                    <div class="lk__havent-offers-title" v-if="!offers.length" >
-                                        <span>
-                                          У вас еще нет опубликованных спецпредложений, вам нужно срочно их опубликовать
-                                        </span>
-                                    </div>
-
-                                    <div class="pe-block__add-btn">
-                                        <a :href="createOfferLink" v-if="serviceCount" class="add-btn add-btn-corall"> 
-                                            <span>Добавить спецпредложение</span> 
-                                        </a>
-                                        <a href="/lk/profile/edit/#add-service" v-else class="add-btn add-btn-corall"> 
-                                            <span>Добавить услугу</span> 
-                                        </a>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -99,7 +99,7 @@
                 .then(({data}) => {
                     this.offers = data.offers;
                 })
-            
+
             axios.get('/app/services/count')
                 .then(({data}) => {
                     this.serviceCount = data.count;

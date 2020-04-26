@@ -77,6 +77,7 @@
                                 </form>
                                 <edit-offer-items
                                     @success-update="successPublishedOffers"
+                                    :offers="offers"
                                 />
                             </div>
                         </div>
@@ -185,13 +186,20 @@
                     this.user = data.user;
                 })
 
+            axios.get('/app/offers')
+                .then(({data}) => {
+                    let offers = data.offers;
+                    this.offers = offers;
+                });
+
             axios.get('/app/offers/create')
                 .then(res => res.data.data)
                 .then(data => {
-                    this.services = data.services;
+                    //this.services = data.services;
                     this.minDate = data.minDate;
                     this.maxDate = data.maxDate;
                 })
+
 
             axios.get('/app/offers/' + this.offerId)
                 .then(res => res.data.data)

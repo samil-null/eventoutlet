@@ -28,6 +28,7 @@
                                                     <div class="col-12 col-sm-12 col-md-6 col-xl-6">
                                                         <label class="form__label">
                                                             <select-app
+                                                                v-if="renderSpecialitySelect"
                                                                 :options="services"
                                                                 select-value="id"
                                                                 select-name="name"
@@ -52,7 +53,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-12 col-sm-12 col-md-6 col-xl-6">
-                                                        <discount-select v-model="discount"></discount-select>
+                                                        <discount-select v-model="discount" v-if="renderDiscount"></discount-select>
                                                         <label class="form__label">
                                                             <span>Дополнительные условия предложения</span>
                                                             <textarea-app
@@ -123,6 +124,8 @@
                 maxDate:null,
                 alertMessages:[],
                 isActiveAlert:false,
+                renderDiscount:true,
+                renderSpecialitySelect:true
             }
         },
         methods: {
@@ -155,11 +158,19 @@
                             body:'Ваше предложение успешно добавлено'
                         }]);
 
-                        this.discount = null;
-                        this.selectService = 0;
                         this.discount = 0;
+                        this.selectService = null;
                         this.dates = [];
                         this.description = null;
+
+                        this.renderDiscount = false;
+                        this.renderSpecialitySelect = false;
+
+                        setTimeout(() => {
+                            this.renderSpecialitySelect = true;
+                            this.renderDiscount = true;
+                        }, 0)
+
                     })
                     .catch(({response}) => {
                         if (response.status === 422) {
@@ -193,7 +204,7 @@
             }
         },
         mounted() {
-            axios.get('/app/offers')
+            axios.get('/app/offers?status=1')
                 .then(({data}) => {
                     let offers = data.offers;
                     this.offers = offers;
@@ -204,10 +215,15 @@
                     this.user = data.user;
                 });
 
+            axios.get('/app/services?status=1')
+                    .then(({data}) => {
+                        this.services = data.services;
+                    })
+
             axios.get('/app/offers/create')
                 .then(res => res.data.data)
                 .then(data => {
-                    this.services = data.services;
+                    //this.services = data.services;
                     this.minDate = data.minDate;
                     this.maxDate = data.maxDate;
                 })
@@ -223,3 +239,10 @@
         }
     }
 </script>
+
+<style>
+    .profile-edit__body.disabled {
+        filter: grayscale(100%);
+        opacity: .7;
+    }
+</style>
