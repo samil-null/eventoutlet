@@ -87960,113 +87960,120 @@ var render = function() {
           [
             _c("div", { staticClass: "container" }, [
               _c("div", { staticClass: "row no-gutters" }, [
-                _c("div", { staticClass: "col-xl-8 offset-xl-2" }, [
-                  _c(
-                    "div",
-                    { staticClass: "modal-body" },
-                    [
-                      _c("div", { staticClass: "modal__f-figure" }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "modal__s-figure" }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "modal-body__figure" }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "modal-body__cross" }, [
-                        _c("div", {
-                          staticClass: "times-svg",
-                          attrs: { "data-close-modal": "true" },
-                          on: { click: _vm.closeModal }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("login-form", {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.activeForm.login,
-                            expression: "activeForm.login"
-                          }
-                        ],
-                        on: {
-                          "forgot-password": function($event) {
-                            return _vm.switchForm("forgotPassword")
-                          },
-                          "switch-to-register": function($event) {
-                            return _vm.switchForm("register")
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("register-form", {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.activeForm.register,
-                            expression: "activeForm.register"
-                          }
-                        ],
-                        on: {
-                          "switch-to-login": function($event) {
-                            return _vm.switchForm("login")
-                          },
-                          "switch-to-success-register": function($event) {
-                            return _vm.switchForm("successRegister")
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("forgot-password-form", {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.activeForm.forgotPassword,
-                            expression: "activeForm.forgotPassword"
-                          }
-                        ],
-                        on: {
-                          "switch-to-login": function($event) {
-                            return _vm.switchForm("login")
-                          },
-                          "success-forgot-password": function($event) {
-                            return _vm.switchForm("successForgotPassword")
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm.activeForm.successForgotPassword
-                        ? _c("success-forgot-password", {
-                            on: {
-                              "switch-to-login": function($event) {
-                                return _vm.switchForm("login")
-                              }
-                            }
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "col-12 col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-8 offset-lg-2 offset-xl-1 col-xl-8 offset-xl-2"
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "modal-body" },
+                      [
+                        _c("div", { staticClass: "modal__f-figure" }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "modal__s-figure" }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "modal-body__figure" }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "modal-body__cross" }, [
+                          _c("div", {
+                            staticClass: "times-svg",
+                            attrs: { "data-close-modal": "true" },
+                            on: { click: _vm.closeModal }
                           })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c("success-register", {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.activeForm.successRegister,
-                            expression: "activeForm.successRegister"
+                        ]),
+                        _vm._v(" "),
+                        _c("login-form", {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.activeForm.login,
+                              expression: "activeForm.login"
+                            }
+                          ],
+                          on: {
+                            "forgot-password": function($event) {
+                              return _vm.switchForm("forgotPassword")
+                            },
+                            "switch-to-register": function($event) {
+                              return _vm.switchForm("register")
+                            }
                           }
-                        ],
-                        on: {
-                          "switch-to-login": function($event) {
-                            return _vm.switchForm("login")
+                        }),
+                        _vm._v(" "),
+                        _c("register-form", {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.activeForm.register,
+                              expression: "activeForm.register"
+                            }
+                          ],
+                          on: {
+                            "switch-to-login": function($event) {
+                              return _vm.switchForm("login")
+                            },
+                            "switch-to-success-register": function($event) {
+                              return _vm.switchForm("successRegister")
+                            }
                           }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm._m(0)
-                    ],
-                    1
-                  )
-                ])
+                        }),
+                        _vm._v(" "),
+                        _c("forgot-password-form", {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.activeForm.forgotPassword,
+                              expression: "activeForm.forgotPassword"
+                            }
+                          ],
+                          on: {
+                            "switch-to-login": function($event) {
+                              return _vm.switchForm("login")
+                            },
+                            "success-forgot-password": function($event) {
+                              return _vm.switchForm("successForgotPassword")
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.activeForm.successForgotPassword
+                          ? _c("success-forgot-password", {
+                              on: {
+                                "switch-to-login": function($event) {
+                                  return _vm.switchForm("login")
+                                }
+                              }
+                            })
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c("success-register", {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.activeForm.successRegister,
+                              expression: "activeForm.successRegister"
+                            }
+                          ],
+                          on: {
+                            "switch-to-login": function($event) {
+                              return _vm.switchForm("login")
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm._m(0)
+                      ],
+                      1
+                    )
+                  ]
+                )
               ])
             ])
           ]
@@ -90217,99 +90224,111 @@ var render = function() {
     _c("div", { staticClass: "modal__wrapper" }, [
       _c("div", { staticClass: "container" }, [
         _c("div", { staticClass: "row no-gutters" }, [
-          _c("div", { staticClass: "col-xl-8 offset-xl-2" }, [
-            _c("div", { staticClass: "modal-body" }, [
-              _c("div", { staticClass: "modal__f-figure" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal__s-figure" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body__figure" }),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "modal-body__cross",
-                  on: {
-                    click: function($event) {
-                      return _vm.$emit("close")
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-12 col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-8 offset-lg-2 offset-xl-1 col-xl-8 offset-xl-2"
+            },
+            [
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "modal__f-figure" }),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal__s-figure" }),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body__figure" }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "modal-body__cross",
+                    on: {
+                      click: function($event) {
+                        return _vm.$emit("close")
+                      }
                     }
-                  }
-                },
-                [_c("div", { staticClass: "times-svg" })]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal__var" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-xl-6 offset-xl-3" }, [
-                    _vm._m(0),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "modal__form" }, [
-                      _c(
-                        "form",
-                        {
-                          attrs: { action: "" },
-                          on: {
-                            submit: function($event) {
-                              $event.preventDefault()
-                              return _vm.send($event)
+                  },
+                  [_c("div", { staticClass: "times-svg" })]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal__var" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-xl-6 offset-xl-3" }, [
+                      _vm._m(0),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "modal__form" }, [
+                        _c(
+                          "form",
+                          {
+                            attrs: { action: "" },
+                            on: {
+                              submit: function($event) {
+                                $event.preventDefault()
+                                return _vm.send($event)
+                              }
                             }
-                          }
-                        },
-                        [
-                          _c(
-                            "label",
-                            { staticClass: "modal__label", attrs: { for: "" } },
-                            [
-                              _c("span", { staticClass: "modal__input-name" }, [
-                                _vm._v("Ссылка на видео")
-                              ]),
-                              _vm._v(" "),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.link,
-                                    expression: "link"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "text",
-                                  placeholder: "https://"
-                                },
-                                domProps: { value: _vm.link },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.link = $event.target.value
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _vm._l(_vm.errors.link, function(error) {
-                                return _c(
+                          },
+                          [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "modal__label",
+                                attrs: { for: "" }
+                              },
+                              [
+                                _c(
                                   "span",
-                                  { staticClass: "validation" },
-                                  [_vm._v(_vm._s(error))]
-                                )
-                              })
-                            ],
-                            2
-                          ),
-                          _vm._v(" "),
-                          _vm._m(1)
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _vm._m(2)
+                                  { staticClass: "modal__input-name" },
+                                  [_vm._v("Ссылка на видео")]
+                                ),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.link,
+                                      expression: "link"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "text",
+                                    placeholder: "https://"
+                                  },
+                                  domProps: { value: _vm.link },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.link = $event.target.value
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _vm._l(_vm.errors.link, function(error) {
+                                  return _c(
+                                    "span",
+                                    { staticClass: "validation" },
+                                    [_vm._v(_vm._s(error))]
+                                  )
+                                })
+                              ],
+                              2
+                            ),
+                            _vm._v(" "),
+                            _vm._m(1)
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(2)
+                    ])
                   ])
                 ])
               ])
-            ])
-          ])
+            ]
+          )
         ])
       ])
     ])
@@ -90381,30 +90400,37 @@ var render = function() {
     _c("div", { staticClass: "modal__wrapper" }, [
       _c("div", { staticClass: "container" }, [
         _c("div", { staticClass: "row no-gutters" }, [
-          _c("div", { staticClass: "col-xl-8 offset-xl-2" }, [
-            _c("div", { staticClass: "modal-body" }, [
-              _c("div", { staticClass: "modal__f-figure" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal__s-figure" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body__figure" }),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "modal-body__cross",
-                  on: {
-                    click: function($event) {
-                      _vm.active = false
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-12 col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-8 offset-lg-2 offset-xl-1 col-xl-8 offset-xl-2"
+            },
+            [
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "modal__f-figure" }),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal__s-figure" }),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body__figure" }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "modal-body__cross",
+                    on: {
+                      click: function($event) {
+                        _vm.active = false
+                      }
                     }
-                  }
-                },
-                [_c("div", { staticClass: "times-svg" })]
-              ),
-              _vm._v(" "),
-              _vm._m(0)
-            ])
-          ])
+                  },
+                  [_c("div", { staticClass: "times-svg" })]
+                ),
+                _vm._v(" "),
+                _vm._m(0)
+              ])
+            ]
+          )
         ])
       ])
     ])

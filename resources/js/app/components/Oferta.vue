@@ -3,7 +3,7 @@
 	<div class="modal__wrapper">
 		<div class="container">
 			<div class="row no-gutters">
-				<div class="col-xl-8 offset-xl-2">
+				<div class="col-12 col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-8 offset-lg-2 offset-xl-1 col-xl-8 offset-xl-2">
 					<div class="modal-body">
 						<div class="modal__f-figure"></div>
 						<div class="modal__s-figure"></div>

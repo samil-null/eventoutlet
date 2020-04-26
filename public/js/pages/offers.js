@@ -75440,113 +75440,120 @@ var render = function() {
           [
             _c("div", { staticClass: "container" }, [
               _c("div", { staticClass: "row no-gutters" }, [
-                _c("div", { staticClass: "col-xl-8 offset-xl-2" }, [
-                  _c(
-                    "div",
-                    { staticClass: "modal-body" },
-                    [
-                      _c("div", { staticClass: "modal__f-figure" }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "modal__s-figure" }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "modal-body__figure" }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "modal-body__cross" }, [
-                        _c("div", {
-                          staticClass: "times-svg",
-                          attrs: { "data-close-modal": "true" },
-                          on: { click: _vm.closeModal }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("login-form", {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.activeForm.login,
-                            expression: "activeForm.login"
-                          }
-                        ],
-                        on: {
-                          "forgot-password": function($event) {
-                            return _vm.switchForm("forgotPassword")
-                          },
-                          "switch-to-register": function($event) {
-                            return _vm.switchForm("register")
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("register-form", {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.activeForm.register,
-                            expression: "activeForm.register"
-                          }
-                        ],
-                        on: {
-                          "switch-to-login": function($event) {
-                            return _vm.switchForm("login")
-                          },
-                          "switch-to-success-register": function($event) {
-                            return _vm.switchForm("successRegister")
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("forgot-password-form", {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.activeForm.forgotPassword,
-                            expression: "activeForm.forgotPassword"
-                          }
-                        ],
-                        on: {
-                          "switch-to-login": function($event) {
-                            return _vm.switchForm("login")
-                          },
-                          "success-forgot-password": function($event) {
-                            return _vm.switchForm("successForgotPassword")
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm.activeForm.successForgotPassword
-                        ? _c("success-forgot-password", {
-                            on: {
-                              "switch-to-login": function($event) {
-                                return _vm.switchForm("login")
-                              }
-                            }
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "col-12 col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-8 offset-lg-2 offset-xl-1 col-xl-8 offset-xl-2"
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "modal-body" },
+                      [
+                        _c("div", { staticClass: "modal__f-figure" }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "modal__s-figure" }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "modal-body__figure" }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "modal-body__cross" }, [
+                          _c("div", {
+                            staticClass: "times-svg",
+                            attrs: { "data-close-modal": "true" },
+                            on: { click: _vm.closeModal }
                           })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c("success-register", {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.activeForm.successRegister,
-                            expression: "activeForm.successRegister"
+                        ]),
+                        _vm._v(" "),
+                        _c("login-form", {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.activeForm.login,
+                              expression: "activeForm.login"
+                            }
+                          ],
+                          on: {
+                            "forgot-password": function($event) {
+                              return _vm.switchForm("forgotPassword")
+                            },
+                            "switch-to-register": function($event) {
+                              return _vm.switchForm("register")
+                            }
                           }
-                        ],
-                        on: {
-                          "switch-to-login": function($event) {
-                            return _vm.switchForm("login")
+                        }),
+                        _vm._v(" "),
+                        _c("register-form", {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.activeForm.register,
+                              expression: "activeForm.register"
+                            }
+                          ],
+                          on: {
+                            "switch-to-login": function($event) {
+                              return _vm.switchForm("login")
+                            },
+                            "switch-to-success-register": function($event) {
+                              return _vm.switchForm("successRegister")
+                            }
                           }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm._m(0)
-                    ],
-                    1
-                  )
-                ])
+                        }),
+                        _vm._v(" "),
+                        _c("forgot-password-form", {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.activeForm.forgotPassword,
+                              expression: "activeForm.forgotPassword"
+                            }
+                          ],
+                          on: {
+                            "switch-to-login": function($event) {
+                              return _vm.switchForm("login")
+                            },
+                            "success-forgot-password": function($event) {
+                              return _vm.switchForm("successForgotPassword")
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.activeForm.successForgotPassword
+                          ? _c("success-forgot-password", {
+                              on: {
+                                "switch-to-login": function($event) {
+                                  return _vm.switchForm("login")
+                                }
+                              }
+                            })
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c("success-register", {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.activeForm.successRegister,
+                              expression: "activeForm.successRegister"
+                            }
+                          ],
+                          on: {
+                            "switch-to-login": function($event) {
+                              return _vm.switchForm("login")
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm._m(0)
+                      ],
+                      1
+                    )
+                  ]
+                )
               ])
             ])
           ]
@@ -76348,259 +76355,274 @@ var render = function() {
     _c("div", { staticClass: "modal__wrapper" }, [
       _c("div", { staticClass: "container" }, [
         _c("div", { staticClass: "row no-gutters" }, [
-          _c("div", { staticClass: "col-xl-8 offset-xl-2" }, [
-            _c("div", { staticClass: "modal-body" }, [
-              _c("div", { staticClass: "modal__f-figure" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal__s-figure" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body__figure" }),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "modal-body__cross",
-                  on: {
-                    click: function($event) {
-                      _vm.active = false
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-12 col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-8 offset-lg-2 offset-xl-1 col-xl-8 offset-xl-2"
+            },
+            [
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "modal__f-figure" }),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal__s-figure" }),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body__figure" }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "modal-body__cross",
+                    on: {
+                      click: function($event) {
+                        _vm.active = false
+                      }
                     }
-                  }
-                },
-                [_c("div", { staticClass: "times-svg" })]
-              ),
-              _vm._v(" "),
-              !_vm.success
-                ? _c("div", { staticClass: "modal__var" }, [
-                    _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "col-xl-6 offset-xl-3" }, [
-                        _vm._m(0),
-                        _vm._v(" "),
-                        _vm._m(1),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "modal__form" }, [
-                          _c(
-                            "form",
-                            {
-                              attrs: { action: "" },
-                              on: {
-                                submit: function($event) {
-                                  $event.preventDefault()
-                                  return _vm.send($event)
-                                }
-                              }
-                            },
-                            [
-                              _c(
-                                "label",
-                                {
-                                  staticClass: "modal__label",
-                                  class: { invalid: !!_vm.errors.name.length },
-                                  attrs: { for: "" }
-                                },
-                                [
-                                  _c(
-                                    "span",
-                                    { staticClass: "modal__input-name" },
-                                    [_vm._v("Ваше Имя")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.name,
-                                        expression: "name"
-                                      }
-                                    ],
-                                    attrs: {
-                                      type: "text",
-                                      placeholder: "Александр"
-                                    },
-                                    domProps: { value: _vm.name },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.name = $event.target.value
-                                      }
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _vm._l(_vm.errors.name, function(error) {
-                                    return _c(
-                                      "span",
-                                      { staticClass: "validation" },
-                                      [_vm._v(_vm._s(error))]
-                                    )
-                                  })
-                                ],
-                                2
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "label",
-                                {
-                                  staticClass: "modal__label",
-                                  class: { invalid: !!_vm.errors.email.length },
-                                  attrs: { for: "" }
-                                },
-                                [
-                                  _c(
-                                    "span",
-                                    { staticClass: "modal__input-name" },
-                                    [_vm._v("Ваша почта")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.email,
-                                        expression: "email"
-                                      }
-                                    ],
-                                    attrs: {
-                                      type: "email",
-                                      placeholder: "eventoutlet@gmail.com"
-                                    },
-                                    domProps: { value: _vm.email },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.email = $event.target.value
-                                      }
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _vm._l(_vm.errors.email, function(error) {
-                                    return _c(
-                                      "span",
-                                      { staticClass: "validation" },
-                                      [_vm._v(_vm._s(error))]
-                                    )
-                                  })
-                                ],
-                                2
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "label",
-                                {
-                                  staticClass: "modal__label",
-                                  class: { invalid: !!_vm.errors.topic.length },
-                                  attrs: { for: "" }
-                                },
-                                [
-                                  _c(
-                                    "span",
-                                    { staticClass: "modal__input-name" },
-                                    [_vm._v("Тема")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.topic,
-                                        expression: "topic"
-                                      }
-                                    ],
-                                    attrs: {
-                                      type: "text",
-                                      placeholder: "Тема сообщения"
-                                    },
-                                    domProps: { value: _vm.topic },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.topic = $event.target.value
-                                      }
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _vm._l(_vm.errors.topic, function(error) {
-                                    return _c(
-                                      "span",
-                                      { staticClass: "validation" },
-                                      [_vm._v(_vm._s(error))]
-                                    )
-                                  })
-                                ],
-                                2
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "label",
-                                {
-                                  staticClass: "form__label",
-                                  class: {
-                                    invalid: !!_vm.errors.message.length
+                  },
+                  [_c("div", { staticClass: "times-svg" })]
+                ),
+                _vm._v(" "),
+                !_vm.success
+                  ? _c("div", { staticClass: "modal__var" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-xl-6 offset-xl-3" }, [
+                          _vm._m(0),
+                          _vm._v(" "),
+                          _vm._m(1),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "modal__form" }, [
+                            _c(
+                              "form",
+                              {
+                                attrs: { action: "" },
+                                on: {
+                                  submit: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.send($event)
                                   }
-                                },
-                                [
-                                  _c("span", [_vm._v("Сообщение")]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    { staticClass: "form__textarea-wrapp" },
-                                    [
-                                      _c("textarea", {
-                                        directives: [
-                                          {
-                                            name: "model",
-                                            rawName: "v-model",
-                                            value: _vm.message,
-                                            expression: "message"
-                                          }
-                                        ],
-                                        staticClass: "form__textarea",
-                                        attrs: {
-                                          placeholder: "Начните писать"
-                                        },
-                                        domProps: { value: _vm.message },
-                                        on: {
-                                          input: function($event) {
-                                            if ($event.target.composing) {
-                                              return
-                                            }
-                                            _vm.message = $event.target.value
-                                          }
+                                }
+                              },
+                              [
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass: "modal__label",
+                                    class: {
+                                      invalid: !!_vm.errors.name.length
+                                    },
+                                    attrs: { for: "" }
+                                  },
+                                  [
+                                    _c(
+                                      "span",
+                                      { staticClass: "modal__input-name" },
+                                      [_vm._v("Ваше Имя")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.name,
+                                          expression: "name"
                                         }
-                                      }),
-                                      _vm._v(" "),
-                                      _vm._l(_vm.errors.topic, function(error) {
-                                        return _c(
-                                          "span",
-                                          { staticClass: "validation" },
-                                          [_vm._v(_vm._s(error))]
-                                        )
-                                      })
-                                    ],
-                                    2
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _vm._m(2)
-                            ]
-                          )
+                                      ],
+                                      attrs: {
+                                        type: "text",
+                                        placeholder: "Александр"
+                                      },
+                                      domProps: { value: _vm.name },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.name = $event.target.value
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _vm._l(_vm.errors.name, function(error) {
+                                      return _c(
+                                        "span",
+                                        { staticClass: "validation" },
+                                        [_vm._v(_vm._s(error))]
+                                      )
+                                    })
+                                  ],
+                                  2
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass: "modal__label",
+                                    class: {
+                                      invalid: !!_vm.errors.email.length
+                                    },
+                                    attrs: { for: "" }
+                                  },
+                                  [
+                                    _c(
+                                      "span",
+                                      { staticClass: "modal__input-name" },
+                                      [_vm._v("Ваша почта")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.email,
+                                          expression: "email"
+                                        }
+                                      ],
+                                      attrs: {
+                                        type: "email",
+                                        placeholder: "eventoutlet@gmail.com"
+                                      },
+                                      domProps: { value: _vm.email },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.email = $event.target.value
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _vm._l(_vm.errors.email, function(error) {
+                                      return _c(
+                                        "span",
+                                        { staticClass: "validation" },
+                                        [_vm._v(_vm._s(error))]
+                                      )
+                                    })
+                                  ],
+                                  2
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass: "modal__label",
+                                    class: {
+                                      invalid: !!_vm.errors.topic.length
+                                    },
+                                    attrs: { for: "" }
+                                  },
+                                  [
+                                    _c(
+                                      "span",
+                                      { staticClass: "modal__input-name" },
+                                      [_vm._v("Тема")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.topic,
+                                          expression: "topic"
+                                        }
+                                      ],
+                                      attrs: {
+                                        type: "text",
+                                        placeholder: "Тема сообщения"
+                                      },
+                                      domProps: { value: _vm.topic },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.topic = $event.target.value
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _vm._l(_vm.errors.topic, function(error) {
+                                      return _c(
+                                        "span",
+                                        { staticClass: "validation" },
+                                        [_vm._v(_vm._s(error))]
+                                      )
+                                    })
+                                  ],
+                                  2
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass: "form__label",
+                                    class: {
+                                      invalid: !!_vm.errors.message.length
+                                    }
+                                  },
+                                  [
+                                    _c("span", [_vm._v("Сообщение")]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "form__textarea-wrapp" },
+                                      [
+                                        _c("textarea", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.message,
+                                              expression: "message"
+                                            }
+                                          ],
+                                          staticClass: "form__textarea",
+                                          attrs: {
+                                            placeholder: "Начните писать"
+                                          },
+                                          domProps: { value: _vm.message },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.message = $event.target.value
+                                            }
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _vm._l(_vm.errors.topic, function(
+                                          error
+                                        ) {
+                                          return _c(
+                                            "span",
+                                            { staticClass: "validation" },
+                                            [_vm._v(_vm._s(error))]
+                                          )
+                                        })
+                                      ],
+                                      2
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _vm._m(2)
+                              ]
+                            )
+                          ])
                         ])
                       ])
                     ])
-                  ])
-                : _c("div", { staticClass: "modal__var thanks-modal" }, [
-                    _vm._m(3)
-                  ])
-            ])
-          ])
+                  : _c("div", { staticClass: "modal__var thanks-modal" }, [
+                      _vm._m(3)
+                    ])
+              ])
+            ]
+          )
         ])
       ])
     ])
@@ -77069,30 +77091,37 @@ var render = function() {
     _c("div", { staticClass: "modal__wrapper" }, [
       _c("div", { staticClass: "container" }, [
         _c("div", { staticClass: "row no-gutters" }, [
-          _c("div", { staticClass: "col-xl-8 offset-xl-2" }, [
-            _c("div", { staticClass: "modal-body" }, [
-              _c("div", { staticClass: "modal__f-figure" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal__s-figure" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body__figure" }),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "modal-body__cross",
-                  on: {
-                    click: function($event) {
-                      _vm.active = false
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-12 col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-8 offset-lg-2 offset-xl-1 col-xl-8 offset-xl-2"
+            },
+            [
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "modal__f-figure" }),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal__s-figure" }),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body__figure" }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "modal-body__cross",
+                    on: {
+                      click: function($event) {
+                        _vm.active = false
+                      }
                     }
-                  }
-                },
-                [_c("div", { staticClass: "times-svg" })]
-              ),
-              _vm._v(" "),
-              _vm._m(0)
-            ])
-          ])
+                  },
+                  [_c("div", { staticClass: "times-svg" })]
+                ),
+                _vm._v(" "),
+                _vm._m(0)
+              ])
+            ]
+          )
         ])
       ])
     ])
