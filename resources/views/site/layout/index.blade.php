@@ -49,7 +49,7 @@
                                 <div class="search-block">
                                     <form action="{{ route('site.offers.index') }}">
                                         <label class="search-block__label" for="input-search">
-                                            <input name="search" id="input-search" type="search" placeholder="Поиск">
+                                            <input name="search" id="input-search" type="search" placeholder="Имя или название">
                                             <div class="search-svg"></div>
                                         </label>
                                     </form>
