@@ -25,9 +25,10 @@ class SendEmailChangeUserStatus
                 $template .= 'active';
                 $subject = 'Добро пожаловать на EventOutlet';
                 break;
-            // case (User::WAITING_STATUS):
-            //     $template .= 'wait';
-            //     break;
+            case (User::WAITING_STATUS):
+                $subject = 'СПАСИБО ЗА РЕГИСТРАЦИЮ';
+                $template .= 'wating';
+                break;
             case (User::REJECTED_STATUS):
                 $template .= 'reject';
                 $subject = 'Ошибка при регистрации на EventOutlet';
@@ -36,11 +37,12 @@ class SendEmailChangeUserStatus
             //     $template .= 'baned';
             //     break;
         }
+
         if ($subject) {
             Mail::send($template, ['user' => $event->user], function ($message) use ($event, $subject) {
-                $message->from('admin@eventoutlet.ru');
+                $message->from('denis.budancev@gmail.com');
                 $message->subject($subject);
-                $message->to($event->user->email);
+                $message->to('denis.budancev@gmail.com');
             });
         }   
         

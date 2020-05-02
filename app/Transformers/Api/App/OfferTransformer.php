@@ -22,6 +22,7 @@ class OfferTransformer extends TransformerAbstract
             'price'             => (string) $offer->discount_price,
             'price_option'      => (string) $offer->service->priceOption->name,
             'status'            => (int) $offer->status,
+            'status_name'       => (string) $offer->getStatus('name'),
             'has_disabled'      => (bool) $offer->hasDisabled() 
         ];
     }

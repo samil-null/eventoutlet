@@ -22,7 +22,7 @@ class Offer extends Model
 
     public  $statuses = [
         self::WAITING_STATUS => [
-            'name' => 'Ожидает',
+            'name' => 'Ожидает модерации',
             'public_name' => 'Ваше предложение отправленно на модерацию'
         ],
         self::ACTIVE_STATUS => [

@@ -6,7 +6,10 @@ use App\Events\Offer\OfferChangeStatus;
 use App\Helpers\DateHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Offer;
+use App\Models\User;
+use App\Transformers\Api\App\OfferTransformer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OfferController extends Controller
 {
@@ -85,7 +88,7 @@ class OfferController extends Controller
             ));
         }
 
-        $offer->update(['status' => $status]);
+        $offer->update(['status' => (int) $request->input('status')]);
 
         return redirect()->route('admin.offers.show', $id);
     }
@@ -97,6 +100,18 @@ class OfferController extends Controller
                 'status' => $status
             ]);
         }
+        
+        $user = User::find($request->input('user_id'));
+
+        $data = $user->offers()->with('service.priceOption','dates')->get();
+
+        $offers = fractal($data, new OfferTransformer)->toArray()['data'];
+
+        Mail::send('mails.offer.change_status', ['offers' => $offers], function ($message) {
+            $message->from('denis.budancev@gmail.com');
+            $message->subject('Subject');
+            $message->to('denis.budancev@gmail.com');
+        });
 
         return redirect()->back();
     }

@@ -36,15 +36,15 @@
                             <a href="{{ route('site.home') }}" class="navbar-logo">
                                 <img src="/static/eventoutlet/dist/img/general/logo.png" alt="">
                                 <span class="eventoutlet">
-								EventOutlet
-							</span>
+							                  	EventOutlet
+							                  </span>
                             </a>
                             <div class="navbar-general__collapse">
                                 <ul class="navbar-general__main">
                                     <li><a href="{{ route('site.offers.index') }}">Каталог специалистов</a></li>
-                                    @guest
+                                    @if(false)
                                     <li><a href="#" class="open-register-modal">Стать исполнителем</a></li>
-                                    @endguest
+                                    @endif
                                 </ul>
                                 <div class="search-block">
                                     <form action="{{ route('site.offers.index') }}">

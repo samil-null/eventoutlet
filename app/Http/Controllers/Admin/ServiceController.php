@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Events\Service\ServiceChangeStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Service;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ServiceController extends Controller
 {
@@ -92,7 +94,15 @@ class ServiceController extends Controller
                 'status' => $status
             ]);
         }
-
+        
+        $user = User::find($request->input('user_id'));
+        
+        Mail::send('mails.service.change_status', ['services' => $user->services], function ($message) {
+            $message->from('denis.budancev@gmail.com');
+            $message->subject('Subject');
+            $message->to('denis.budancev@gmail.com');
+        });
+        
         return redirect()->back();
     }
 

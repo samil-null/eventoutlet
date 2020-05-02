@@ -253,6 +253,7 @@
                         <form action="{{ route('admin.services.change_status') }}" method="post">
                             @method('put')
                             @csrf
+                            <input type="hidden" name="user_id" value="{{ $user->id }}">
                             <h6 class="heading-small text-muted mb-4 d-flex justify-content-between">
                                 Услуги <button class="btn btn-sm btn-primary">Сохранить</button>
                             </h6>
@@ -300,6 +301,7 @@
                         <form action="{{ route('admin.offers.change_status') }}" method="post">
                             @method('put')
                             @csrf
+                            <input type="hidden" name="user_id" value="{{ $user->id }}">
                             <hr class="my-4">
                             <h6 class="heading-small text-muted mb-4 d-flex justify-content-between">
                                 Спецпредложения<button class="btn btn-sm btn-primary">Сохранить</button>

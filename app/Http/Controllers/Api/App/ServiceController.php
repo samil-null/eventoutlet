@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\App;
 
+use App\Events\Service\ServiceChangeStatus;
 use App\Http\Requests\Api\Service\StoreRequest;
 use App\Services\ServiceManagerService;
 use App\Http\Controllers\Controller;
@@ -50,9 +51,9 @@ class ServiceController extends ApiAppController
     public function store(StoreRequest $request)
     {
         $service = $this->service->create($request, $this->user);
-
-        $this->user->update(['status' => User::WAITING_STATUS]);
-
+        //$this->user->update(['status' => User::WAITING_STATUS]);
+        event(new ServiceChangeStatus($this->user, User::WAITING_STATUS, ''));
+        
         $storeService = $this->user
                             ->services()
                             ->where('services.id',$service->id)
