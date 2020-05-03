@@ -107,10 +107,10 @@ class OfferController extends Controller
 
         $offers = fractal($data, new OfferTransformer)->toArray()['data'];
 
-        Mail::send('mails.offer.change_status', ['offers' => $offers], function ($message) {
-            $message->from('denis.budancev@gmail.com');
-            $message->subject('Subject');
-            $message->to('denis.budancev@gmail.com');
+        Mail::send('mails.offer.change_status', ['offers' => $offers], function ($message) use($user) {
+            $message->from('admin@eventoutlet.ru');
+            $message->subject('Subject 2');
+            $message->to($user->email);
         });
 
         return redirect()->back();

@@ -97,10 +97,10 @@ class ServiceController extends Controller
         
         $user = User::find($request->input('user_id'));
         
-        Mail::send('mails.service.change_status', ['services' => $user->services], function ($message) {
-            $message->from('denis.budancev@gmail.com');
+        Mail::send('mails.service.change_status', ['services' => $user->services], function ($message) use ($user) {
+            $message->from('admin@eventoutlet.ru');
             $message->subject('Subject');
-            $message->to('denis.budancev@gmail.com');
+            $message->to($user->email);
         });
         
         return redirect()->back();
