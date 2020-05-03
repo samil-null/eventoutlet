@@ -20,7 +20,7 @@ class CreateServicesTable extends Migration
             $table->integer('price_option_id');
             $table->string('name', 255);
             $table->integer('price');
-            $table->string('description', 500);
+            $table->string('description', 1000);
             $table->timestamps();
         });
     }

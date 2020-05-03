@@ -103,10 +103,10 @@
                                         description="Кол-во"
                                         empty-selected="Кол-во"
                                     ></select-app>
-                                    <button class="rectangle-btn rectangle-btn-green" @click.prevent.stop="updateService(index)">
+                                    <button class="rectangle-btn rectangle-btn-green rectangle-btn_save-service" @click.prevent.stop="updateService(index)">
                                         <span>Сохранить</span>
                                     </button>
-                                    <button class="rectangle-btn rectangle-btn-green" @click="deleteService(index, service.id)">
+                                    <button class="rectangle-btn rectangle-btn-green rectangle-btn_delete-service" @click="deleteService(index, service.id)">
                                         <span>Удалить</span>
                                     </button>
                                 </div>

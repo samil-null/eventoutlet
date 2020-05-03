@@ -91404,7 +91404,8 @@ var render = function() {
                         _c(
                           "button",
                           {
-                            staticClass: "rectangle-btn rectangle-btn-green",
+                            staticClass:
+                              "rectangle-btn rectangle-btn-green rectangle-btn_save-service",
                             on: {
                               click: function($event) {
                                 $event.preventDefault()
@@ -91419,7 +91420,8 @@ var render = function() {
                         _c(
                           "button",
                           {
-                            staticClass: "rectangle-btn rectangle-btn-green",
+                            staticClass:
+                              "rectangle-btn rectangle-btn-green rectangle-btn_delete-service",
                             on: {
                               click: function($event) {
                                 return _vm.deleteService(index, service.id)

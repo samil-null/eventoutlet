@@ -28,6 +28,7 @@ class SendForgotEmailUser
     {
         Mail::send('mails.user.forgot', ['user' => $event->user, 'token' => $event->token], function ($message) use ($event) {
             $message->from('admin@eventoutlet.ru');
+            $message->subject('Восстановление пароля на Eventoutlet');
             $message->to($event->user->email);
         });
     }
