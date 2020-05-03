@@ -161,6 +161,11 @@
                             <i class="ni ni-archive-2 text-black"></i> Роли
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="{{ route('admin.settings.index') }}">
+                            <i class="ni ni-settings-gear-65 text-dark"></i> Настройки
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
