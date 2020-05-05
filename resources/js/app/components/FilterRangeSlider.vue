@@ -67,8 +67,8 @@
         },
         mounted() {
             document.addEventListener('click', this.documentClick);
-            this.start = this.valueFrom;
-            this.end = this.valueTo;
+            this.start = this.valueFrom || this.fromRange;
+            this.end = this.valueTo || this.toRange;
         },
         destroyed() {
             document.removeEventListener('click', this.documentClick)
