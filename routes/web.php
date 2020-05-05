@@ -21,10 +21,6 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::post('/forgot', 'ForgotController@forgot')->name('forgot');
 });
 
-Route::get('/debug-sentry', function () {
-    throw new Exception('My first Sentry error!');
-});
-
 Route::group(['namespace' => 'Site'], function () {
 
     Route::get('/', 'HomeController@index')->name('site.home');

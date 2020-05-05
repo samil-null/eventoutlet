@@ -214,7 +214,7 @@
                 </div>
             </div>
             <div class="finda__wrapper">
-                <video src="/assets/video/animation.mp4" width="1200" autoplay="" muted loop="" class="guide-video"></video>
+                <video src="/assets/video/animation.mp4" width="1200" autoplay="" muted playsinline loop="" class="guide-video"></video>
             </div>
             <div class="finda__button">
                 <a href="{{ route('site.offers.index') }}" class="benefits-btn red-border">
@@ -226,8 +226,8 @@
     </div>
 </section>
 <section id="profitable" class="profitable">
-    <div class="profitable__f-figure" style="background-image: url(./img/general/.png);"></div>
-    <div class="profitable__s-figure" style="background-image: url(./img/general/.png);"></div>
+    <div class="profitable__f-figure" style="background-image: url(/static/eventoutlet/dist/img/general/evd-item.png);"></div>
+    <div class="profitable__s-figure" style="background-image: url(/static/eventoutlet/dist/img/general/evd-s-item.png);"></div>
     <div class="container">
         <div class="profitable__head">
             <div class="row">

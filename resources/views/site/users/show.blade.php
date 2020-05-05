@@ -222,7 +222,6 @@
                                                                     <span>Услуга</span>
                                                                     <span>{{ $service->name }}</span>
                                                                 </div>
-                                                                <div class="sidebar__slash"></div>
                                                                 <div class="special-offer__item profile-core__offer-item">
                                                                     <span>Стоимость</span>
                                                                     <span>{{ $service->price }} {{ $service->priceOption->name }}</span>
