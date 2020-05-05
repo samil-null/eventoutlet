@@ -2852,8 +2852,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     document.addEventListener('click', this.documentClick);
-    this.start = this.valueFrom;
-    this.end = this.valueTo;
+    this.start = this.valueFrom || this.fromRange;
+    this.end = this.valueTo || this.toRange;
   },
   destroyed: function destroyed() {
     document.removeEventListener('click', this.documentClick);
