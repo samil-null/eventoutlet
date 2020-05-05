@@ -211,7 +211,7 @@
                                             <div class="profile-core__contacts_title">
                                                 <span>Услуги</span>
                                             </div>
-                                            
+
                                                 @foreach($user->activeServices as $service)
                                                     <div class="profile-edit__body profile-core__list tmin_price">
                                                     <!-- Line -->
@@ -233,7 +233,7 @@
                                                                     <span>Описание</span>
                                                                 </div>
                                                                 <div class="special-offer__desctipton-body">
-                                                                    <p>{{ $service->description }}.</p>
+                                                                    <p>{{ $service->description }}</p>
                                                                 </div>
                                                             </div>
                                                         </div>
