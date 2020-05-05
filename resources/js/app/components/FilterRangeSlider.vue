@@ -9,22 +9,23 @@
                 <span>{{ start }}-{{ end }}%</span>
             </div>
         </div>
-
         <div class="catalog-select__body">
             <div class="catalog-select__body-title">
                 <span>Выберете размер скидки</span>
             </div>
-            <div class="form__select-wrapper">
-                <div class="form__range">
-                    <div class="range-result">
-                    <span class="rent-value">
-                        {{ start }}-{{ end }}%
-                    </span>
+                <div class="form__select-wrapper">
+                <label class="form__label">
+                    <span>От</span>
+                    <div class="form__icon-input-wrapper">
+                        <input type="number" :name="`${inputName}[from]`" v-model="start" class="form__icon-input" placeholder="10">
                     </div>
-                    <input type="hidden" :name="`${inputName}[from]`" :value="start">
-                    <input type="hidden" :name="`${inputName}[to]`" :value="end">
-                    <input type="text"  ref="filterRange"/>
-                </div>
+                </label>
+                <label class="form__label">
+                    <span>До</span>
+                    <div class="form__icon-input-wrapper">
+                        <input type="number" :name="`${inputName}[to]`" v-model="end" class="form__icon-input" placeholder="70">
+                    </div>
+                </label>
             </div>
             <div class="catalog-select__button">
                 <a href="#" @click="apply" class="rectangle-btn-border rectangle-btn-border-green">
@@ -36,7 +37,6 @@
 </template>
 
 <script>
-    import '../../libs/rslider';
 
     export default {
         name: "FilterRangeSlider",
@@ -45,7 +45,7 @@
             return {
                 show:false,
                 start:0,
-                end:100,
+                end:70,
             }
         },
         methods:{
@@ -64,46 +64,11 @@
                     this.show = false
                 }
             },
-            createValues(start, end) {
-                start = parseInt(start);
-                end = parseInt(end);
-                let range = [];
-                for(let i = start; i <= end; i++) {
-                    range.push(i);
-                }
-
-                return range;
-            }
-
         },
         mounted() {
-            let range = this.createValues(this.fromRange, this.toRange);
-            this.start = parseInt(this.fromRange);
-            this.end = parseInt(this.toRange);
-            console.log([parseInt(this.fromRange), parseInt(this.toRange)],);
-            let slider = new rSlider({
-                target: this.$refs.filterRange,
-                values: range,
-                range: true,
-                tooltip: false,
-                scale: true,
-                labels: true,
-                set: [parseInt(this.valueFrom), parseInt(this.valueTo)],
-                onChange: (value) => {
-                    let values = value.split(',');
-                    ///console.log(values);
-                    this.start = parseInt(values[0]);
-                    this.end = parseInt(values[1]);
-                }
-            });
-
-            if (this.displayResult === undefined) {
-                this.displayResult = true;
-            }
-
-
-
-            document.addEventListener('click', this.documentClick)
+            document.addEventListener('click', this.documentClick);
+            this.start = this.valueFrom;
+            this.end = this.valueTo;
         },
         destroyed() {
             document.removeEventListener('click', this.documentClick)
