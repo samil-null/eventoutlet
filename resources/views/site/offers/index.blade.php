@@ -73,6 +73,7 @@
                                             form="#offers-filter"
                                             input-name="discount"
                                             title="Размер скидки"
+                                            display-result="true"                                            
                                         ></filter-range-slider>
                                     </div>
                                 @endif
