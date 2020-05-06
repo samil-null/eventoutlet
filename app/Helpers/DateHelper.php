@@ -95,4 +95,11 @@ class DateHelper
     {
         return Carbon::now()->addDays(31)->format('d-m-Y');
     }
+
+    public static function flatDate($dates)
+    {
+        return $dates->map(function($date) {
+            return $date->date;
+        });
+    }
 }
