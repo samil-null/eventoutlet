@@ -243,59 +243,11 @@
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-12 col-lg-4 col-xl-4">
-                                        <div class="profile-core__sidebar">
-                                            <div class="sidebar__item">
-                                                <div class="sidebar__title">
-                                                    <span>Предложения по датам</span>
-                                                </div>
-                                                <div class="sidebar__core">
-                                                    <div class="sidebar__calendar">
-                                                        <user-calendar :dates="{{ $dates }}"/>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <div class="sidebar__title">
-                                                <span>Спецпредложения</span>
-                                            </div>
-                                            @foreach($offers as $offer)
-                                                <div class="sidebar__item">
-                                                <div class="sidebar__core">
-                                                    <div class="sidebar__head">
-                                                        <div class="catalog-card__discount-icon">
-                                                            <div class="percent-svg"></div>
-                                                        </div>
-                                                        <div class="sidebar__head_item">
-                                                            <span>Дата</span>
-                                                            <span class="sidebar-price">{{ $offer->dates }}</span>
-                                                        </div>
-                                                        <div class="sidebar__head_item">
-                                                            <span>Услуга</span>
-                                                            <span class="service-name">{{ $offer->serviceName }}</span>
-                                                        </div>
-                                                        <!-- <div class="sidebar__slash"></div> -->
-                                                    </div>
-                                                    <div class="sidebar__head">
-                                                        <div class="sidebar__head_item">
-                                                            <span>Скидка</span>
-                                                            <span class="sidebar-price">{{ $offer->discount }}%</span>
-                                                        </div>
-                                                        <div class="sidebar__head_item">
-                                                            <span>Цена со скидкой</span>
-                                                            <span class="service-name">{{ $offer->price }} {{ $offer->priceOption }}</span>
-                                                        </div>
-                                                        <!-- <div class="sidebar__slash"></div> -->
-                                                    </div>
-                                                    <div class="sidebar__description">
-                                                        <span>Описание</span>
-                                                        <p>
-                                                            {{ $offer->description }}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            @endforeach
-                                        </div>
+                                        <offers-list-date-picker
+                                            :dates="{{ $dates }}"
+                                            :offers="{{ $offers }}"
+                                        ></offers-list-date-picker>
+                                        
                                     </div>
                                 </div>
                             </div>

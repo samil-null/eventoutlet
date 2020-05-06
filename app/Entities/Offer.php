@@ -14,6 +14,8 @@ class Offer
 
     public $dates;
 
+    public $datesList;
+
     public $price;
 
     public $discount;
@@ -23,13 +25,15 @@ class Offer
     public $editUrl;
 
     public $status;
+    
 
-    public function __construct($id, $serviceName, $description, $dates, $price, $discount, $priceOption, $editUrl, $status)
+    public function __construct($id, $serviceName, $description, $dates,  $datesList, $price, $discount, $priceOption, $editUrl, $status)
     {
         $this->id = $id;
         $this->serviceName = $serviceName;
         $this->description = $description;
         $this->dates = $dates;
+        $this->datesList = $datesList;
         $this->price = $price;
         $this->discount = $discount;
         $this->priceOption = $priceOption;

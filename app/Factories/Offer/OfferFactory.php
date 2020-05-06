@@ -31,6 +31,7 @@ class OfferFactory
                 $offer->service->name,
                 $offer->description,
                 DateHelper::displayRangeDates($offer->dates),
+                DateHelper::flatDate($offer->dates),
                 $offer->discount_price,
                 $offer->discount,
                 $offer->service->priceOption->name,

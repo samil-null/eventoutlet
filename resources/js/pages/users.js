@@ -7,6 +7,7 @@ import AuthForm from "../app/components/Auth/AuthForm";
 import UserCalendar from "../app/components/Datepickers/UserCalendar";
 import Feedback from '../app/components/Feedback';
 import Oferta from '../app/components/Oferta';
+import OffersListDatePicker from '../app/components/Datepickers/OffersListDatePicker'
 
 new Vue({
     el:'#app',
@@ -14,7 +15,8 @@ new Vue({
         AuthForm,
         UserCalendar,
         Feedback,
-        Oferta
+        Oferta,
+        OffersListDatePicker
     }
 });
 
