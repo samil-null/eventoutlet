@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\App;
 
+use App\Events\User\UserChangeStatus;
 use App\Helpers\SocialHelper;
 use App\Models\City;
 use App\Models\User;
@@ -129,9 +130,14 @@ class ProfileController extends ApiAppController
         $user = $this->user;
 
         $user->update([
-            'name' => $request->input('name')
+            'name' => $request->input('name'),
+            'status' => User::WAITING_STATUS
         ]);
 
+        if ($user->status != User::WAITING_STATUS) {
+            event(new UserChangeStatus(User::WAITING_STATUS, $user));    
+        }
+        
         UserInfo::where('user_id', $user->id)->first()
                 ->update($request->except('name'));
 

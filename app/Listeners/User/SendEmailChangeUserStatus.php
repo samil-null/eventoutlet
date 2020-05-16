@@ -26,7 +26,7 @@ class SendEmailChangeUserStatus
                 $subject = 'Добро пожаловать на EventOutlet';
                 break;
             case (User::WAITING_STATUS):
-                $subject = 'СПАСИБО ЗА РЕГИСТРАЦИЮ';
+                $subject = 'Аккаунт на модерации';
                 $template .= 'wating';
                 break;
             case (User::REJECTED_STATUS):
@@ -40,9 +40,9 @@ class SendEmailChangeUserStatus
 
         if ($subject) {
             Mail::send($template, ['user' => $event->user], function ($message) use ($event, $subject) {
-                $message->from('denis.budancev@gmail.com');
+                $message->from('admin@eventoutlet.ru');
                 $message->subject($subject);
-                $message->to('denis.budancev@gmail.com');
+                $message->to($event->user->email);
             });
         }   
         

@@ -101,18 +101,6 @@ class OfferController extends Controller
             ]);
         }
         
-        $user = User::find($request->input('user_id'));
-
-        $data = $user->offers()->with('service.priceOption','dates')->get();
-
-        $offers = fractal($data, new OfferTransformer)->toArray()['data'];
-
-        Mail::send('mails.offer.change_status', ['offers' => $offers], function ($message) use($user) {
-            $message->from('admin@eventoutlet.ru');
-            $message->subject('Subject 2');
-            $message->to($user->email);
-        });
-
         return redirect()->back();
     }
     /**

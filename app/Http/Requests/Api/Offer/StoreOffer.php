@@ -38,7 +38,8 @@ class StoreOffer extends FormRequest
             'discount.required' => 'Укажите размер скидки',
             'discount.min' => 'Минимальный размер скидки :min%',
             'discount.max' => 'Максимальный размер скидки :max%',
-            'description.required' => 'Заполните описание спец. предложения'
+            'description.required' => 'Заполните описание спецпредложения',
+            'dates.required' => 'Укажите хотябы одну дату'
         ];
     }
 }

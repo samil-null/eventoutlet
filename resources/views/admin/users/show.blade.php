@@ -23,7 +23,7 @@
                         <div class="col-lg-3 order-lg-2">
                             <div class="card-profile-image">
                                 <a href="#">
-                                    <img width="200px" src="{{ Imager::avatar($user->avatar) }}" class="rounded-circle">
+                                    <img width="200px" src="{{ Imager::avatar($user->avatar, 'middle') }}" class="rounded-circle">
                                 </a>
                             </div>
                         </div>

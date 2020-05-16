@@ -6,9 +6,7 @@
     >
         <div class="services-list__head">
             <div class="services-list__title">
-                        <span class="services-list__ltitle">
-                            Услуга
-                        </span>
+                <span class="services-list__ltitle">Услуга</span>
                 <span v-if="false">{{ service.name }}</span>
             </div>
             <div class="services-list__moder-info">
@@ -43,8 +41,9 @@
             <div>
                 <div class="row">
                     <div class="col-xl-6">
-                        <label class="form__label"><span>Услуга</span>
-                            <input type="text" v-model="service.name" placeholder="Введите название услуги" class="form__input">
+                        <label class="form__label">
+                            <span>Услуга</span>
+                            <input type="text" v-model="service.name" maxlength="40" placeholder="Введите название услуги" class="form__input">
                         </label>
                     </div>
                     <div class="col-xl-6">
@@ -70,7 +69,8 @@
                 </div>
                 <div class="row">
                     <div class="col-xl-9">
-                        <label class="form__label"><span>Расскажите о себе</span>
+                        <label class="form__label">
+                            <span>Условия работы</span>
                             <div class="form__textarea-wrapp">
                                 <textarea-app
                                     placeholder="Начните писать"

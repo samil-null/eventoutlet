@@ -113,18 +113,20 @@ a[x-apple-data-detectors] {
                  <tr style="border-collapse:collapse;"> 
                   <td width="560" align="center" valign="top" style="padding:0;Margin:0;"> 
                    <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;"> 
-                     <tr style="border-collapse:collapse;"> 
-                      <td align="left" style="padding:0;Margin:0;padding-bottom:10px;"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#333333;"><strong>Верификация аккаунта</strong></p></td> 
-                     </tr> 
+
                      <tr style="border-collapse:collapse;"> 
                       <td align="left" style="padding:0;Margin:0;padding-bottom:15px;"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#333333;"><strong>Мы рады видеть тебя на портале EventOutlet.</strong></p></td> 
                      </tr> 
                      <tr style="border-collapse:collapse;"> 
-                      <td align="left" style="padding:0;Margin:0;padding-bottom:15px;"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#333333;">Для продолжения работы необходимо верифицировать аккаунт.</p></td> 
+                      <td align="left" style="padding:0;Margin:0;padding-bottom:15px;"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#333333;">
+                        Для продолжения работы необходимо верифицировать аккаунт.</p>
+                      </td> 
                      </tr> 
-                   </table></td> 
+                   </table>
+                 </td> 
                  </tr> 
-               </table></td> 
+               </table>
+             </td> 
              </tr> 
              <tr style="border-collapse:collapse;"> 
               <td align="left" style="padding:0;Margin:0;"> 
@@ -137,9 +139,50 @@ a[x-apple-data-detectors] {
                      </tr> 
                    </table></td> 
                  </tr> 
+                 <tr>
+                   <td width="560" align="center" valign="top" style="padding:10px 0;Margin:0;"> 
+                   <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;"> 
+
+                     <tr style="border-collapse:collapse;"> 
+                      <td align="left" style="padding:0;Margin:0;padding-bottom:15px;">
+                        <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#333333; margin-bottom: 10px;">
+                           <strong>Как заполнить анкету?</strong>
+                        </p>
+
+                        <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#333333;">
+                        - перейдите на сайт <br />
+                        - введите свой логин и пароль <br />
+                        - заполните анкету <br />
+                        - заполните данные с вашими услугами (от 1 до 6 вариантов ваших услуг) <br />
+                        - далее ваш акканут уйдет на модерацию, так как мы проверяем всю указанную информацию на достоверность. <br /> 
+                         </p>
+                       </td> 
+                     </tr> 
+                      <tr style="border-collapse:collapse;"> 
+                      <td align="left" style="padding:0;Margin:0;padding-bottom:15px;">
+
+                        <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#333333; margin-bottom: 10px;">
+                          EventOutlet это портал, который помогает сделать работу еще более продуктивной, увеличить запись на месяц вперед и не простаивать. 
+                        </p>
+                        <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#333333;margin-bottom: 10px;">
+                          Почему только ближайший месяц? Мы не видим смысла всегда работать со скидкой, тем самым обесценивая свой труд. Но если остался всего месяц, а у вас есть свободные даты, почему бы не заполнить их интересными проектами, которые принесут прибыль и увеличат ваше портфолио?
+                        </p>
+                        <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#333333;margin-bottom: 10px;">
+                            Желаем много интересной работы!
+                            <br />
+                            Если что-то не получилось или остались вопросы, пиши.
+                         </p>
+                       </td> 
+                     </tr> 
+                   </table>
+                 </td> 
+                 </tr>
                </table></td> 
+              
              </tr> 
-           </table></td> 
+           </table>
+         </td> 
+
          </tr> 
        </table></td> 
      </tr> 

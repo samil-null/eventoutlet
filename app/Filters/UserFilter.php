@@ -52,4 +52,13 @@ class UserFilter extends ModelFilter
         $this->related('services.offers', 'status','=', $status);
     }
 
+    public function search($query)
+    {
+        $connection = \DB::connection('sphinx');
+        $userIds = $connection->table('idx_users_name')
+            ->match('name', $query);
+
+        $this->orWhere('users.name', 'LIKE', "%{$query}%");
+        $this->orWhereIn('users.id', $userIds->get('id')->pluck('id'));
+    }
 }

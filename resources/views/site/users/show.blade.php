@@ -82,7 +82,7 @@
                                     <div class="profile-preview__item profile-preview__catacts">
                                         <div class="contacts-block__item">
                                             @if ($user->info->email)
-                                                <a href="mailto:{{ $user->info->email }}">
+                                                <a href="mailto:{{ $user->info->email }}" target="_blank">
                                                     <div class="at-svg contacts-block-svg"></div>
                                                 </a>
                                             @endif
@@ -157,7 +157,7 @@
                                                                 <div class="col-xl-6">
                                                                     <div  class="form__label">
                                                                         <span>Email</span>
-                                                                        <a href="mailto:{{ $user->info->email }}" class="form__icon-input-wrapper">
+                                                                        <a href="mailto:{{ $user->info->email }}" target="_blank" class="form__icon-input-wrapper">
                                                                             <div class="at-svg input-svg"></div>
                                                                             <div class="delimiter"></div>
                                                                             <div class="profile-core__text">{{ $user->info->email }}</div>
