@@ -49,7 +49,7 @@
                             <div class="col-xl-6">
                                 <label class="form__label" :class="{invalid:!!(service.name_errors.length)}"
                                 ><span>Услуга</span>
-                                    <input type="text" v-model="service.name" placeholder="Введите название услуги" class="form__input">
+                                    <input type="text" maxlength="40" v-model="service.name" placeholder="Введите название услуги" class="form__input">
                                     <span class="validation" v-for="error in service.name_errors">{{ error }}</span>
                                 </label>
                                
@@ -81,7 +81,7 @@
                         </div>
                         <div class="row">
                             <div class="col-xl-9">
-                                <label class="form__label"><span>Расскажите о себе</span>
+                                <label class="form__label"><span>Условия работы</span>
                                     <div class="form__textarea-wrapp">
                                         <textarea-app
                                             placeholder="Начните писать"

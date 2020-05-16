@@ -12,7 +12,7 @@
                         <div class="col-xl-6">
                             <label class="form__label" :class="{invalid:!!errors.name.length}">
                                 <span>Услуга</span>
-                                <input type="text" class="form__input" v-model="name" placeholder="Введите название услуги">
+                                <input type="text" maxlength="40" class="form__input" v-model="name" placeholder="Введите название услуги">
                                 <span class="validation" v-for="error in errors.name">{{ error }}</span>
                             </label>
                         </div>

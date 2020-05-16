@@ -9,7 +9,7 @@
                 <div class="row no-gutters">
                     <div class="col-12 d-md-none d-lg-block col-lg-1 col-xl-2">
                         <div class="catalog-nav__title">
-                            <span>Каталог</span>
+                            <a href="{{ route('site.offers.index') }}">Каталог</a>
                         </div>
                     </div>
                     <div class="col-12 col-md-12 col-lg-11 col-xl-9">

@@ -27,7 +27,7 @@
                                         <th scope="row">
                                             <div class="media align-items-center">
                                                 <a href="{{ route('admin.users.show', $user->id) }}" class="avatar rounded-circle mr-3">
-                                                    <img alt="Image placeholder" src="{{ ImgCrop::roc($user->avatar,'avatar', 'avatar')?? '/assets/avatars/'.random_int(1,6).'.png'}}">
+                                                    <img alt="Image placeholder" src="{{ Imager::avatar($user->avatar) }}">
                                                 </a>
                                                 <div class="media-body">
                                                     <a href="{{ route('admin.users.show', $user->id) }}" class="mb-0 text-sm">{{ $user->name }}</a>

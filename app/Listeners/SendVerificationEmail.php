@@ -18,6 +18,7 @@ class SendVerificationEmail
     {
         Mail::send('mails.verification', ['user' => $event->user], function ($message) use ($event) {
             $message->from('admin@eventoutlet.ru');
+            $message->subject('Верификация аккаунта');
             $message->to($event->user->email);
         });
     }

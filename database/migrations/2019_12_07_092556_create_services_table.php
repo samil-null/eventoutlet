@@ -18,7 +18,7 @@ class CreateServicesTable extends Migration
             $table->bigInteger('user_id');
             $table->integer('status')->default(1);
             $table->integer('price_option_id');
-            $table->string('name', 255);
+            $table->string('name', 40);
             $table->integer('price');
             $table->string('description', 1000);
             $table->timestamps();
