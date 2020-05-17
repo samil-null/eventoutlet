@@ -114,10 +114,10 @@ a[x-apple-data-detectors] {
                   <td width="560" align="center" valign="top" style="padding:0;Margin:0;"> 
                    <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;"> 
                      <tr style="border-collapse:collapse;"> 
-                      <td align="left" style="padding:0;Margin:0;padding-bottom:10px;"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#333333;"><strong>СПАСИБО ЗА РЕГИСТРАЦИЮ</strong></p></td> 
+                      <td align="left" style="padding:0;Margin:0;padding-bottom:10px;"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#333333;"><strong>Ваш аккаунт успешно прошел модерацию!</strong></p></td> 
                      </tr> 
                      <tr style="border-collapse:collapse;"> 
-                      <td align="left" style="padding:0;Margin:0;padding-bottom:15px;"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#333333;"><strong>Мы рады видеть тебя на портале EventOutlet.</strong></p></td> 
+                      <td align="left" style="padding:0;Margin:0;padding-bottom:15px;"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#333333;">Статус ваших услуг, прошедших модерацию:</p></td> 
                      </tr> 
                       <tr>
                         <td>
@@ -145,7 +145,8 @@ a[x-apple-data-detectors] {
                   <td width="560" align="center" valign="top" style="padding:0;Margin:0;"> 
                    <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;"> 
                      <tr style="border-collapse:collapse;"> 
-                      <td align="left" style="padding:0;Margin:0;padding-bottom:10px;"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#333333;">Желаем тебе много интересной работы!</p></td> 
+                      <td align="left" style="padding:0;Margin:0;padding-bottom:10px;"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#333333;">Информация о вас и ваших услугах уже появилась на портале Event Outlet. 
+Но вы можете еще добавить спецпредложения на те даты, которые остались свободными. Сделайте свою работу более продуктивной!</p></td> 
                      </tr> 
                    </table></td> 
                  </tr> 
@@ -155,6 +156,33 @@ a[x-apple-data-detectors] {
                      <tr style="border-collapse:collapse;"> 
                       <td align="left" style="padding:0;Margin:0;padding-bottom:25px;"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#333333;">Если что-то не получилось, или остались вопросы пиши.</p></td> 
                      </tr> 
+                     <tr style="border-collapse:collapse;"> <td align="center" style="padding:10px;margin:0;"><span class="es-button-border_mailru_css_attribute_postfix" style="border-style:solid;border-color:#2CB543;background:#393838;border-width:0px 0px 2px 0px;display:inline-block;border-radius:9px;width:auto;border-top-width:0px;border-right-width:0px;border-bottom-width:0px;"><a href="{{ route('site.lk.offers.create') }}" class="es-button_mailru_css_attribute_postfix" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:14px;color:#FFFFFF;border-style:solid;border-color:#393838;border-width:20px;display:inline-block;background:#393838;border-radius:9px;font-weight:normal;font-style:normal;line-height:17px;width:auto;text-align:center;" rel=" noopener noreferrer">Добавить спецпредложение</a></span></td> </tr>
+                     <tr style="border-collapse:collapse;"> 
+                      <td align="left" style="padding:0;Margin:0;padding-bottom:25px;"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#333333;">
+                        А как это работает? <br />
+                        - выбираете ранее указанные вами услуги и день в ближайшем месяце, в который вы готовы выполнить их со скидкой  <br />
+                        - можете добавить одну дату, несколько дат или даже диапазон. Вы ничем не ограничены <br />
+                        - даете на каждое предложение специальную цену, скидку от 10% до 50% <br />
+                        - обязательно пропишите те условия, на которых вы готовы работать (минимальный заказ, удаленность и пр) <br />
+                        Done!
+                      </p></td>
+                     </tr> 
+                     <tr>
+                       <td align="left" style="padding:0;Margin:0;padding-bottom:25px;"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#333333;">
+                        Клиент находит вас и сам пишет или звонит! Пустых дней в этом месяце все меньше, работы все больше!
+                      </p></td>
+                     </tr>
+                     <tr>
+                       <td align="left" style="padding:0;Margin:0;padding-bottom:25px;"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#333333;">
+                        EventOutlet это портал, который помогает сделать работу еще более продуктивной, увеличить запись на месяц вперед и не простаивать. 
+                      </p></td>
+                     </tr>
+                     <tr>
+                       <td align="left" style="padding:0;Margin:0;padding-bottom:25px;"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#333333;">
+                        Желаем тебе много интересной работы! <br />
+                        Если что-то не получилось или остались вопросы, пиши.
+                      </p></td>
+                     </tr>
                    </table></td> 
                  </tr> 
                </table></td> 

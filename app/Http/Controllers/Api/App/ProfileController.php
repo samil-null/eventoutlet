@@ -131,10 +131,13 @@ class ProfileController extends ApiAppController
 
         $user->update([
             'name' => $request->input('name'),
-            'status' => User::WAITING_STATUS
         ]);
 
-        if ($user->status != User::WAITING_STATUS) {
+        if ($user->status != User::WAITING_STATUS && $user->services->count()) {
+            $user->update([
+                'status' => User::WAITING_STATUS
+            ]);
+            
             event(new UserChangeStatus(User::WAITING_STATUS, $user));    
         }
         
