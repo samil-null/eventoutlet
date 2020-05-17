@@ -19,7 +19,8 @@ class FeedbackController extends Controller
         });
 
         return response()->json([
-            'success' => true
+            'success' => true,
+            'feedback' => setting('feedback_email')
         ]);
     }
 }
