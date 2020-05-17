@@ -99,7 +99,7 @@ class ServiceController extends Controller
         
         Mail::send('mails.service.change_status', ['services' => $user->services], function ($message) use ($user) {
             $message->from('admin@eventoutlet.ru');
-            $message->subject('Subject');
+            $message->subject('😃 Добро пожаловать на EventOutlet');
             $message->to($user->email);
         });
         

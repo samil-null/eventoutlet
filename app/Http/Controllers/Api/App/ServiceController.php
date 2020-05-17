@@ -51,8 +51,6 @@ class ServiceController extends ApiAppController
     public function store(StoreRequest $request)
     {
         $service = $this->service->create($request, $this->user);
-        //$this->user->update(['status' => User::WAITING_STATUS]);
-        event(new ServiceChangeStatus($this->user, User::WAITING_STATUS, ''));
         
         $storeService = $this->user
                             ->services()
