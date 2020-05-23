@@ -53,7 +53,8 @@
 							</span>
 							<div class="info-page__card_subtitle">
 								<p>
-									При создании генератора мы использовали небезизвестный универсальный код речей. Текст генерируется абзацами случайным образом от двух до десяти предложений в абзаце, что позволяет сделать текст более привлекательным и живым для визуально-слухового восприятия.
+									Важно, мы проверяем актуальность вашего предложения. 
+									Теперь Вы всегда ротируетесь в каталоге, если клиент ищет специалиста без конкретной даты.
 								</p>
 							</div>
 						</div>
@@ -153,12 +154,15 @@
 				</div>
 			</div>
 
+			@guest 
 			<div class="whats-it__benefits_button">
-				<a href="{{ route('site.offers.index') }}" class="benefits-btn yellow">
-					<span>Подобрать исполнителя</span>
+
+				<a href="#" class="benefits-btn yellow open-register-modal">
+					<span>Стать исполнителя</span>
 					<div class="full-arrow-svg"></div>
 				</a>
 			</div>
+			@endguest
 		</div>
 	</div>
 </section>
