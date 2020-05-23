@@ -21,11 +21,13 @@ class LoginController extends Controller
 
             return response()->json([
                 'success' => true,
+                'to' => $user->hasRole('admin')?route('admin.dashboard') : route('site.lk.profile.show')
             ]);
         }
 
         return response()->json([
             'success' => false,
+            'to' => route('site.home')
         ]);
 
     }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Events\User\UserForgotPassword;
+use App\Events\User\ForgotPassword;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\ChangePassword;
 use App\Http\Requests\Auth\ForgotRequest;
@@ -20,7 +20,7 @@ class ForgotController extends Controller
         if ($user) {
             $token = Str::random(54);
             $user->update(['remember_token' => $token]);
-            event(new UserForgotPassword($user, $token));
+            event(new ForgotPassword($user, $token));
         }
 
         return response()->json([

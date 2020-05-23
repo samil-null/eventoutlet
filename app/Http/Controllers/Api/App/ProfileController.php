@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers\Api\App;
 
-use App\Events\User\UserChangeStatus;
-use App\Helpers\SocialHelper;
+use App\Events\User\ChangeStatus;
 use App\Models\City;
 use App\Models\User;
 use App\Models\UserInfo;
 use App\Models\Specialty;
-
 use App\Utils\Media\Video;
 use App\Models\PriceOption;
 use Illuminate\Http\Request;
 use App\Services\ResizeService;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Profile\UpdateRequest;
-use Illuminate\Support\Facades\Auth;
+
 
 class ProfileController extends ApiAppController
 {
@@ -137,10 +134,10 @@ class ProfileController extends ApiAppController
             $user->update([
                 'status' => User::WAITING_STATUS
             ]);
-            
-            event(new UserChangeStatus(User::WAITING_STATUS, $user));    
+
+            event(new ChangeStatus(User::WAITING_STATUS, $user));
         }
-        
+
         UserInfo::where('user_id', $user->id)->first()
                 ->update($request->except('name'));
 

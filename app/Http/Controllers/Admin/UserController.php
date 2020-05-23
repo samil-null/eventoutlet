@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Events\User\UserChangeStatus;
-use App\Filters\UserFilter;
+use App\Events\User\ChangeStatus as UserChangeStatus;
 use App\Models\City;
 use App\Models\Role;
-use App\Models\Service;
 use App\Models\Specialty;
 use App\Models\User;
 use App\Http\Controllers\Controller;
-use App\Services\UserFilterService;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -23,7 +20,9 @@ class UserController extends Controller
     public function index(Request $request)
     {
 
-        $users = User::filter($request->all())->paginate(20);
+        $users = User::filter($request->all())
+                    ->paginate(20)
+                    ->appends($request->input());
 
         return view('admin.users.index', [
             'users' => $users,

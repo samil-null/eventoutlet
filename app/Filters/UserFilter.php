@@ -36,10 +36,14 @@ class UserFilter extends ModelFilter
             $query->where('services.status', Service::WAIT_STATUS);
         })->get('id');
 
+
+
         $ids = $usersOffers->pluck('id');
         $ids->merge($usersServices->pluck('id'));
 
         $this->whereIn('id', $ids->toArray());
+
+        $this->orWhere('users.status', '!=', User::ACTIVE_STATUS);
     }
 
     public function servicesStatus($status)

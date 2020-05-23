@@ -17,7 +17,7 @@ class FeedbackController extends Controller
             $message->subject('Обратная связь Event outlet');
             $message->to(setting('feedback_email'));
         });
-
+        
         return response()->json([
             'success' => true,
             'feedback' => setting('feedback_email')

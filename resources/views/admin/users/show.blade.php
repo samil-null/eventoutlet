@@ -57,7 +57,9 @@
                                 <i class="ni location_pin mr-2"></i>{{ $user->city->name }}
                             </div>
                             <hr class="my-4">
-                            <a href="{{ route('site.users.show', $user->slug) }}">Просмотреть страницу</a>
+                            @if ($user->slug)
+                                <a href="{{ route('site.users.show', $user->slug) }}">Просмотреть страницу</a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -257,6 +259,27 @@
                             <h6 class="heading-small text-muted mb-4 d-flex justify-content-between">
                                 Услуги <button class="btn btn-sm btn-primary">Сохранить</button>
                             </h6>
+                            @foreach($user->services as $service)
+                            <!-- Modal -->
+                                <div class="modal fade" id="service-comment-{{ $service->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Комментарий к "{{ $service->name }}"</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <textarea class="form-control" name="comments[{{ $service->id }}]" rows="6" placeholder="Комментарий к услуге"></textarea>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-primary">Сохранить</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
                             <div class="table-responsive card shadow mb-5">
                                 <table class="table align-items-center table-flush">
                                     <thead class="thead-light">
@@ -290,7 +313,7 @@
                                                 </select>
                                             </td>
                                             <td>
-
+                                                <button type="button" data-toggle="modal" data-target="#service-comment-{{ $service->id }}" class="btn btn-secondary btn-sm">Добавить комментарий</button>
                                             </td>
                                         </tr>
                                     @endforeach

@@ -2,6 +2,7 @@
 
 namespace App\Events\User;
 
+use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -10,28 +11,28 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UserChangeStatus
+class ForgotPassword
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
-     * @var
-     */
-    public $status;
-
-    /**
-     * @var
+     * @var User
      */
     public $user;
 
     /**
-     * UserChangeStatus constructor.
-     * @param $status
-     * @param $user
+     * @var string
      */
-    public function __construct($status, $user)
+    public $token;
+
+    /**
+     * UserForgotPassword constructor.
+     * @param User $user
+     * @param string $token
+     */
+    public function __construct(User $user, string $token)
     {
-        $this->status = $status;
         $this->user = $user;
+        $this->token = $token;
     }
 }

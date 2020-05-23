@@ -51,7 +51,7 @@ class ServiceController extends ApiAppController
     public function store(StoreRequest $request)
     {
         $service = $this->service->create($request, $this->user);
-        
+
         $storeService = $this->user
                             ->services()
                             ->where('services.id',$service->id)

@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Events\RegisterNewUser;
+
 use App\Models\User;
 use Illuminate\Support\Str;
 
@@ -21,7 +21,6 @@ class UserObserver
     public function created(User $user)
     {
         //$user->info()->create();
-        event(new RegisterNewUser($user));
     }
 
     /**
