@@ -68,6 +68,9 @@
                                                     <div class="arrow-svg"></div>
                                                 </div>
                                                 <ul class="navbar-general__profile-menu">
+                                                    @if (Auth::user()->hasRole('admin'))
+                                                        <li><a href="{{ route('admin.dashboard') }}">Административная панель</a></li>
+                                                    @endif
                                                     <li><a href="{{ route('site.lk.profile.show') }}">Личный кабинет</a></li>
                                                     <li><a href="{{ route('site.lk.profile.edit') }}">Редактировать профиль</a></li>
                                                     <li><a href="{{ route('logout') }}">Выход</a></li>

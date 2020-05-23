@@ -71,7 +71,7 @@
                     })
                     .then(data => {
                         if (data.success) {
-                            location.href = '/'
+                            location.href = data.to;
                         } else {
                             this.noAccount = true;
                         }

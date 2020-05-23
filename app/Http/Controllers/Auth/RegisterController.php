@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\User\Registration;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -19,8 +19,10 @@ class RegisterController extends Controller
 
         //attache role
         $user->attachRole('executor');
-
+        
         $user->info()->create();
+        
+        event(new Registration($user));
 
         return response()->json([
             'success' => true

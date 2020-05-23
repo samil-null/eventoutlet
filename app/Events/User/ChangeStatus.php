@@ -11,28 +11,28 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UserForgotPassword
+class ChangeStatus
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
-     * @var User
+     * @var
+     */
+    public $status;
+
+    /**
+     * @var
      */
     public $user;
 
     /**
-     * @var string
+     * UserChangeStatus constructor.
+     * @param $status
+     * @param $user
      */
-    public $token;
-
-    /**
-     * UserForgotPassword constructor.
-     * @param User $user
-     * @param string $token
-     */
-    public function __construct(User $user, string $token)
+    public function __construct(int $status, User $user)
     {
+        $this->status = $status;
         $this->user = $user;
-        $this->token = $token;
     }
 }

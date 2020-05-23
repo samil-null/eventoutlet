@@ -28,27 +28,6 @@ class SendEmailChangeServiceStatus
      */
     public function handle($event)
     {
-        $template = 'mails.service.status.';
-        $subject = '';
-
-        switch ($event->status) {
-            case(Service::ACTIVE_STATUS):
-                $template .= 'active';
-                $subject = 'Ваша услуга принята';
-                break;
-            case (Offer::REJECTED_STATUS):
-                $template .= 'reject';
-                $subject = 'Ваша услуга отклонена';
-                break;
-            default:
-                throw new \Exception('Неизвестный статус');
-        }
-
-        Mail::send($template, ['user' => $event->user, '_message' => $event->message], function ($message) use ($event, $subject) {
-            $message->from('admin@eventoutlet.ru');
-            $message->subject($subject);
-            $message->to($event->user->email);
-        });
-
+        
     }
 }

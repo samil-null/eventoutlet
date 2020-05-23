@@ -2,10 +2,13 @@
 
 namespace App\Listeners\User;
 
+use Illuminate\Mail\Mailable;
+use \App\Events\User\ChangeStatus as UserChangeStatusEvent;
+use App\Notifications\User\ChangeStatus;
+use App\Mail\User\Status\{Active, Wait, Reject};
 use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Support\Facades\Mail;
 
 class SendEmailChangeUserStatus
 {
@@ -16,35 +19,25 @@ class SendEmailChangeUserStatus
      * @param  object  $event
      * @return void
      */
-    public function handle($event)
+    public function handle(UserChangeStatusEvent $event)
     {
-        $template = 'mails.user.status.';
-        $subject = null;
+        $instance = null;
+
         switch ($event->status) {
             case (User::ACTIVE_STATUS):
-                $template .= 'active';
-                $subject = 'Добро пожаловать на EventOutlet';
+                $instance = new Active($event->user->services);
                 break;
             case (User::WAITING_STATUS):
-                $subject = 'Аккаунт на модерации';
-                $template .= 'wating';
+                $instance = new Wait();
                 break;
             case (User::REJECTED_STATUS):
-                $template .= 'reject';
-                $subject = 'Ошибка при регистрации на EventOutlet';
+                $instance = new Reject();
                 break;
-            // case (User::BANED_STATUS):
-            //     $template .= 'baned';
-            //     break;
         }
 
-        if ($subject) {
-            Mail::send($template, ['user' => $event->user], function ($message) use ($event, $subject) {
-                $message->from('admin@eventoutlet.ru');
-                $message->subject($subject);
-                $message->to($event->user->email);
-            });
-        }   
-        
+        if ($instance instanceof Mailable) {
+            $event->user->notify(new ChangeStatus($instance));
+        }
+
     }
 }

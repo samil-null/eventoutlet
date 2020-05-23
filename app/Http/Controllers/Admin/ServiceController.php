@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Notifications\Service\StatusChange as ServiceChangeStatusNotification;
 use App\Events\Service\ServiceChangeStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Service;
@@ -94,15 +95,11 @@ class ServiceController extends Controller
                 'status' => $status
             ]);
         }
-        
+
         $user = User::find($request->input('user_id'));
-        
-        Mail::send('mails.service.change_status', ['services' => $user->services], function ($message) use ($user) {
-            $message->from('admin@eventoutlet.ru');
-            $message->subject('😃 Добро пожаловать на EventOutlet');
-            $message->to($user->email);
-        });
-        
+
+        $user->notify(new ServiceChangeStatusNotification($user->services, $request->input('comments')));
+
         return redirect()->back();
     }
 
