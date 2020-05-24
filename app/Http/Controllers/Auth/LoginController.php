@@ -15,7 +15,7 @@ class LoginController extends Controller
     {
         $user = User::where('email', $request->input('email'))->first();
 
-        if ($user && $user->checkPassword($request->input('password'))) {
+        if ($user && $user->checkPassword($request->input('password')) && $user->status != User::BANED_STATUS) {
 
             Auth::login($user);
 
@@ -26,7 +26,7 @@ class LoginController extends Controller
         }
 
         return response()->json([
-            'success' => false,
+            'success' => true,
             'to' => route('site.home')
         ]);
 

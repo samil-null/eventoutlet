@@ -14,6 +14,8 @@ class OfferController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Offer::class);
+
         SEO::page('lk.offer.create');
 
         return view('site.lk.offers.create');
@@ -21,6 +23,8 @@ class OfferController extends Controller
 
     public function edit(Request $request, $id)
     {
+        $this->authorize('create', Offer::class);
+
         $user = $request->user();
         SEO::page('lk.offer.edit');
 
