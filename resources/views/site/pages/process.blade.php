@@ -25,6 +25,13 @@
 				</button>
 			</div>
 			@endguest
+			@auth
+			<div class="header-hero__independent">
+				<a href="{{ route('site.lk.offers.create') }}" type="button" class="almost-square-btn almost-square-btn-corral open-register-modal">
+					<span>Добавить спецпредложение</span>
+				</a>
+			</div>
+			@endauth
 		</div>
 	</div>
 </header>
@@ -116,6 +123,7 @@
 					</div>
 				</div>
 			</div>	
+			
 			@guest
 			<div class="whats-it__benefits_button process__button">
 				<button class="benefits-btn yellow open-register-modal">
@@ -124,6 +132,15 @@
 				</button>
 			</div>
 			@endguest
+
+			@auth
+			<div class="whats-it__benefits_button process__button">
+				<a href="{{ route('site.lk.offers.create') }}" class="benefits-btn yellow open-register-modal">
+					<span>Добавить спецпредложение</span> 
+					<div class="full-arrow-svg"></div>
+				</a>
+			</div>
+			@endauth
 		</div>
 	</div>
 </section>

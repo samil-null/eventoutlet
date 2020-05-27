@@ -21,6 +21,7 @@ class UserController extends Controller
     {
 
         $users = User::filter($request->all())
+                    ->orderBy('id', 'DESC')
                     ->paginate(20)
                     ->appends($request->input());
 
