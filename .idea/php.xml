@@ -147,6 +147,7 @@
       <path value="$PROJECT_DIR$/vendor/foolz/sphinxql-query-builder" />
       <path value="$PROJECT_DIR$/vendor/anlutro/l4-settings" />
       <path value="$PROJECT_DIR$/vendor/laravel/helpers" />
+      <path value="$PROJECT_DIR$/vendor/jkocik/laravel-profiler" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
