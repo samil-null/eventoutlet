@@ -66,6 +66,8 @@ class Cropper
     {
         $data = $this->prepare($filename, $store, $options, 'fit');
 
+        if (!is_array($data)) return null;
+
         if (is_string($data)) return $data;
         $image = $data['image'];
 
@@ -84,6 +86,7 @@ class Cropper
         $data = $this->prepare($filename, $store, $options, 'resize');
 
         if (is_string($data)) return $data;
+
         $image = $data['image'];
 
         if (!$image) return null;

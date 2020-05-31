@@ -20,20 +20,30 @@
                             </div>
                             <!-- have no offers -->
                             <div  class="lk__havent-offers">
-                                <div class="lk__havent-offers-title" v-if="!offers.length" >
-                                    <span>
-                                        У вас еще нет опубликованных спецпредложений, вам нужно срочно их опубликовать
-                                    </span>
-                                </div>
+                                <template v-if="!offers.length && user.status == 1">
+                                    <div class="lk__havent-offers-title">
+                                        <span>
+                                            У вас еще нет опубликованных спецпредложений, вам нужно срочно их опубликовать
+                                        </span>
+                                    </div>
+                                    <div class="pe-block__add-btn">
+                                        <a :href="createOfferLink" v-if="serviceCount" class="add-btn add-btn-corall">
+                                            <span>Добавить спецпредложение</span>
+                                        </a>
+                                        <a href="/lk/profile/edit/#add-service" v-else class="add-btn add-btn-corall">
+                                            <span>Добавить услугу</span>
+                                        </a>
+                                    </div>
+                                </template>
+                                <template v-if="user.status != 1">
+                                    <div class="lk__havent-offers-title">
+                                        <span>
+                                            Спасибо за регистрацию! Как только вы заполните аккаунт и пройдёте модерацию, вы сможете добавлять спецпредложения на свободные даты.
+                                        </span>
+                                    </div>
+                                </template>
 
-                                <div class="pe-block__add-btn">
-                                    <a :href="createOfferLink" v-if="serviceCount" class="add-btn add-btn-corall">
-                                        <span>Добавить спецпредложение</span>
-                                    </a>
-                                    <a href="/lk/profile/edit/#add-service" v-else class="add-btn add-btn-corall">
-                                        <span>Добавить услугу</span>
-                                    </a>
-                                </div>
+
                             </div>
                             <template v-if="offers.length">
                                 <div class="profile-edit__body lk__body" v-for="offer in offers">
