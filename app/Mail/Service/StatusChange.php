@@ -33,6 +33,7 @@ class StatusChange extends Mailable
     public function build()
     {
         return $this->subject('Мы обновили статусы ваших услуг')
+                    ->from(env('MAIL_SENDER'), env('APP_NAME'))
                     ->view('mails.service.status-change')
                     ->with(['services' => $this->services, 'comments' => $this->comments]);
     }

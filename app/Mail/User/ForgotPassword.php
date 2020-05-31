@@ -30,6 +30,7 @@ class ForgotPassword extends Mailable
     public function build()
     {
         return $this->subject('Восстановление пароля')
+                ->from(env('MAIL_SENDER'), env('APP_NAME'))
                 ->view('mails.user.forgot-password')
                 ->with(['token' => $this->token]);
     }

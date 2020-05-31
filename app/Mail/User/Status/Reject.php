@@ -28,6 +28,7 @@ class Reject extends Mailable
      */
     public function build()
     {
-        return $this->view('mails.user.status.reject');
+        return $this->from(env('MAIL_SENDER'), env('APP_NAME'))
+                    ->view('mails.user.status.reject');
     }
 }

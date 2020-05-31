@@ -29,6 +29,7 @@ class Wait extends Mailable
     public function build()
     {
         return $this->subject('Аккаунт на модерации')
+                    ->from(env('MAIL_SENDER'), env('APP_NAME'))
                     ->view('mails.user.status.wait');
     }
 }

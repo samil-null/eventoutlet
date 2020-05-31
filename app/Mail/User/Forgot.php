@@ -28,6 +28,7 @@ class Forgot extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->from(env('MAIL_SENDER'), env('APP_NAME'))
+                    ->view('view.name');
     }
 }

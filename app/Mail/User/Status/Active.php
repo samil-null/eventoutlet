@@ -30,6 +30,7 @@ class Active extends Mailable
     public function build()
     {
         return $this->subject('😃 Добро пожаловать на EventOutlet')
+                    ->from(env('MAIL_SENDER'), env('APP_NAME'))
                     ->view('mails.user.status.active')
                     ->with(['services' => $this->services]);
     }

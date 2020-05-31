@@ -30,6 +30,7 @@ class Verification extends Mailable
     public function build()
     {
         return $this->subject('Верификация аккаунта')
+                ->from(env('MAIL_SENDER'), env('APP_NAME'))
                 ->view('mails.user.verification')
                 ->with(['user' => $this->user]);
                     
