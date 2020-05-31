@@ -1,9 +1,6 @@
 @extends('mails.layouts.index')
 
 @section('content')
-    @component('mails.templates.tags.h1')
-        Восстановление пароля
-    @endcomponent
 
     @component('mails.templates.tags.h1')
         Восстановление пароля
