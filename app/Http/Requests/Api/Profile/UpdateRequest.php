@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Api\Profile;
 
+use App\Rules\ExistAvatarRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 
@@ -25,20 +26,26 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:255',
+            'name'          => 'required|max:255',
             'speciality_id' => 'required|integer|not_in:0',
-            'city_id' => 'required|integer|not_in:0',
+            'city_id'       => 'required|integer|not_in:0',
+            'about_me'      => 'required',
+            'phone'         => 'required',
+            'email'         => 'required',
+            'avatar'        => ['required'],
+            'services'      => 'required|min:1|integer',
+            'gallery'       => 'required|min:5|integer'
         ];
     }
 
     public function messages()
     {
        return [
-            'name.required' => 'Заполните поле',
-            'speciality_id.required' => 'Заполните поле',
-            'city_id.required' => 'Заполните поле',
-            '*integer' => 'Заполните поле',
-            '*.not_in' => 'Заполните поле'
+           'avatar.required'    => 'Загрузите аватар',
+           'gallery.min'        => 'Укажите как минимум 5 фото',
+            '*.required'        => 'Заполните поле',
+            '*integer'          => 'Заполните поле',
+            '*.not_in'          => 'Заполните поле'
        ];
     }
 }

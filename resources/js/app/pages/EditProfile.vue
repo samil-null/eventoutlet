@@ -107,13 +107,14 @@
                                             <form action="">
                                                 <div class="row">
                                                     <div class="col-xl-6">
-                                                        <label class="form__label">
+                                                        <label class="form__label" :class="{invalid:!!errors.phone.length}">
                                                             <span>Телефон</span>
-                                                            <div class="form__icon-input-wrapper">
+                                                            <div class="form__icon-input-wrapper" >
                                                                 <div class="phone-svg input-svg"></div>
                                                                 <div class="delimiter"></div>
                                                                 <input type="text" v-model="form.phone" v-mask="['+7 (###) ###-##-##']" class="form__icon-input" placeholder="+7 (965) 632-34-12">
                                                             </div>
+                                                            <span class="validation" v-for="error in errors.phone">{{ error }}</span>
                                                         </label>
                                                     </div>
                                                     <div class="col-xl-6">
@@ -129,13 +130,14 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-xl-6">
-                                                        <label class="form__label">
+                                                        <label class="form__label" :class="{invalid:!!errors.email.length}">
                                                             <span>Email</span>
                                                             <div class="form__icon-input-wrapper">
                                                                 <div class="at-svg input-svg"></div>
                                                                 <div class="delimiter"></div>
                                                                 <input type="text" v-model="form.email" class="form__icon-input" placeholder="event-outlet@gmail.com">
                                                             </div>
+                                                            <span class="validation" v-for="error in errors.email">{{ error }}</span>
                                                         </label>
                                                     </div>
                                                     <div class="col-xl-6">
@@ -194,6 +196,7 @@
                                                                 <div class="pe-portfolio__block">
                                                                     <avatar-loader :prev-image="avatar"></avatar-loader>
                                                                 </div>
+                                                                <span class="validation-new" v-for="error in errors.avatar">{{ error }}</span>
                                                             </div>
                                                         </div>
                                                         <!-- Add/Edit portfolio photos -->
@@ -209,6 +212,7 @@
                                                                     @error="triggerAlert"
                                                                     :limit="20"
                                                                 ></gallery>
+                                                                <span class="validation-new" v-for="error in errors.gallery">{{ error }}</span>
                                                             </div>
                                                         </div>
                                                         <!-- Add/Edit portfolio video -->
@@ -293,7 +297,6 @@
                 renderServiceApp:false,
                 specialities:[],
                 priceOptions:[],
-
                 speciality:{},
                 avatar:null,
                 email:null,
@@ -319,32 +322,53 @@
                     name:[],
                     speciality_id:[],
                     city_id:[],
-                    user_type:[]
+                    user_type:[],
+                    phone:[],
+                    email:[],
+                    avatar:[],
+                    services:[],
+                    gallery:[]
                 }
             }
         },
         methods: {
             send() {
-                axios.put(`/app/profiles/${this.userId}`, this.form)
+                let payload = this.form;
+                payload.avatar = this.avatar;
+                payload.services = this.services.length;
+                payload.gallery  = this.gallery.length;
+
+                axios.put(`/app/profiles/${this.userId}`, payload)
                     .then(({data}) => {
                         if (data.success) {
                             this.errors.name = [];
                             this.errors.speciality_id = [];
                             this.errors.city_id = [];
+                            this.errors.phone = [];
+                            this.errors.email = [];
+                            this.errors.avatar = [];
+                            this.errors.gallery = [];
+                            this.errors.services = [];
 
                             location.href = '/lk/profile'
                         }
                     }).catch(({ response }) => {
                         if (response.status === 422) {
                             let errors = response.data.errors;
+
                             this.triggerAlert([{
                                 type:'error',
-                                body:'В форме содержится ошибка!'
+                                body:"В форме содержится ошибка!"
                             }]);
                             this.errors.name = errors.name || [];
                             this.errors.speciality_id = errors.speciality_id || [];
                             this.errors.city_id = errors.city_id || [];
                             this.errors.user_type = errors.user_type || [];
+                            this.errors.phone = errors.phone || [];
+                            this.errors.email = errors.email || [];
+                            this.errors.avatar = errors.avatar || [];
+                            this.errors.services = errors.services || [];
+                            this.errors.gallery = errors.gallery || [];
                         }
                     })
             },
@@ -434,7 +458,20 @@
             CreateServiceApp,
             ServicesListApp,
             Gallery,
-            Alert
+            Alert,
         }
     }
 </script>
+
+<style>
+    .validation-new {
+        color: #d6555e;
+        font-family: SFUI Display Medium,Montserrat,Helvetica,Arial,sans-serif;
+        font-size: 15px;
+        display: block;
+        margin-bottom: 2px;
+        letter-spacing: .6px;
+        text-align: center;
+        padding-top: 7px;
+    }
+</style>
