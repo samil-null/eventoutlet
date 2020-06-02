@@ -245,6 +245,7 @@
                                         ></services-list-app>
                                     </div>
                                     <div id="add-service"></div>
+                                    <span class="validation-new" v-for="error in errors.services">{{ error }}</span>
                                     <template v-if="renderServiceApp && services.length < 6">
                                         <create-service-app
                                             :price-options="priceOptions"

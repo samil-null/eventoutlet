@@ -5573,6 +5573,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -106749,6 +106750,12 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _c("div", { attrs: { id: "add-service" } }),
+                      _vm._v(" "),
+                      _vm._l(_vm.errors.services, function(error) {
+                        return _c("span", { staticClass: "validation-new" }, [
+                          _vm._v(_vm._s(error))
+                        ])
+                      }),
                       _vm._v(" "),
                       _vm.renderServiceApp && _vm.services.length < 6
                         ? [
