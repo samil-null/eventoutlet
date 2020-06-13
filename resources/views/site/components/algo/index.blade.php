@@ -75,7 +75,7 @@
         <div class="catalog-card__contacts-block" >
             @if($user->info->instagram)
                 <div class="catalog-card__head-info catalog-card-insta">
-                    <span class="catalog-card__first-title">{{ $user->info->instagram }}</span>
+                    <a href="{{ Social::instagramUrl($user->info->instagram) }}" target="_blank" class="catalog-card__first-title">{{ Social::instagramTag($user->info->instagram) }}</a>
                     <span class="catalog-card__second-title">Instagram</span>
                 </div>
             @endif

@@ -214,7 +214,7 @@
                 </div>
             </div>
             <div class="finda__wrapper">
-                <video src="/assets/video/animation.mp4" width="1200" autoplay="" muted playsinline loop="" class="guide-video"></video>
+                <video src="/assets/video/vodie.mp4" width="1200" autoplay="" muted playsinline loop="" class="guide-video"></video>
             </div>
             <div class="finda__button">
                 <a href="{{ route('site.offers.index') }}" class="benefits-btn red-border">

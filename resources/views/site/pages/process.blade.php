@@ -30,7 +30,7 @@
 				<a href="{{ route('site.lk.offers.create') }}" type="button" class="almost-square-btn almost-square-btn-corral open-register-modal">
 					<span>Добавить спецпредложение</span>
 				</a>
-			</div>
+			</div> 
 			@endauth
 		</div>
 	</div>
@@ -53,7 +53,7 @@
 						<div class="whats-it__block">
 							<div class="whats-it__block_wrapp">
 								<div class="whats-it__block_pic">
-									<img src="/static/eventoutlet/dist/img/general/process.png" alt="">
+									<img src="/static/eventoutlet/dist/img/general/process.jpg" alt="">
 								</div>
 								<div class="whats-it__block_title">
 									<span>Экономия рекламного бюджета</span>
@@ -71,7 +71,7 @@
 						<div class="whats-it__block">
 							<div class="whats-it__block_wrapp">
 								<div class="whats-it__block_pic">
-									<img src="/static/eventoutlet/dist/img/general/process2.png" alt="">
+									<img src="/static/eventoutlet/dist/img/general/process2.jpg" alt="">
 								</div>
 								<div class="whats-it__block_title">
 									<span>Экономия времени</span>
@@ -90,7 +90,7 @@
 						<div class="whats-it__block">
 							<div class="whats-it__block_wrapp">
 								<div class="whats-it__block_pic">
-									<img src="/static/eventoutlet/dist/img/general/process3.png" alt="">
+									<img src="/static/eventoutlet/dist/img/general/process3.jpg" alt="">
 								</div>
 								<div class="whats-it__block_title">
 									<span>Целевая аудитория</span>
@@ -108,7 +108,7 @@
 						<div class="whats-it__block">
 							<div class="whats-it__block_wrapp">
 								<div class="whats-it__block_pic">
-									<img src="/static/eventoutlet/dist/img/general/process4.png" alt="">
+									<img src="/static/eventoutlet/dist/img/general/process4.jpg" alt="">
 								</div>
 								<div class="whats-it__block_title">
 									<span>Никаких посредников</span>
@@ -215,26 +215,26 @@
 			<div class="row">
 				<div class="process-punkts__card">
 					<span>Создайте анкету</span>
-					<div class="process-punkts__number">
-						<span>01</span>
+					<div class="process-punkts__number hiw__number-f">
+						<div class="edit-projess"></div>
 					</div>
 				</div>
 				<div class="process-punkts__card">
 					<span>Выбираете день в ближайшем месяце, в который вы готовы выполнить заказ со скидкой</span>
-					<div class="process-punkts__number">
-						<span>02</span>
+					<div class="process-punkts__number hiw__number-s">
+						<div class="calendar-process"></div>
 					</div>
 				</div>
 				<div class="process-punkts__card">
 					<span>Можете добавить одну дату, несколько дат или даже диапазон. Вы ничем не ограничены</span>
-					<div class="process-punkts__number">
-						<span>03</span>
+					<div class="process-punkts__number hiw__number-t">
+						<div class="calendar-plus-process"></div>
 					</div>
 				</div>
 				<div class="process-punkts__card">
 					<span>Даете на каждое предложение специальную цену, скидку от 10% до 50%, на ваших условиях</span>
-					<div class="process-punkts__number">
-						<span>04</span>
+					<div class="process-punkts__number hiw__number-f">
+						<div class="badge-process"></div>
 					</div>
 				</div>
 				<div class="process-punkts__success">

@@ -35,15 +35,41 @@
           n.queue=[];t=b.createElement(e);t.async=!0;
           t.src=v;s=b.getElementsByTagName(e)[0];
           s.parentNode.insertBefore(t,s)}(window, document,'script',
-          'https://connect.facebook.net/en_US/fbevents.js%27);
+          'https://connect.facebook.net/en_US/fbevents.js%27');
           fbq('init', '334505644197900');
           fbq('track', 'PageView');
         </script>
 
+        <!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(64554316, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/64554316" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
         <noscript><img height="1" width="1" style="display:none"
           src="https://www.facebook.com/tr?id=334505644197900&ev=PageView&noscript=1";
         /></noscript>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-168249111-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-168249111-1');
+</script>
+<meta name="yandex-verification" content="c60d2e11f5e1a5b7" />
+<meta name="google-site-verification" content="R_H0BdfDFIy7P3l5g6Bbz3UFhS5dHvotYEMJ0Z7BD1k" />
       </head>
     <body class="Site">
     <!-- main wrapper -->

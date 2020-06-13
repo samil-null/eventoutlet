@@ -36,6 +36,6 @@ class ExistAvatarRule implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return 'Загрузите аватар';
     }
 }

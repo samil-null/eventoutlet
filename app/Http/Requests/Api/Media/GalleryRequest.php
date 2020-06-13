@@ -26,7 +26,7 @@ class GalleryRequest extends FormRequest
     {
 
         return [
-            'image' => ['image', 'required', 'dimensions:min_width=1080,min_height=1080', 'max:500000', new UserCountImageRule(20)]
+            'image' => ['image', 'required', 'dimensions:min_width=800,min_height=800', 'max:500000', new UserCountImageRule(20)]
         ];
     }
 

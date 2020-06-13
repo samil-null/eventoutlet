@@ -29,12 +29,12 @@ class UpdateRequest extends FormRequest
             'name'          => 'required|max:255',
             'speciality_id' => 'required|integer|not_in:0',
             'city_id'       => 'required|integer|not_in:0',
-            'about_me'      => 'required',
-            'phone'         => 'required',
-            'email'         => 'required',
-            'avatar'        => ['required'],
-            'services'      => 'required|min:1|integer',
-            'gallery'       => 'required|min:5|integer'
+            //'about_me'      => 'required',
+            //'phone'         => 'required',
+            //'email'         => 'required',
+            //'avatar'        => [new ExistAvatarRule()],
+            //'services'      => 'required|min:1|integer',
+            //'gallery'       => 'required|min:5|integer'
         ];
     }
 
@@ -42,7 +42,8 @@ class UpdateRequest extends FormRequest
     {
        return [
            'avatar.required'    => 'Загрузите аватар',
-           'gallery.min'        => 'Укажите как минимум 5 фото',
+           'gallery.min'        => 'Добавьте минимум 5 фото',
+           'services.min'       => 'Добавьте хотя бы одну услугу',   
             '*.required'        => 'Заполните поле',
             '*integer'          => 'Заполните поле',
             '*.not_in'          => 'Заполните поле'

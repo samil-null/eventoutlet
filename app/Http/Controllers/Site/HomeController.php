@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Factories\Algo\AlgoFactoryInterface;
-use App\Filters\Offers\SpecialOfferFilter;
+use App\Filters\Offers\OfferFilter;
 use App\Helpers\DateHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Specialty;
@@ -17,12 +17,10 @@ class HomeController extends Controller
     {
         SEO::page('home');
 
-        $filter = (new SpecialOfferFilter($request))->apply();
+        $filter = (new OfferFilter($request))->apply();
 
         $users = $factory->load(
-            $filter->get()->orderBy('users.id', 'DESC')->take(2)->get(),
-            true
-            )
+            $filter->get()->orderBy('users.id', 'DESC')->take(2)->get(), false)
             ->create();
 
         $specialities = (new Specialty())

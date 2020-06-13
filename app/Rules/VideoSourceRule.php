@@ -25,7 +25,7 @@ class VideoSourceRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        return preg_match("/(vimeo.com|youtube.com)/is", $value);
+        return preg_match("/(vimeo.com|youtu.be|youtube.com)/is", $value);
     }
 
     /**

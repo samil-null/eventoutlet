@@ -139,7 +139,7 @@ class ProfileController extends ApiAppController
         }
 
         UserInfo::where('user_id', $user->id)->first()
-                ->update($request->except('name'));
+                ->update($request->except(['name', 'avatar', 'gallery', 'services']));
 
         return response()->json([
             'success' => true,
