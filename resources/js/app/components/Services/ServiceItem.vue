@@ -15,9 +15,9 @@
             </div>
             <div class="services-list__info">
                 <div class="services-list__info-left">
-                            <span class="services-list__ltitle">
-                                Цена
-                            </span>
+                    <span class="services-list__ltitle">
+                        Цена
+                    </span>
                     <div class="services-list__price">
                         <span>{{ service.price }}</span>
                         <span></span>

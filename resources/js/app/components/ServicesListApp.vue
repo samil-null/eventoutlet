@@ -81,7 +81,8 @@
                         </div>
                         <div class="row">
                             <div class="col-xl-9">
-                                <label class="form__label"><span>Условия работы</span>
+                                <label class="form__label" :class="{invalid:!!(service.description_errors.length)}">
+                                    <span>Условия работы</span>
                                     <div class="form__textarea-wrapp">
                                         <textarea-app
                                             placeholder="Начните писать"
@@ -89,6 +90,7 @@
                                             v-model="service.description"
                                         ></textarea-app>
                                     </div>
+                                    <span class="validation" v-for="error in service.description_errors">{{ error }}</span>
                                 </label>
                             </div>
                             <div class="col-xl-3">
@@ -166,6 +168,7 @@
 
                             serviceObj.price_errors = [];
                             serviceObj.name_errors = [];
+                            serviceObj.description_errors = [];
 
                             this.$emit('update-service', [{
                                 body:'Предложение успешно обновлено',
@@ -185,6 +188,7 @@
 
                             serviceObj.price_errors = errors.price || [];
                             serviceObj.name_errors = errors.name || [];
+                            serviceObj.description_errors = errors.description || [];
                             console.log(errors)
                         }
                     });
@@ -220,6 +224,7 @@
                     this.$set(item, 'additional_errors', {});
                     this.$set(item, 'name_errors', [])
                     this.$set(item, 'price_errors', [])
+                    this.$set(item, 'description_errors', [])
                     return item;
                 });
             }

@@ -4458,6 +4458,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -4508,6 +4510,7 @@ __webpack_require__.r(__webpack_exports__);
           _this.servicesMap[index].status = 0;
           serviceObj.price_errors = [];
           serviceObj.name_errors = [];
+          serviceObj.description_errors = [];
 
           _this.$emit('update-service', [{
             body: 'Предложение успешно обновлено',
@@ -4527,6 +4530,7 @@ __webpack_require__.r(__webpack_exports__);
 
           _serviceObj.price_errors = errors.price || [];
           _serviceObj.name_errors = errors.name || [];
+          _serviceObj.description_errors = errors.description || [];
           console.log(errors);
         }
       });
@@ -4570,6 +4574,8 @@ __webpack_require__.r(__webpack_exports__);
         _this2.$set(item, 'name_errors', []);
 
         _this2.$set(item, 'price_errors', []);
+
+        _this2.$set(item, 'description_errors', []);
 
         return item;
       });
@@ -105073,30 +105079,44 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
                   _c("div", { staticClass: "col-xl-9" }, [
-                    _c("label", { staticClass: "form__label" }, [
-                      _c("span", [_vm._v("Условия работы")]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "form__textarea-wrapp" },
-                        [
-                          _c("textarea-app", {
-                            attrs: {
-                              placeholder: "Начните писать",
-                              limit: "1000"
-                            },
-                            model: {
-                              value: service.description,
-                              callback: function($$v) {
-                                _vm.$set(service, "description", $$v)
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form__label",
+                        class: { invalid: !!service.description_errors.length }
+                      },
+                      [
+                        _c("span", [_vm._v("Условия работы")]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form__textarea-wrapp" },
+                          [
+                            _c("textarea-app", {
+                              attrs: {
+                                placeholder: "Начните писать",
+                                limit: "1000"
                               },
-                              expression: "service.description"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ])
+                              model: {
+                                value: service.description,
+                                callback: function($$v) {
+                                  _vm.$set(service, "description", $$v)
+                                },
+                                expression: "service.description"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _vm._l(service.description_errors, function(error) {
+                          return _c("span", { staticClass: "validation" }, [
+                            _vm._v(_vm._s(error))
+                          ])
+                        })
+                      ],
+                      2
+                    )
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-xl-3" }, [
