@@ -102780,7 +102780,7 @@ var staticRenderFns = [
       _c(
         "button",
         { staticClass: "add-btn add-btn-green", attrs: { type: "submit" } },
-        [_c("span", [_vm._v("Сохранить спецпредложение")])]
+        [_c("span", [_vm._v("Добавить спецпредложение")])]
       )
     ])
   }
