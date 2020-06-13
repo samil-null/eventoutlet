@@ -7,7 +7,7 @@
                     <a href="/lk/profile">{{ name }}</a>
                 </span>
                 <div class="profile-edit__prof">
-                    <span>Статус: {{ status }}</span>
+                    <span>Статус: <span class="user-status" :class="{'user-active':activeStatus, 'user-wait':waitStatus}">{{ status }}</span></span>
                 </div>
                 <div class="pe-block__add-btn" v-if="editable">
                 <a href="/lk/profile/edit" class="add-btn">
@@ -22,7 +22,33 @@
 
 <script>
     export default {
-        props:['name', 'speciality', 'avatar', 'editable', 'link', 'status'],
-        name: "UserCard"
+        props:['name', 'speciality', 'avatar', 'editable', 'link', 'status', 'statusId'],
+        name: "UserCard",
+        data() {
+            return {
+                activeStatus:false,
+                waitStatus:false
+            }
+        },
+        created() {
+            switch (this.statusId) {
+                case 1:
+                    this.activeStatus = true;
+                    break;
+                case 2:
+                    this.waitStatus = true;
+                    break;
+            }
+        }
     }
 </script>
+
+<style>
+    .user-status.user-active {
+        color: #91b15f;
+    }
+
+    .user-status.user-wait {
+        color: #e0c87e;
+    }
+</style>

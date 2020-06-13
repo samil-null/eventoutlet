@@ -11,6 +11,7 @@
                                 :status="user.status_name"
                                 :name="user.name"
                                 :speciality="user.info.speciality"
+                                :status-id="user.status"
                             />
                         </div>
                         <div class="col-xl-8 offset-xl-1">

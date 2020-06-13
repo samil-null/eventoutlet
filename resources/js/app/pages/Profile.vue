@@ -11,6 +11,7 @@
                             :status="user.status_name"
                             :speciality="user.info.speciality"
                             :editable="true"
+                            :status-id="user.status"
                         />
                     </div>
                     <div class="col-md-12 col-lg-8 col-xl-8 offset-lg-1 offset-xl-1">
