@@ -44,6 +44,8 @@ class UserFilter extends ModelFilter
         $this->whereIn('id', $ids->toArray());
 
         $this->orWhere('users.status', '!=', User::ACTIVE_STATUS);
+        $this->where('users.status', '!=', User::NEW_STATUS);
+
     }
 
     public function servicesStatus($status)
