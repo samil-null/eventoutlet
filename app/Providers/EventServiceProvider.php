@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Listeners\System\SendEmailRegisterNewUser;
 use App\Listeners\User\SendForgotPasswordEmail;
 use App\Events\User\Registration as UserRegistration;
 use App\Events\User\ChangeStatus as UserChangeStatus;
@@ -19,7 +20,8 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         UserRegistration::class => [
-            SendVerificationEmail::class
+            SendVerificationEmail::class,
+            SendEmailRegisterNewUser::class
         ],
         UserChangeStatus::class => [
             SendEmailChangeUserStatus::class
