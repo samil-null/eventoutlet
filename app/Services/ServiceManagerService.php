@@ -8,6 +8,7 @@ use App\Exceptions\AdditionFieldValidateException;
 use App\Models\AdditionFieldService;
 use App\Models\Offer;
 use App\Models\Service;
+use App\Notifications\Service\ToModeration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
@@ -119,6 +120,11 @@ class ServiceManagerService
         $user = $request->user();
         $fields = $user->speciality->fields;
         $this->updateAdditionFields(collect($request->input('additional_fields')), $fields, $service);
+
+        if ($user->services()->where('services.status', Service::WAIT_STATUS)->count() == 0) {
+            $user->notify(new ToModeration());
+        }
+
         $service->update([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
