@@ -9,7 +9,7 @@
                 <span>{{ description }}</span>
             </div>
             <div class="form__select-wrapper">
-                <div class="form__select-list">
+                <div class="form__select-list mscroll" data-simplebar data-simplebar-auto-hide="false">
                     <span v-for="(option, index) in options" @click="selected(index, option[selectValue])">{{ option[selectName] }}</span>
                 </div>
             </div>

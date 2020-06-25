@@ -15,7 +15,7 @@
             </div>
             <div class="form__select-wrapper">
                 <input type="hidden" v-if="selected.id" :name="inputName" :value="selected.id">
-                <div class="form__select-list">
+                <div class="form__select-list mscroll" data-simplebar data-simplebar-auto-hide="false">
                     <span v-for="(option, index) in options"
                         @click="select(index)"
                     >{{ option.name }}</span>
