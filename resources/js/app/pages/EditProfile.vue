@@ -36,6 +36,7 @@
                                                         <label class="form__label" :class="{invalid:!!errors.speciality_id.length}">
                                                             <span>Специальность</span>
                                                             <select-app
+                                                                v-if="specialities"
                                                                 :options="specialities"
                                                                 select-value="id"
                                                                 select-name="name"
