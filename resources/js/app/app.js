@@ -17,6 +17,7 @@ import UserCalendar from "./components/Datepickers/UserCalendar";
 import PerPageApp from "./components/PerPageApp";
 import SearchInCategory from "./components/SearchInCategory";
 import Oferta from "./components/Oferta";
+import 'simplebar';
 
 new Vue({
     el:'#app',
