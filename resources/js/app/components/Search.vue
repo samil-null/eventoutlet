@@ -6,7 +6,7 @@
                   <div class="main-form__container">
                     <div class="main-form__wrapper">
                       <div class="main-form__inputs">
-                        <div class="main-form__input catalog-select" ref="select" :class=t"{show:showSpeciality}" @click="openSelectSpeciality">
+                        <div class="main-form__input catalog-select" ref="select" :class="{show:showSpeciality}" @click="openSelectSpeciality">
                           <div class="main-form__input-content">
                             <span>{{ selectSpeciality.name }}</span>
                             <div class="arrow-svg"></div>

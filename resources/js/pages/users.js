@@ -7,7 +7,9 @@ import AuthForm from "../app/components/Auth/AuthForm";
 import UserCalendar from "../app/components/Datepickers/UserCalendar";
 import Feedback from '../app/components/Feedback';
 import Oferta from '../app/components/Oferta';
-import OffersListDatePicker from '../app/components/Datepickers/OffersListDatePicker'
+import OffersListDatePicker from '../app/components/Datepickers/OffersListDatePicker';
+import 'simplebar';
+
 
 new Vue({
     el:'#app',

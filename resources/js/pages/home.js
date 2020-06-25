@@ -4,6 +4,7 @@ import AuthForm from "../app/components/Auth/AuthForm";
 import Search from '../app/components/Search';
 import Feedback from '../app/components/Feedback';
 import Oferta from '../app/components/Oferta';
+import 'simplebar';
 
 import '../common/algo'
 

@@ -5,6 +5,7 @@ import Search from '../app/components/Search';
 import Feedback from '../app/components/Feedback';
 import Oferta from '../app/components/Oferta';
 import ChangePassword from "../app/pages/ChangePassword";
+import 'simplebar';
 
 import '../common/algo'
 

@@ -11,7 +11,9 @@ import AdditionField from "../app/components/AdditionField";
 import PerPageApp from "../app/components/PerPageApp";
 import Feedback from '../app/components/Feedback';
 import Oferta from '../app/components/Oferta';
-import '../common/algo'
+import '../common/algo';
+import 'simplebar';
+
 
 $(document).ready(function () {
     $('.catalog-filter__preview').click(function(){
