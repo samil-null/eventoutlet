@@ -65,7 +65,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="acquainted__pic">
-                                                            <img src="assets/img/general/meet.png" alt="">
+                                                            <img src="/static/eventoutlet/dist/img/general/meet.png" alt="">
                                                         </div>
                                                     </div>
                                                 </div>
