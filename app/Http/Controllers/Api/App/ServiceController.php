@@ -7,6 +7,7 @@ use App\Http\Requests\Api\Service\StoreRequest;
 use App\Services\ServiceManagerService;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class ServiceController extends ApiAppController
@@ -37,11 +38,18 @@ class ServiceController extends ApiAppController
     }
 
 
-    public function count()
+    public function count(Request $request)
     {
-        return response()->json([
-            'count' => $this->user->services()->count()
-        ]);
+        if ($request->has('active')) {
+            return response()->json([
+                'count' => $this->user->services()->where('services.status', Service::ACTIVE_STATUS)->count()
+            ]);
+        } else {
+            return response()->json([
+                'count' => $this->user->services()->count()
+            ]);
+        }
+        
     }
 
     /**

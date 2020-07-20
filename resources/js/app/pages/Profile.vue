@@ -111,7 +111,7 @@
                     this.offers = data.offers;
                 })
 
-            axios.get('/app/services/count')
+            axios.get('/app/services/count?active=1')
                 .then(({data}) => {
                     this.serviceCount = data.count;
                 })
