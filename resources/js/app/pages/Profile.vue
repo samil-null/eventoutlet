@@ -27,15 +27,15 @@
                                             У вас еще нет опубликованных спецпредложений, вам нужно срочно их опубликовать
                                         </span>
                                     </div>
-                                    <div class="pe-block__add-btn">
-                                        <a :href="createOfferLink" v-if="serviceCount" class="add-btn add-btn-corall">
-                                            <span>Добавить спецпредложение</span>
-                                        </a>
-                                        <a href="/lk/profile/edit/#add-service" v-else class="add-btn add-btn-corall">
-                                            <span>Добавить услугу</span>
-                                        </a>
-                                    </div>
                                 </template>
+                                <div class="pe-block__add-btn">
+                                    <a :href="createOfferLink" v-if="serviceCount" class="add-btn add-btn-corall">
+                                        <span>Добавить спецпредложение</span>
+                                    </a>
+                                    <a href="/lk/profile/edit/#add-service" v-else class="add-btn add-btn-corall">
+                                        <span>Добавить услугу</span>
+                                    </a>
+                                </div>
                                 <template v-if="user.status != 1">
                                     <div class="lk__havent-offers-title">
                                         <span>
