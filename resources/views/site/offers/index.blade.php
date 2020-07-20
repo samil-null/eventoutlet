@@ -143,7 +143,7 @@
                         @include('site.components.algo.index', ['user' => $user])
                     @endforeach
                 </div>
-                {{ $pagination->links('site.components.pagination') }}
+                {{ $pagination->appends(request()->input())->onEachSide(1)->links('site.components.pagination') }}
             </div>
 
         </div>

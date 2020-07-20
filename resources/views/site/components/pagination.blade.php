@@ -20,13 +20,6 @@
                     @endforeach
                 @endif
             @endforeach
-
-
-
-
-{{--                <div class="catalog-pagination__item">3</div>--}}
-{{--                <div class="catalog-pagination__item">...</div>--}}
-{{--                <div class="catalog-pagination__item">98</div>--}}
             </div>
         </div>
     </div>

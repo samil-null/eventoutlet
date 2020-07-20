@@ -27,19 +27,6 @@
        <link rel="stylesheet" href="{{ asset('/static/eventoutlet/dist/css/style.bundle.css') }}?global={{ env('CSS_VERSION') }}&local=1">
        <link rel="stylesheet" href="{{ asset('/css/app.css') }}?global={{ env('CSS_VERSION') }}&local=1">
 
-        <script>
-          !function(f,b,e,v,n,t,s)
-          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-          n.queue=[];t=b.createElement(e);t.async=!0;
-          t.src=v;s=b.getElementsByTagName(e)[0];
-          s.parentNode.insertBefore(t,s)}(window, document,'script',
-          'https://connect.facebook.net/en_US/fbevents.js%27');
-          fbq('init', '334505644197900');
-          fbq('track', 'PageView');
-        </script>
-
         <!-- Yandex.Metrika counter -->
 <script type="text/javascript" >
    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -68,7 +55,24 @@
 
   gtag('config', 'UA-168249111-1');
 </script>
-<meta name="yandex-verification" content="c60d2e11f5e1a5b7" />
+<!-- Facebook Pixel Code -->
+<script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '334505644197900');
+    fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+               src="https://www.facebook.com/tr?id=334505644197900&ev=PageView&noscript=1";
+    /></noscript>
+<!-- End Facebook Pixel Code -->
+<meta name="yandex-verification" content="bea99fba5f7bf4f9" />
 <meta name="google-site-verification" content="R_H0BdfDFIy7P3l5g6Bbz3UFhS5dHvotYEMJ0Z7BD1k" />
       </head>
     <body class="Site">
@@ -185,7 +189,7 @@
             </div>
           </footer>
     </div>
-
+    
     </body>
     @stack('scripts')
 </html>

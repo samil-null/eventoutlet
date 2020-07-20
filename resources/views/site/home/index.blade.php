@@ -52,10 +52,10 @@
                                     <img src="/static/eventoutlet/dist/img/general/what.png" alt="" />
                                 </div>
                                 <div class="whats-it__block_title">
-                                    <span>Кому нужен этот портал?</span>
+                                    <span>Вам поможет данный портал</span>
                                 </div>
                                 <div class="whats-it__block_subtitle">
-                                    <p>Вы готовитесь к мероприятию или празднику</p>
+                                    <p>Если вы готовитесь к мероприятию или празднику </p>
                                 </div>
                                 <div class="whats-it__block_button">
                                     <a href="{{ route('site.about') }}" class="thin-rectangle-btn rectangle-btn-border rectangle-btn-border-green">
@@ -73,7 +73,7 @@
                                     <img src="/static/eventoutlet/dist/img/general/what-2.png" alt="" />
                                 </div>
                                 <div class="whats-it__block_title">
-                                    <span>Как это работает?</span>
+                                    <span>Как он работает</span>
                                 </div>
                                 <div class="whats-it__block_subtitle">
                                     <p>Если ваше мероприятие проходит в ближайший 31 день</p>

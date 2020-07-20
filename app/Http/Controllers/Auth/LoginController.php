@@ -26,7 +26,7 @@ class LoginController extends Controller
         }
 
         return response()->json([
-            'success' => true,
+            'success' => false,
             'to' => route('site.home')
         ]);
 
