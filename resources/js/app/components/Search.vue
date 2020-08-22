@@ -1,5 +1,5 @@
 <template>
-    <form action="/offers">
+    <form :action="actionUrl" >
         <div class="header-hero__form">
             <div class="main-form__container">
                 <div class="header-hero__form">
@@ -65,12 +65,11 @@
                           </div>
                         </div>
                       </div>
-                        <input name="speciality_id" type="hidden" :value="selectSpeciality.id" v-if="selectSpeciality.id">
                         <input type="hidden" v-if="dateFrom" :value="dateFrom" name="specials_offers[date_from]">
                         <input type="hidden" v-if="dateTo" :value="dateTo" name="specials_offers[date_to]">
-                      <button type="submit" class="almost-square-btn almost-square-btn-corral">
-                        <span>Поиск</span>
-                      </button>
+                          <button type="submit" class="almost-square-btn almost-square-btn-corral">
+                            <span>Поиск</span>
+                          </button>
                     </div>
                   </div>
                 </div>
@@ -87,6 +86,7 @@
         name: 'Search',
         data() {
             return {
+                actionUrl:'/offers',
                 resp:null,
                 range: {
                     start: null,
@@ -115,6 +115,7 @@
             },
             selectedSpeciality(index) {
                 this.selectSpeciality = this.specialities[index];
+                this.actionUrl =  this.selectSpeciality.slug;
             },
             documentClickCalendar(e){
                 let el = this.$refs.calendar;
@@ -161,6 +162,7 @@
             'v-calendar': () => import('v-calendar/lib/components/date-picker.umd')
         },
         mounted() {
+            console.log(this.specialities);
             document.addEventListener('click', this.documentClickCalendar)
             document.addEventListener('click', this.documentClickSelect)
         },

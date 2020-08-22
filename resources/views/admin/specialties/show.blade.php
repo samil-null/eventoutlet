@@ -46,6 +46,10 @@
                                             <input type="text" required name="name" id="input-username" class="form-control form-control-alternative" placeholder="Название" value="{{ $speciality->name }}">
                                         </div>
                                         <div class="form-group focused">
+                                            <label class="form-control-label" for="input-url">Url</label>
+                                            <input type="text" required name="slug" id="input-url" class="form-control form-control-alternative" placeholder="Url" value="{{ $speciality->slug }}">
+                                        </div>
+                                        <div class="form-group focused">
                                             <label class="form-control-label" for="input-seo-name">SEO Название</label>
                                             <input type="text" required name="seo_name" id="input-seo-name" class="form-control form-control-alternative" placeholder="Название" value="{{ $speciality->seo_name }}">
                                         </div>

@@ -40,7 +40,7 @@
                                 @endif
                                 @if(in_array('speciality',$filters['availableFilters']))
                                     <div class="catalog-filter__item">
-                                        <filter-select
+                                        <speciality-select
                                             select-name="Специальность"
                                             select-title="Выберете специальность"
                                             :remove-additional-fields="true"
@@ -48,7 +48,7 @@
                                             input-name="speciality_id"
                                             form="#offers-filter"
                                             active="{{ $filters['specialities']['active'] }}"
-                                        ></filter-select>
+                                        ></speciality-select>
                                     </div>
                                 @endif
                                 @if(in_array('date',$filters['availableFilters']))
@@ -73,7 +73,7 @@
                                             form="#offers-filter"
                                             input-name="discount"
                                             title="Размер скидки"
-                                            display-result="true"                                            
+                                            display-result="true"
                                         ></filter-range-slider>
                                     </div>
                                 @endif

@@ -21,29 +21,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::post('/forgot', 'ForgotController@forgot')->name('forgot');
 });
 
-Route::group(['namespace' => 'Site'], function () {
 
-    Route::get('/', 'HomeController@index')->name('site.home');
-
-    Route::group(['middleware' => ['role:executor'], 'prefix' => 'lk', 'namespace' => 'Lk' ], function() {
-
-        Route::get('/profile', 'ProfileController@show')->name('site.lk.profile.show');
-        Route::get('/profile/edit', 'ProfileController@edit')->name('site.lk.profile.edit');
-
-        Route::resource('/offers', 'OfferController')->names([
-            'create' => 'site.lk.offers.create',
-            'store' => 'site.lk.offers.store',
-            'edit' => 'site.lk.offers.edit'
-        ]);
-    });
-
-    Route::get('/offers', 'OfferController@index')->name('site.offers.index');
-    Route::get('/users/{id}', 'UserController@show')->name('site.users.show');
-
-    Route::get('/about', 'PageController@about')->name('site.about');
-    Route::get('/process', 'PageController@process')->name('site.process');
-
-});
 
 //feedback
 Route::post('/app/feedback', 'Api\App\FeedbackController@index');
@@ -52,7 +30,6 @@ Route::post('/app/feedback', 'Api\App\FeedbackController@index');
 /**
  * executor routes
  */
-
 
 //http://127.0.0.1:8000/offers?city_id=2&speciality_id=2&specials_offers%5Bdate_from%5D=2020-03-17&specials_offers%5Bdate_to%5D=2020-03-31&discount%5Bfrom%5D=10&discount%5Bto%5D=70&per_page=10&specials_offers%5Bdate_from%5D=17-03-2020&specials_offers%5Bdate_to%5D=17-04-2020
 Route::group(['prefix' => 'app', 'namespace' => 'Api\App', 'middleware' => ['role:executor']], function() {
@@ -155,4 +132,30 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['rol
         'index' => 'admin.settings.index',
         'store' => 'admin.settings.store',
     ]);
+});
+
+Route::group(['namespace' => 'Site'], function () {
+
+    Route::get('/', 'HomeController@index')->name('site.home');
+
+    Route::group(['middleware' => ['role:executor'], 'prefix' => 'lk', 'namespace' => 'Lk' ], function() {
+
+        Route::get('/profile', 'ProfileController@show')->name('site.lk.profile.show');
+        Route::get('/profile/edit', 'ProfileController@edit')->name('site.lk.profile.edit');
+
+        Route::resource('/offers', 'OfferController')->names([
+            'create' => 'site.lk.offers.create',
+            'store' => 'site.lk.offers.store',
+            'edit' => 'site.lk.offers.edit'
+        ]);
+    });
+
+    Route::get('/offers', 'OfferController@index')->name('site.offers.index');
+    Route::get('/users/{id}', 'UserController@show')->name('site.users.show');
+
+    Route::get('/about', 'PageController@about')->name('site.about');
+    Route::get('/process', 'PageController@process')->name('site.process');
+
+    Route::get('/{slug}', 'OfferController@category');
+
 });

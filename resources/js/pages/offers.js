@@ -11,6 +11,7 @@ import AdditionField from "../app/components/AdditionField";
 import PerPageApp from "../app/components/PerPageApp";
 import Feedback from '../app/components/Feedback';
 import Oferta from '../app/components/Oferta';
+import SpecialitySelect from "../app/components/SpecialitySelect";
 import '../common/algo';
 import 'simplebar';
 
@@ -41,7 +42,8 @@ new Vue({
         AdditionField,
         PerPageApp,
         Feedback,
-        Oferta
+        Oferta,
+        SpecialitySelect
         //SearchInCategory
     }
 });
