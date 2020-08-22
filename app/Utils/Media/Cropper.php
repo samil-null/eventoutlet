@@ -10,7 +10,7 @@ use Image;
 
 class Cropper
 {
-    protected const NO_FOUND_IMAGE = 'assets/image-not-found-big.png';
+    const NO_FOUND_IMAGE = 'assets/image-not-found-big.png';
 
     protected $storage = [
         'gallery' => ['gallery'],
@@ -38,6 +38,8 @@ class Cropper
 
     protected function prepare($filename, $store, $options, $method)
     {
+        if (strpos($filename, '.webp') || strpos($filename, '.heic')) return '/images/gallery/original/' . $filename;
+
         $params = $this->getOptions($options);
         $storage = $this->getStorage($store);
         $cropName = $this->createName($filename, $params, $method);

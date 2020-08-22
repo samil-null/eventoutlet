@@ -99,6 +99,8 @@ class UserController extends Controller
             event(new UserChangeStatus($request->status, $user));
         }
 
+        $user->info->update(['about_me' => $request->input('about_me')]);
+
         $roles = Role::whereIn('name', $request->roles)->get();
         $user->syncRoles($roles);
 

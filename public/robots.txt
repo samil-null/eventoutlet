@@ -1,2 +1,4 @@
 User-agent: *
 Disallow:
+Sitemap: https://eventoutlet.ru/sitemap.xml
+Host: https://eventoutlet.ru

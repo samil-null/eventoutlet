@@ -13,17 +13,23 @@ class UserFilter extends ModelFilter
 
     public function status($status)
     {
-        $this->where('status', $status);
+        if (is_numeric($status)) {
+            $this->where('status', $status);
+        }
     }
 
     public function speciality($id)
     {
-        $this->related('info', 'speciality_id','=', $id);
+        if (is_numeric($id)) {
+            $this->related('info', 'speciality_id','=', $id);
+        } 
     }
 
     public function city($id)
     {
-        $this->related('info', 'city_id','=', $id);
+        if (is_numeric($id)) {
+            $this->related('info', 'city_id','=', $id);
+        }
     }
 
     public function requireModeration($value)
@@ -37,11 +43,10 @@ class UserFilter extends ModelFilter
         })->get('id');
 
 
-
-        $ids = $usersOffers->pluck('id');
-        $ids->merge($usersServices->pluck('id'));
-
-        $this->whereIn('id', $ids->toArray());
+        $idsUsersOffers = $usersOffers->pluck('id')->toArray();
+        $idsUsersServices = $usersServices->pluck('id')->toArray();
+        
+        $this->whereIn('id', array_merge($idsUsersOffers, $idsUsersServices));
 
         $this->orWhere('users.status', '!=', User::ACTIVE_STATUS);
         $this->where('users.status', '!=', User::NEW_STATUS);

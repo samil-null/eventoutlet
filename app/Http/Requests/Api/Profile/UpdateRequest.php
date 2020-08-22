@@ -29,12 +29,12 @@ class UpdateRequest extends FormRequest
             'name'          => 'required|max:255',
             'speciality_id' => 'required|integer|not_in:0',
             'city_id'       => 'required|integer|not_in:0',
-            //'about_me'      => 'required',
-            //'phone'         => 'required',
-            //'email'         => 'required',
-            //'avatar'        => [new ExistAvatarRule()],
-            //'services'      => 'required|min:1|integer',
-            //'gallery'       => 'required|min:5|integer'
+            'about_me'      => 'required',
+            'phone'         => 'required',
+            'email'         => 'required',
+            'avatar'        => [new ExistAvatarRule()],
+            'services'      => 'required|min:1|integer',
+            'gallery'       => 'required|min:5|integer'
         ];
     }
 

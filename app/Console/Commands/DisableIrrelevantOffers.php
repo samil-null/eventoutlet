@@ -39,8 +39,13 @@ class DisableIrrelevantOffers extends Command
      */
     public function handle()
     {
-        Offer::withCount('dates')
+        $offers = Offer::withCount('dates')
             ->having('dates_count', '=', 0)
-            ->update('offers.status', Offer::WAITING_STATUS);
+            ->get('id')
+            ->pluck('id');
+        
+        Offer::whereIn('id', $offers)->update([
+            'status' => Offer::NO_ACTIVE
+        ]);
     }
 }

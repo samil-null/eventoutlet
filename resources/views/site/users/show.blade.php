@@ -66,7 +66,7 @@
                             <div class="profile-preview">
                                 <div class="profile-preview__body">
                                     <div class="profile-preview__item profile-preview__photo">
-                                        <div class="profile-preview__pic" style="background-image: url({{ Imager::avatar($user->avatar) }};">
+                                        <div class="profile-preview__pic" style="background-image: url({{ Imager::avatar($user->avatar, 'middle') }};">
                                         </div>
                                     </div>
                                     <div class="profile-preview__item profile-preview__name">
@@ -181,7 +181,7 @@
                                                             <div class="col-xl-6">
                                                                 <div class="form__label">
                                                                     <span>Вконтакте</span>
-                                                                    <a target="_blank" href="{{ Social::webSiteUrl($user->info->vk) }}" class="form__icon-input-wrapper">
+                                                                    <a target="_blank" href="{{ $user->info->vk }}" class="form__icon-input-wrapper">
                                                                         <div class="vk-svg input-svg"></div>
                                                                         <div class="delimiter"></div>
                                                                         <div class="profile-core__text">{{ $user->info->vk }}</div>
