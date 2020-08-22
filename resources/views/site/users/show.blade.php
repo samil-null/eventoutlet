@@ -66,7 +66,7 @@
                             <div class="profile-preview">
                                 <div class="profile-preview__body">
                                     <div class="profile-preview__item profile-preview__photo">
-                                        <div class="profile-preview__pic" style="background-image: url({{ Imager::avatar($user->avatar) }};">
+                                        <div class="profile-preview__pic" style="background-image: url({{ Imager::avatar($user->avatar, 'middle') }};">
                                         </div>
                                     </div>
                                     <div class="profile-preview__item profile-preview__name">

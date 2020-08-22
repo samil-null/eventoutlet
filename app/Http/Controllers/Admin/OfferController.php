@@ -88,7 +88,10 @@ class OfferController extends Controller
             ));
         }
 
-        $offer->update(['status' => (int) $request->input('status')]);
+        $offer->update([
+            'status' => (int) $request->input('status'),
+            'description' => $request->input('description')
+        ]);
 
         return redirect()->route('admin.offers.show', $id);
     }

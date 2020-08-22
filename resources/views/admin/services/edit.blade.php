@@ -113,7 +113,7 @@
                                     <div class="col-lg-12">
                                         <div class="form-group focused">
                                             <label>Условия</label>
-                                            <textarea rows="8" disabled class="form-control form-control-alternative" placeholder="A few words about you ...">{{ $service->description }}</textarea>
+                                            <textarea rows="8" class="form-control form-control-alternative" name="description">{{ $service->description }}</textarea>
                                         </div>
                                     </div>
                                 </div>

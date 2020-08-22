@@ -26,14 +26,14 @@ class GalleryRequest extends FormRequest
     {
 
         return [
-            'image' => ['image', 'required', 'dimensions:min_width=800,min_height=800', 'max:500000', new UserCountImageRule(20)]
+            'image' => ['mimes:jpeg,jpg,png','required', 'dimensions:min_width=800,min_height=800', 'max:500000', new UserCountImageRule(20)]
         ];
     }
 
     public function messages()
     {
         return [
-            'image.image' => 'Не верный формат',
+            'image.mimes' => 'Не верный формат',
             'image.dimensions' => 'Неверные размер фото. Минимальные размер 1080x1080'
         ];
     }

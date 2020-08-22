@@ -247,7 +247,7 @@
                             <div class="pl-lg-4">
                                 <div class="form-group focused">
                                     <label>Обо мне</label>
-                                    <textarea rows="8" class="form-control form-control-alternative" placeholder="A few words about you ...">{{ $user->info->about_me }}</textarea>
+                                    <textarea rows="8" name="about_me" class="form-control form-control-alternative" placeholder="">{{ $user->info->about_me }}</textarea>
                                 </div>
                             </div>
                         </form>

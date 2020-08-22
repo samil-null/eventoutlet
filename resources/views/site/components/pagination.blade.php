@@ -55,6 +55,10 @@
                 paginationElement.previousElementSibling.classList.add('show');
             }
             
+            let moreBtns = document.querySelectorAll('.catalog-pagination__item_more');
+            if (moreBtns.length == 1 && document.querySelector('.catalog-pagination__body').firstElementChild.tagName == 'SPAN') {
+                moreBtns[0].classList.add('show');
+            }
         }
     </script>
 @endpush

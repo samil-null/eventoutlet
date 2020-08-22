@@ -71,7 +71,7 @@
                         <div class="form-group focused">
                             <label class="form-control-label" for="input-speciality">Специальность</label>
                             <select class="form-control form-control-alternative" id="input-speciality" name="speciality_id">
-                                <option>Нет</option>
+                                <option value="no">Нет</option>
                                 @foreach(\App\Models\Specialty::all() as $speciality)
                                     <option value="{{ $speciality->id }}" @if($request->get('speciality_id') == $speciality->id) selected @endif>{{ $speciality->name }}</option>
                                 @endforeach
@@ -80,19 +80,19 @@
                         <div class="form-group focused">
                             <label class="form-control-label" for="input-speciality">Город</label>
                             <select class="form-control form-control-alternative" id="input-speciality" name="city_id">
-                                <option>Нет</option>
+                                <option value="no">Нет</option>
                                 @foreach(\App\Models\City::all() as $city)
                                     <option value="{{ $city->id }}" @if($request->get('city_id') == $city->id) selected @endif>{{ $city->name }}</option>
                                 @endforeach
                             </select>
                         </div>
 
-                        <div class="form-group focused">
+                        <div class="form-group focused">   
                             <label class="form-control-label" for="input-speciality">Статус</label>
                             <select class="form-control form-control-alternative" id="input-speciality" name="status">
-                                <option value="">Нет</option>
+                                <option value="no">Нет</option>
                                 @foreach((new \App\Models\User())->statuses as $status => $name)
-                                    <option value="{{ $status }}" @if($request->get('status') == $status) selected @endif>{{ $name['name'] }}</option>
+                                    <option value="{{ $status }}" @if(is_numeric($request->get('status')) && $request->get('status') == $status) selected @endif>{{ $name['name'] }}</option>
                                 @endforeach
                             </select>
                         </div>

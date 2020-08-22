@@ -31,7 +31,7 @@ class VideoPathHelper
             return 'https://img.youtube.com/vi/' . $name . '/sddefault.jpg';
         } elseif (Media::VIMEO_SOURCE == $store) {
 
-            $apiData = unserialize( file_get_contents( "http://vimeo.com/api/v2/video/$name.php" ) );
+            $apiData = unserialize( file_get_contents( "https://vimeo.com/api/v2/video/$name.php" ) );
 
             if (is_array( $apiData ) && count( $apiData ) > 0 ) {
                 $videoInfo = $apiData[ 0 ];
@@ -43,7 +43,7 @@ class VideoPathHelper
     public static function renderUrl($name, $store)
     {
         if (Media::YT_SOURCE == $store) {
-            return 'http://www.youtube.com/embed/' . $name;
+            return 'https://www.youtube.com/embed/' . $name . '?autoplay=1';
         } elseif (Media::VIMEO_SOURCE == $store) {
             return 'https://player.vimeo.com/video/' . $name;
         }

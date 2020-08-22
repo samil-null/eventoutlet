@@ -116,6 +116,7 @@ class AlgoFactory implements AlgoFactoryInterface
     public function bindOffer($data)
     {
         $offer = new stdClass();
+
         $offer->discount = $data->discount??'';
         $offer->discount_price = $data->discount_price??'';
         $offer->price_option = $this->getPriceOption($data->price_option_id??null);

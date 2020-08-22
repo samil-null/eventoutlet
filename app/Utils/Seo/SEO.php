@@ -21,8 +21,9 @@ class SEO
 
     public static $pages = [
         'home' => [
-            'title' => 'Event Outlet - поиск свободных специалистов для вашего мероприятия со скидкой.',
-            'description' => 'Event Outlet – информационный портал по поиску исполнителей на мероприятия.',
+            'title' => 'Услуги фотографа, диджея, тамады и видеографа в СПб. Аренда банкетного зала. Ведущие и аниматоры на мероприятия.',
+            'description' => 'Не знаете где отметить день рожденье? Портал Event Outlet предлагает заказать диджея на свадьбу, профессионального фотографа и видеографа, арендовать лофт и мебель для праздника. Воспользуйтесь поиском на сайте и Вы найдёте ресторан для проведения юбилея, а также ведущего или тамаду.',
+            'keywords' => ['фотостудия спб', 'аренда лофта', 'свадебный фотограф', 'лучшие фотографы', 'фотограф на свадьбу', 'снять ресторан', 'ведущий тамада', 'фотограф москва', 'фотограф цена', 'диджей на праздник', 'лучшие видеографы', 'ведущий на свадьбу стоимость', 'услуги диджея', 'услуги видеографа', 'тамада ведущая юбилей'],
             'url' => [
                 'route' => 'site.home',
                 'params' => ''
@@ -170,12 +171,14 @@ class SEO
     {
         $title = self::$pages[$page]['title'];
         $description = self::$pages[$page]['description'];
+        $keywords = self::$pages[$page]['keywords']?? [];
         $route = self::$pages[$page]['url']['route'];
         $params = self::$pages[$page]['url']['params'];
         
 
         SEOMeta::setTitle($title);
         SEOMeta::setDescription($description);
+        SEOMeta::addKeyword($keywords);
         JsonLd::setType('WebPage');
         JsonLd::setDescription($description);
         JsonLd::setTitle($title);
