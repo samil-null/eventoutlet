@@ -78,6 +78,7 @@
     <body class="Site">
     <!-- main wrapper -->
     <div class="wrapper" id="app">
+
         <nav id="menuBody" class="navbar-general">
             <div class="container @if (\Route::current() && \Route::current()->getName() == 'site.home') container-bg @endif">
                 <div class="row">
@@ -131,6 +132,7 @@
                                 <auth-form
                                 ></auth-form>
                                 @endguest
+
                             </div>
                             <div id="menuBtn" class="navbar-burger">
                                 <span></span>
@@ -152,6 +154,7 @@
         </div>
         <feedback></feedback>
         <oferta></oferta>
+        @stack('after-content')
         <footer class="footer">
 
             <div class="container">
@@ -182,14 +185,13 @@
                           <li><a href="{{ route('site.process') }}">Как работает портал</a></li>
                       </ul>
                     </div>
-
                   </div>
                 </div>
               </div>
             </div>
           </footer>
     </div>
-    
+
     </body>
     @stack('scripts')
 </html>

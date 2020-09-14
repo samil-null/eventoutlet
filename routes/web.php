@@ -21,6 +21,8 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::post('/forgot', 'ForgotController@forgot')->name('forgot');
 });
 
+//Route::get('/blog');
+
 
 
 //feedback
@@ -128,6 +130,16 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['rol
         'destroy'   => 'admin.roles.destroy'
     ]);
 
+
+    Route::resource('/blog', 'BlogController')->names([
+        'index'     => 'admin.blog.index',
+        'show'      => 'admin.blog.show',
+        'create'    => 'admin.blog.create',
+        'store'     => 'admin.blog.store',
+        'update'    => 'admin.blog.update',
+        'destroy'   => 'admin.blog.destroy'
+    ]);
+
     Route::resource('/settings', 'SettingsController')->only('index', 'store')->names([
         'index' => 'admin.settings.index',
         'store' => 'admin.settings.store',
@@ -150,6 +162,7 @@ Route::group(['namespace' => 'Site'], function () {
         ]);
     });
 
+    Route::post('/subscriber', 'SubscriberController@subscribe')->name('site.subscribe');
     Route::get('/offers', 'OfferController@index')->name('site.offers.index');
     Route::get('/users/{id}', 'UserController@show')->name('site.users.show');
 
@@ -159,3 +172,13 @@ Route::group(['namespace' => 'Site'], function () {
     Route::get('/{slug}', 'OfferController@category');
 
 });
+
+
+//Route::group(['prefix' => 'laraberg', 'middleware' => ['web', 'auth']], function() {
+//    Route::apiResource('blocks', 'VanOns\Laraberg\Http\Controllers\BlockController');
+//    //Route::get('oembed', 'VanOns\Laraberg\Http\Controllers\OEmbedController');
+//});
+//
+//Route::group(['middleware' => ['web', 'auth']], function () {
+//    \UniSharp\LaravelFilemanager\Lfm::routes();
+//});

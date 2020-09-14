@@ -84,6 +84,7 @@ class OfferController extends Controller
             event(new OfferChangeStatus(
                 $request->input('status'),
                 $offer->user,
+                $offer,
                 $request->input('message')
             ));
         }
@@ -103,7 +104,7 @@ class OfferController extends Controller
                 'status' => $status
             ]);
         }
-        
+
         return redirect()->back();
     }
     /**

@@ -148,28 +148,46 @@
 
         </div>
     @else
+
         <div class="catalog__nothing">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
+
                         <div class="catalog__nothing_body">
-                            <div class="catalog__nothing_pic"><img src="/static/eventoutlet/dist/img/general/what.png" alt="" /></div>
-                            <div class="catalog__nothing_title"><span>Ничего не найдено</span></div>
-                            <div class="info-page__head_subtitle">
-                                <p>Упс.... По вашему запросу ничего не найдено попробуйте снова</p>
-                            </div>
-                            <div class="catalog__nothing_button">
-                                <a href="#" onclick="window.history.back()" class="thin-rectangle-btn rectangle-btn-border-green"><span>Вернуться назад</span></a>
+                            <div class="fof-page__wrapp">
+                                <div class="fof-page__pic">
+                                    <img src="/static/eventoutlet/dist/img/general/what.png" alt="">
+                                </div>
+                                <div class="fof-page__title">
+                                    <span>Ничего не найдено</span>
+                                </div>
+                                <div class="fof-page__subtitle">
+                                    <p>
+                                        Упс.... По вашему запросу ничего не найдено попробуйте снова или оставьте нам свою дату и вам на почту придут актуальные предложения. Ваши данные мы никому не отправляем
+                                    </p>
+                                </div>
+
+                                <div class="fof-page__button">
+                                    <a href="#" class="benefits-btn yellow subscription-btn">
+                                        <div class="bell-svg"></div>
+                                        <span>Следить за датой</span>
+                                        <div class="full-arrow-svg"></div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    @endif
 
+    @endif
 </section>
+
+<subscribe-modal :cities="{{ $filters['cities']['options'] }}" :specialities="{{ $filters['specialities']['options'] }}"></subscribe-modal>
 @endsection
+
 @push('scripts')
     <script src="{{ asset('js/pages/offers.js') }}?global={{ env('JS_VERSION') }}&local=1"></script>
 @endpush

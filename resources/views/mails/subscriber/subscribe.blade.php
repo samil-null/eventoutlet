@@ -1,0 +1,17 @@
+@extends('mails.layouts.index')
+
+@section('content')
+    @component('mails.templates.tags.h1')
+        Решили дождаться самого выгодного предложения? И правильно сделали!
+    @endcomponent
+
+    @component('mails.templates.tags.p')
+        Спецпредложения начнут появляться за 31 день до вашей даты. Вся актуальная информацию придет вам на почту.  <br>
+    @endcomponent
+    <div style="text-align: center; padding: 20px 0 40px;">
+        @component('mails.templates.buttons.orange', ['url' => route('site.lk.offers.create')])
+            Подтвердить подписку
+        @endcomponent
+    </div>
+
+@endsection

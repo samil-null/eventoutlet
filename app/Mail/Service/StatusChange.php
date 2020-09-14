@@ -11,8 +11,14 @@ class StatusChange extends Mailable
 {
     use Queueable, SerializesModels;
 
+    /**
+     * @var
+     */
     protected $services;
 
+    /**
+     * @var
+     */
     protected $comments;
     /**
      * Create a new message instance.

@@ -12,6 +12,7 @@ import PerPageApp from "../app/components/PerPageApp";
 import Feedback from '../app/components/Feedback';
 import Oferta from '../app/components/Oferta';
 import SpecialitySelect from "../app/components/SpecialitySelect";
+import SubscribeModal from "../app/components/SubscribeModel";
 import '../common/algo';
 import 'simplebar';
 
@@ -43,7 +44,8 @@ new Vue({
         PerPageApp,
         Feedback,
         Oferta,
-        SpecialitySelect
+        SpecialitySelect,
+        SubscribeModal
         //SearchInCategory
     }
 });

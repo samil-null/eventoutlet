@@ -32,15 +32,22 @@ class OfferChangeStatus
     public $user;
 
     /**
+     * @var Offer
+     */
+    public $offer;
+
+    /**
      * OfferChangeStatus constructor.
      * @param int $status
      * @param User $user
+     * @param $offer
      * @param null $message
      */
-    public function __construct(int $status, User $user, $message = null)
+    public function __construct(int $status, User $user, Offer $offer, $message = null)
     {
         $this->status = $status;
         $this->user = $user;
+        $this->offer = $offer;
         $this->message = $message;
     }
 }

@@ -31,6 +31,7 @@
     <!-- CSS Files -->
     <link href="{{ asset('css/admin/argon-dashboard.min.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/admin/index.css') }}">
+    
 </head>
 
 <body class="">
@@ -243,6 +244,17 @@
     <script src="{{ asset('/js/admin/plugins/chart.js/dist/Chart.min.js') }}"></script>
     <script src="{{ asset('/js/admin/plugins/chart.js/dist/Chart.extension.js') }}"></script>
     <script src="{{ asset('/js/admin/argon-dashboard.min.js') }}"></script>
+
+    @stack('footer')
+
+    <script>
+        Laraberg.init('content', {
+            prefix_here: 'laraberg',
+            laravelFilemanager:  { 
+                prefix: '/filemanager' 
+            }
+        });
+    </script>
 </body>
 
 </html>

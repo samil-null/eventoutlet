@@ -80,6 +80,7 @@ class OfferController extends ApiAppController
     public function store(StoreOffer $request, OfferService $offerService)
     {
         $offer = $offerService->create($request->user(), $request);
+
         return response()->json([
             'data' => [
                 'url' => route('site.lk.offers.edit', $offer->id)

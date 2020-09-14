@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Events\Offer\OfferChangeStatus;
+use App\Jobs\Subscribe\SendEmailToSubscribers;
 use App\Models\OfferDate;
 use Carbon\Carbon;
 use App\Models\User;
@@ -32,6 +34,8 @@ class OfferService
         );
 
         $offer->dates()->saveMany($dates);
+
+        SendEmailToSubscribers::dispatch($offer)->delay(now()->addMinutes(10));
 
         return $offer;
     }
