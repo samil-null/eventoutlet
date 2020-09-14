@@ -5,7 +5,7 @@
                 <div class="row no-gutters">
                     <div class="col-12 col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-8 offset-lg-2 offset-xl-1 col-xl-8 offset-xl-2"> <!-- html change new -->
 
-                        <div class="modal-body">
+                        <div class="modal-body" @click="openDateSelect = false">
                             <div class="modal__t-figure"></div>
                             <div class="modal__f-figure"></div>
                             <div class="modal-body__figure"></div>
@@ -25,14 +25,15 @@
                                         <div class="modal__form-second-type">
                                             <form action="">
                                                 <label class="modal__label" for="">
-                                                    <span class="modal__input-name">Ваше Имя</span>
-                                                    <input type="text" v-model="email" placeholder="Александр">
+                                                    <span class="modal__input-name">Ваша почта</span>
+                                                    <input type="text" v-model="email" placeholder="eventoutlet@gmail.com">
                                                 </label>
                                                 <label class="form__label">
                                                     <span>Выберите дату или диапазон дат </span>
                                                     <div class="form__select" :class="{'show':openDateSelect}">
-                                                        <div class="form__select-intro" @click="openDateSelect = !openDateSelect ">
-                                                            <span>Выбрать дату</span>
+                                                        <div class="form__select-intro" @click.stop="openDateSelect = !openDateSelect ">
+                                                            <span v-if="date">{{ formatDate }}</span>
+                                                            <span v-else>Выбрать дату</span>
                                                             <span class="arrow-svg"></span>
                                                         </div>
                                                         <div class="form__select-body select-body-second-type">
@@ -114,9 +115,11 @@
 
 <script>
 
+
 import VCalendar from 'v-calendar/lib/components/date-picker.umd';
 import SelectApp from "./SelectApp";
 import axios from '../modules/axios';
+import dayjs from 'dayjs';
 
 export default {
     props: ['specialities', 'cities'],
@@ -124,14 +127,19 @@ export default {
 
     data () {
         return {
-            email:'denis.budancev@gmail.com',
+            email:'',
             date:null,
-            active: true,
+            active: false,
             agree:true,
             openDateSelect: false,
             selectedSpeciality: 0,
             selectedCity:0,
             specialitySelectedList: [{value:0}]
+        }
+    },
+    computed: {
+        formatDate() {
+            return dayjs(this.date).format('DD.MM.YYYY');
         }
     },
     methods: {
@@ -152,17 +160,23 @@ export default {
                 specialities: this.specialitySelectedList.map(speciality => speciality.value),
                 agree: this.agree
             })
+            .then(() => {
+                this.active = false;
+            })
         }
     },
     components: {
         VCalendar,
         SelectApp
     },
-    created() {
-        document.querySelector('.subscription-btn').addEventListener('click', (e) => {
-            e.preventDefault();
-            this.active = true;
+    mounted() {
+        window.addEventListener('load',  () =>  {
+            document.querySelector('.subscription-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                this.active = true;
+            });
         });
+
     }
 }
 </script>
