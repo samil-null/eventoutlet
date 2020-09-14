@@ -163,6 +163,8 @@ Route::group(['namespace' => 'Site'], function () {
     });
 
     Route::post('/subscriber', 'SubscriberController@subscribe')->name('site.subscribe');
+    Route::get('/subscriber/{token}/enable', 'SubscriberController@enable')->name('site.subscribe-enable');
+    Route::get('/subscriber/{token}/disabled', 'SubscriberController@disable')->name('site.subscribe-disable');
     Route::get('/offers', 'OfferController@index')->name('site.offers.index');
     Route::get('/users/{id}', 'UserController@show')->name('site.users.show');
 

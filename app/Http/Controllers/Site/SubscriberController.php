@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Site;
 
+use App\Http\Requests\Api\Subscriptions\SubscribeRequest;
 use App\Mail\Subscribe\NewSubscriber;
 use Mail;
 use DB;
@@ -14,16 +15,18 @@ use Illuminate\Support\Str;
 class SubscriberController extends Controller
 {
     /**
-     * @param Request $request
+     * @param SubscribeRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function subscribe(Request $request)
+    public function subscribe(SubscribeRequest $request)
     {
+        $token =  Str::random(54);
+
         $subscriber = Subscriber::create([
             'email' => $request->input('email'),
             'city_id' => $request->input('city_id'),
             'date'    => Carbon::create($request->input('date'))->format('Y-m-d'),
-            'token'   => Str::random(54)
+            'token'   => $token
         ]);
 
         $query = [];
@@ -41,7 +44,7 @@ class SubscriberController extends Controller
             DB::table('subscribers_specialties')->insert($query);
         }
 
-        Mail::to($request->input('email'))->send(new NewSubscriber(Carbon::create($request->input('date'))->format('d.m.Y')));
+        Mail::to($request->input('email'))->send(new NewSubscriber(Carbon::create($request->input('date'))->format('d.m.Y'), $token));
 
         return response()->json([
             'status' => 200
@@ -49,12 +52,14 @@ class SubscriberController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param string $token
      */
-    public function unsubscribe(Request $request)
+    public function enable(string $token)
     {
-        if ($request->has('token')) {
-            Subscriber::where('token', $request->input('token'))->update('is_active', 0);
-        }
+        Subscriber::where('token', $token)->update([
+            'is_active' => 1
+        ]);
+
+        return redirect()->route('site.home');
     }
 }

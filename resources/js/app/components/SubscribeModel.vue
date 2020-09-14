@@ -13,7 +13,7 @@
                                 <div class="times-svg"></div>
                             </div>
                             <!-- Track the date -->
-                            <div class="modal__var modal__second-var">
+                            <div class="modal__var modal__second-var" v-if="!successSend">
                                 <div class="row">
                                     <div class="col-xl-6 offset-xl-3">
                                         <div class="modal__title-type-second">
@@ -24,11 +24,12 @@
                                         </div>
                                         <div class="modal__form-second-type">
                                             <form action="">
-                                                <label class="modal__label" for="">
+                                                <label class="modal__label" :class="{invalid:!!errors.email.length}">
                                                     <span class="modal__input-name">Ваша почта</span>
                                                     <input type="text" v-model="email" placeholder="eventoutlet@gmail.com">
+                                                    <span class="validation" v-for="error in errors.email">{{ error }}</span>
                                                 </label>
-                                                <label class="form__label">
+                                                <label class="form__label" :class="{invalid:!!errors.date.length}">
                                                     <span>Выберите дату или диапазон дат </span>
                                                     <div class="form__select" :class="{'show':openDateSelect}">
                                                         <div class="form__select-intro" @click.stop="openDateSelect = !openDateSelect ">
@@ -53,6 +54,7 @@
 
                                                         </div>
                                                     </div>
+                                                    <span class="validation" v-for="error in errors.date">{{ error }}</span>
                                                 </label>
 
                                                     <label class="form__label">
@@ -71,17 +73,18 @@
                                                          </template>
                                                     </label>
 
-                                                <label class="form__label">
+                                                <label class="form__label" :class="{invalid:!!errors.city_id.length}">
                                                     <span>Выберите город</span>
                                                     <select-app
                                                         v-if="cities"
                                                         :options="cities"
                                                         select-value="id"
                                                         select-name="name"
-                                                        v-model="selectedCity"
+                                                        v-model="city_id"
                                                         description="Выберете ваш город"
                                                         empty-selected="Выберете ваш город"
                                                     ></select-app>
+                                                    <span class="validation" v-for="error in errors.city_id">{{ error }}</span>
                                                 </label>
 
                                                 <div class="checkpol">
@@ -93,7 +96,7 @@
                                                 </div>
 
                                                 <div class="track-button-modal">
-                                                    <a href="#" class="benefits-btn yellow" @click="sendForm">
+                                                    <a href="#" class="benefits-btn yellow" @click.prevent="sendForm">
                                                         <div class="bell-svg"></div>
                                                         <span>Следить за датой</span>
                                                         <div class="full-arrow-svg"></div>
@@ -105,6 +108,18 @@
                                 </div>
                             </div>
                             <!-- end track -->
+                            <div class="modal__var thanks-modal" v-else>
+                                <div class="row">
+                                    <div class="col-xl-6 offset-xl-3">
+                                        <div class="modal__title">
+                                            <span>Заявка успешно создана!</span>
+                                        </div>
+                                        <div class="modal__subtitle">
+                                            <span>Вам на почту было отправлено письмо для подтверждения</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -133,8 +148,14 @@ export default {
             agree:true,
             openDateSelect: false,
             selectedSpeciality: 0,
-            selectedCity:0,
-            specialitySelectedList: [{value:0}]
+            city_id:0,
+            successSend:false,
+            specialitySelectedList: [{value:0}],
+            errors: {
+                email:[],
+                date:[],
+                city_id:[]
+            }
         }
     },
     computed: {
@@ -149,20 +170,30 @@ export default {
             });
         },
         sendForm() {
-            // console.log({
 
-            // });
+            if (this.agree) {
+                axios.post('/subscriber', {
+                    email: this.email,
+                    date: this.date,
+                    city_id: this.city_id,
+                    specialities: this.specialitySelectedList.map(speciality => speciality.value),
+                })
+                .then((response) => {
+                    this.successSend = true;
+                    //this.active = false;
+                })
+                .catch(({response}) => {
+                    if (response.status === 422) {
+                        let errors = response.data.errors;
 
-            axios.post('/subscriber', {
-                email: this.email,
-                date: this.date,
-                city_id: this.selectedCity,
-                specialities: this.specialitySelectedList.map(speciality => speciality.value),
-                agree: this.agree
-            })
-            .then(() => {
-                this.active = false;
-            })
+                        this.errors.email = errors.email || [];
+                        this.errors.date = errors.date || [];
+                        this.errors.city_id = errors.city_id || [];
+                    }
+                })
+            }
+
+
         }
     },
     components: {

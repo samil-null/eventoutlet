@@ -12,17 +12,24 @@ class NewSubscriber extends Mailable
     use Queueable, SerializesModels;
 
     /**
-     * @var
+     * @var string
      */
     protected $date;
 
     /**
+     * @var string
+     */
+    protected $token;
+
+    /**
      * NewSubscriber constructor.
      * @param string $date
+     * @param string $token
      */
-    public function __construct(string $date)
+    public function __construct(string $date, string $token)
     {
         $this->date = $date;
+        $this->token = $token;
     }
 
     /**
@@ -34,6 +41,7 @@ class NewSubscriber extends Mailable
     {
         return $this->subject('Подписка на дату ' . $this->date)
             ->from(env('MAIL_SENDER'), env('APP_NAME'))
-            ->view('mails.subscriber.subscribe');
+            ->view('mails.subscriber.subscribe')
+            ->with(['token' => $this->token]);
     }
 }
