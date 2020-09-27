@@ -44,10 +44,12 @@ class SubscriberController extends Controller
             foreach (Specialty::where('status', Specialty::ACTIVE_STATUS)->get() as $speciality) {
                 $querySpecialty[] = [
                     'subscriber_id' => $subscriber->id,
-                    'speciality_id' => $speciality->id
+                    'specialty_id' => $speciality->id
                 ];
             }
         }
+
+        DB::table('subscribers_specialties')->insert($querySpecialty);
 
         $dateQuery = [];
 
@@ -60,10 +62,13 @@ class SubscriberController extends Controller
 
         DB::table('subscribers_dates')->insert($dateQuery);
 
-        Mail::to($request->input('email'))->send(new NewSubscriber(Carbon::create($request->input('date'))->format('d.m.Y'), $token));
+        //dd(Carbon::now()->diffInDays(collect($request->input('dates'))->min()));
+        //dd();
+
+        Mail::to($request->input('email'))->send(new NewSubscriber($request->input('dates'), $token));
 
         return response()->json([
-            'status' => 200
+            'status' => 500
         ]);
 
     }

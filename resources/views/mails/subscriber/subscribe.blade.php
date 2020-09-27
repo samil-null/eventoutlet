@@ -6,7 +6,10 @@
     @endcomponent
 
     @component('mails.templates.tags.p')
-        Спецпредложения начнут появляться за 31 день до вашей даты. Вся актуальная информацию придет вам на почту.  <br>
+        @if(!$minMonth)
+            Спецпредложения начнут появляться за 31 день до вашей даты.<br>
+        @endif
+        Вся актуальная информацию придет вам на почту. <br>
     @endcomponent
     <div style="text-align: center; padding: 20px 0 40px;">
         @component('mails.templates.buttons.orange', ['url' => route('site.subscribe-enable', $token)])
