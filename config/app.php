@@ -190,7 +190,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class
+        //UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class
     ],
 
     /*

@@ -13,7 +13,7 @@ class Specialty extends Model
      * @var string[]
      */
     protected $fillable = [
-        'name', 'status', 'seo_name', 'plural_name', 'slug'
+        'name', 'status', 'seo_name', 'plural_name', 'slug', 'seo_title', 'seo_keywords', 'seo_description'
     ];
 
     /**

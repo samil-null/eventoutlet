@@ -29,13 +29,22 @@ class SubscriberController extends Controller
             'token'   => $token
         ]);
 
-        $query = [];
+        $querySpecialty = [];
 
         foreach ($request->input('specialities') as $speciality) {
             if ($speciality > 0) {
-                $query[$speciality] = [
+                $querySpecialty[$speciality] = [
                     'subscriber_id' => $subscriber->id,
                     'specialty_id' => $speciality
+                ];
+            }
+        }
+
+        if (empty($querySpecialty)) {
+            foreach (Specialty::where('status', Specialty::ACTIVE_STATUS)->get() as $speciality) {
+                $querySpecialty[] = [
+                    'subscriber_id' => $subscriber->id,
+                    'speciality_id' => $speciality->id
                 ];
             }
         }
@@ -49,19 +58,14 @@ class SubscriberController extends Controller
             ];
         }
 
-        if (!empty($dateQuery)) {
-            DB::table('subscribers_dates')->insert($dateQuery);
-        }
+        DB::table('subscribers_dates')->insert($dateQuery);
 
-        if (!empty($query)) {
-            DB::table('subscribers_specialties')->insert($query);
-        }
-
-        Mail::to($request->input('email'))->send(new NewSubscriber(Carbon::create($request->input('date'))->addDay()->format('d.m.Y'), $token));
+        Mail::to($request->input('email'))->send(new NewSubscriber(Carbon::create($request->input('date'))->format('d.m.Y'), $token));
 
         return response()->json([
             'status' => 200
         ]);
+
     }
 
     /**
@@ -71,6 +75,18 @@ class SubscriberController extends Controller
     {
         Subscriber::where('token', $token)->update([
             'is_active' => 1
+        ]);
+
+        return redirect()->route('site.home');
+    }
+
+    /**
+     * @param string $token
+     */
+    public function disable(string $token)
+    {
+        Subscriber::where('token', $token)->update([
+            'is_active' => 0
         ]);
 
         return redirect()->route('site.home');
