@@ -188,14 +188,21 @@
                                         Или подписывайтесь на рассылку по вашей дате
                                     </p>
                                 </div>
+                                <div class="whats-it__benefit_button">
+                                    <a href="#" class="benefit-btn subscription-btn">
+                                        <span>Подписаться на рассылку</span>
+                                        <div class="long-arrow-svg"></div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="whats-it__benefits_button">
-                    <a href="{{ route('site.offers.index') }}" class="benefits-btn yellow">
-                        <span>Найти исполнителя</span>
+                    <a href="" class="benefits-btn yellow subscription-btn">
+                        <div class="bell-svg"></div>
+                        <span>Следить за датой</span> 
                         <div class="full-arrow-svg"></div>
                     </a>
                 </div>

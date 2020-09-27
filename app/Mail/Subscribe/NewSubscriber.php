@@ -2,6 +2,7 @@
 
 namespace App\Mail\Subscribe;
 
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -28,7 +29,7 @@ class NewSubscriber extends Mailable
      */
     public function __construct(array $dates, string $token)
     {
-        $this->date = $dates;
+        $this->dates = $dates;
         $this->token = $token;
     }
 
@@ -39,10 +40,13 @@ class NewSubscriber extends Mailable
      */
     public function build()
     {
-        dd($this->dates);
-        return $this->subject('Подписка на дату ' . $this->date)
+        $subject = (count($this->dates) > 1)? 'Подписка на даты ': 'Подписка на дату ';
+
+        $minMonth = (Carbon::now()->diffInDays(collect($this->dates)->min(), false) < 31);
+
+        return $this->subject($subject . implode(',', $this->dates))
             ->from(env('MAIL_SENDER'), env('APP_NAME'))
             ->view('mails.subscriber.subscribe')
-            ->with(['token' => $this->token]);
+            ->with(['token' => $this->token, 'minMonth' => $minMonth, 'dates' => $this->dates]);
     }
 }
