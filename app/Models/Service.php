@@ -14,6 +14,9 @@ class Service extends Model
 
     public const REJECTED_STATUS = 2;
 
+    /**
+     * @var \string[][]
+     */
     public $statuses = [
         self::WAIT_STATUS => [
             'name' => 'Ожидает модерации',
@@ -29,26 +32,42 @@ class Service extends Model
         ]
     ];
 
+
     public const LIMIT_RECORD = 6;
 
+    /**
+     * @var array
+     */
     protected $guarded = [];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function offers()
     {
         return $this->hasMany(Offer::class,'service_id', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function activeOffers()
     {
       return $this->hasMany(Offer::class,'service_id', 'id')
             ->where('status', Offer::ACTIVE_STATUS);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public  function priceOption()
     {
         return $this->hasOne(PriceOption::class, 'id', 'price_option_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
     public function additionalFields()
     {
         return $this->hasManyThrough(
@@ -61,6 +80,9 @@ class Service extends Model
         );
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function fields()
     {
         return $this->hasMany(
@@ -68,21 +90,34 @@ class Service extends Model
             'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+    /**
+     * @param string $name
+     * @return string
+     */
     public function getStatus($name = 'name')
     {
         return $this->statuses[$this->status][$name];
     }
 
+    /**
+     * @param $value
+     */
      public function setDescriptionAttribute($value)
     {
         $this->attributes['description'] = Str::removeEmoji(strip_tags($value));
     }
 
+    /**
+     * @param $value
+     */
     public function setNameAttribute($value)
     {
         $this->attributes['name'] = Str::removeEmoji(strip_tags($value));

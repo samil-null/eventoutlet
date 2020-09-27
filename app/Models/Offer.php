@@ -8,18 +8,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Offer extends Model
 {
+    const WAITING_STATUS = 0;
+    const ACTIVE_STATUS = 1;
+    const REJECTED_STATUS = 2;
+    const NO_ACTIVE = 3;
+
+    /**
+     * @var string[]
+     */
     protected $fillable = ['status', 'discount', 'discount_price', 'description'];
 
+    /**
+     * @var array
+     */
     protected $guarded = [];
 
-    public const WAITING_STATUS = 0;
-
-    public const ACTIVE_STATUS = 1;
-
-    public const REJECTED_STATUS = 2;
-
-    public const NO_ACTIVE = 3;
-
+    /**
+     * @var \string[][]
+     */
     public  $statuses = [
         self::WAITING_STATUS => [
             'name' => 'Ожидает модерации',
@@ -39,16 +45,25 @@ class Offer extends Model
         ]
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function dates()
     {
         return $this->hasMany(OfferDate::class,'offer_id', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function service()
     {
         return $this->hasOne(Service::class, 'id', 'service_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOneThrough
+     */
     public function user()
     {
         return $this->hasOneThrough(
@@ -68,11 +83,21 @@ class Offer extends Model
         $this->discount_price = $price - $sale;
     }
 
+    /**
+     * @param $key
+     * @return string
+     */
     public function getStatus($key)
     {
         return $this->statuses[$this->status][$key];
     }
 
+    /**
+     * @param $query
+     * @param $dateFrom
+     * @param $dateTo
+     * @return mixed
+     */
     public function scopeBetweenDates($query, $dateFrom, $dateTo)
     {
         return $query->whereHas('dates', function ($q) use ($dateFrom, $dateTo) {
@@ -81,21 +106,36 @@ class Offer extends Model
         });
     }
 
+    /**
+     * @param $query
+     * @param $condition
+     * @param $value
+     * @return mixed
+     */
     public function scopeBetweenDiscount($query, $condition, $value)
     {
         return $query->where('discount', $condition, $value);
     }
 
+    /**
+     * @return mixed
+     */
     public function modelFilter()
     {
         return $this->provideFilter(\App\Filters\OfferFilter::class);
     }
 
+    /**
+     * @return bool
+     */
     public function hasDisabled()
     {
         return !(bool) $this->dates()->count();
     }
 
+    /**
+     * @param $value
+     */
     public function setDescriptionAttribute($value)
     {
         $this->attributes['description'] = Str::removeEmoji(strip_tags($value));

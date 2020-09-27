@@ -20,16 +20,15 @@ class User extends Authenticatable
     use Notifiable;
     use Sluggable;
 
-    public const NEW_STATUS = 0;
+    const NEW_STATUS = 0;
+    const ACTIVE_STATUS = 1;
+    const WAITING_STATUS = 2;
+    const REJECTED_STATUS = 3;
+    const BANED_STATUS = 4;
 
-    public const ACTIVE_STATUS = 1;
-
-    public const WAITING_STATUS = 2;
-
-    public const REJECTED_STATUS = 3;
-
-    public const BANED_STATUS = 4;
-
+    /**
+     * @var string[]
+     */
     protected $with = ['info'];
 
     /**
@@ -63,6 +62,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $guarded = [];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -81,17 +81,26 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function services()
     {
         return $this->hasMany(Service::class,'user_id', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function activeServices()
     {
         return $this->hasMany(Service::class,'user_id', 'id')
             ->where('status', Service::ACTIVE_STATUS);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
     public function offers()
     {
         return $this->hasManyThrough(
@@ -104,6 +113,9 @@ class User extends Authenticatable
         );
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
     public function activeOffers()
     {
         return $this->hasManyThrough(
@@ -116,6 +128,9 @@ class User extends Authenticatable
         )->where('offers.status', Offer::ACTIVE_STATUS);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOneThrough
+     */
     public function speciality()
     {
         return $this->hasOneThrough(
@@ -128,6 +143,9 @@ class User extends Authenticatable
         )->withDefault();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOneThrough
+     */
     public function city()
     {
         return $this->hasOneThrough(
@@ -140,23 +158,36 @@ class User extends Authenticatable
         )->withDefault();
     }
 
+    /**
+     * @param $password
+     * @return mixed
+     */
     public function checkPassword($password)
     {
         return Hash::check($password, $this->password);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function gallery()
     {
         return $this->hasMany(Media::class,'user_id', 'id')
             ->where('type', Media::GALLERY_TYPE);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function videos()
     {
         return $this->hasMany(Media::class,'user_id', 'id')
             ->where('type', Media::VIDEO_TYPE);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function info()
     {
         return $this->hasOne(UserInfo::class, 'user_id', 'id')
@@ -168,16 +199,26 @@ class User extends Authenticatable
         $this->info()->increment('views');
     }
 
+    /**
+     * @param string $name
+     * @return mixed|string
+     */
     public function getStatus($name = 'name')
     {
         return $this->statuses[$this->status][$name];
     }
 
+    /**
+     * @return string|null
+     */
     public function modelFilter()
     {
         return $this->provideFilter(\App\Filters\UserFilter::class);
     }
 
+    /**
+     * @param $value
+     */
     public function setNameAttribute($value)
     {
         $this->attributes['name'] = Str::removeEmoji(strip_tags($value));

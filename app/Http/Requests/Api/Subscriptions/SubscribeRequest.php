@@ -26,7 +26,7 @@ class SubscribeRequest extends FormRequest
         return [
             'email' => 'required|email',
             'city_id'   => 'required|integer|min:1',
-            'date'      => 'required',
+            'dates'      => 'required',
         ];
     }
 
@@ -37,7 +37,7 @@ class SubscribeRequest extends FormRequest
             'email.max'         => 'Максимальная длина :max',
             'email.required'    => 'Заполните поле',
             'email.email'       => 'Неверный формат email',
-            'date.required'     => 'Укажите дату',
+            'dates.required'     => 'Укажите дату',
             'city_id.required'  => 'Укажите город',
             'city_id.min'       => 'Укажите город'
         ];

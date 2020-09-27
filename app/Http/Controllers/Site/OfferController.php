@@ -44,7 +44,7 @@ class OfferController extends Controller
         $city = City::find($request->input('city_id'));
         $speciality = Specialty::find($request->input('speciality_id'));
 
-        Seo::offers($city, $speciality, $request->has('specials_offers'));
+        Seo::offers($city, $speciality, $request->has('specials_offers'), count($users));
 
         $filters = [
             'availableFilters' => $result->getAvailableFilters(),

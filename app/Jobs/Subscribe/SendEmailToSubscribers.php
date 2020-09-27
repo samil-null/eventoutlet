@@ -3,6 +3,7 @@
 namespace App\Jobs\Subscribe;
 
 use App\Models\User;
+use Carbon\Carbon;
 use DB;
 use App\Models\Offer;
 use Illuminate\Bus\Queueable;
@@ -10,6 +11,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Mail;
 
 class SendEmailToSubscribers implements ShouldQueue
 {
@@ -44,6 +46,9 @@ class SendEmailToSubscribers implements ShouldQueue
                 ->where('s.city_id', $user->info->city_id)
                 ->whereIn('s.date', $this->offer->dates->pluck('date')->toArray())
                 ->get(['email']);
+
+            Carbon::create()->format()
+
         }
 
     }

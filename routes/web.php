@@ -144,6 +144,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['rol
         'index' => 'admin.settings.index',
         'store' => 'admin.settings.store',
     ]);
+
+    Route::resource('/subscribers', 'SubscriberController')->only('index')->names([
+        'index' => 'admin.subscribers.index',
+    ]);
+
 });
 
 Route::group(['namespace' => 'Site'], function () {

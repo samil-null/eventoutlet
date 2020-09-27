@@ -31,7 +31,7 @@
     <!-- CSS Files -->
     <link href="{{ asset('css/admin/argon-dashboard.min.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/admin/index.css') }}">
-    
+
 </head>
 
 <body class="">
@@ -163,10 +163,16 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link " href="{{ route('admin.subscribers.index') }}">
+                            <i class="ni ni-single-02 text-yellow"></i> Подписчики
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link " href="{{ route('admin.settings.index') }}">
                             <i class="ni ni-settings-gear-65 text-dark"></i> Настройки
                         </a>
                     </li>
+
                 </ul>
             </div>
         </div>
@@ -250,8 +256,8 @@
     <script>
         Laraberg.init('content', {
             prefix_here: 'laraberg',
-            laravelFilemanager:  { 
-                prefix: '/filemanager' 
+            laravelFilemanager:  {
+                prefix: '/filemanager'
             }
         });
     </script>

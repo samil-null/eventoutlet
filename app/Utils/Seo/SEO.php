@@ -15,10 +15,16 @@ use Social;
 
 class SEO
 {
+    /**
+     * @var string[]
+     */
     protected static $socials = [
         'vk', 'instagram'
     ];
 
+    /**
+     * @var array[]
+     */
     public static $pages = [
         'home' => [
             'title' => 'Услуги фотографа, диджея, тамады и видеографа в СПб. Аренда банкетного зала. Ведущие и аниматоры на мероприятия.',
@@ -79,6 +85,9 @@ class SEO
         ]
     ];
 
+    /**
+     * @param $user
+     */
     public static function user($user)
     {
         $title = $user->name .' - '. $user->speciality->name;
@@ -127,6 +136,11 @@ class SEO
 
     }
 
+    /**
+     * @param $user
+     * @param $title
+     * @param $description
+     */
     protected static function personal($user, $title, $description)
     {
         JsonLd::setType('Person');
@@ -143,6 +157,9 @@ class SEO
 
     }
 
+    /**
+     * @param $user
+     */
     protected static function organization($user)
     {
         JsonLd::setType('Organization');
@@ -164,9 +181,12 @@ class SEO
 
         JsonLd::addValue('contactPoint', $contactPoint);
 
-        
+
     }
 
+    /**
+     * @param $page
+     */
     public static function page($page)
     {
         $title = self::$pages[$page]['title'];
@@ -174,7 +194,7 @@ class SEO
         $keywords = self::$pages[$page]['keywords']?? [];
         $route = self::$pages[$page]['url']['route'];
         $params = self::$pages[$page]['url']['params'];
-        
+
 
         SEOMeta::setTitle($title);
         SEOMeta::setDescription($description);
@@ -189,11 +209,19 @@ class SEO
 
     }
 
+    /**
+     * @param $speciality
+     * @param $city
+     */
     public static function filter($speciality, $city)
     {
         SEOMeta::setTitle("Выбрать {$speciality} на определенную свободную в {$city} со скидкой.");
     }
 
+    /**
+     * @param $info
+     * @return array
+     */
     protected static function createSocials($info)
     {
         $socials = [];
@@ -207,7 +235,13 @@ class SEO
         return [];
     }
 
-    public static function offers($city, $speciality, $specials)
+    /**
+     * @param $city
+     * @param $speciality
+     * @param $specials
+     * @param $count
+     */
+    public static function offers($city, $speciality, $specials, $count = 0)
     {
         $title = '';
         $description = '';
@@ -234,6 +268,10 @@ class SEO
 
         $title = $specials? $title . ' со скидкой': $title;
         $title = $title . ' - Event Outlet.';
+
+        if (!$count) {
+            $title = 'Следить за датой';
+        }
 
         SEOMeta::setTitle($title);
         SEOMeta::setDescription($description);

@@ -6,19 +6,27 @@ use Illuminate\Database\Eloquent\Model;
 
 class Specialty extends Model
 {
+    const DISABLED_STATUS = 0;
+    const ACTIVE_STATUS = 1;
+
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'name', 'status', 'seo_name', 'plural_name', 'slug'
     ];
 
-    public const DISABLED_STATUS = 0;
-
-    public const ACTIVE_STATUS = 1;
-
+    /**
+     * @var string[]
+     */
     public $statuses = [
         self::DISABLED_STATUS => 'Не активен',
         self::ACTIVE_STATUS => 'Активен'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOneThrough
+     */
     public function users()
     {
         return $this->hasOneThrough(
@@ -31,11 +39,17 @@ class Specialty extends Model
         );
     }
 
+    /**
+     * @return string
+     */
     public function getStatus()
     {
         return $this->statuses[$this->status];
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function fields()
     {
         return $this->hasMany(
@@ -44,6 +58,9 @@ class Specialty extends Model
             'id');
     }
 
+    /**
+     * @return mixed
+     */
     public function active()
     {
         return $this->where('status', self::ACTIVE_STATUS);

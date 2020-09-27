@@ -10,10 +10,7 @@
                     <div class="card-header border-0">
                         <div class="row">
                             <div class="col-lg-8">
-                                <h3 class="mb-0">Специальности</h3>
-                            </div>
-                            <div class="col-lg-4 text-right">
-                                <a href="{{ route('admin.specialties.create') }}" class="btn btn-sm btn-default">Добавить</a>
+                                <h3 class="mb-0">Подписчики</h3>
                             </div>
                         </div>
                     </div>

@@ -5,7 +5,7 @@
                 <div class="row no-gutters">
                     <div class="col-12 col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-8 offset-lg-2 offset-xl-1 col-xl-8 offset-xl-2"> <!-- html change new -->
 
-                        <div class="modal-body" @click="openDateSelect = false">
+                        <div class="modal-body">
                             <div class="modal__t-figure"></div>
                             <div class="modal__f-figure"></div>
                             <div class="modal-body__figure"></div>
@@ -29,10 +29,10 @@
                                                     <input type="text" v-model="email" placeholder="eventoutlet@gmail.com">
                                                     <span class="validation" v-for="error in errors.email">{{ error }}</span>
                                                 </label>
-                                                <label class="form__label" :class="{invalid:!!errors.date.length}">
-                                                    <span>Выберите дату или диапазон дат </span>
+                                                <label class="form__label" :class="{invalid:!!errors.dates.length}">
+                                                    <span>Выберите дату или диапазон дат</span>
                                                     <div class="form__select" :class="{'show':openDateSelect}">
-                                                        <div class="form__select-intro" @click.stop="openDateSelect = !openDateSelect ">
+                                                        <div class="form__select-intro" @click.stop="openDateSelect = !openDateSelect">
                                                             <span v-if="date">{{ formatDate }}</span>
                                                             <span v-else>Выбрать дату</span>
                                                             <span class="arrow-svg"></span>
@@ -43,9 +43,10 @@
                                                             </div>
                                                             <div class="form__select-wrapper select-wrapper-second-type">
                                                                 <v-calendar
+                                                                    mode="multiple"
                                                                     class="calendar main-calendar"
                                                                     title-position="left"
-                                                                    v-model="date"
+                                                                    v-model="dates"
                                                                     is-inline
                                                                     color="red"
                                                                     :popover="{ placement: 'bottom', visibility: 'click' }">
@@ -58,7 +59,7 @@
                                                 </label>
 
                                                     <label class="form__label">
-                                                        <span>Выберите специалиста, но это не обязательно </span>
+                                                        <span>Выберите специалиста, но это не обязательно</span>
                                                         <template v-for="sel in specialitySelectedList">
                                                         <select-app
                                                             v-if="specialities"
@@ -67,8 +68,8 @@
                                                             select-name="name"
                                                             v-model="sel.value"
                                                             @input="addSpeciality"
-                                                            description="Выберете вашу специальность"
-                                                            empty-selected="Выберете вашу специальность"
+                                                            description="Выберите специалиста"
+                                                            empty-selected="Выберите специалиста"
                                                         ></select-app>
                                                          </template>
                                                     </label>
@@ -143,7 +144,7 @@ export default {
     data () {
         return {
             email:'',
-            date:null,
+            dates:null,
             active: false,
             agree:true,
             openDateSelect: false,
@@ -153,14 +154,16 @@ export default {
             specialitySelectedList: [{value:0}],
             errors: {
                 email:[],
-                date:[],
+                dates:[],
                 city_id:[]
             }
         }
     },
     computed: {
         formatDate() {
-            return dayjs(this.date).format('DD.MM.YYYY');
+            return this.dates.map(date => {
+                return dayjs(date).format('DD.MM.YYYY')
+            }).join(', ');
         }
     },
     methods: {
@@ -174,7 +177,9 @@ export default {
             if (this.agree) {
                 axios.post('/subscriber', {
                     email: this.email,
-                    date: this.date,
+                    dates: this.dates.map(date => {
+                        return dayjs(date).format('DD.MM.YYYY')
+                    }),
                     city_id: this.city_id,
                     specialities: this.specialitySelectedList.map(speciality => speciality.value),
                 })
@@ -187,7 +192,7 @@ export default {
                         let errors = response.data.errors;
 
                         this.errors.email = errors.email || [];
-                        this.errors.date = errors.date || [];
+                        this.errors.dates = errors.dates || [];
                         this.errors.city_id = errors.city_id || [];
                     }
                 })
@@ -213,5 +218,11 @@ export default {
 </script>
 
 <style scoped>
-
+    .form__select-intro > span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+        padding-right: 10px;
+    }
 </style>
