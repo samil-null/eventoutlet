@@ -20,7 +20,12 @@
                                             <span>Следите за датой</span>
                                         </div>
                                         <div class="modal__subtitle-type-second">
-                                            <span>Если у вас есть вопросы по сотрудничеству, предложения или обратная связь по работе портала, пишите нам! Нам очень важно быть с вами на связи.</span>
+                                            <span>
+                                                Подпишитесь на уведомления об актуальных предложениях по вашей дате или диапазон дат.
+                                                Вы можете подписаться на любую дату, вы не ограничены одним месяцем.
+                                                Вашу почту и данные мы никому не отправляем.
+                                                Вы получите актуальные преложения себе на почту
+                                            </span>
                                         </div>
                                         <div class="modal__form-second-type">
                                             <form action="">
@@ -29,7 +34,7 @@
                                                     <input type="text" v-model="email" placeholder="eventoutlet@gmail.com">
                                                     <span class="validation" v-for="error in errors.email">{{ error }}</span>
                                                 </label>
-                                                <label class="form__label" :class="{invalid:!!errors.dates.length}">
+                                                <label class="form__label" ref="dateSelect" :class="{invalid:!!errors.dates.length}">
                                                     <span>Выберите дату или диапазон дат</span>
                                                     <div class="form__select" :class="{'show':openDateSelect}">
                                                         <div class="form__select-intro" @click.stop="openDateSelect = !openDateSelect">
@@ -57,22 +62,32 @@
                                                     </div>
                                                     <span class="validation" v-for="error in errors.date">{{ error }}</span>
                                                 </label>
+                                                <div class="form__label" ref="specialtySelect">
+                                                    <span>Выберите специалиста, но это не обязательно </span>
+                                                    <div class="form__select" :class="{show:openSpecialtySelect}">
+                                                        <div class="form__select-intro" @click="openSpecialtySelect = !openSpecialtySelect">
+                                                            <span>Выбрать специалиста</span>
+                                                            <span class="arrow-svg"></span>
+                                                        </div>
+                                                        <div class="form__select-body">
+                                                            <div class="form__select-title">
+                                                                <span>Выбрать специалиста</span>
+                                                            </div>
+                                                            <div class="form__select-wrapper">
+                                                                <div class="form__select-list mscroll" data-simplebar data-simplebar-auto-hide="false">
 
-                                                    <label class="form__label">
-                                                        <span>Выберите специалиста, но это не обязательно</span>
-                                                        <template v-for="sel in specialitySelectedList">
-                                                        <select-app
-                                                            v-if="specialities"
-                                                            :options="specialities"
-                                                            select-value="id"
-                                                            select-name="name"
-                                                            v-model="sel.value"
-                                                            @input="addSpeciality"
-                                                            description="Выберите специалиста"
-                                                            empty-selected="Выберите специалиста"
-                                                        ></select-app>
-                                                         </template>
-                                                    </label>
+                                                                    <label v-for="specialty in specialities" :key="'spec-' + specialty.id" class="collapse-checkbox filter-checkbox">
+                                                                        <input type="checkbox" :value="specialty.id" v-model="specialitySelectedList">
+                                                                        <span class="checkmark"></span>
+                                                                        <span class="collapse-checkbox__title">{{ specialty.name }}</span>
+                                                                    </label>
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
 
                                                 <label class="form__label" :class="{invalid:!!errors.city_id.length}">
                                                     <span>Выберите город</span>
@@ -151,7 +166,8 @@ export default {
             selectedSpeciality: 0,
             city_id:0,
             successSend:false,
-            specialitySelectedList: [{value:0}],
+            specialitySelectedList: [],
+            openSpecialtySelect:false,
             errors: {
                 email:[],
                 dates:[],
@@ -181,7 +197,7 @@ export default {
                         return dayjs(date).format('DD.MM.YYYY')
                     }),
                     city_id: this.city_id,
-                    specialities: this.specialitySelectedList.map(speciality => speciality.value),
+                    specialities: this.specialitySelectedList
                 })
                 .then((response) => {
                     this.successSend = true;
@@ -199,13 +215,31 @@ export default {
             }
 
 
-        }
+        },
+        documentClick(e){
+            let el = this.$refs.dateSelect;
+            let target = e.target;
+            if ( (el !== target) && !el.contains(target)) {
+                this.openDateSelect = false
+            }
+        },
+
+        documentClick2(e){
+            let el = this.$refs.specialtySelect;
+            let target = e.target;
+            if ( (el !== target) && !el.contains(target)) {
+                this.openSpecialtySelect = false
+            }
+        },
     },
     components: {
         VCalendar,
         SelectApp
     },
     mounted() {
+        document.addEventListener('click', this.documentClick)
+        document.addEventListener('click', this.documentClick2)
+
         window.addEventListener('load',  () =>  {
             document.querySelector('.subscription-btn').addEventListener('click', (e) => {
                 e.preventDefault();

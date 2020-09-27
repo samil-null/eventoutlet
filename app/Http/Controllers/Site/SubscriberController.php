@@ -67,6 +67,7 @@ class SubscriberController extends Controller
 
         Mail::to($request->input('email'))->send(new NewSubscriber($request->input('dates'), $token));
 
+
         return response()->json([
             'status' => 500
         ]);
