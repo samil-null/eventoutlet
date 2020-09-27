@@ -3490,6 +3490,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3507,9 +3522,8 @@ __webpack_require__.r(__webpack_exports__);
       selectedSpeciality: 0,
       city_id: 0,
       successSend: false,
-      specialitySelectedList: [{
-        value: 0
-      }],
+      specialitySelectedList: [],
+      openSpecialtySelect: false,
       errors: {
         email: [],
         dates: [],
@@ -3540,9 +3554,7 @@ __webpack_require__.r(__webpack_exports__);
             return dayjs__WEBPACK_IMPORTED_MODULE_3___default()(date).format('DD.MM.YYYY');
           }),
           city_id: this.city_id,
-          specialities: this.specialitySelectedList.map(function (speciality) {
-            return speciality.value;
-          })
+          specialities: this.specialitySelectedList
         }).then(function (response) {
           _this.successSend = true; //this.active = false;
         })["catch"](function (_ref) {
@@ -3556,6 +3568,22 @@ __webpack_require__.r(__webpack_exports__);
           }
         });
       }
+    },
+    documentClick: function documentClick(e) {
+      var el = this.$refs.dateSelect;
+      var target = e.target;
+
+      if (el !== target && !el.contains(target)) {
+        this.openDateSelect = false;
+      }
+    },
+    documentClick2: function documentClick2(e) {
+      var el = this.$refs.specialtySelect;
+      var target = e.target;
+
+      if (el !== target && !el.contains(target)) {
+        this.openSpecialtySelect = false;
+      }
     }
   },
   components: {
@@ -3565,6 +3593,8 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this2 = this;
 
+    document.addEventListener('click', this.documentClick);
+    document.addEventListener('click', this.documentClick2);
     window.addEventListener('load', function () {
       document.querySelector('.subscription-btn').addEventListener('click', function (e) {
         e.preventDefault();
@@ -86074,6 +86104,7 @@ var render = function() {
                                 _c(
                                   "label",
                                   {
+                                    ref: "dateSelect",
                                     staticClass: "form__label",
                                     class: {
                                       invalid: !!_vm.errors.dates.length
@@ -86174,44 +86205,192 @@ var render = function() {
                                 ),
                                 _vm._v(" "),
                                 _c(
-                                  "label",
-                                  { staticClass: "form__label" },
+                                  "div",
+                                  {
+                                    ref: "specialtySelect",
+                                    staticClass: "form__label"
+                                  },
                                   [
                                     _c("span", [
                                       _vm._v(
-                                        "Выберите специалиста, но это не обязательно"
+                                        "Выберите специалиста, но это не обязательно "
                                       )
                                     ]),
                                     _vm._v(" "),
-                                    _vm._l(_vm.specialitySelectedList, function(
-                                      sel
-                                    ) {
-                                      return [
-                                        _vm.specialities
-                                          ? _c("select-app", {
-                                              attrs: {
-                                                options: _vm.specialities,
-                                                "select-value": "id",
-                                                "select-name": "name",
-                                                description:
-                                                  "Выберите специалиста",
-                                                "empty-selected":
-                                                  "Выберите специалиста"
-                                              },
-                                              on: { input: _vm.addSpeciality },
-                                              model: {
-                                                value: sel.value,
-                                                callback: function($$v) {
-                                                  _vm.$set(sel, "value", $$v)
-                                                },
-                                                expression: "sel.value"
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "form__select",
+                                        class: { show: _vm.openSpecialtySelect }
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass: "form__select-intro",
+                                            on: {
+                                              click: function($event) {
+                                                _vm.openSpecialtySelect = !_vm.openSpecialtySelect
                                               }
+                                            }
+                                          },
+                                          [
+                                            _c("span", [
+                                              _vm._v("Выбрать специалиста")
+                                            ]),
+                                            _vm._v(" "),
+                                            _c("span", {
+                                              staticClass: "arrow-svg"
                                             })
-                                          : _vm._e()
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "form__select-body" },
+                                          [
+                                            _vm._m(3),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "form__select-wrapper"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "form__select-list mscroll",
+                                                    attrs: {
+                                                      "data-simplebar": "",
+                                                      "data-simplebar-auto-hide":
+                                                        "false"
+                                                    }
+                                                  },
+                                                  _vm._l(
+                                                    _vm.specialities,
+                                                    function(specialty) {
+                                                      return _c(
+                                                        "label",
+                                                        {
+                                                          key:
+                                                            "spec-" +
+                                                            specialty.id,
+                                                          staticClass:
+                                                            "collapse-checkbox filter-checkbox"
+                                                        },
+                                                        [
+                                                          _c("input", {
+                                                            directives: [
+                                                              {
+                                                                name: "model",
+                                                                rawName:
+                                                                  "v-model",
+                                                                value:
+                                                                  _vm.specialitySelectedList,
+                                                                expression:
+                                                                  "specialitySelectedList"
+                                                              }
+                                                            ],
+                                                            attrs: {
+                                                              type: "checkbox"
+                                                            },
+                                                            domProps: {
+                                                              value:
+                                                                specialty.id,
+                                                              checked: Array.isArray(
+                                                                _vm.specialitySelectedList
+                                                              )
+                                                                ? _vm._i(
+                                                                    _vm.specialitySelectedList,
+                                                                    specialty.id
+                                                                  ) > -1
+                                                                : _vm.specialitySelectedList
+                                                            },
+                                                            on: {
+                                                              change: function(
+                                                                $event
+                                                              ) {
+                                                                var $$a =
+                                                                    _vm.specialitySelectedList,
+                                                                  $$el =
+                                                                    $event.target,
+                                                                  $$c = $$el.checked
+                                                                    ? true
+                                                                    : false
+                                                                if (
+                                                                  Array.isArray(
+                                                                    $$a
+                                                                  )
+                                                                ) {
+                                                                  var $$v =
+                                                                      specialty.id,
+                                                                    $$i = _vm._i(
+                                                                      $$a,
+                                                                      $$v
+                                                                    )
+                                                                  if (
+                                                                    $$el.checked
+                                                                  ) {
+                                                                    $$i < 0 &&
+                                                                      (_vm.specialitySelectedList = $$a.concat(
+                                                                        [$$v]
+                                                                      ))
+                                                                  } else {
+                                                                    $$i > -1 &&
+                                                                      (_vm.specialitySelectedList = $$a
+                                                                        .slice(
+                                                                          0,
+                                                                          $$i
+                                                                        )
+                                                                        .concat(
+                                                                          $$a.slice(
+                                                                            $$i +
+                                                                              1
+                                                                          )
+                                                                        ))
+                                                                  }
+                                                                } else {
+                                                                  _vm.specialitySelectedList = $$c
+                                                                }
+                                                              }
+                                                            }
+                                                          }),
+                                                          _vm._v(" "),
+                                                          _c("span", {
+                                                            staticClass:
+                                                              "checkmark"
+                                                          }),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "span",
+                                                            {
+                                                              staticClass:
+                                                                "collapse-checkbox__title"
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                _vm._s(
+                                                                  specialty.name
+                                                                )
+                                                              )
+                                                            ]
+                                                          )
+                                                        ]
+                                                      )
+                                                    }
+                                                  ),
+                                                  0
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
                                       ]
-                                    })
-                                  ],
-                                  2
+                                    )
+                                  ]
                                 ),
                                 _vm._v(" "),
                                 _c(
@@ -86350,7 +86529,7 @@ var render = function() {
                       ])
                     ])
                   : _c("div", { staticClass: "modal__var thanks-modal" }, [
-                      _vm._m(3)
+                      _vm._m(4)
                     ])
               ])
             ]
@@ -86376,7 +86555,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "modal__subtitle-type-second" }, [
       _c("span", [
         _vm._v(
-          "Если у вас есть вопросы по сотрудничеству, предложения или обратная связь по работе портала, пишите нам! Нам очень важно быть с вами на связи."
+          "\n                                            Подпишитесь на уведомления об актуальных предложениях по вашей дате или диапазон дат.\n                                            Вы можете подписаться на любую дату, вы не ограничены одним месяцем.\n                                            Вашу почту и данные мы никому не отправляем.\n                                            Вы получите актуальные преложения себе на почту\n                                        "
         )
       ])
     ])
@@ -86387,6 +86566,14 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form__select-title" }, [
       _c("span", [_vm._v("Выбрать дату")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form__select-title" }, [
+      _c("span", [_vm._v("Выбрать специалиста")])
     ])
   },
   function() {

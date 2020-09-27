@@ -23,12 +23,12 @@ class NewSubscriber extends Mailable
 
     /**
      * NewSubscriber constructor.
-     * @param string $date
+     * @param string $dates
      * @param string $token
      */
-    public function __construct(string $date, string $token)
+    public function __construct(array $dates, string $token)
     {
-        $this->date = $date;
+        $this->date = $dates;
         $this->token = $token;
     }
 
@@ -39,6 +39,7 @@ class NewSubscriber extends Mailable
      */
     public function build()
     {
+        dd($this->dates);
         return $this->subject('Подписка на дату ' . $this->date)
             ->from(env('MAIL_SENDER'), env('APP_NAME'))
             ->view('mails.subscriber.subscribe')

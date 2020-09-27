@@ -60,7 +60,7 @@ class SubscriberController extends Controller
 
         DB::table('subscribers_dates')->insert($dateQuery);
 
-        Mail::to($request->input('email'))->send(new NewSubscriber(Carbon::create($request->input('date'))->format('d.m.Y'), $token));
+        Mail::to($request->input('email'))->send(new NewSubscriber(Carbon::create($request->input('dates'))->format('d.m.Y'), $token));
 
         return response()->json([
             'status' => 200

@@ -32,7 +32,7 @@ class DateHelper
     {
         $startDate = $dates->min('date');
         $endDate = $dates->max('date');
-        
+
         if ($dates->count() == 1) {
             return Carbon::parse($dates->first()->date)->format('d.m.y');
         }
@@ -69,7 +69,6 @@ class DateHelper
             if ($side == 'from') return Carbon::now()->format(self::FILTER_DATE_FORMAT);
             if ($side == 'to') return Carbon::now()->addDays(31)->format(self::FILTER_DATE_FORMAT);
         }
-
 
         if ($date->diffInDays($now, false) > 0 || $date->diffInDays($now, false) < -31) {
             if ($side == 'from') return Carbon::now()->format(self::FILTER_DATE_FORMAT);
