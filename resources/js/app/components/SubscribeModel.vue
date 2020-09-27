@@ -38,7 +38,7 @@
                                                     <span>Выберите дату или диапазон дат</span>
                                                     <div class="form__select" :class="{'show':openDateSelect}">
                                                         <div class="form__select-intro" @click.stop="openDateSelect = !openDateSelect">
-                                                            <span v-if="date">{{ formatDate }}</span>
+                                                            <span v-if="dates.length">{{ formatDate }}</span>
                                                             <span v-else>Выбрать дату</span>
                                                             <span class="arrow-svg"></span>
                                                         </div>
@@ -66,12 +66,14 @@
                                                     <span>Выберите специалиста, но это не обязательно </span>
                                                     <div class="form__select" :class="{show:openSpecialtySelect}">
                                                         <div class="form__select-intro" @click="openSpecialtySelect = !openSpecialtySelect">
-                                                            <span>Выбрать специалиста</span>
+                                                            <span v-if="!specialitySelectedList.length">Выбрать специалиста</span>
+                                                            <span>{{ formatSpecialty }}</span>
                                                             <span class="arrow-svg"></span>
                                                         </div>
                                                         <div class="form__select-body">
                                                             <div class="form__select-title">
                                                                 <span>Выбрать специалиста</span>
+
                                                             </div>
                                                             <div class="form__select-wrapper">
                                                                 <div class="form__select-list mscroll" data-simplebar data-simplebar-auto-hide="false">
@@ -155,15 +157,14 @@ import dayjs from 'dayjs';
 export default {
     props: ['specialities', 'cities'],
     name: "SubscribeModal",
-
     data () {
         return {
             email:'',
-            dates:null,
+            dates:[],
             active: false,
             agree:true,
             openDateSelect: false,
-            selectedSpeciality: 0,
+            selectedSpeciality: [],
             city_id:0,
             successSend:false,
             specialitySelectedList: [],
@@ -179,6 +180,11 @@ export default {
         formatDate() {
             return this.dates.map(date => {
                 return dayjs(date).format('DD.MM.YYYY')
+            }).join(', ');
+        },
+        formatSpecialty() {
+            return this.specialitySelectedList.map(spec => {
+                return this.specialities.filter(item => item.id == spec)[0].name;
             }).join(', ');
         }
     },

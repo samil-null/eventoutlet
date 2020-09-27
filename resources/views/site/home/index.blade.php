@@ -23,7 +23,7 @@
       </div>
     </div>
   </header>
- 
+
 <section id="whats" class="whats">
     <div class="container">
         <div class="whats-it">
@@ -266,6 +266,7 @@
         </div>
     </div>
 </section>
+<subscribe-modal></subscribe-modal>
 @endsection
 @push('scripts')
     <script src="{{ asset('js/pages/home.js') }}?global={{ env('JS_VERSION') }}&local=1"></script>

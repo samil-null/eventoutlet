@@ -3505,6 +3505,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -3515,11 +3517,11 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       email: '',
-      dates: null,
+      dates: [],
       active: false,
       agree: true,
       openDateSelect: false,
-      selectedSpeciality: 0,
+      selectedSpeciality: [],
       city_id: 0,
       successSend: false,
       specialitySelectedList: [],
@@ -3536,6 +3538,15 @@ __webpack_require__.r(__webpack_exports__);
       return this.dates.map(function (date) {
         return dayjs__WEBPACK_IMPORTED_MODULE_3___default()(date).format('DD.MM.YYYY');
       }).join(', ');
+    },
+    formatSpecialty: function formatSpecialty() {
+      var _this = this;
+
+      return this.specialitySelectedList.map(function (spec) {
+        return _this.specialities.filter(function (item) {
+          return item.id == spec;
+        })[0].name;
+      }).join(', ');
     }
   },
   methods: {
@@ -3545,7 +3556,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     sendForm: function sendForm() {
-      var _this = this;
+      var _this2 = this;
 
       if (this.agree) {
         _modules_axios__WEBPACK_IMPORTED_MODULE_2__["default"].post('/subscriber', {
@@ -3556,15 +3567,15 @@ __webpack_require__.r(__webpack_exports__);
           city_id: this.city_id,
           specialities: this.specialitySelectedList
         }).then(function (response) {
-          _this.successSend = true; //this.active = false;
+          _this2.successSend = true; //this.active = false;
         })["catch"](function (_ref) {
           var response = _ref.response;
 
           if (response.status === 422) {
             var errors = response.data.errors;
-            _this.errors.email = errors.email || [];
-            _this.errors.dates = errors.dates || [];
-            _this.errors.city_id = errors.city_id || [];
+            _this2.errors.email = errors.email || [];
+            _this2.errors.dates = errors.dates || [];
+            _this2.errors.city_id = errors.city_id || [];
           }
         });
       }
@@ -3591,14 +3602,14 @@ __webpack_require__.r(__webpack_exports__);
     SelectApp: _SelectApp__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this3 = this;
 
     document.addEventListener('click', this.documentClick);
     document.addEventListener('click', this.documentClick2);
     window.addEventListener('load', function () {
       document.querySelector('.subscription-btn').addEventListener('click', function (e) {
         e.preventDefault();
-        _this2.active = true;
+        _this3.active = true;
       });
     });
   }
@@ -86134,7 +86145,7 @@ var render = function() {
                                             }
                                           },
                                           [
-                                            _vm.date
+                                            _vm.dates.length
                                               ? _c("span", [
                                                   _vm._v(_vm._s(_vm.formatDate))
                                                 ])
@@ -86235,8 +86246,16 @@ var render = function() {
                                             }
                                           },
                                           [
+                                            !_vm.specialitySelectedList.length
+                                              ? _c("span", [
+                                                  _vm._v("Выбрать специалиста")
+                                                ])
+                                              : _vm._e(),
+                                            _vm._v(" "),
                                             _c("span", [
-                                              _vm._v("Выбрать специалиста")
+                                              _vm._v(
+                                                _vm._s(_vm.formatSpecialty)
+                                              )
                                             ]),
                                             _vm._v(" "),
                                             _c("span", {
