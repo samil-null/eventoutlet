@@ -8,6 +8,7 @@ use Mail;
 use DB;
 use App\Http\Controllers\Controller;
 use App\Models\Subscriber;
+use App\Models\Specialty;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -25,7 +26,7 @@ class SubscriberController extends Controller
         $subscriber = Subscriber::create([
             'email' => $request->input('email'),
             'city_id' => $request->input('city_id'),
-            'date'    => Carbon::create($request->input('date'))->format('Y-m-d'),
+            'date'    => Carbon::create($request->input('date'))->addDay()->format('Y-m-d'),
             'token'   => $token
         ]);
 
@@ -40,11 +41,20 @@ class SubscriberController extends Controller
             }
         }
 
+        if (empty($query)) {
+            foreach (Specialty::where('status', Specialty::ACTIVE_STATUS)->get() as $speciality) {
+                $query[] = [
+                    'subscriber_id' => $subscriber->id,
+                    'speciality_id' => $speciality->id
+                ];
+            }            
+        }
+
         if (!empty($query)) {
             DB::table('subscribers_specialties')->insert($query);
         }
 
-        Mail::to($request->input('email'))->send(new NewSubscriber(Carbon::create($request->input('date'))->format('d.m.Y'), $token));
+        Mail::to($request->input('email'))->send(new NewSubscriber(Carbon::create($request->input('date'))->addDay()->format('d.m.Y'), $token));
 
         return response()->json([
             'status' => 200
@@ -58,6 +68,18 @@ class SubscriberController extends Controller
     {
         Subscriber::where('token', $token)->update([
             'is_active' => 1
+        ]);
+
+        return redirect()->route('site.home');
+    }
+
+    /**
+     * @param string $token
+     */
+    public function disable(string $token)
+    {
+        Subscriber::where('token', $token)->update([
+            'is_active' => 0
         ]);
 
         return redirect()->route('site.home');

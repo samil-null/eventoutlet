@@ -21,8 +21,8 @@ class SEO
 
     public static $pages = [
         'home' => [
-            'title' => 'Услуги фотографа, диджея, тамады и видеографа в СПб. Аренда банкетного зала. Ведущие и аниматоры на мероприятия.',
-            'description' => 'Не знаете где отметить день рожденье? Портал Event Outlet предлагает заказать диджея на свадьбу, профессионального фотографа и видеографа, арендовать лофт и мебель для праздника. Воспользуйтесь поиском на сайте и Вы найдёте ресторан для проведения юбилея, а также ведущего или тамаду.',
+            'title' => 'Услуги фотографов, видеографов и ведущих со скидкой в СПб. Аренда ресторанов и банкетных залов. Event Outlet',
+            'description' => 'Все для мероприятия со скидкой. На Event Outlet вы найдете где отметить день рождения, ресторан для свадьбы или профессионального фотографа и видеографа. Сможете со скидкой арендовать лофт и мебель для праздника. Заказать шоу-программу и ведущего на корпоратив. Выбрать детского аниматора и фотобудку',
             'keywords' => ['фотостудия спб', 'аренда лофта', 'свадебный фотограф', 'лучшие фотографы', 'фотограф на свадьбу', 'снять ресторан', 'ведущий тамада', 'фотограф москва', 'фотограф цена', 'диджей на праздник', 'лучшие видеографы', 'ведущий на свадьбу стоимость', 'услуги диджея', 'услуги видеографа', 'тамада ведущая юбилей'],
             'url' => [
                 'route' => 'site.home',
@@ -211,30 +211,52 @@ class SEO
     {
         $title = '';
         $description = '';
+
         $specialities = self::createSpecialitiesList();
         $specialityName = $speciality? mb_strtolower($speciality->seo_name):null;
         $cityName = $city? $city->seo_name:null;
-        $description = "Выбор специалистов из каталога: {$specialities}. Закажите услугу профессионала в ближайший 31 день со скидкой от 10% до 70%.";
-        if (is_null($city) && is_null($speciality) ) {
-            $title = 'Поиск свободных специалистов для вашего мероприятия';
+        
+        
 
+        if (is_object($speciality) && $speciality->seo_title) {
+            $title = $speciality->seo_title;
+            
+        } else {
+            if (is_null($city) && is_null($speciality) ) {
+                $title = 'Поиск свободных специалистов для вашего мероприятия';
+
+            }
+
+            if (is_null($city) && !is_null($speciality)) {
+                $title = "Поиск {$specialityName} для вашего мероприятия";
+            }
+
+            if (!is_null($city) && is_null($speciality)) {
+                $title = "Поиск специалистов в {$cityName} для вашего мероприятия";
+            }
+
+            if (!is_null($city) && !is_null($speciality)) {
+                $title = "Поиск {$specialityName} в {$cityName} для вашего мероприятия";
+            }
+
+            $title = $specials? $title . ' со скидкой': $title;
+            $title = $title . ' - Event Outlet.';
         }
 
-        if (is_null($city) && !is_null($speciality)) {
-            $title = "Поиск {$specialityName} для вашего мероприятия";
+        
+
+        if (is_object($speciality) && $speciality->seo_description) {
+            $description = $speciality->seo_description;
+        } else {
+            $description = "Выбор специалистов из каталога: {$specialities}. Закажите услугу профессионала в ближайший 31 день со скидкой от 10% до 70%.";
+            
         }
 
-        if (!is_null($city) && is_null($speciality)) {
-            $title = "Поиск специалистов в {$cityName} для вашего мероприятия";
+
+        if (is_object($speciality) && $speciality->seo_keywords) {
+            SEOMeta::setKeywords([$speciality->seo_keywords]);    
         }
-
-        if (!is_null($city) && !is_null($speciality)) {
-            $title = "Поиск {$specialityName} в {$cityName} для вашего мероприятия";
-        }
-
-        $title = $specials? $title . ' со скидкой': $title;
-        $title = $title . ' - Event Outlet.';
-
+        
         SEOMeta::setTitle($title);
         SEOMeta::setDescription($description);
 

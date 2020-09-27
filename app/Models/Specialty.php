@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Specialty extends Model
 {
     protected $fillable = [
-        'name', 'status', 'seo_name', 'plural_name', 'slug'
+        'name', 'status', 'seo_name', 'plural_name', 'slug', 'seo_title', 'seo_keywords', 'seo_description'
     ];
 
     public const DISABLED_STATUS = 0;

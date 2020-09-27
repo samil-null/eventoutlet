@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Models\OfferDate;
 use Carbon\Carbon;
+use App\Models\Specialty;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
 
@@ -14,7 +14,7 @@ class RemoveOldOffersDate extends Command
      *
      * @var string
      */
-    protected $signature = 'offers:remove-old-dates';
+    protected $signature = 'offers:send-email-to-executors';
 
     /**
      * The console command description.
@@ -40,6 +40,8 @@ class RemoveOldOffersDate extends Command
      */
     public function handle()
     {
-        OfferDate::where('date', '<', Carbon::today())->delete();
+        $speciality = Specialty::all();
+
+        dd($speciality);
     }
 }

@@ -45,7 +45,7 @@ class SpecialityController extends Controller
      */
     public function store(StoreSpecialityRequest $request)
     {
-        $speciality = Specialty::create($request->only('name', 'status', 'seo_name', 'plural_name', 'slug'));
+        $speciality = Specialty::create($request->only('name', 'status', 'seo_name', 'plural_name', 'slug', 'seo_title', 'seo_keywords', 'seo_description'));
 
         return redirect()->route('admin.specialties.index');
     }
@@ -86,7 +86,7 @@ class SpecialityController extends Controller
 
         $service->make($request->input('addition_fields'), $speciality);
         $speciality->update(
-            $request->only('name', 'status', 'seo_name', 'plural_name', 'slug')
+            $request->only('name', 'status', 'seo_name', 'plural_name', 'slug', 'seo_title', 'seo_keywords', 'seo_description')
         );
 
         return redirect()->route('admin.specialties.index');

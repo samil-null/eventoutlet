@@ -60,6 +60,24 @@
                                     </div>
                                 </div>
                             </div>
+                             <h6 class="heading-small text-muted mb-4">SEO</h6>
+                             <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="form-group focused">
+                                            <label class="form-control-label" for="input-seo-title">Title</label>
+                                            <input type="text" required id="input-seo-title" name="seo_title" id="input-username" class="form-control form-control-alternative" placeholder="" value="{{ $speciality->seo_title }}">
+                                        </div>
+                                        <div class="form-group focused">
+                                            <label class="form-control-label" for="input-seo-keywords">Keywords</label>
+                                            <textarea rows="7" class="form-control form-control-alternative" required name="seo_keywords" id="input-seo-keywords">{{ $speciality->seo_keywords }}</textarea>
+                                        <div class="form-group focused">
+                                            <label class="form-control-label" for="input-seo-description">Descriptions</label>
+                                            <textarea rows="7" class="form-control form-control-alternative" required name="seo_description" id="input-seo-description">{{ $speciality->seo_description }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <h6 class="heading-small text-muted mb-4">Дополнительные свойства</h6>
                             <div class="pl-lg-4">
                                 <div class="row">
