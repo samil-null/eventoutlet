@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Specialty;
 use App\Utils\Seo\SEO;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use SEOMeta;
 use Illuminate\Http\Request;
 
@@ -16,6 +18,7 @@ class HomeController extends Controller
 {
     public function index(Request $request, AlgoFactoryInterface $factory)
     {
+
         SEO::page('home');
 
         $filter = (new OfferFilter($request))->apply();

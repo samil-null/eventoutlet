@@ -5,6 +5,7 @@ namespace App\Helpers;
 
 
 use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Support\Collection;
 
 class DateHelper
@@ -100,5 +101,36 @@ class DateHelper
         return $dates->map(function($date) {
             return $date->date;
         });
+    }
+
+    public static function createCalendarDateRange()
+    {
+        $period = CarbonPeriod::create(Carbon::now()->format('d-m-Y'), Carbon::now()->addDays(31)->format('d-m-Y'));
+
+        $calendar = [];
+
+        foreach ($period as $item) {
+            $dayOfWeek = ($item->dayOfWeek == 0)? 7: $item->dayOfWeek;
+            $calendar[$item->year][$item->month][$item->week][$dayOfWeek] = $item->day;
+        }
+
+        foreach ($calendar as $year => $months) {
+            //echo "year: $year<br>";
+            foreach ($months as $month => $weeks) {
+                //echo DateHelper::$ruMonth[$month] . "<br>";
+                foreach ($weeks as $week => $days) {
+                    //  echo $week . "<br>";
+                    echo "<tr>";
+                    foreach ([1,2,3,4,5,6,7] as $index) {
+                        //dd($days);
+                        $val = $days[$index]?? ' ';
+                        echo "<td>" . $val ."<td>";
+                    }
+                    echo "</tr>";
+                }
+            }
+        }
+
+        return $calendar;
     }
 }
