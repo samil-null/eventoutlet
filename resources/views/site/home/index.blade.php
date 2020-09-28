@@ -202,7 +202,7 @@
                 <div class="whats-it__benefits_button">
                     <a href="" class="benefits-btn yellow subscription-btn">
                         <div class="bell-svg"></div>
-                        <span>Следить за датой</span> 
+                        <span>Следить за датой</span>
                         <div class="full-arrow-svg"></div>
                     </a>
                 </div>
@@ -273,7 +273,10 @@
         </div>
     </div>
 </section>
-<subscribe-modal></subscribe-modal>
+<subscribe-model
+    :specialities="{{ $specialities }}"
+    :cities="{{ $cities }}"
+></subscribe-model>
 @endsection
 @push('scripts')
     <script src="{{ asset('js/pages/home.js') }}?global={{ env('JS_VERSION') }}&local=1"></script>

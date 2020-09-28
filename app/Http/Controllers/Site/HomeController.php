@@ -6,6 +6,7 @@ use App\Factories\Algo\AlgoFactoryInterface;
 use App\Filters\Offers\OfferFilter;
 use App\Helpers\DateHelper;
 use App\Http\Controllers\Controller;
+use App\Models\City;
 use App\Models\Specialty;
 use App\Utils\Seo\SEO;
 use SEOMeta;
@@ -31,6 +32,7 @@ class HomeController extends Controller
         return view('site.home.index',[
             'users' => $users,
             'specialities' => $specialities,
+            'cities'    => (new City())->active()->get(),
             'startDate' => DateHelper::minFilterDate(),
             'endDate' => DateHelper::maxFilterDate()
         ]);

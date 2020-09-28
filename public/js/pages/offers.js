@@ -3607,9 +3607,11 @@ __webpack_require__.r(__webpack_exports__);
     document.addEventListener('click', this.documentClick);
     document.addEventListener('click', this.documentClick2);
     window.addEventListener('load', function () {
-      document.querySelector('.subscription-btn').addEventListener('click', function (e) {
-        e.preventDefault();
-        _this3.active = true;
+      document.querySelectorAll('.subscription-btn').forEach(function (el) {
+        el.addEventListener('click', function (e) {
+          e.preventDefault();
+          _this3.active = true;
+        });
       });
     });
   }

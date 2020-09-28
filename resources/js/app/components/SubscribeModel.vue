@@ -247,9 +247,12 @@ export default {
         document.addEventListener('click', this.documentClick2)
 
         window.addEventListener('load',  () =>  {
-            document.querySelector('.subscription-btn').addEventListener('click', (e) => {
-                e.preventDefault();
-                this.active = true;
+
+            document.querySelectorAll('.subscription-btn').forEach(el => {
+                el.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.active = true;
+                });
             });
         });
 
