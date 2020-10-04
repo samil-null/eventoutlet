@@ -76,6 +76,7 @@ class WeeklySendEmailToExecutors extends Command
 
                     dump($emails);
 
+
                     if (in_array('denis.budancev@gmail.com', $emails) ) {
                         \Mail::send('mails.subscriber.notify-executors', ['dates' => $dates], function ($message) use ($emails, $city, $specialty) {
                             $message->from(env('MAIL_SENDER'), env('APP_NAME'));

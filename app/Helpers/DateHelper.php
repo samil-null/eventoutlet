@@ -105,19 +105,21 @@ class DateHelper
 
     public static function createCalendarDateRange()
     {
-        $period = CarbonPeriod::create(Carbon::now()->format('d-m-Y'), Carbon::now()->addDays(31)->format('d-m-Y'));
+        $period = CarbonPeriod::create(Carbon::now()->format('Y-m-d'), Carbon::now()->addDays(31)->format('d-m-Y'));
 
         $calendar = [];
 
+
         foreach ($period as $item) {
             $dayOfWeek = ($item->dayOfWeek == 0)? 7: $item->dayOfWeek;
-            $calendar[$item->year][$item->month][$item->week][$dayOfWeek] = $item->day;
+            $month = $item->month < 10 ? '0' . $item->month : $item->month;
+            $calendar[$item->year][$month][$item->week][$dayOfWeek] = $item->day;
         }
 
         foreach ($calendar as $year => $months) {
             //echo "year: $year<br>";
             foreach ($months as $month => $weeks) {
-                //echo DateHelper::$ruMonth[$month] . "<br>";
+                echo DateHelper::$ruMonth[$month] . "<br>";
                 foreach ($weeks as $week => $days) {
                     //  echo $week . "<br>";
                     echo "<tr>";

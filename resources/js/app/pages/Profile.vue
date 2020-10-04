@@ -28,7 +28,7 @@
                                         </span>
                                     </div>
                                 </template>
-                                
+
                                 <template v-if="user.status != 1">
                                     <div class="lk__havent-offers-title">
                                         <span>
@@ -36,7 +36,14 @@
                                         </span>
                                     </div>
                                 </template>
-
+                                <div class="lk__subscribe-block">
+                                        <p>На нашем портале все гости могут следить за спецпредложениями на свою дату. И вы можете получать письма с датами на которые есть запросы. Обещаем не спамить только одно письмо в неделю.</p>
+                                        <label class="filter-checkbox">
+                                            Если вы хотите получать запросы на спецпредложения поставте галочку
+                                        <input  type="checkbox" @change="updateSubscriptionStatus" v-model="user.subscription_status">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
                                 <div class="pe-block__add-btn">
                                     <a :href="createOfferLink" v-if="serviceCount" class="add-btn add-btn-corall">
                                         <span>Добавить спецпредложение</span>
@@ -45,7 +52,6 @@
                                         <span>Добавить услугу</span>
                                     </a>
                                 </div>
-
                             </div>
                             <template v-if="offers.length">
                                 <div class="profile-edit__body lk__body" v-for="offer in offers">
@@ -98,6 +104,14 @@
                 serviceCount:0
             }
         },
+        methods: {
+            updateSubscriptionStatus() {
+                console.log(this.user.subscription_status);
+                axios.put('/app/users/' + this.user.id, {
+                    subscription_status: this.user.subscription_status
+                })
+            }
+        },
         computed: {
 
         },
@@ -119,3 +133,10 @@
         }
     }
 </script>
+
+<style>
+.lk__subscribe-block {
+    font-family: Gilroy Regular,Montserrat,Helvetica,Arial,sans-serif;
+    padding-top: 10px;
+}
+</style>

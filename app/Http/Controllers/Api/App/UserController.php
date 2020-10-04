@@ -23,6 +23,10 @@ class UserController extends ApiAppController
 
     public function update(Request $request)
     {
+        $this->user->update($request->only('subscription_status'));
 
+        return [
+            'status' => 200
+        ];
     }
 }

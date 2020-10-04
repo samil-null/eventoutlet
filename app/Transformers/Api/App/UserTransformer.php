@@ -25,6 +25,7 @@ class UserTransformer extends TransformerAbstract
             'email'         => (string) $user->email,
             'status'        => (int) $user->status,
             'status_name'   => (string) $user->getStatus('public_name'),
+            'subscription_status'   => $user->subscription_status,
             'avatar' => [
                 'small'     => (string) AvatarHelper::small($user->avatar),
                 'middle'    => (string) AvatarHelper::middle($user->avatar),
