@@ -92,7 +92,7 @@
                             </a>
                             <div class="navbar-general__collapse">
                                 <ul class="navbar-general__main">
-                                    <li><a href="{{ route('site.offers.index') }}">Каталог специалистов</a></li>
+                                    <li><a href="#" class="subscription-btn">Следить за датой</a></li>
                                     @if(false)
                                     <li><a href="#" class="open-register-modal">Стать исполнителем</a></li>
                                     @endif
