@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('avatar', 255)->nullable();
             $table->integer('status')->default(0);
             $table->integer('verified')->default(0);
+            $table->integer('subscription_status')->default(1);
             $table->string('email')->unique();
             $table->string('email_verified_token')->unique();
             $table->timestamp('email_verified_at')->nullable();

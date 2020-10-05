@@ -59,10 +59,10 @@ class WeeklySendEmailToExecutors extends Command
                         ->get(['sd.date', \DB::raw('count(sd.date) as count')]);
 
                 dump($specialty->name . ' - ' . $city->name);
-                dump($dates);
+
                 if ($dates->count()) {
 
-                    $emails = User::where('status', User::ACTIVE_STATUS)->whereHas('info', function ($query) use ($city, $specialty) {
+                    $emails = User::where('status', User::ACTIVE_STATUS)->where('subscription_status', 1)->whereHas('info', function ($query) use ($city, $specialty) {
                         $query->where('city_id', '=', $city->id)
                               ->where('speciality_id', '=', $specialty->id);
                     })
@@ -70,15 +70,9 @@ class WeeklySendEmailToExecutors extends Command
                     ->pluck('email')
                     ->toArray();
 
-                    //dump($emails);
-
-//                    $_emails = [
-//                        'denis.budancev@gmail.com',
-//                        'planner.done@yandex.ru',
-//                        'lobanovaspb@ya.ru'
-//                    ];
 
                     dump($emails);
+
 
                     if (in_array('denis.budancev@gmail.com', $emails) ) {
                         \Mail::send('mails.subscriber.notify-executors', ['dates' => $dates, 'calendar' => DateHelper::createCalendarDateRange()], function ($message) use ($emails, $city, $specialty) {
@@ -87,30 +81,6 @@ class WeeklySendEmailToExecutors extends Command
                             $message->to('denis.budancev@gmail.com');
                         });
                     }
-
-                    // if (in_array('planner.done@yandex.ru', $emails) ) {
-                    //     \Mail::send('mails.subscriber.notify-executors', ['dates' => $dates], function ($message) use ($emails, $city, $specialty) {
-                    //         $message->from(env('MAIL_SENDER'), env('APP_NAME'));
-                    //         $message->subject('Запрос на услугу ' . $city->name . ' ' . $specialty->name);
-                    //         $message->to('planner.done@yandex.ru');
-                    //     });
-                    // }
-
-                    // if (in_array('lobanovaspb@ya.ru', $emails) ) {
-                    //     \Mail::send('mails.subscriber.notify-executors', ['dates' => $dates], function ($message) use ($emails, $city, $specialty) {
-                    //         $message->from(env('MAIL_SENDER'), env('APP_NAME'));
-                    //         $message->subject('Запрос на услугу ' . $city->name . ' ' . $specialty->name);
-                    //         $message->to('lobanovaspb@ya.ru');
-                    //     });
-                    // }
-                    //$emails = array_diff($_emails, );
-
-
-//                    \Mail::send('mails.subscriber.notify-executors', ['dates' => $dates], function ($message) use ($emails, $city, $specialty) {
-//                        $message->from(env('MAIL_SENDER'), env('APP_NAME'));
-//                        $message->subject('Запрос на услугу ' . $city->name . ' ' . $specialty->name);
-//                        $message->to($emails);
-//                    });
 
                 }
             }
