@@ -47465,7 +47465,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal__title" }, [
-      _c("span", [_vm._v("Пароль отпправлен на вашу почту")])
+      _c("span", [_vm._v("Пароль отправлен на вашу почту")])
     ])
   },
   function() {

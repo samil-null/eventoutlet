@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-xl-6 offset-xl-3">
                 <div class="modal__title">
-                    <span>Пароль отпправлен на вашу почту</span>
+                    <span>Пароль отправлен на вашу почту</span>
                 </div>
                 <div class="modal__subtitle">
                     <span>Мы отправили письмо с инструкцией по восстановлению пароля на вашу почту.</span>

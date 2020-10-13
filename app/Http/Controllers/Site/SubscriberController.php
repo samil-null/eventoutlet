@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Site;
 use App\Http\Requests\Api\Subscriptions\SubscribeRequest;
 use App\Mail\Subscribe\NewSubscriber;
 use App\Models\Specialty;
+use App\Services\Subscribe\HotNewsletterService;
 use Mail;
 use DB;
 use App\Http\Controllers\Controller;
@@ -19,7 +20,7 @@ class SubscriberController extends Controller
      * @param SubscribeRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function subscribe(SubscribeRequest $request)
+    public function subscribe(SubscribeRequest $request, HotNewsletterService $hotNewsletterService)
     {
         $token =  Str::random(54);
 

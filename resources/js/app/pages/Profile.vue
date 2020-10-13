@@ -36,14 +36,7 @@
                                         </span>
                                     </div>
                                 </template>
-                                <div class="lk__subscribe-block">
-                                        <p>На нашем портале все гости могут следить за спецпредложениями на свою дату. И вы можете получать письма с датами на которые есть запросы. Обещаем не спамить только одно письмо в неделю.</p>
-                                        <label class="filter-checkbox">
-                                            Если вы хотите получать запросы на спецпредложения поставте галочку
-                                        <input  type="checkbox" @change="updateSubscriptionStatus" v-model="user.subscription_status">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
+
                                 <div class="pe-block__add-btn">
                                     <a :href="createOfferLink" v-if="serviceCount" class="add-btn add-btn-corall">
                                         <span>Добавить спецпредложение</span>
@@ -82,6 +75,14 @@
                                     </div>
                                 </div>
                             </template>
+                        </div>
+                        <div class="lk__subscribe-block">
+                            <p>На нашем портале все гости могут следить за спецпредложениями на свою дату. И вы можете получать письма с датами на которые есть запросы. Обещаем не спамить только одно письмо в неделю.</p>
+                            <label class="filter-checkbox">
+                                Если вы хотите получать запросы на спецпредложения поставте галочку
+                                <input  type="checkbox" @change="updateSubscriptionStatus" v-model="user.subscription_status">
+                                <span class="checkmark"></span>
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -137,6 +138,7 @@
 <style>
 .lk__subscribe-block {
     font-family: Gilroy Regular,Montserrat,Helvetica,Arial,sans-serif;
-    padding-top: 10px;
+    margin-left: -15px;
+    padding-top: 30px;
 }
 </style>
