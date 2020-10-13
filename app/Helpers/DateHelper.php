@@ -25,10 +25,29 @@ class DateHelper
         12 => 'декабря'
     ];
 
-    private const FULL_DATE_FORMAT = 'd.m.y';
+    protected static $ruMonthTranslate = [
+        'january'   => 'Январь',
+        'february'  => 'Февраль',
+        'april'     => 'Апрель',
+        'march'     => 'Март',
+        'may'       => 'Май',
+        'june'      => 'Июнь',
+        'july'      => 'Июль',
+        'august'    => 'Август',
+        'september' => 'Сентябрь',
+        'october' => 'Октябрь',
+        'november'  => 'Ноябрь',
+        'december'  => 'Декабрь'
+    ];
 
-    private const FILTER_DATE_FORMAT = 'Y-m-d';
+    const FULL_DATE_FORMAT = 'd.m.y';
 
+    const FILTER_DATE_FORMAT = 'Y-m-d';
+
+    /**
+     * @param Collection $dates
+     * @return string
+     */
     public static function displayRangeDates(Collection $dates)
     {
         $startDate = $dates->min('date');
@@ -54,12 +73,24 @@ class DateHelper
 
     }
 
+    /**
+     * @param $start
+     * @param $end
+     * @param null $startPattern
+     * @param null $endPattern
+     * @return string
+     */
     private static function concatDate($start, $end, $startPattern = null, $endPattern = null)
     {
         return Carbon::parse($start)->format($startPattern?? self::FULL_DATE_FORMAT) . ' - ' .
             Carbon::parse($end)->format($endPattern?? self::FULL_DATE_FORMAT);
     }
 
+    /**
+     * @param $value
+     * @param $side
+     * @return mixed
+     */
     public static function filterPrepare($value, $side)
     {
         $now = Carbon::now();
@@ -79,6 +110,10 @@ class DateHelper
         return $date->format(self::FILTER_DATE_FORMAT);
     }
 
+    /**
+     * @param $date
+     * @return string
+     */
     public static function toDateFilter($date)
     {
         $date = Carbon::parse($date);
@@ -86,16 +121,26 @@ class DateHelper
         return 'До ' . $date->day . ' ' . self::$ruMonth[$date->month];
     }
 
+    /**
+     * @return mixed
+     */
     public static function minFilterDate()
     {
         return Carbon::now()->format('d-m-Y');
     }
 
+    /**
+     * @return mixed
+     */
     public static function maxFilterDate()
     {
         return Carbon::now()->addDays(31)->format('d-m-Y');
     }
 
+    /**
+     * @param $dates
+     * @return mixed
+     */
     public static function flatDate($dates)
     {
         return $dates->map(function($date) {
@@ -134,5 +179,25 @@ class DateHelper
         }
 
         return $calendar;
+    }
+
+    /**
+     * @param int $value
+     * @return int|string\
+     */
+    public static function zero(int $value)
+    {
+        if ($value < 10) return '0' . $value;
+
+        return $value;
+    }
+
+    /**
+     * @param string $name
+     * @return string
+     */
+    public static function monthTranslate(string $name)
+    {
+        return self::$ruMonthTranslate[strtolower($name)];
     }
 }
