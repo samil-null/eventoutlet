@@ -113,11 +113,11 @@
                                                 </div>
 
                                                 <div class="track-button-modal">
-                                                    <a href="#" class="benefits-btn yellow" @click.prevent="sendForm">
+                                                    <button type="button" class="benefits-btn yellow" @click="sendForm">
                                                         <div class="bell-svg"></div>
                                                         <span>Следить за датой</span>
                                                         <div class="full-arrow-svg"></div>
-                                                    </a>
+                                                    </button>
                                                 </div>
                                             </form>
                                         </div>

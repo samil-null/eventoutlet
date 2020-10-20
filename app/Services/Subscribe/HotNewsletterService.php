@@ -15,6 +15,8 @@ class HotNewsletterService
 
         $maxDate = Carbon::now();
 
+
+
         foreach ($dates as $date) {
             if ($maxDate->diff(Carbon::create($date)->format('d-m-Y')) <= 7) {
 
