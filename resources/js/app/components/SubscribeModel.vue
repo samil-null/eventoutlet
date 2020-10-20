@@ -113,7 +113,7 @@
                                                 </div>
 
                                                 <div class="track-button-modal">
-                                                    <button class="benefits-btn yellow" type="button">
+                                                    <button class="benefits-btn yellow" type="submit">
                                                         <div class="bell-svg"></div>
                                                         <span>Следить за датой</span>
                                                         <div class="full-arrow-svg"></div>
