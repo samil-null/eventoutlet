@@ -113,7 +113,7 @@
                                                 </div>
 
                                                 <div class="track-button-modal">
-                                                    <button type="button" class="benefits-btn yellow" @click="sendForm">
+                                                    <button class="benefits-btn yellow" type="button" @click.native="sendForm">
                                                         <div class="bell-svg"></div>
                                                         <span>Следить за датой</span>
                                                         <div class="full-arrow-svg"></div>
