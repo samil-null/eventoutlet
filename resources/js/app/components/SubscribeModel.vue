@@ -27,7 +27,7 @@
                                             </span>
                                         </div>
                                         <div class="modal__form-second-type">
-                                            <form action="">
+                                            <form  @submit.prevent="sendForm">
                                                 <label class="modal__label" :class="{invalid:!!errors.email.length}">
                                                     <span class="modal__input-name">Ваша почта</span>
                                                     <input type="text" v-model="email" placeholder="eventoutlet@gmail.com">
@@ -113,7 +113,7 @@
                                                 </div>
 
                                                 <div class="track-button-modal">
-                                                    <button class="benefits-btn yellow" type="button" @click.native="sendForm">
+                                                    <button class="benefits-btn yellow" type="button">
                                                         <div class="bell-svg"></div>
                                                         <span>Следить за датой</span>
                                                         <div class="full-arrow-svg"></div>
