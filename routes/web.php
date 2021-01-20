@@ -21,6 +21,10 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::post('/forgot', 'ForgotController@forgot')->name('forgot');
 });
 
+Route::get('dev-imports', 'ImportController@index');
+Route::get('dev-imports-editor', 'ImportController@list');
+Route::post('dev-imports-editor', 'ImportController@update');
+
 //Route::get('/blog');
 
 
@@ -148,7 +152,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['rol
     Route::resource('/subscribers', 'SubscriberController')->only('index')->names([
         'index' => 'admin.subscribers.index',
     ]);
-
 });
 
 Route::group(['namespace' => 'Site'], function () {
@@ -170,14 +173,21 @@ Route::group(['namespace' => 'Site'], function () {
     Route::post('/subscriber', 'SubscriberController@subscribe')->name('site.subscribe');
     Route::get('/subscriber/{token}/enable', 'SubscriberController@enable')->name('site.subscribe-enable');
     Route::get('/subscriber/{token}/disabled', 'SubscriberController@disable')->name('site.subscribe-disable');
+    Route::get('/executor-subscriber/{token}/disabled', 'SubscriberController@executorDisable')->name('site.executor-subscribe-disable');
+
     Route::get('/offers', 'OfferController@index')->name('site.offers.index');
     Route::get('/users/{id}', 'UserController@show')->name('site.users.show');
 
     Route::get('/about', 'PageController@about')->name('site.about');
     Route::get('/process', 'PageController@process')->name('site.process');
 
-    Route::get('/{slug}', 'OfferController@category');
+//    Route::get('/{slug}', 'OfferController@category')->name('site.offers.slug');
+//
+//    Route::get('/{city}/{slug}', 'OfferController@offersList');
+//    Route::get('/{city}/{slug}/{user}', 'UserController@show2')->name('site.users.show2');
 
+    Route::get('/{slug}/{city?}', 'OfferController@offersList');
+    Route::get('/{slug}/{city}/{user}', 'UserController@show2')->name('site.users.show2');
 });
 
 

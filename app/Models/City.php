@@ -13,7 +13,7 @@ class City extends Model
      * @var string[]
      */
     protected $fillable = [
-        'name', 'status', 'seo_name'
+        'name', 'status', 'seo_name', 'slug'
     ];
 
     /**

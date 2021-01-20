@@ -84,7 +84,7 @@ class Cropper
     }
 
     public function resize($filename, $store, $options)
-    {
+    { return true; //todo: delete it
         $data = $this->prepare($filename, $store, $options, 'resize');
 
         if (is_string($data)) return $data;

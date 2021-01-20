@@ -67,7 +67,7 @@
                       </div>
                         <input type="hidden" v-if="dateFrom" :value="dateFrom" name="specials_offers[date_from]">
                         <input type="hidden" v-if="dateTo" :value="dateTo" name="specials_offers[date_to]">
-                          <button type="submit" class="almost-square-btn almost-square-btn-corral">
+                          <button @click="submit" type="submit" class="almost-square-btn almost-square-btn-corral">
                             <span>Поиск</span>
                           </button>
                     </div>
@@ -107,6 +107,12 @@
             }
         },
         methods: {
+            submit(e) {
+              if(! this.displayFromDate ) {
+                  e.preventDefault();
+                  location.href = this.actionUrl;
+              }
+            },
             closePiker() {
                 this.showDatePick = false
             },

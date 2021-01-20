@@ -20,7 +20,7 @@ class OfferFilter extends BaseOfferFilter implements OfferFilterInterface
         'users.name','users.id', 'users.slug', 'users.avatar', 'services.user_id',
         'services.name as service_name', 'services.id as service_id', 'services.price as service_price', 'services.price_option_id',
         'users_info.instagram','offers.discount','offers.discount_price',
-        'users_info.speciality_id','users_info.whatsapp', 'users_info.email', 'users_info.phone'
+        'users_info.speciality_id','users_info.whatsapp', 'users_info.email', 'users_info.phone', 'users_info.city_id'
     ];
 
     public function setup()

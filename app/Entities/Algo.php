@@ -26,13 +26,15 @@ class Algo
 
     public $slug;
 
-    public function __construct($id = '', $slug = '', $name = '', $avatar = '', $speciality = '', $offer = '', $info ='', $gallery = '', $isSpecials = false, $servicePrice = 0)
+    public function __construct($id = '', $slug = '', $name = '', $avatar = '', $speciality = '', $speciality_slug = '', $city_id = '', $offer = '', $info ='', $gallery = '', $isSpecials = false, $servicePrice = 0)
     {
         $this->id = $id;
         $this->name = $name;
         $this->slug = $slug;
         $this->avatar = $avatar;
         $this->speciality = $speciality;
+        $this->speciality_slug = $speciality_slug;
+        $this->city_id = $city_id;
         $this->offer = $offer;
         $this->info = $info;
         $this->gallery = $gallery;

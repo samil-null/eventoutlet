@@ -95,6 +95,7 @@ class SEO
 
         SEOMeta::setTitle($title);
         SEOMeta::setDescription($description);
+        SEOMeta::setCanonical(route('site.users.show', $user->slug));
 
         $sameAs = [];
 
@@ -195,6 +196,7 @@ class SEO
         $route = self::$pages[$page]['url']['route'];
         $params = self::$pages[$page]['url']['params'];
 
+        SEOMeta::setCanonical(url()->full());
 
         SEOMeta::setTitle($title);
         SEOMeta::setDescription($description);
@@ -250,7 +252,13 @@ class SEO
         $specialityName = $speciality? mb_strtolower($speciality->seo_name):null;
         $cityName = $city? $city->seo_name:null;
 
+        // if ($specialityName) {
+        //     SEOMeta::setCanonical(route('site.offers.slug', $speciality->slug));
+        // } else {
+        //     SEOMeta::setCanonical(url()->full());
+        // }
 
+        SEOMeta::setCanonical(url()->full());
 
         if (is_object($speciality) && $speciality->seo_title) {
             $title = $speciality->seo_title;

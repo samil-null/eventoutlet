@@ -58,9 +58,11 @@ class WeeklySendEmailToExecutors extends Command
                         ->groupBy('sd.date')
                         ->get(['sd.date', \DB::raw('count(sd.date) as count')]);
 
-                dump($specialty->name . ' - ' . $city->name);
+                
 
                 if ($dates->count()) {
+
+                    dump($specialty->name . ' - ' . $city->name);
 
                     $emails = User::where('status', User::ACTIVE_STATUS)->where('subscription_status', 1)->whereHas('info', function ($query) use ($city, $specialty) {
                         $query->where('city_id', '=', $city->id)
@@ -70,15 +72,14 @@ class WeeklySendEmailToExecutors extends Command
                     ->pluck('email')
                     ->toArray();
 
-
                     dump($emails);
 
 
-                    if (in_array('denis.budancev@gmail.com', $emails) ) {
-                        \Mail::send('mails.subscriber.notify-executors', ['dates' => $dates, 'calendar' => DateHelper::createCalendarDateRange()], function ($message) use ($emails, $city, $specialty) {
+                    foreach ($emails as $email) {
+                        \Mail::send('mails.subscriber.notify-executors', ['dates' => $dates, 'calendar' => DateHelper::createCalendarDateRange(), 'token' => md5($email)], function ($message) use ($email, $city, $specialty) {
                             $message->from(env('MAIL_SENDER'), env('APP_NAME'));
-                            $message->subject('Запрос на услугу ' . $city->name . ' ' . $specialty->name);
-                            $message->to('denis.budancev@gmail.com');
+                            $message->subject('Запрос на услугу');
+                            $message->to($email);
                         });
                     }
 

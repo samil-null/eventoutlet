@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\City\StoreCityRequest;
 use App\Models\City;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CityController extends Controller
 {
@@ -41,7 +42,10 @@ class CityController extends Controller
      */
     public function store(StoreCityRequest $request)
     {
-        $city = City::create($request->only('name', 'status', 'seo_name'));
+        $fields = $request->only('name', 'status', 'seo_name');
+        $fields['slug'] = Str::slug($fields['name']);
+
+        $city = City::create($fields);
 
         return redirect()->route('admin.cities.show', $city->id);
 

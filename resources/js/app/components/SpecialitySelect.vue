@@ -42,21 +42,31 @@ export default {
     methods: {
         select(index) {
             this.selected = this.options[index];
-            console.log(this.selected);
+
+            let url = document.location.pathname;
+            url = url.split('/');
+
+            let newUrl = '/' + this.selected.slug;
+            if( typeof url[2] !== "undefined" ) {
+                newUrl += '/' + url[2];
+            }
+
+
             if (this.removeAdditionalFields) {
                 document.querySelectorAll('.addition-field-entity').forEach((item) => {
                     item.remove()
                 });
             }
-            if (window.innerWidth >= 767) {
+            // if (window.innerWidth >= 767) {
                 setTimeout(() => {
-                    let form = document.querySelector(this.form);
-                    form.action = this.selected.slug;
-                    form.submit();
+                    // let form = document.querySelector(this.form);
+                    // form.action = this.selected.slug;
+                    // form.submit();
+                    location.href = newUrl;
                 }, 0)
-            } else {
-                this.show = false
-            }
+            // } else {
+            //     this.show = false
+            // }
 
         },
         documentClick(e){

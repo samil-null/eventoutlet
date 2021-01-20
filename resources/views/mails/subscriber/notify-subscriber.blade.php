@@ -2,7 +2,8 @@
 
 @section('content')
     @component('mails.templates.tags.h1')
-        Ура! На вашу дату появилось спецпредложение. Самое время познакомиться и забронировать <br>
+        Ура! На вашу дату появилось спецпредложение. <br> 
+        Самое время познакомиться и забронировать
     @endcomponent
     <table width="100%" style="margin-bottom: 10px; padding: 10px 20px 30px; border-spacing: 0;background-color: #f3f3f3; border-radius: 5px;">
     <tbody>
@@ -39,7 +40,8 @@
         @endcomponent
     </div>
     @component('mails.templates.tags.p')
-        Если вы уже нашли специалиста на вашу, вы можете просто <a href="{{ route('site.subscribe-disable', $token) }}">отменить подписку</a>.<br>
-        Бали рады вам помочь и до новых встреч!
+        Если вы уже нашли специалиста при помощи Event Outlet <a href="{{ route('site.subscribe-disable', $token) }}">нажмите сюда</a>, и вам больше не будут приходить рассылки на вашу дату. <br>
+        Также, вы можете отменить подписку. <br> 
+        Были рады вам помочь и до новых встреч! 
     @endcomponent
 @endsection

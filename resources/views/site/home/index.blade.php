@@ -265,6 +265,7 @@
                     @endforeach
                 </div>
             </div>
+            </div>
             <div class="catalog-pagination">
                 <div class="catalog-pagination__wrapper">
                     <a href="{{ route('site.offers.index') }}" class="almost-square-btn rectangle-btn-border-green"><span>Перейти к каталогу</span></a>

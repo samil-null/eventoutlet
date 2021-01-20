@@ -22,7 +22,7 @@ class UserFilter extends ModelFilter
     {
         if (is_numeric($id)) {
             $this->related('info', 'speciality_id','=', $id);
-        } 
+        }
     }
 
     public function city($id)
@@ -45,7 +45,7 @@ class UserFilter extends ModelFilter
 
         $idsUsersOffers = $usersOffers->pluck('id')->toArray();
         $idsUsersServices = $usersServices->pluck('id')->toArray();
-        
+
         $this->whereIn('id', array_merge($idsUsersOffers, $idsUsersServices));
 
         $this->orWhere('users.status', '!=', User::ACTIVE_STATUS);

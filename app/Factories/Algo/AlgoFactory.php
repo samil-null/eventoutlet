@@ -63,7 +63,7 @@ class AlgoFactory implements AlgoFactoryInterface
     {
         $specialities = (new Specialty())
             ->active()
-            ->get(['name', 'id']);
+            ->get(['name', 'id', 'slug']);
 
         $this->specialities = $specialities->mapWithKeys(function ($item) {
             return [$item['id'] => $item];
@@ -75,7 +75,7 @@ class AlgoFactory implements AlgoFactoryInterface
     {
         $cities = (new City())
             ->active()
-            ->get(['name', 'id']);
+            ->get(['name', 'id', 'slug']);
 
         $this->cities = $cities->mapWithKeys(function ($item) {
             return [$item['id'] => $item];
@@ -100,6 +100,8 @@ class AlgoFactory implements AlgoFactoryInterface
             $data->name,
             $data->avatar,
             $this->bindSpeciality($data->speciality_id),
+            $this->bindSpecialitySlug($data->speciality_id),
+            $this->bindCities($data->city_id),
             $this->bindOffer($data),
             $this->bindInfo($data),
             $this->bindGallery($data->id),
@@ -111,6 +113,14 @@ class AlgoFactory implements AlgoFactoryInterface
     public function bindSpeciality($id)
     {
         return isset($this->specialities[$id])? $this->specialities[$id]['name']:'';
+    }
+    public function bindSpecialitySlug($id)
+    {
+        return isset($this->specialities[$id])? $this->specialities[$id]['slug']:'';
+    }
+    public function bindCities($id)
+    {
+        return isset($this->cities[$id])? $this->cities[$id]['slug']:'';
     }
 
     public function bindOffer($data)

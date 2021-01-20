@@ -150,7 +150,12 @@ class DateHelper
 
     public static function createCalendarDateRange()
     {
-        $period = CarbonPeriod::create(Carbon::now()->format('Y-m-d'), Carbon::now()->addDays(31)->format('d-m-Y'));
+        Carbon::now();
+
+        $period = CarbonPeriod::create(
+            Carbon::now()->startOfMonth(), 
+            Carbon::now()->addMonthsNoOverflow(1)->endOfMonth()->format('d-m-Y')
+        );
 
         $calendar = [];
 

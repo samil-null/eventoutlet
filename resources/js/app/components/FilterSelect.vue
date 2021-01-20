@@ -43,18 +43,26 @@
         methods: {
             select(index) {
                 this.selected = this.options[index];
+
+                let url = document.location.pathname;
+                url = url.split('/');
+
+                let newUrl = '/' + url[1] + '/' + this.selected.slug + '/' ;
+
                 if (this.removeAdditionalFields) {
                     document.querySelectorAll('.addition-field-entity').forEach((item) => {
                         item.remove()
                     });
                 }
-                if (window.innerWidth >= 767) {
+                //if (window.innerWidth >= 767) {
                     setTimeout(() => {
-                        document.querySelector(this.form).submit();
+                      //  document.querySelector(this.form).submit();
+                        location.href = newUrl;
+
                     }, 0)
-                } else {
-                    this.show = false
-                }
+                // } else {
+                //     this.show = false
+                // }
 
             },
             documentClick(e){
