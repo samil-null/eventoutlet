@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Site;
 
+use App\Services\Subscribe\HotNewsletterService;
 use App\Http\Requests\Api\Subscriptions\SubscribeRequest;
 use App\Mail\Subscribe\NewSubscriber;
 use App\Models\Specialty;
-use App\Services\Subscribe\HotNewsletterService;
+use App\Models\User;
 use Mail;
 use DB;
 use App\Http\Controllers\Controller;
@@ -20,9 +21,9 @@ class SubscriberController extends Controller
      * @param SubscribeRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function subscribe(SubscribeRequest $request, HotNewsletterService $hotNewsletterService)
+    public function subscribe(SubscribeRequest $request)
     {
-        $token =  Str::random(54);
+        $token =  md5($request->input('email'));
 
         $subscriber = Subscriber::create([
             'email' => $request->input('email'),
@@ -31,6 +32,7 @@ class SubscriberController extends Controller
         ]);
 
         $querySpecialty = [];
+        $specialtyIds   = [];
 
         foreach ($request->input('specialities') as $speciality) {
             if ($speciality > 0) {
@@ -38,6 +40,8 @@ class SubscriberController extends Controller
                     'subscriber_id' => $subscriber->id,
                     'specialty_id' => $speciality
                 ];
+
+                $specialtyIds[] = $speciality; 
             }
         }
 
@@ -47,6 +51,8 @@ class SubscriberController extends Controller
                     'subscriber_id' => $subscriber->id,
                     'specialty_id' => $speciality->id
                 ];
+
+                $specialtyIds[] = $speciality->id;
             }
         }
 
@@ -66,6 +72,8 @@ class SubscriberController extends Controller
         //dd(Carbon::now()->diffInDays(collect($request->input('dates'))->min()));
         //dd();
 
+
+        (new HotNewsletterService())->execute($request->input('dates'), $request->input('city_id'), $specialtyIds);
         Mail::to($request->input('email'))->send(new NewSubscriber($request->input('dates'), $token));
 
 
@@ -94,6 +102,18 @@ class SubscriberController extends Controller
     {
         Subscriber::where('token', $token)->update([
             'is_active' => 0
+        ]);
+
+        return redirect()->route('site.home');
+    }
+
+    /**
+     * @param string $token
+     */
+    public function executorDisable(string $token)
+    {
+        User::where('email_verified_token', $token)->update([
+            'subscription_status' => 0
         ]);
 
         return redirect()->route('site.home');

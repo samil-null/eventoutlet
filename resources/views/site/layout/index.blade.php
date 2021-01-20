@@ -87,8 +87,8 @@
                             <a href="{{ route('site.home') }}" class="navbar-logo">
                                 <img src="/static/eventoutlet/dist/img/general/logo.png" alt="">
                                 <span class="eventoutlet">
-							                  	EventOutlet
-							                  </span>
+					                  	EventOutlet
+			                     </span>
                             </a>
                             <div class="navbar-general__collapse">
                                 <ul class="navbar-general__main">
@@ -180,9 +180,10 @@
                     <div class="footer-nav__item">
                       <ul>
                         <li><a href="{{ route('site.home') }}">Главная</a></li>
+                        <li><a href="https://www.blog.eventoutlet.ru/">Блог</a></li>
                         <li><a href="#" class="feedback-open-trigger">Обратная связь</a></li>
                         <li><a href="#" class="oferta-open-trigger">Оферта</a></li>
-                          <li><a href="{{ route('site.process') }}">Как работает портал</a></li>
+                        <li><a href="{{ route('site.process') }}">Как работает портал</a></li>
                       </ul>
                     </div>
                   </div>

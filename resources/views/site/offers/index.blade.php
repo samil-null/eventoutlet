@@ -2,7 +2,7 @@
 
 @section('content')
 <section class="catalog">
-    <form action="{{ route('site.offers.index') }}" id="offers-filter">
+    <form action="" id="offers-filter">
     <div class="catalog-nav" id="catalog-nav">
         <div class="catalog-nav__first">
             <div class="container">
@@ -32,7 +32,7 @@
                                             select-name="Город"
                                             select-title="Выберете город"
                                             :options="{{ $filters['cities']['options'] }}"
-                                            input-name="city_id"
+
                                             form="#offers-filter"
                                             active="{{ $filters['cities']['active'] }}"
                                         ></filter-select>
@@ -45,7 +45,7 @@
                                             select-title="Выберете специальность"
                                             :remove-additional-fields="true"
                                             :options="{{ $filters['specialities']['options'] }}"
-                                            input-name="speciality_id"
+
                                             form="#offers-filter"
                                             active="{{ $filters['specialities']['active'] }}"
                                         ></speciality-select>
@@ -140,11 +140,33 @@
             <div class="container">
                 <div class="row">
                     @foreach($users as $user)
+                        @if($loop->iteration == 3)
+                            @break
+                        @endif
+
+                        @include('site.components.algo.index', ['user' => $user])
+                    @endforeach
+                </div>
+            </div>
+
+            @if($users->count() > 2)
+                @include('site.offers.partials.banner')
+            @endif
+
+            <div class="container">
+                <div class="row">
+                    @foreach($users as $user)
+                        @if($loop->iteration < 3)
+                            @continue
+                        @endif
+
                         @include('site.components.algo.index', ['user' => $user])
                     @endforeach
                 </div>
                 {{ $pagination->appends(request()->input())->onEachSide(1)->links('site.components.pagination') }}
             </div>
+
+
 
         </div>
     @else

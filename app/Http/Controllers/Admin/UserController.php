@@ -118,7 +118,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
-
+        $user->info()->delete();
         $user->gallery()->delete();
         $user->videos()->delete();
 

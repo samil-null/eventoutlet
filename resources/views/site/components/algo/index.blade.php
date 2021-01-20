@@ -4,15 +4,15 @@
             <div class="catalog-card__head-photo" style="background-image: url({{ Imager::avatar($user->avatar, 'middle') }});"></div>
             <div class="catalog-card__head-info catalog-card-name">
                 <span class="catalog-card__first-title">
-                    <a href="{{ route('site.users.show', $user->slug) }}">{{ $user->name }}</a>
+                    <a href="{{ route('site.users.show2', [$user->speciality_slug, $user->city_id, $user->slug]) }}">{{ $user->name }}</a>
                 </span>
                 <span class="catalog-card__second-title">{{ $user->speciality }}</span>
             </div>
             @if($user->info->instagram)
-            <div class="catalog-card__head-info catalog-card-insta">
-                <a href="{{ Social::instagramUrl($user->info->instagram) }}" target="_blank" class="catalog-card__first-title">{{ Social::instagramTag($user->info->instagram) }}</a>
-                <span class="catalog-card__second-title">Instagram</span>
-            </div>
+                <div class="catalog-card__head-info catalog-card-insta">
+                    <a href="{{ Social::instagramUrl($user->info->instagram) }}" target="_blank" class="catalog-card__first-title">{{ Social::instagramTag($user->info->instagram) }}</a>
+                    <span class="catalog-card__second-title">Instagram</span>
+                </div>
             @endif
             @if($user->isSpecials || $user->offer->discount_price)
                 <div class="catalog-card__head-info catalog-card-price">

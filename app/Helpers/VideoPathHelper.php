@@ -26,17 +26,26 @@ class VideoPathHelper
 
     public static function thumbUrl($name, $store)
     {
+        try {
+            
+            if (Media::YT_SOURCE == $store) {
+                return 'https://img.youtube.com/vi/' . $name . '/sddefault.jpg';
+            } elseif (Media::VIMEO_SOURCE == $store) {
 
-        if (Media::YT_SOURCE == $store) {
-            return 'https://img.youtube.com/vi/' . $name . '/sddefault.jpg';
-        } elseif (Media::VIMEO_SOURCE == $store) {
+                if (self::checkUrl("https://vimeo.com/api/v2/video/$name.php") == '200') {
+                    $apiData = unserialize( file_get_contents("https://vimeo.com/api/v2/video/$name.php") );
 
-            $apiData = unserialize( file_get_contents( "https://vimeo.com/api/v2/video/$name.php" ) );
+                    if (is_array( $apiData ) && count( $apiData ) > 0 ) {
+                        $videoInfo = $apiData[ 0 ];
+                        return $videoInfo[ 'thumbnail_large' ];
+                    }
+                }
 
-            if (is_array( $apiData ) && count( $apiData ) > 0 ) {
-                $videoInfo = $apiData[ 0 ];
-                return $videoInfo[ 'thumbnail_large' ];
+                return '';
+                
             }
+        } catch (Exception $e) {
+            return '';
         }
     }
 
@@ -52,5 +61,10 @@ class VideoPathHelper
     public static function getRealVideoPath($filename)
     {
         return storage_path('app/videos/' . $filename);
+    }
+
+    public static function checkUrl($url) {
+        $headers = get_headers($url);
+        return substr($headers[0], 9, 3);
     }
 }

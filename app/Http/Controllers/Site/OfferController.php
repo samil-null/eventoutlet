@@ -23,6 +23,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class OfferController extends Controller
 {
@@ -43,7 +44,6 @@ class OfferController extends Controller
 
         $city = City::find($request->input('city_id'));
         $speciality = Specialty::find($request->input('speciality_id'));
-
         Seo::offers($city, $speciality, $request->has('specials_offers'), count($users));
 
         $filters = [
@@ -105,8 +105,9 @@ class OfferController extends Controller
         $users = $factory->load($data, $request->has('specials_offers'))->create();
 
         $city = City::find($request->input('city_id'));
+        $pagination = $data->appends($request->input());
 
-        Seo::offers($city, $speciality, $request->has('specials_offers'));
+        Seo::offers($city, $speciality, false, $pagination->total());
 
         $filters = [
             'availableFilters' => $result->getAvailableFilters(),
@@ -133,11 +134,84 @@ class OfferController extends Controller
             'additional_fields_params' => $result->getFilterParam('additional_fields')
         ];
 
+
+        return view('site.offers.index', [
+            'users' => $users,
+            'filters' => $filters,
+            'pagination' => $pagination,
+            'perPage' => $perPage
+        ]);
+    }
+
+
+
+    public function offersList(string $slug, string $city = null, Request $request, OfferFilterInterface $filter, AlgoFactoryInterface $factory)
+    {
+        $perPage = 10;
+
+        if ($request->has('per_page') && is_numeric($request->input('per_page'))) {
+            $perPage = $request->input('per_page');
+        }
+
+
+        if( $city ) {
+            $city = City::where('slug', $city)->firstOrFail();
+            $filter->city_id($city->id);
+        }
+
+        $speciality = null;
+
+        if( $slug === 'offers' ) { //выводим все офферы
+            $result = $filter->apply();
+        }
+        else { //офферы по конкретной специальности
+            $speciality = Specialty::where('slug', $slug)->firstOrFail();
+            $filter->speciality_id($speciality->id);
+
+            $result = $filter->apply();
+        }
+
+        $additionFields = $result->additionsFields();
+        $data = $result->get()->paginate($perPage);
+
+        $users = $factory->load($data, $request->has('specials_offers'))->create();
+
+        Seo::offers($city, $speciality, $request->has('specials_offers'), count($users));
+
+        $filters = [
+            'availableFilters' => $result->getAvailableFilters(),
+            'cities' => [
+                'options' => (new City())->active()->get()->toJson(),
+                'active' => $city ? $city->id : 0
+            ],
+            'specialities' => [
+                'options' => (new Specialty())->active()->get()->toJson(),
+                'active' => $speciality ? $speciality->id : 0
+            ],
+            'dates' => [
+                'from' => $result->getFilterParam('date_from'),
+                'to' => $result->getFilterParam('date_to'),
+                'to_date_filter' => DateHelper::toDateFilter($result->getFilterParam('date_to')),
+                'max_date' => DateHelper::maxFilterDate(),
+                'min_date' => DateHelper::minFilterDate()
+            ],
+            'discount' => [
+                'from' => $result->getFilterParam('discount_from'),
+                'to' => $result->getFilterParam('discount_to'),
+            ],
+            'additional_fields' => $additionFields,
+            'additional_fields_params' => $result->getFilterParam('additional_fields')
+        ];
+
+
         return view('site.offers.index', [
             'users' => $users,
             'filters' => $filters,
             'pagination' => $data->appends($request->input()),
             'perPage' => $perPage
         ]);
+
+
+
     }
 }

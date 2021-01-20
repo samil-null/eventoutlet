@@ -227,6 +227,7 @@
                                                                     <span>{{ $service->price }} {{ $service->priceOption->name }}</span>
                                                                 </div>
                                                             </div>
+                                                            @if ($service->description)
                                                             <div class="special-offer__desctipton">
                                                                 <div class="special-offer__desctipton-title">
                                                                     <span>Описание</span>
@@ -235,6 +236,7 @@
                                                                     <p>{{ $service->description }}</p>
                                                                 </div>
                                                             </div>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
@@ -247,7 +249,7 @@
                                             :dates="{{ $dates }}"
                                             :offers="{{ $offers }}"
                                         ></offers-list-date-picker>
-                                        
+
                                     </div>
                                 </div>
                             </div>

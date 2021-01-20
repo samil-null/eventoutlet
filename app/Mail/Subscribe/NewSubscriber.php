@@ -40,13 +40,13 @@ class NewSubscriber extends Mailable
      */
     public function build()
     {
-        $subject = (count($this->dates) > 1)? 'Подписка на даты ': 'Подписка на дату ';
-
-        $minMonth = (Carbon::now()->diffInDays(collect($this->dates)->min(), false) < 31);
-
-        return $this->subject($subject . implode(',', $this->dates))
+        return $this->subject('Подписка на дату')
             ->from(env('MAIL_SENDER'), env('APP_NAME'))
             ->view('mails.subscriber.subscribe')
-            ->with(['token' => $this->token, 'minMonth' => $minMonth, 'dates' => $this->dates]);
+            ->with([
+                'token' => $this->token, 
+                'dates' => implode(', ', $this->dates), 
+                'singleDate' => (count($this->dates) == 1)
+            ]);
     }
 }
